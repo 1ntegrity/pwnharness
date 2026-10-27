@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" font-family="ui-monospace,'SF Mono','JetBrains Mono','Cascadia Code',Menlo,Consolas,monospace">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b100c"/>
+      <stop offset="1" stop-color="#060806"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3fb950"/>
+      <stop offset="1" stop-color="#2ea043"/>
+    </linearGradient>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="none"/>
+      <rect width="4" height="1" fill="#ffffff" opacity="0.025"/>
+    </pattern>
+  </defs>
+
+  <!-- frame -->
+  <rect x="2" y="2" width="1196" height="316" rx="14" fill="url(#bg)" stroke="#1e3a24" stroke-width="2"/>
+  <rect x="2" y="2" width="1196" height="316" rx="14" fill="url(#scan)"/>
+
+  <!-- title bar -->
+  <circle cx="34" cy="34" r="6" fill="#ff5f56"/>
+  <circle cx="56" cy="34" r="6" fill="#ffbd2e"/>
+  <circle cx="78" cy="34" r="6" fill="#27c93f"/>
+  <text x="600" y="39" text-anchor="middle" fill="#3b6b47" font-size="14" letter-spacing="2">— 127.0.0.1:4097 —</text>
+
+  <!-- glow echo -->
+  <text x="80" y="176" fill="#3fb950" opacity="0.18" font-size="104" font-weight="700" letter-spacing="2">pwncode</text>
+  <!-- wordmark -->
+  <text x="78" y="174" fill="url(#green)" font-size="104" font-weight="700" letter-spacing="2">pwncode</text>
+  <text x="560" y="138" fill="#5a5858" font-size="30" font-weight="700">▓▒░</text>
+
+  <!-- tagline -->
+  <text x="82" y="222" fill="#c9d1cf" font-size="26" letter-spacing="1">
+    <tspan fill="#3fb950" font-weight="700">&gt; </tspan>plug-in agent harness
+  </text>
+  <text x="82" y="258" fill="#7d8a82" font-size="18">
+    connect your coding agent · gain sessions · tools · skills · permissions · LSP
+  </text>
+
+  <!-- prompt blink -->
+  <text x="82" y="296" fill="#3fb950" font-size="16" opacity="0.9">$ bun run dev serve --port 4097</text>
+  <rect x="396" y="283" width="10" height="16" fill="#3fb950" opacity="0.9"/>
+</svg>

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" font-family="ui-monospace,'SF Mono','JetBrains Mono','Cascadia Code',Menlo,Consolas,monospace">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b100c"/>
+      <stop offset="1" stop-color="#060806"/>
+    </linearGradient>
+    <pattern id="scan2" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="1" fill="#ffffff" opacity="0.02"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#3fb950"/>
+    </marker>
+  </defs>
+
+  <rect x="2" y="2" width="1196" height="426" rx="14" fill="url(#bg2)" stroke="#1e3a24" stroke-width="2"/>
+  <rect x="2" y="2" width="1196" height="426" rx="14" fill="url(#scan2)"/>
+
+  <!-- ===== clients ===== -->
+  <text x="50" y="46" fill="#3b6b47" font-size="13" letter-spacing="2">YOUR FRONT-END</text>
+  <g>
+    <rect x="50" y="64" width="190" height="52" rx="8" fill="#0f1711" stroke="#2ea043" stroke-width="1.5"/>
+    <text x="145" y="96" text-anchor="middle" fill="#c9d1cf" font-size="18">pi extension</text>
+  </g>
+  <g>
+    <rect x="50" y="128" width="190" height="52" rx="8" fill="#0f1711" stroke="#2ea043" stroke-width="1.5"/>
+    <text x="145" y="160" text-anchor="middle" fill="#c9d1cf" font-size="18">editor / IDE</text>
+  </g>
+  <g>
+    <rect x="50" y="192" width="190" height="52" rx="8" fill="#0f1711" stroke="#2ea043" stroke-width="1.5"/>
+    <text x="145" y="224" text-anchor="middle" fill="#c9d1cf" font-size="18">curl / ACP</text>
+  </g>
+
+  <!-- arrow clients -> harness -->
+  <line x1="248" y1="154" x2="352" y2="154" stroke="#3fb950" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="300" y="144" text-anchor="middle" fill="#7d8a82" font-size="12">HTTP</text>
+  <text x="300" y="172" text-anchor="middle" fill="#3fb950" font-size="12">:4097</text>
+
+  <!-- ===== harness ===== -->
+  <rect x="360" y="40" width="560" height="350" rx="12" fill="#0a130d" stroke="#3fb950" stroke-width="2"/>
+  <text x="640" y="68" text-anchor="middle" fill="#3fb950" font-size="16" font-weight="700" letter-spacing="2">pwncode harness</text>
+  <text x="640" y="88" text-anchor="middle" fill="#3b6b47" font-size="12">server-side · sqlite-persistent · resumable</text>
+
+  <!-- capability tiles -->
+  <g fill="#0f1711" stroke="#2ea043" stroke-width="1.2">
+    <rect x="384" y="108" width="248" height="56" rx="8"/>
+    <rect x="648" y="108" width="248" height="56" rx="8"/>
+    <rect x="384" y="178" width="248" height="56" rx="8"/>
+    <rect x="648" y="178" width="248" height="56" rx="8"/>
+    <rect x="384" y="248" width="248" height="56" rx="8"/>
+    <rect x="648" y="248" width="248" height="56" rx="8"/>
+  </g>
+  <g fill="#c9d1cf" font-size="16" text-anchor="middle">
+    <text x="508" y="135">Sessions</text><text x="508" y="153" fill="#7d8a82" font-size="12">persist · fork · resume</text>
+    <text x="772" y="135">Tool bus</text><text x="772" y="153" fill="#7d8a82" font-size="12">read·edit·shell·task</text>
+    <text x="508" y="205">Skills</text><text x="508" y="223" fill="#7d8a82" font-size="12">.claude / .agents compat</text>
+    <text x="772" y="205">Permissions</text><text x="772" y="223" fill="#7d8a82" font-size="12">allow·ask·deny · paths</text>
+    <text x="508" y="275">LSP</text><text x="508" y="293" fill="#7d8a82" font-size="12">diagnostics to agent</text>
+    <text x="772" y="275">MCP client</text><text x="772" y="293" fill="#7d8a82" font-size="12">attach ext. servers</text>
+  </g>
+
+  <!-- compaction strip -->
+  <rect x="384" y="318" width="512" height="48" rx="8" fill="#0f1711" stroke="#1e3a24" stroke-width="1.2"/>
+  <text x="640" y="347" text-anchor="middle" fill="#7d8a82" font-size="13">todo · compaction · snapshots · per-message diff &amp; revert</text>
+
+  <!-- arrow harness -> models -->
+  <line x1="924" y1="200" x2="1028" y2="200" stroke="#3fb950" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="976" y="190" text-anchor="middle" fill="#7d8a82" font-size="12">LLM</text>
+
+  <!-- ===== providers ===== -->
+  <text x="1036" y="46" fill="#3b6b47" font-size="13" letter-spacing="2">PROVIDERS</text>
+  <rect x="1036" y="120" width="128" height="160" rx="8" fill="#0f1711" stroke="#2ea043" stroke-width="1.5"/>
+  <text x="1100" y="170" text-anchor="middle" fill="#c9d1cf" font-size="16">20+</text>
+  <text x="1100" y="192" text-anchor="middle" fill="#7d8a82" font-size="12">OpenAI-compat</text>
+  <text x="1100" y="212" text-anchor="middle" fill="#7d8a82" font-size="12">Anthropic</text>
+  <text x="1100" y="232" text-anchor="middle" fill="#7d8a82" font-size="12">Google</text>
+  <text x="1100" y="252" text-anchor="middle" fill="#7d8a82" font-size="12">+ friends</text>
+</svg>
