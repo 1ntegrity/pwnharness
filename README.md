@@ -18,9 +18,41 @@ headless server + TUI — with the entire penetration-testing layer removed:
   engagement + knowledge stores, pentest events, scope gating, the anti-solo rail,
   the deterministic orchestrator, pentest slash-commands, skills/phases/playbooks, TUI
   engagement surfaces
+
 - everything renamed `@pentestcode/*` → `@opencode-harness/*`; config/data dirs are
   `opencode-harness.json(c)` / `.opencode-harness/` / `~/.opencode-harness/` (legacy
   `opencode.*` names still accepted), so it does not touch an installed PentestCode
+
+## Quickstart (2 minutes)
+
+```bash
+git clone <this-repo> && cd opencode-harness
+bun install                                # needs bun >= 1.3
+bun run dev serve --port 4097              # headless server on 127.0.0.1:4097
+```
+
+Point any OpenAI-compatible provider at it:
+
+```bash
+mkdir -p ~/.config/opencode-harness ~/.local/share/opencode-harness
+cat > ~/.config/opencode-harness/opencode-harness.json <<'EOF'
+{
+  "model": "my-provider/my-model",
+  "provider": {
+    "my-provider": {
+      "options": { "baseURL": "https://api.example.com/v1" },
+      "models": { "my-model": { "name": "My Model" } }
+    }
+  }
+}
+EOF
+echo '{"my-provider": {"type": "api", "key": "sk-..."}}' > ~/.local/share/opencode-harness/auth.json
+chmod 600 ~/.local/share/opencode-harness/auth.json
+```
+
+Verify: `curl -X POST localhost:4097/session -d '{}' -H 'content-type: application/json'`
+then `POST /session/<id>/prompt_async` with `{"parts":[{"type":"text","text":"hi"}]}`.
+API docs: `GET /doc`.
 
 Default agents: `build` (primary), `plan` (read-only planning), plus the internal
 compaction/title/summary agents. Bundled-skill seeding is content-agnostic: the repo
