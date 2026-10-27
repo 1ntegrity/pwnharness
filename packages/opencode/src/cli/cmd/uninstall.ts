@@ -2,7 +2,7 @@ import type { Argv } from "yargs"
 import { UI } from "../ui"
 import * as prompts from "@clack/prompts"
 import { Installation } from "../../installation"
-import { Global } from "@pentestcode/core/global"
+import { Global } from "@opencode-harness/core/global"
 import fs from "fs/promises"
 import path from "path"
 import os from "os"
@@ -24,7 +24,7 @@ interface RemovalTargets {
 
 export const UninstallCommand = {
   command: "uninstall",
-  describe: "uninstall pentestcode and remove all related files",
+  describe: "uninstall opencode-harness and remove all related files",
   builder: (yargs: Argv) =>
     yargs
       .option("keep-config", {
@@ -55,7 +55,7 @@ export const UninstallCommand = {
     UI.empty()
     UI.println(UI.logo("  "))
     UI.empty()
-    prompts.intro("Uninstall PentestCode")
+    prompts.intro("Uninstall OpenCode Harness")
 
     const method = await Installation.method()
     prompts.log.info(`Installation method: ${method}`)
@@ -129,13 +129,13 @@ async function showRemovalSummary(targets: RemovalTargets, method: Installation.
 
   if (method !== "curl" && method !== "unknown") {
     const cmds: Record<string, string> = {
-      npm: "npm uninstall -g pentestcode-ai",
-      pnpm: "pnpm uninstall -g pentestcode-ai",
-      bun: "bun remove -g pentestcode-ai",
-      yarn: "yarn global remove pentestcode-ai",
-      brew: "brew uninstall pentestcode",
-      choco: "choco uninstall pentestcode",
-      scoop: "scoop uninstall pentestcode",
+      npm: "npm uninstall -g opencode-harness-ai",
+      pnpm: "pnpm uninstall -g opencode-harness-ai",
+      bun: "bun remove -g opencode-harness-ai",
+      yarn: "yarn global remove opencode-harness-ai",
+      brew: "brew uninstall opencode-harness",
+      choco: "choco uninstall opencode-harness",
+      scoop: "scoop uninstall opencode-harness",
     }
     prompts.log.info(`  ✓ Package: ${cmds[method] || method}`)
   }
@@ -180,19 +180,19 @@ async function executeUninstall(method: Installation.Method, targets: RemovalTar
 
   if (method !== "curl" && method !== "unknown") {
     const cmds: Record<string, string[]> = {
-      npm: ["npm", "uninstall", "-g", "pentestcode-ai"],
-      pnpm: ["pnpm", "uninstall", "-g", "pentestcode-ai"],
-      bun: ["bun", "remove", "-g", "pentestcode-ai"],
-      yarn: ["yarn", "global", "remove", "pentestcode-ai"],
-      brew: ["brew", "uninstall", "pentestcode"],
-      choco: ["choco", "uninstall", "pentestcode"],
-      scoop: ["scoop", "uninstall", "pentestcode"],
+      npm: ["npm", "uninstall", "-g", "opencode-harness-ai"],
+      pnpm: ["pnpm", "uninstall", "-g", "opencode-harness-ai"],
+      bun: ["bun", "remove", "-g", "opencode-harness-ai"],
+      yarn: ["yarn", "global", "remove", "opencode-harness-ai"],
+      brew: ["brew", "uninstall", "opencode-harness"],
+      choco: ["choco", "uninstall", "opencode-harness"],
+      scoop: ["scoop", "uninstall", "opencode-harness"],
     }
 
     const cmd = cmds[method]
     if (cmd) {
       spinner.start(`Running ${cmd.join(" ")}...`)
-      const result = await Process.run(method === "choco" ? ["choco", "uninstall", "pentestcode", "-y", "-r"] : cmd, {
+      const result = await Process.run(method === "choco" ? ["choco", "uninstall", "opencode-harness", "-y", "-r"] : cmd, {
         nothrow: true,
       })
       if (result.code !== 0) {
@@ -221,7 +221,7 @@ async function executeUninstall(method: Installation.Method, targets: RemovalTar
     }
 
     const binDir = path.dirname(targets.binary)
-    if (binDir.includes(".pentestcode") || binDir.includes(".opencode")) {
+    if (binDir.includes(".opencode-harness") || binDir.includes(".opencode")) {
       await fs.rmdir(binDir).catch(() => {})
     }
   }
@@ -235,7 +235,7 @@ async function executeUninstall(method: Installation.Method, targets: RemovalTar
   }
 
   UI.empty()
-  prompts.log.success("Thank you for using PentestCode!")
+  prompts.log.success("Thank you for using OpenCode Harness!")
 }
 
 async function getShellConfigFile(): Promise<string | null> {
@@ -272,7 +272,7 @@ async function getShellConfigFile(): Promise<string | null> {
     if (!exists) continue
 
     const content = await Filesystem.readText(file).catch(() => "")
-    if (content.includes("# pentestcode") || content.includes("# opencode") || content.includes(".pentestcode/bin") || content.includes(".opencode/bin")) {
+    if (content.includes("# opencode-harness") || content.includes("# opencode") || content.includes(".opencode-harness/bin") || content.includes(".opencode/bin")) {
       return file
     }
   }
@@ -290,21 +290,21 @@ async function cleanShellConfig(file: string) {
   for (const line of lines) {
     const trimmed = line.trim()
 
-    if (trimmed === "# pentestcode" || trimmed === "# opencode") {
+    if (trimmed === "# opencode-harness" || trimmed === "# opencode") {
       skip = true
       continue
     }
 
     if (skip) {
       skip = false
-      if (trimmed.includes(".pentestcode/bin") || trimmed.includes(".opencode/bin") || trimmed.includes("fish_add_path")) {
+      if (trimmed.includes(".opencode-harness/bin") || trimmed.includes(".opencode/bin") || trimmed.includes("fish_add_path")) {
         continue
       }
     }
 
     if (
-      (trimmed.startsWith("export PATH=") && (trimmed.includes(".pentestcode/bin") || trimmed.includes(".opencode/bin"))) ||
-      (trimmed.startsWith("fish_add_path") && (trimmed.includes(".pentestcode") || trimmed.includes(".opencode")))
+      (trimmed.startsWith("export PATH=") && (trimmed.includes(".opencode-harness/bin") || trimmed.includes(".opencode/bin"))) ||
+      (trimmed.startsWith("fish_add_path") && (trimmed.includes(".opencode-harness") || trimmed.includes(".opencode")))
     ) {
       continue
     }

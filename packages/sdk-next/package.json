@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@pentestcode/sdk-next",
+  "name": "@opencode-harness/sdk-next",
   "private": true,
   "type": "module",
   "license": "MIT",
@@ -12,9 +12,9 @@
     "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
-    "@pentestcode/client": "workspace:*",
-    "@pentestcode/core": "workspace:*",
-    "@pentestcode/server": "workspace:*",
+    "@opencode-harness/client": "workspace:*",
+    "@opencode-harness/core": "workspace:*",
+    "@opencode-harness/server": "workspace:*",
     "effect": "catalog:"
   },
   "devDependencies": {

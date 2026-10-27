@@ -1,4 +1,4 @@
-import { Location } from "@pentestcode/schema/location"
+import { Location } from "@opencode-harness/schema/location"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
 

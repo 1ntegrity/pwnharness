@@ -1,10 +1,10 @@
 import { describe, expect } from "bun:test"
 import { Context, Deferred, Effect, Exit, Fiber, Layer, Scope } from "effect"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { AppNodeBuilder } from "@pentestcode/core/effect/app-node-builder"
-import { EventV2 } from "@pentestcode/core/event"
-import { QuestionV2 } from "@pentestcode/core/question"
-import { SessionV2 } from "@pentestcode/core/session"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
+import { EventV2 } from "@opencode-harness/core/event"
+import { QuestionV2 } from "@opencode-harness/core/question"
+import { SessionV2 } from "@opencode-harness/core/session"
 import { testEffect } from "./lib/effect"
 
 const questions = AppNodeBuilder.build(LayerNode.group([EventV2.node, QuestionV2.node]))

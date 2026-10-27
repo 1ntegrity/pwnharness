@@ -1,6 +1,6 @@
 import { SessionID, MessageID } from "./schema"
-import { SessionV1 } from "@pentestcode/core/v1/session"
-import { ProviderV2 } from "@pentestcode/core/provider"
+import { SessionV1 } from "@opencode-harness/core/v1/session"
+import { ProviderV2 } from "@opencode-harness/core/provider"
 import {
   APIError,
   AbortedError,
@@ -14,12 +14,12 @@ import {
   SubtaskPart,
   User,
   WithParts,
-} from "@pentestcode/core/v1/session"
+} from "@opencode-harness/core/v1/session"
 
-import { NamedError } from "@pentestcode/core/util/error"
+import { NamedError } from "@opencode-harness/core/util/error"
 import { APICallError, convertToModelMessages, LoadAPIKeyError, type ModelMessage, type UIMessage } from "ai"
-import { Database } from "@pentestcode/core/database/database"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
+import { Database } from "@opencode-harness/core/database/database"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
 import { NotFoundError } from "@/storage/storage"
 import { and } from "drizzle-orm"
 import { desc } from "drizzle-orm"
@@ -27,7 +27,7 @@ import { eq } from "drizzle-orm"
 import { inArray } from "drizzle-orm"
 import { lt } from "drizzle-orm"
 import { or } from "drizzle-orm"
-import { MessageTable, PartTable, SessionTable } from "@pentestcode/core/session/sql"
+import { MessageTable, PartTable, SessionTable } from "@opencode-harness/core/session/sql"
 import { ProviderError } from "@/provider/error"
 import { iife } from "@/util/iife"
 import { errorMessage } from "@/util/error"

@@ -1,10 +1,10 @@
 import { describe, expect } from "bun:test"
 import path from "path"
 import { Effect, FileSystem } from "effect"
-import { LayerNodePlatform } from "@pentestcode/core/effect/app-node-platform"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { FSUtil } from "@pentestcode/core/fs-util"
-import { ReadToolFileSystem } from "@pentestcode/core/tool/read-filesystem"
+import { LayerNodePlatform } from "@opencode-harness/core/effect/app-node-platform"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { FSUtil } from "@opencode-harness/core/fs-util"
+import { ReadToolFileSystem } from "@opencode-harness/core/tool/read-filesystem"
 import { testEffect } from "./lib/effect"
 
 const it = testEffect(LayerNode.compile(LayerNode.group([FSUtil.node, LayerNodePlatform.filesystem])))

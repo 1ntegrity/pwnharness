@@ -5,7 +5,7 @@ export function WordmarkV2(props: Pick<ComponentProps<"svg">, "class">) {
   const mask = createUniqueId()
   const maskGradient = createUniqueId()
 
-  // Pixel wordmark spelling "pentestcode". The six glyphs shared with the old
+  // Pixel wordmark spelling "opencode-harness". The six glyphs shared with the old
   // "opencode" mark (p, e, n, c, o, d) are reused verbatim and translated into
   // place; t and s are drawn as rects in the same 18.46px-grid style.
   return (

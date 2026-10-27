@@ -1,10 +1,10 @@
 import * as i18n from "@solid-primitives/i18n"
 import { createEffect, createMemo, createResource } from "solid-js"
 import { createStore } from "solid-js/store"
-import { createSimpleContext } from "@pentestcode/ui/context"
+import { createSimpleContext } from "@opencode-harness/ui/context"
 import { Persist, persisted } from "@/utils/persist"
 import { dict as en } from "@/i18n/en"
-import { dict as uiEn } from "@pentestcode/ui/i18n/en"
+import { dict as uiEn } from "@opencode-harness/ui/i18n/en"
 
 export type Locale =
   | "en"
@@ -104,23 +104,23 @@ const merge = (app: Promise<Source>, ui: Promise<Source>) =>
   Promise.all([app, ui]).then(([a, b]) => ({ ...base, ...i18n.flatten({ ...a.dict, ...b.dict }) }) as Dictionary)
 
 const loaders: Record<Exclude<Locale, "en">, () => Promise<Dictionary>> = {
-  zh: () => merge(import("@/i18n/zh"), import("@pentestcode/ui/i18n/zh")),
-  zht: () => merge(import("@/i18n/zht"), import("@pentestcode/ui/i18n/zht")),
-  ko: () => merge(import("@/i18n/ko"), import("@pentestcode/ui/i18n/ko")),
-  de: () => merge(import("@/i18n/de"), import("@pentestcode/ui/i18n/de")),
-  es: () => merge(import("@/i18n/es"), import("@pentestcode/ui/i18n/es")),
-  fr: () => merge(import("@/i18n/fr"), import("@pentestcode/ui/i18n/fr")),
-  da: () => merge(import("@/i18n/da"), import("@pentestcode/ui/i18n/da")),
-  ja: () => merge(import("@/i18n/ja"), import("@pentestcode/ui/i18n/ja")),
-  pl: () => merge(import("@/i18n/pl"), import("@pentestcode/ui/i18n/pl")),
-  ru: () => merge(import("@/i18n/ru"), import("@pentestcode/ui/i18n/ru")),
-  uk: () => merge(import("@/i18n/uk"), import("@pentestcode/ui/i18n/uk")),
-  ar: () => merge(import("@/i18n/ar"), import("@pentestcode/ui/i18n/ar")),
-  no: () => merge(import("@/i18n/no"), import("@pentestcode/ui/i18n/no")),
-  br: () => merge(import("@/i18n/br"), import("@pentestcode/ui/i18n/br")),
-  th: () => merge(import("@/i18n/th"), import("@pentestcode/ui/i18n/th")),
-  bs: () => merge(import("@/i18n/bs"), import("@pentestcode/ui/i18n/bs")),
-  tr: () => merge(import("@/i18n/tr"), import("@pentestcode/ui/i18n/tr")),
+  zh: () => merge(import("@/i18n/zh"), import("@opencode-harness/ui/i18n/zh")),
+  zht: () => merge(import("@/i18n/zht"), import("@opencode-harness/ui/i18n/zht")),
+  ko: () => merge(import("@/i18n/ko"), import("@opencode-harness/ui/i18n/ko")),
+  de: () => merge(import("@/i18n/de"), import("@opencode-harness/ui/i18n/de")),
+  es: () => merge(import("@/i18n/es"), import("@opencode-harness/ui/i18n/es")),
+  fr: () => merge(import("@/i18n/fr"), import("@opencode-harness/ui/i18n/fr")),
+  da: () => merge(import("@/i18n/da"), import("@opencode-harness/ui/i18n/da")),
+  ja: () => merge(import("@/i18n/ja"), import("@opencode-harness/ui/i18n/ja")),
+  pl: () => merge(import("@/i18n/pl"), import("@opencode-harness/ui/i18n/pl")),
+  ru: () => merge(import("@/i18n/ru"), import("@opencode-harness/ui/i18n/ru")),
+  uk: () => merge(import("@/i18n/uk"), import("@opencode-harness/ui/i18n/uk")),
+  ar: () => merge(import("@/i18n/ar"), import("@opencode-harness/ui/i18n/ar")),
+  no: () => merge(import("@/i18n/no"), import("@opencode-harness/ui/i18n/no")),
+  br: () => merge(import("@/i18n/br"), import("@opencode-harness/ui/i18n/br")),
+  th: () => merge(import("@/i18n/th"), import("@opencode-harness/ui/i18n/th")),
+  bs: () => merge(import("@/i18n/bs"), import("@opencode-harness/ui/i18n/bs")),
+  tr: () => merge(import("@/i18n/tr"), import("@opencode-harness/ui/i18n/tr")),
 }
 
 function loadDict(locale: Locale) {

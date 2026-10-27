@@ -1,6 +1,6 @@
 import { describe, expect } from "bun:test"
 import { Cause, Effect, Exit, Schema } from "effect"
-import { SystemContext } from "@pentestcode/core/system-context"
+import { SystemContext } from "@opencode-harness/core/system-context"
 import { it } from "../lib/effect"
 
 const key = SystemContext.Key.make

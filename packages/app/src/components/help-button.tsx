@@ -1,5 +1,5 @@
-import { Icon } from "@pentestcode/ui/v2/icon"
-import { Popover } from "@pentestcode/ui/popover"
+import { Icon } from "@opencode-harness/ui/v2/icon"
+import { Popover } from "@opencode-harness/ui/popover"
 import { createSignal, Show } from "solid-js"
 import { createStore } from "solid-js/store"
 

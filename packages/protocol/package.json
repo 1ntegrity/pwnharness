@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@pentestcode/protocol",
+  "name": "@opencode-harness/protocol",
   "private": true,
   "type": "module",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
-    "@pentestcode/schema": "workspace:*",
+    "@opencode-harness/schema": "workspace:*",
     "effect": "catalog:"
   },
   "devDependencies": {

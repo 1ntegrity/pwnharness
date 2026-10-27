@@ -1,6 +1,6 @@
 import { describe, expect } from "bun:test"
-import { BackgroundJob } from "@pentestcode/core/background-job"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
+import { BackgroundJob } from "@opencode-harness/core/background-job"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
 import { Deferred, Effect, Exit, Scope } from "effect"
 import { it } from "./lib/effect"
 

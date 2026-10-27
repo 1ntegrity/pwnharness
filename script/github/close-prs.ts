@@ -2,7 +2,7 @@
 
 import { parseArgs } from "util"
 
-const defaultRepo = "s0ld13rr/pentestcode"
+const defaultRepo = "s0ld13rr/opencode-harness"
 const defaultAgeMonths = 1
 const defaultThreshold = 2
 const defaultSleepMs = 20_000

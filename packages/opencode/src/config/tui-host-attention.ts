@@ -1,5 +1,5 @@
-import { TuiConfig } from "@pentestcode/tui/config"
-import { isRecord } from "@pentestcode/tui/util/record"
+import { TuiConfig } from "@opencode-harness/tui/config"
+import { isRecord } from "@opencode-harness/tui/util/record"
 import { Filesystem } from "@/util/filesystem"
 import { Schema } from "effect"
 

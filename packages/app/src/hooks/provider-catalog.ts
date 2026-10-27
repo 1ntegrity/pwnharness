@@ -1,4 +1,4 @@
-import type { NormalizedProviderListResponse } from "@pentestcode/session-ui/context"
+import type { NormalizedProviderListResponse } from "@opencode-harness/session-ui/context"
 
 const emptyProviderCatalog: NormalizedProviderListResponse = { all: new Map(), connected: [], default: {} }
 

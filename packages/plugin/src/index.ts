@@ -9,8 +9,8 @@ import type {
   Message,
   Part,
   Config as SDKConfig,
-} from "@pentestcode/sdk"
-import type { Provider as ProviderV2, Model as ModelV2, Auth } from "@pentestcode/sdk/v2"
+} from "@opencode-harness/sdk"
+import type { Provider as ProviderV2, Model as ModelV2, Auth } from "@opencode-harness/sdk/v2"
 
 import type { BunShell } from "./shell.js"
 import { type ToolDefinition } from "./tool.js"

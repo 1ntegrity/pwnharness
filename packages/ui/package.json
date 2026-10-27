@@ -1,11 +1,11 @@
 {
-  "name": "@pentestcode/ui",
+  "name": "@opencode-harness/ui",
   "version": "0.1.0",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/s0ld13rr/pentestcode.git",
+    "url": "git+https://github.com/s0ld13rr/opencode-harness.git",
     "directory": "packages/ui"
   },
   "publishConfig": {

@@ -1,6 +1,6 @@
 export * as Tool from "./tool"
 
-import { ToolDefinition, ToolFailure, ToolOutput, type ToolCall } from "@pentestcode/llm"
+import { ToolDefinition, ToolFailure, ToolOutput, type ToolCall } from "@opencode-harness/llm"
 import { Effect, JsonSchema, Schema } from "effect"
 import type { AgentV2 } from "../agent"
 import type { SessionMessage } from "../session/message"

@@ -1,7 +1,7 @@
-# PentestCode
+# OpenCode Harness
 
 <p align="center">
-  <img src="https://github.com/s0ld13rr/pentestcode/raw/main/.github/logo.png" alt="PentestCode" width="480" />
+  <img src="https://github.com/s0ld13rr/opencode-harness/raw/main/.github/logo.png" alt="OpenCode Harness" width="480" />
 </p>
 
 <p align="center">
@@ -10,16 +10,16 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/s0ld13rr/pentestcode/releases/latest"><img src="https://img.shields.io/github/v/release/s0ld13rr/pentestcode?style=flat-square&color=red" alt="Release"></a>
-  <a href="https://github.com/s0ld13rr/pentestcode/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="License"></a>
-  <a href="https://github.com/s0ld13rr/pentestcode"><img src="https://img.shields.io/github/stars/s0ld13rr/pentestcode?style=flat-square" alt="Stars"></a>
+  <a href="https://github.com/s0ld13rr/opencode-harness/releases/latest"><img src="https://img.shields.io/github/v/release/s0ld13rr/opencode-harness?style=flat-square&color=red" alt="Release"></a>
+  <a href="https://github.com/s0ld13rr/opencode-harness/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="License"></a>
+  <a href="https://github.com/s0ld13rr/opencode-harness"><img src="https://img.shields.io/github/stars/s0ld13rr/opencode-harness?style=flat-square" alt="Stars"></a>
 </p>
 
 ---
 
-**PentestCode is an autonomous pentesting agent for your terminal.** Point it at a target and it runs the tools, reads the output, updates its picture of the network, and decides what to do next — the way an operator would. A hard fork of [OpenCode](https://github.com/anomalyco/opencode) (MIT), stripped of the code-editing focus and rebuilt for offensive security.
+**OpenCode Harness is an autonomous pentesting agent for your terminal.** Point it at a target and it runs the tools, reads the output, updates its picture of the network, and decides what to do next — the way an operator would. A hard fork of [OpenCode](https://github.com/anomalyco/opencode) (MIT), stripped of the code-editing focus and rebuilt for offensive security.
 
-> **Beta** — it holds up on real engagements and CTFs, but expect rough edges. [File an issue](https://github.com/s0ld13rr/pentestcode/issues) when something breaks; that's what makes it better.
+> **Beta** — it holds up on real engagements and CTFs, but expect rough edges. [File an issue](https://github.com/s0ld13rr/opencode-harness/issues) when something breaks; that's what makes it better.
 
 ## What it does
 
@@ -45,17 +45,17 @@ It's methodical where people get lazy: it sprays every credential against every 
 
 ```bash
 
-npm install -g pentestcode-ai
+npm install -g opencode-harness-ai
 
 # via curl
-curl -fsSL https://raw.githubusercontent.com/s0ld13rr/pentestcode/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/s0ld13rr/opencode-harness/main/install.sh | bash
 ```
 
 A single self-contained binary — no Bun, Node, or runtime to install. Linux and macOS, x64 and arm64.
 
 **Arch Linux (AUR):**
 ```bash
-paru -S pentestcode-bin
+paru -S opencode-harness-bin
 ```
 
 <details>
@@ -63,19 +63,19 @@ paru -S pentestcode-bin
 
 **Pin version:**
 ```bash
-PENTESTCODE_VERSION=0.1.7 curl -fsSL https://raw.githubusercontent.com/s0ld13rr/pentestcode/main/install.sh | bash
+OPENCODE_HARNESS_VERSION=0.1.7 curl -fsSL https://raw.githubusercontent.com/s0ld13rr/opencode-harness/main/install.sh | bash
 ```
 
 **Custom directory:**
 ```bash
-PENTESTCODE_INSTALL=/usr/local/bin curl -fsSL https://raw.githubusercontent.com/s0ld13rr/pentestcode/main/install.sh | bash
+OPENCODE_HARNESS_INSTALL=/usr/local/bin curl -fsSL https://raw.githubusercontent.com/s0ld13rr/opencode-harness/main/install.sh | bash
 ```
 
 **From source:**
 ```bash
 bun install
 bun run build --single --skip-embed-web-ui
-# binary at packages/opencode/dist/pentestcode-<os>-<arch>/bin/pentestcode
+# binary at packages/opencode/dist/opencode-harness-<os>-<arch>/bin/opencode-harness
 ```
 
 </details>
@@ -83,16 +83,16 @@ bun run build --single --skip-embed-web-ui
 ## Quick start
 
 ```bash
-pentestcode auth login          # connect your LLM provider
-pentestcode                     # interactive session
-pentestcode --prompt "scan 10.10.10.0/24 and enumerate all services"   # one-shot
+opencode-harness auth login          # connect your LLM provider
+opencode-harness                     # interactive session
+opencode-harness --prompt "scan 10.10.10.0/24 and enumerate all services"   # one-shot
 ```
 
 Works with 20+ providers through [ai-sdk](https://github.com/vercel/ai) — Anthropic, OpenAI, Google, Azure, AWS Bedrock, Ollama, and more.
 
 ## How it works
 
-Two things separate PentestCode from a pentester prompt pasted into a chat window: **a team of agents** and **a memory they share**.
+Two things separate OpenCode Harness from a pentester prompt pasted into a chat window: **a team of agents** and **a memory they share**.
 
 ### A team, not a monologue
 
@@ -197,7 +197,7 @@ One toolkit across offensive security:
 
 ## Configuration
 
-Config lives at `.pentestcode/pentestcode.jsonc`:
+Config lives at `.opencode-harness/opencode-harness.jsonc`:
 
 ```jsonc
 {
@@ -213,7 +213,7 @@ Providers: Anthropic, OpenAI, Google, Azure, AWS Bedrock, Ollama, Together, Groq
 
 ## Contributing
 
-Bug reports from real usage are the most valuable thing you can send. Run PentestCode on a CTF box, an HTB machine, or an authorized pentest, and when something goes wrong — it loops, misses an obvious path, chokes on tool output, or wastes tokens — open an issue with:
+Bug reports from real usage are the most valuable thing you can send. Run OpenCode Harness on a CTF box, an HTB machine, or an authorized pentest, and when something goes wrong — it loops, misses an obvious path, chokes on tool output, or wastes tokens — open an issue with:
 
 1. What you were testing (target type, not sensitive details)
 2. What went wrong

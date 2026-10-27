@@ -1,10 +1,10 @@
-import { Location } from "@pentestcode/core/location"
-import { ProjectCopy } from "@pentestcode/core/project/copy"
-import { Git } from "@pentestcode/core/git"
+import { Location } from "@opencode-harness/core/location"
+import { ProjectCopy } from "@opencode-harness/core/project/copy"
+import { Git } from "@opencode-harness/core/git"
 import { Effect } from "effect"
 import { HttpApiBuilder, HttpApiSchema } from "effect/unstable/httpapi"
 import { Api } from "../api"
-import { ProjectCopyError } from "@pentestcode/protocol/groups/project-copy"
+import { ProjectCopyError } from "@opencode-harness/protocol/groups/project-copy"
 
 export const ProjectCopyHandler = HttpApiBuilder.group(Api, "server.projectCopy", (handlers) =>
   Effect.succeed(

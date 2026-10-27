@@ -1,35 +1,35 @@
 import { expect, test } from "bun:test"
 import { Schema } from "effect"
-import { AgentV2 } from "@pentestcode/core/agent"
-import { ModelV2 } from "@pentestcode/core/model"
-import { SessionV2 } from "@pentestcode/core/session"
-import { Agent } from "@pentestcode/schema/agent"
-import { Location } from "@pentestcode/schema/location"
-import { Model } from "@pentestcode/schema/model"
-import { AgentAttachment, FileAttachment, Prompt, Source } from "@pentestcode/schema/prompt"
-import { Provider } from "@pentestcode/schema/provider"
-import { Project } from "@pentestcode/schema/project"
-import { ProjectDirectories } from "@pentestcode/schema/project-directories"
-import { PermissionV1 } from "@pentestcode/schema/permission-v1"
-import { Session } from "@pentestcode/schema/session"
-import { SessionInput } from "@pentestcode/schema/session-input"
-import { SessionMessage } from "@pentestcode/schema/session-message"
-import { Workspace } from "@pentestcode/schema/workspace"
-import { Command } from "@pentestcode/schema/command"
-import { Connection } from "@pentestcode/schema/connection"
-import { Credential } from "@pentestcode/schema/credential"
-import { FileSystem } from "@pentestcode/schema/filesystem"
-import { Integration } from "@pentestcode/schema/integration"
-import { LLM } from "@pentestcode/schema/llm"
-import { Permission } from "@pentestcode/schema/permission"
-import { Plugin } from "@pentestcode/schema/plugin"
-import { Pty } from "@pentestcode/schema/pty"
-import { Reference } from "@pentestcode/schema/reference"
-import { SessionTodo } from "@pentestcode/schema/session-todo"
-import { Skill } from "@pentestcode/schema/skill"
-import { AbsolutePath, DateTimeUtcFromMillis, optional, statics } from "@pentestcode/schema/schema"
-import { ProviderV2 } from "@pentestcode/core/provider"
-import { PluginV2 } from "@pentestcode/core/plugin"
+import { AgentV2 } from "@opencode-harness/core/agent"
+import { ModelV2 } from "@opencode-harness/core/model"
+import { SessionV2 } from "@opencode-harness/core/session"
+import { Agent } from "@opencode-harness/schema/agent"
+import { Location } from "@opencode-harness/schema/location"
+import { Model } from "@opencode-harness/schema/model"
+import { AgentAttachment, FileAttachment, Prompt, Source } from "@opencode-harness/schema/prompt"
+import { Provider } from "@opencode-harness/schema/provider"
+import { Project } from "@opencode-harness/schema/project"
+import { ProjectDirectories } from "@opencode-harness/schema/project-directories"
+import { PermissionV1 } from "@opencode-harness/schema/permission-v1"
+import { Session } from "@opencode-harness/schema/session"
+import { SessionInput } from "@opencode-harness/schema/session-input"
+import { SessionMessage } from "@opencode-harness/schema/session-message"
+import { Workspace } from "@opencode-harness/schema/workspace"
+import { Command } from "@opencode-harness/schema/command"
+import { Connection } from "@opencode-harness/schema/connection"
+import { Credential } from "@opencode-harness/schema/credential"
+import { FileSystem } from "@opencode-harness/schema/filesystem"
+import { Integration } from "@opencode-harness/schema/integration"
+import { LLM } from "@opencode-harness/schema/llm"
+import { Permission } from "@opencode-harness/schema/permission"
+import { Plugin } from "@opencode-harness/schema/plugin"
+import { Pty } from "@opencode-harness/schema/pty"
+import { Reference } from "@opencode-harness/schema/reference"
+import { SessionTodo } from "@opencode-harness/schema/session-todo"
+import { Skill } from "@opencode-harness/schema/skill"
+import { AbsolutePath, DateTimeUtcFromMillis, optional, statics } from "@opencode-harness/schema/schema"
+import { ProviderV2 } from "@opencode-harness/core/provider"
+import { PluginV2 } from "@opencode-harness/core/plugin"
 
 test("Core reuses the canonical shared schemas", async () => {
   const [
@@ -55,27 +55,27 @@ test("Core reuses the canonical shared schemas", async () => {
     coreSchema,
     coreWorkspace,
   ] = await Promise.all([
-    import("@pentestcode/core/command"),
-    import("@pentestcode/core/integration/connection"),
-    import("@pentestcode/core/credential"),
-    import("@pentestcode/core/filesystem"),
-    import("@pentestcode/core/integration"),
-    import("@pentestcode/core/location"),
-    import("@pentestcode/llm"),
-    import("@pentestcode/core/permission"),
-    import("@pentestcode/core/v1/permission"),
-    import("@pentestcode/core/project/copy"),
-    import("@pentestcode/core/pty"),
-    import("@pentestcode/core/project/schema"),
-    import("@pentestcode/core/reference"),
-    import("@pentestcode/core/session/input"),
-    import("@pentestcode/core/session/message"),
-    import("@pentestcode/core/session/todo"),
-    import("@pentestcode/core/session/prompt"),
-    import("@pentestcode/core/skill"),
-    import("@pentestcode/core/v2-schema"),
-    import("@pentestcode/core/schema"),
-    import("@pentestcode/core/workspace"),
+    import("@opencode-harness/core/command"),
+    import("@opencode-harness/core/integration/connection"),
+    import("@opencode-harness/core/credential"),
+    import("@opencode-harness/core/filesystem"),
+    import("@opencode-harness/core/integration"),
+    import("@opencode-harness/core/location"),
+    import("@opencode-harness/llm"),
+    import("@opencode-harness/core/permission"),
+    import("@opencode-harness/core/v1/permission"),
+    import("@opencode-harness/core/project/copy"),
+    import("@opencode-harness/core/pty"),
+    import("@opencode-harness/core/project/schema"),
+    import("@opencode-harness/core/reference"),
+    import("@opencode-harness/core/session/input"),
+    import("@opencode-harness/core/session/message"),
+    import("@opencode-harness/core/session/todo"),
+    import("@opencode-harness/core/session/prompt"),
+    import("@opencode-harness/core/skill"),
+    import("@opencode-harness/core/v2-schema"),
+    import("@opencode-harness/core/schema"),
+    import("@opencode-harness/core/workspace"),
   ])
 
   const schemas = [

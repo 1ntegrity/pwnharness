@@ -1,1 +1,1 @@
-export * from "@pentestcode/tui/logo"
+export * from "@opencode-harness/tui/logo"

@@ -1,1 +1,1 @@
-export { AgentAttachment, FileAttachment, Prompt, Source } from "@pentestcode/schema/prompt"
+export { AgentAttachment, FileAttachment, Prompt, Source } from "@opencode-harness/schema/prompt"

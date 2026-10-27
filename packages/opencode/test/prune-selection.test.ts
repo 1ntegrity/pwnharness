@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
 import { selectPrunableParts, PRUNE_PROTECT } from "@/session/compaction"
-import type { SessionV1 } from "@pentestcode/core/v1/session"
+import type { SessionV1 } from "@opencode-harness/core/v1/session"
 
 // A-5 regression guard: prune-to-ref must never eat the ACTIVE context. These
 // tests lock the depth-protection invariants of the selection pass — the exact

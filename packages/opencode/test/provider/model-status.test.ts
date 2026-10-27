@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test"
 import { Schema } from "effect"
-import { ConfigProviderV1 } from "@pentestcode/core/v1/config/provider"
+import { ConfigProviderV1 } from "@opencode-harness/core/v1/config/provider"
 import { CatalogModelStatus, ModelStatus } from "@/provider/model-status"
-import { ModelsDev } from "@pentestcode/core/models-dev"
+import { ModelsDev } from "@opencode-harness/core/models-dev"
 import { Provider } from "@/provider/provider"
 
 describe("provider model status schemas", () => {

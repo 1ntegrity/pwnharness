@@ -1,7 +1,7 @@
 import { Schema } from "effect"
-import { NamedError } from "@pentestcode/core/util/error"
+import { NamedError } from "@opencode-harness/core/util/error"
 import { Process } from "@/util/process"
-import { IdeEvent } from "@pentestcode/schema/ide-event"
+import { IdeEvent } from "@opencode-harness/schema/ide-event"
 
 const SUPPORTED_IDES = [
   { name: "Windsurf" as const, cmd: "windsurf" },

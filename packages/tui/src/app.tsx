@@ -2,9 +2,9 @@ import { render, TimeToFirstDraw, useRenderer, useTerminalDimensions } from "@op
 import { registerOpencodeSpinner } from "./component/register-spinner"
 import { createDefaultOpenTuiKeymap } from "@opentui/keymap/opentui"
 import { Deferred, Effect } from "effect"
-import { Global } from "@pentestcode/core/global"
-import { Flag } from "@pentestcode/core/flag/flag"
-import { InstallationVersion } from "@pentestcode/core/installation/version"
+import { Global } from "@opencode-harness/core/global"
+import { Flag } from "@opencode-harness/core/flag/flag"
+import { InstallationVersion } from "@opencode-harness/core/installation/version"
 import { ClipboardProvider, useClipboard } from "./context/clipboard"
 import { ExitProvider, useExit } from "./context/exit"
 import { EpilogueProvider } from "./context/epilogue"
@@ -457,14 +457,14 @@ function App(props: { onSnapshot?: () => Promise<string[]>; pluginHost: TuiPlugi
     if (!terminalTitleEnabled() || Flag.OPENCODE_DISABLE_TERMINAL_TITLE) return
 
     if (route.data.type === "home") {
-      renderer.setTerminalTitle("PentestCode")
+      renderer.setTerminalTitle("OpenCode Harness")
       return
     }
 
     if (route.data.type === "session") {
       const session = sync.session.get(route.data.sessionID)
       if (!session || isDefaultTitle(session.title)) {
-        renderer.setTerminalTitle("PentestCode")
+        renderer.setTerminalTitle("OpenCode Harness")
         return
       }
 
@@ -845,7 +845,7 @@ function App(props: { onSnapshot?: () => Promise<string[]>; pluginHost: TuiPlugi
         name: "docs.open",
         title: "Open docs",
         run: () => {
-          open("https://github.com/s0ld13rr/pentestcode").catch(() => {})
+          open("https://github.com/s0ld13rr/opencode-harness").catch(() => {})
           dialog.clear()
         },
         category: "System",
@@ -1114,7 +1114,7 @@ function App(props: { onSnapshot?: () => Promise<string[]>; pluginHost: TuiPlugi
     await DialogAlert.show(
       dialog,
       "Update Complete",
-      `Successfully updated to PentestCode v${result.data.version}. Please restart the application.`,
+      `Successfully updated to OpenCode Harness v${result.data.version}. Please restart the application.`,
     )
 
     void exit()

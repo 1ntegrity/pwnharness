@@ -1,4 +1,4 @@
-import { Npm } from "@pentestcode/core/npm"
+import { Npm } from "@opencode-harness/core/npm"
 import { Effect, Layer } from "effect"
 
 export const noop = Layer.mock(Npm.Service)({

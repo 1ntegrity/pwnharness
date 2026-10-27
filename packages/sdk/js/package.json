@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@pentestcode/sdk",
+  "name": "@opencode-harness/sdk",
   "version": "1.17.15",
   "type": "module",
   "license": "MIT",

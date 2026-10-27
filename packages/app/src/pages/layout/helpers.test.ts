@@ -6,7 +6,7 @@ import {
   parseDeepLink,
   parseNewSessionDeepLink,
 } from "./deep-links"
-import { type Session } from "@pentestcode/sdk/v2/client"
+import { type Session } from "@opencode-harness/sdk/v2/client"
 import {
   childSessionOnPath,
   closeHomeProject,

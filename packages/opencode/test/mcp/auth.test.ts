@@ -1,8 +1,8 @@
 import { expect, test } from "bun:test"
 import { setTimeout as sleep } from "node:timers/promises"
-import { AppNodeBuilder } from "@pentestcode/core/effect/app-node-builder"
+import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
 import { Effect, Layer } from "effect"
-import { FSUtil } from "@pentestcode/core/fs-util"
+import { FSUtil } from "@opencode-harness/core/fs-util"
 import { McpAuth } from "../../src/mcp/auth"
 
 function authFile() {

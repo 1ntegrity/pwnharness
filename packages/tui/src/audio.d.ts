@@ -3,7 +3,7 @@ declare module "*.mp3" {
   export default path
 }
 
-declare module "@pentestcode/ui/audio/*.mp3" {
+declare module "@opencode-harness/ui/audio/*.mp3" {
   const path: string
   export default path
 }

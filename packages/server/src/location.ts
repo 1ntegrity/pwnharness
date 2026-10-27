@@ -1,7 +1,7 @@
-import { Location } from "@pentestcode/core/location"
-import { LocationServiceMap } from "@pentestcode/core/location-services"
-import { AbsolutePath } from "@pentestcode/core/schema"
-import { WorkspaceV2 } from "@pentestcode/core/workspace"
+import { Location } from "@opencode-harness/core/location"
+import { LocationServiceMap } from "@opencode-harness/core/location-services"
+import { AbsolutePath } from "@opencode-harness/core/schema"
+import { WorkspaceV2 } from "@opencode-harness/core/workspace"
 import { Effect, Layer } from "effect"
 import { HttpServerRequest } from "effect/unstable/http"
 import { HttpApiMiddleware } from "effect/unstable/httpapi"
@@ -9,7 +9,7 @@ import { HttpApiMiddleware } from "effect/unstable/httpapi"
 export type LocationServices = Layer.Success<ReturnType<(typeof LocationServiceMap.Service)["get"]>>
 
 export class LocationMiddleware extends HttpApiMiddleware.Service<LocationMiddleware, { provides: LocationServices }>()(
-  "@pentestcode/HttpApiLocation",
+  "@opencode-harness/HttpApiLocation",
 ) {}
 
 export function response<A, E, R>(data: Effect.Effect<A, E, R>) {
@@ -28,10 +28,10 @@ export function response<A, E, R>(data: Effect.Effect<A, E, R>) {
 
 function ref(request: HttpServerRequest.HttpServerRequest): Location.Ref {
   const query = new URL(request.url, "http://localhost").searchParams
-  const workspaceID = query.get("location[workspace]") || request.headers["x-pentestcode-workspace"]
+  const workspaceID = query.get("location[workspace]") || request.headers["x-opencode-harness-workspace"]
   const directory =
     query.get("location[directory]") ||
-    (request.headers["x-pentestcode-directory"] ? decode(request.headers["x-pentestcode-directory"]) : process.cwd())
+    (request.headers["x-opencode-harness-directory"] ? decode(request.headers["x-opencode-harness-directory"]) : process.cwd())
   return Location.Ref.make({
     directory: AbsolutePath.make(directory),
     workspaceID: workspaceID ? WorkspaceV2.ID.make(workspaceID) : undefined,

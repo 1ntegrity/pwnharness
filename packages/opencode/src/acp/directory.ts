@@ -3,9 +3,9 @@ import { Command } from "@/command"
 import { InstanceRef } from "@/effect/instance-ref"
 import { InstanceBootstrap } from "@/project/bootstrap"
 import { InstanceStore } from "@/project/instance-store"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { ProviderV2 } from "@pentestcode/core/provider"
-import { ModelV2 } from "@pentestcode/core/model"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { ProviderV2 } from "@opencode-harness/core/provider"
+import { ModelV2 } from "@opencode-harness/core/model"
 import { Provider } from "@/provider/provider"
 import { Context, Effect, Layer, SynchronizedRef } from "effect"
 import type * as ACPError from "./error"
@@ -51,9 +51,9 @@ export interface Interface {
   readonly variants: (snapshot: Snapshot, model: DefaultModel) => ModelVariants | undefined
 }
 
-export class Loader extends Context.Service<Loader, LoaderInterface>()("@pentestcode/ACPDirectoryLoader") {}
+export class Loader extends Context.Service<Loader, LoaderInterface>()("@opencode-harness/ACPDirectoryLoader") {}
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/ACPDirectory") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/ACPDirectory") {}
 
 export const modelKey = (model: DefaultModel) => `${model.providerID}/${model.modelID}`
 

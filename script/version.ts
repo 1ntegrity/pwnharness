@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 
-import { Script } from "@pentestcode/script"
+import { Script } from "@opencode-harness/script"
 import { $ } from "bun"
 
 const output = [`version=${Script.version}`]

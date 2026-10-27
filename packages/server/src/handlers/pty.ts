@@ -1,19 +1,19 @@
-import { Pty } from "@pentestcode/core/pty"
-import { PtyProtocol } from "@pentestcode/core/pty/protocol"
-import { PtyTicket } from "@pentestcode/core/pty/ticket"
-import { Location } from "@pentestcode/core/location"
+import { Pty } from "@opencode-harness/core/pty"
+import { PtyProtocol } from "@opencode-harness/core/pty/protocol"
+import { PtyTicket } from "@opencode-harness/core/pty/ticket"
+import { Location } from "@opencode-harness/core/location"
 import { Effect, Queue } from "effect"
 import { HttpServerRequest, HttpServerResponse } from "effect/unstable/http"
 import { HttpApiBuilder, HttpApiSchema } from "effect/unstable/httpapi"
 import * as Socket from "effect/unstable/socket/Socket"
 import { Api } from "../api"
 import { CorsConfig, isAllowedRequestOrigin } from "../cors"
-import { ForbiddenError, PtyNotFoundError } from "@pentestcode/protocol/errors"
+import { ForbiddenError, PtyNotFoundError } from "@opencode-harness/protocol/errors"
 import {
   PTY_CONNECT_TICKET_QUERY,
   PTY_CONNECT_TOKEN_HEADER,
   PTY_CONNECT_TOKEN_HEADER_VALUE,
-} from "@pentestcode/protocol/groups/pty"
+} from "@opencode-harness/protocol/groups/pty"
 import { response } from "../location"
 import { PtyEnvironment } from "../pty-environment"
 

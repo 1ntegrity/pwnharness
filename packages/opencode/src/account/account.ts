@@ -1,7 +1,7 @@
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { httpClient } from "@pentestcode/core/effect/app-node-platform"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { httpClient } from "@opencode-harness/core/effect/app-node-platform"
 import { Cache, Clock, Duration, Effect, Layer, Option, Schema, SchemaGetter, Context } from "effect"
-import { serviceUse } from "@pentestcode/core/effect/service-use"
+import { serviceUse } from "@opencode-harness/core/effect/service-use"
 import {
   FetchHttpClient,
   HttpClient,
@@ -134,7 +134,7 @@ class TokenRefreshRequest extends Schema.Class<TokenRefreshRequest>("TokenRefres
   client_id: Schema.String,
 }) {}
 
-const clientId = "pentestcode-cli"
+const clientId = "opencode-harness-cli"
 const eagerRefreshThreshold = Duration.minutes(5)
 const eagerRefreshThresholdMs = Duration.toMillis(eagerRefreshThreshold)
 
@@ -182,7 +182,7 @@ export interface Interface {
   readonly poll: (input: Login) => Effect.Effect<PollResult, AccountError>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/Account") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Account") {}
 
 export const use = serviceUse(Service)
 

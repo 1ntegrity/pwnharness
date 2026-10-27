@@ -1,4 +1,4 @@
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
 import { Context, Effect, Layer } from "effect"
 
 import { InstanceState } from "@/effect/instance-state"
@@ -8,12 +8,12 @@ import type { Provider } from "@/provider/provider"
 import type { Agent } from "@/agent/agent"
 import { Permission } from "@/permission"
 import { Skill } from "@/skill"
-import { AbsolutePath } from "@pentestcode/core/schema"
-import { Location } from "@pentestcode/core/location"
-import { LocationServiceMap, locationServiceMapLayer } from "@pentestcode/core/location-services"
-import { Reference } from "@pentestcode/core/reference"
+import { AbsolutePath } from "@opencode-harness/core/schema"
+import { Location } from "@opencode-harness/core/location"
+import { LocationServiceMap, locationServiceMapLayer } from "@opencode-harness/core/location-services"
+import { Reference } from "@opencode-harness/core/reference"
 import { MCP } from "@/mcp"
-import { PermissionV1 } from "@pentestcode/core/v1/permission"
+import { PermissionV1 } from "@opencode-harness/core/v1/permission"
 
 export function provider(model: Provider.Model) {
   return [PROMPT_BUILD]
@@ -25,7 +25,7 @@ export interface Interface {
   readonly mcp: (agent: Agent.Info, permission?: PermissionV1.Ruleset) => Effect.Effect<string | undefined>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/SystemPrompt") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/SystemPrompt") {}
 
 const layer = Layer.effect(
   Service,

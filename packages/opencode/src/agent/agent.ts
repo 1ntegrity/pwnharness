@@ -1,7 +1,7 @@
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { PermissionV1 } from "@pentestcode/core/v1/permission"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { PermissionV1 } from "@opencode-harness/core/v1/permission"
 import { Config } from "@/config/config"
-import { serviceUse } from "@pentestcode/core/effect/service-use"
+import { serviceUse } from "@opencode-harness/core/effect/service-use"
 import { Provider } from "@/provider/provider"
 
 import { generateObject, streamObject, type ModelMessage } from "ai"
@@ -17,7 +17,7 @@ import PROMPT_SUMMARY from "./prompt/summary.txt"
 import PROMPT_TITLE from "./prompt/title.txt"
 import { Permission } from "@/permission"
 import { mergeDeep, pipe, sortBy, values } from "remeda"
-import { Global } from "@pentestcode/core/global"
+import { Global } from "@opencode-harness/core/global"
 import path from "path"
 import { Plugin } from "@/plugin"
 import { Skill } from "../skill"
@@ -25,13 +25,13 @@ import { Effect, Context, Layer, Schema } from "effect"
 import { InstanceState } from "@/effect/instance-state"
 import * as Option from "effect/Option"
 import * as OtelTracer from "@effect/opentelemetry/Tracer"
-import { AbsolutePath, type DeepMutable } from "@pentestcode/core/schema"
-import { ProviderV2 } from "@pentestcode/core/provider"
-import { ModelV2 } from "@pentestcode/core/model"
-import { LocationServiceMap, locationServiceMapLayer } from "@pentestcode/core/location-services"
-import { Reference } from "@pentestcode/core/reference"
-import { Location } from "@pentestcode/core/location"
-import { PluginV2 } from "@pentestcode/core/plugin"
+import { AbsolutePath, type DeepMutable } from "@opencode-harness/core/schema"
+import { ProviderV2 } from "@opencode-harness/core/provider"
+import { ModelV2 } from "@opencode-harness/core/model"
+import { LocationServiceMap, locationServiceMapLayer } from "@opencode-harness/core/location-services"
+import { Reference } from "@opencode-harness/core/reference"
+import { Location } from "@opencode-harness/core/location"
+import { PluginV2 } from "@opencode-harness/core/plugin"
 
 export const Info = Schema.Struct({
   name: Schema.String,
@@ -82,7 +82,7 @@ export interface Interface {
 
 type State = Omit<Interface, "generate">
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/Agent") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Agent") {}
 
 export const use = serviceUse(Service)
 

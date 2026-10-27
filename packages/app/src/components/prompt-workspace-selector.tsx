@@ -1,8 +1,8 @@
 import { For, Show } from "solid-js"
-import { MenuV2 } from "@pentestcode/ui/v2/menu-v2"
-import { Icon } from "@pentestcode/ui/icon"
-import { Icon as IconV2 } from "@pentestcode/ui/v2/icon"
-import { getFilename } from "@pentestcode/core/util/path"
+import { MenuV2 } from "@opencode-harness/ui/v2/menu-v2"
+import { Icon } from "@opencode-harness/ui/icon"
+import { Icon as IconV2 } from "@opencode-harness/ui/v2/icon"
+import { getFilename } from "@opencode-harness/core/util/path"
 import { useLanguage } from "@/context/language"
 
 export function PromptWorkspaceSelector(props: {

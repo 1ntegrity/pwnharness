@@ -1,8 +1,8 @@
-import { Catalog } from "@pentestcode/core/catalog"
+import { Catalog } from "@opencode-harness/core/catalog"
 import { Effect } from "effect"
 import { HttpApiBuilder } from "effect/unstable/httpapi"
 import { Api } from "../api"
-import { ProviderNotFoundError } from "@pentestcode/protocol/errors"
+import { ProviderNotFoundError } from "@opencode-harness/protocol/errors"
 import { response } from "../location"
 
 export const ProviderHandler = HttpApiBuilder.group(Api, "server.provider", (handlers) =>

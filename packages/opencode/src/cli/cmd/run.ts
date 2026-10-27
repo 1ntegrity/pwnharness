@@ -1,14 +1,14 @@
-import type { PermissionV1 } from "@pentestcode/core/v1/permission"
-import { FSUtil } from "@pentestcode/core/fs-util"
-// CLI entry point for `pentestcode run` and `pentestcode --mini`.
+import type { PermissionV1 } from "@opencode-harness/core/v1/permission"
+import { FSUtil } from "@opencode-harness/core/fs-util"
+// CLI entry point for `opencode-harness run` and `opencode-harness --mini`.
 //
 // Handles three modes:
 //   1. Non-interactive (default): sends a single prompt, streams events to
 //      stdout, and exits when the session goes idle.
-//   2. Interactive local (`pentestcode --mini`): boots the split-footer direct mode
+//   2. Interactive local (`opencode-harness --mini`): boots the split-footer direct mode
 //      with an in-process server (no external HTTP).
-//   3. Interactive attach (`pentestcode --mini --attach`): connects to a running
-//      pentestcode server and runs interactive mode against it.
+//   3. Interactive attach (`opencode-harness --mini --attach`): connects to a running
+//      opencode-harness server and runs interactive mode against it.
 //
 // Also supports `--command` for slash-command execution, `--format json` for
 // raw event streaming, `--continue` / `--session` for session resumption,
@@ -22,7 +22,7 @@ import { UI } from "../ui"
 import { effectCmd } from "../effect-cmd"
 import { EOL } from "os"
 import { Filesystem } from "@/util/filesystem"
-import { createOpencodeClient, type OpencodeClient, type ToolPart } from "@pentestcode/sdk/v2"
+import { createOpencodeClient, type OpencodeClient, type ToolPart } from "@opencode-harness/sdk/v2"
 import { FormatError, FormatUnknownError } from "../error"
 import { INTERACTIVE_INPUT_ERROR, resolveInteractiveStdin } from "./run/runtime.stdin"
 
@@ -125,7 +125,7 @@ async function toolError(part: ToolPart) {
 
 export const RunCommand = effectCmd({
   command: "run [message..]",
-  describe: "run pentestcode with a message",
+  describe: "run opencode-harness with a message",
   // --attach connects to a remote server (no local instance needed); the
   // default path runs an in-process server and needs the project instance.
   instance: (args) => !args.attach,
@@ -189,7 +189,7 @@ export const RunCommand = effectCmd({
       })
       .option("attach", {
         type: "string",
-        describe: "attach to a running pentestcode server (e.g., http://localhost:4096)",
+        describe: "attach to a running opencode-harness server (e.g., http://localhost:4096)",
       })
       .option("password", {
         alias: ["p"],
@@ -199,7 +199,7 @@ export const RunCommand = effectCmd({
       .option("username", {
         alias: ["u"],
         type: "string",
-        describe: "basic auth username (defaults to OPENCODE_SERVER_USERNAME or 'pentestcode')",
+        describe: "basic auth username (defaults to OPENCODE_SERVER_USERNAME or 'opencode-harness')",
       })
       .option("dir", {
         type: "string",
@@ -949,7 +949,7 @@ export const RunCommand = effectCmd({
         return Server.Default().app.fetch(new Request(request, { headers }))
       }) as typeof globalThis.fetch
       const sdk = createOpencodeClient({
-        baseUrl: "http://pentestcode.internal",
+        baseUrl: "http://opencode-harness.internal",
         fetch: fetchFn,
         directory,
       })
@@ -977,7 +977,7 @@ type MiniCommandInput = {
 export async function runMini(input: MiniCommandInput) {
   if (!RunCommand.handler) throw new Error("Mini command handler is unavailable")
   await RunCommand.handler({
-    $0: "pentestcode",
+    $0: "opencode-harness",
     _: ["mini"],
     message: input.prompt ? [input.prompt] : [],
     command: undefined,

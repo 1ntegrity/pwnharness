@@ -73,4 +73,4 @@ export const Script = {
     return team
   },
 }
-console.log(`pentestcode script`, JSON.stringify(Script, null, 2))
+console.log(`opencode-harness script`, JSON.stringify(Script, null, 2))

@@ -1,7 +1,7 @@
 import path from "path"
 import { writeHeapSnapshot } from "node:v8"
-import { Flag } from "@pentestcode/core/flag/flag"
-import { Global } from "@pentestcode/core/global"
+import { Flag } from "@opencode-harness/core/flag/flag"
+import { Global } from "@opencode-harness/core/global"
 const MINUTE = 60_000
 const LIMIT = 2 * 1024 * 1024 * 1024
 

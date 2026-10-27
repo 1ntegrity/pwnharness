@@ -1,10 +1,10 @@
 import { describe, expect } from "bun:test"
 import { Effect, Layer } from "effect"
-import { AppNodeBuilder } from "@pentestcode/core/effect/app-node-builder"
-import { Location } from "@pentestcode/core/location"
-import { Project } from "@pentestcode/core/project"
-import { AbsolutePath } from "@pentestcode/core/schema"
-import { WorkspaceV2 } from "@pentestcode/core/workspace"
+import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
+import { Location } from "@opencode-harness/core/location"
+import { Project } from "@opencode-harness/core/project"
+import { AbsolutePath } from "@opencode-harness/core/schema"
+import { WorkspaceV2 } from "@opencode-harness/core/workspace"
 import { testEffect } from "./lib/effect"
 
 const workspaceID = WorkspaceV2.ID.make("wrk_test")

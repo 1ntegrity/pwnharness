@@ -1,8 +1,8 @@
 import type { McpServer } from "@agentclientprotocol/sdk"
-import type { Message, Part } from "@pentestcode/sdk/v2"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { ProviderV2 } from "@pentestcode/core/provider"
-import { ModelV2 } from "@pentestcode/core/model"
+import type { Message, Part } from "@opencode-harness/sdk/v2"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { ProviderV2 } from "@opencode-harness/core/provider"
+import { ModelV2 } from "@opencode-harness/core/model"
 import { Context, Effect, Layer, Ref } from "effect"
 import * as ACPError from "./error"
 
@@ -90,7 +90,7 @@ export type Interface = {
   readonly tryGetPartMetadata: (input: PartMetadataLookupInput) => Effect.Effect<KnownMessagePartMetadata | undefined>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/ACP/Session") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/ACP/Session") {}
 
 type State = Map<string, Info>
 

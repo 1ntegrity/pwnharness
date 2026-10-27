@@ -1,4 +1,4 @@
-// Top-level orchestrator for `pentestcode --mini`.
+// Top-level orchestrator for `opencode-harness --mini`.
 //
 // Wires the boot sequence, lifecycle (renderer + footer), stream transport,
 // and prompt queue together into a single session loop. Two entry points:
@@ -12,8 +12,8 @@
 //   3. starts the stream transport (SDK event subscription), lazily for fresh
 //      local sessions,
 //   4. runs the prompt queue until the footer closes.
-import { createOpencodeClient } from "@pentestcode/sdk/v2"
-import { Flag } from "@pentestcode/core/flag/flag"
+import { createOpencodeClient } from "@opencode-harness/sdk/v2"
+import { Flag } from "@opencode-harness/core/flag/flag"
 import { MessageID } from "@/session/schema"
 import { createRunDemo } from "./demo"
 import { resolveModelInfo, resolveRunTuiConfig, resolveSessionInfo } from "./runtime.boot"
@@ -734,7 +734,7 @@ async function runInteractiveRuntime(input: RunRuntimeInput, deps: RunRuntimeDep
 // the in-process server, so no external HTTP server is needed.
 export async function runInteractiveLocalMode(input: RunLocalInput): Promise<void> {
   const sdk = createOpencodeClient({
-    baseUrl: "http://pentestcode.internal",
+    baseUrl: "http://opencode-harness.internal",
     fetch: input.fetch,
     directory: input.directory,
   })

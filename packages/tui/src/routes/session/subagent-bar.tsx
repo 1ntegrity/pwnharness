@@ -7,7 +7,7 @@ import { Spinner } from "../../component/spinner"
 import { SplitBorder } from "../../ui/border"
 import { Locale } from "../../util/locale"
 import { useTerminalDimensions } from "@opentui/solid"
-import type { ToolPart } from "@pentestcode/sdk/v2"
+import type { ToolPart } from "@opencode-harness/sdk/v2"
 
 type Status = "running" | "done" | "error"
 

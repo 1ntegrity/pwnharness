@@ -1,11 +1,11 @@
-import { Database } from "@pentestcode/core/database/database"
+import { Database } from "@opencode-harness/core/database/database"
 import { inArray } from "drizzle-orm"
-import { EventSequenceTable } from "@pentestcode/core/event/sql"
+import { EventSequenceTable } from "@opencode-harness/core/event/sql"
 import { Workspace } from "@/control-plane/workspace"
-import type { WorkspaceV2 } from "@pentestcode/core/workspace"
+import type { WorkspaceV2 } from "@opencode-harness/core/workspace"
 import { Effect } from "effect"
 
-export const HEADER = "x-pentestcode-sync"
+export const HEADER = "x-opencode-harness-sync"
 export type State = Record<string, number>
 
 export function load(db: Database.Interface["db"], ids?: string[]) {

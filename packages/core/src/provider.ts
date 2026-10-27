@@ -1,7 +1,7 @@
 export * as ProviderV2 from "./provider"
 
 import { Types } from "effect"
-import { Provider } from "@pentestcode/schema/provider"
+import { Provider } from "@opencode-harness/schema/provider"
 
 export const ID = Provider.ID
 export type ID = typeof ID.Type

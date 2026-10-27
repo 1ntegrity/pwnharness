@@ -1,8 +1,8 @@
 import { Component, createMemo, Show } from "solid-js"
 import { useSync } from "@/context/sync"
-import { Dialog } from "@pentestcode/ui/dialog"
-import { List } from "@pentestcode/ui/list"
-import { Switch } from "@pentestcode/ui/switch"
+import { Dialog } from "@opencode-harness/ui/dialog"
+import { List } from "@opencode-harness/ui/list"
+import { Switch } from "@opencode-harness/ui/switch"
 import { useLanguage } from "@/context/language"
 import { useMcpToggle } from "@/context/mcp"
 

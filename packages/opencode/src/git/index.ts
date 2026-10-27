@@ -1,5 +1,5 @@
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { AppProcess } from "@pentestcode/core/process"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { AppProcess } from "@opencode-harness/core/process"
 import { Effect, Layer, Context, Stream } from "effect"
 import { ChildProcess } from "effect/unstable/process"
 
@@ -98,7 +98,7 @@ const kind = (code: string): Kind => {
   return "modified"
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/Git") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Git") {}
 
 const layer = Layer.effect(
   Service,

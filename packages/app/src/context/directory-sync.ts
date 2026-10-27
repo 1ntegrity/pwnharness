@@ -1,5 +1,5 @@
-import { Binary } from "@pentestcode/core/util/binary"
-import type { Message, Part, Session } from "@pentestcode/sdk/v2/client"
+import { Binary } from "@opencode-harness/core/util/binary"
+import type { Message, Part, Session } from "@opencode-harness/sdk/v2/client"
 import { createMemo } from "solid-js"
 import { produce, reconcile, type SetStoreFunction } from "solid-js/store"
 import type { createServerSdkContext } from "./server-sdk"

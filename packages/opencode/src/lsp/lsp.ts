@@ -1,5 +1,5 @@
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { FSUtil } from "@pentestcode/core/fs-util"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { FSUtil } from "@opencode-harness/core/fs-util"
 import { EventV2Bridge } from "@/event-v2-bridge"
 import * as LSPClient from "./client"
 import path from "path"
@@ -11,9 +11,9 @@ import { spawn as lspspawn } from "./launch"
 import { Effect, Layer, Context, Schema } from "effect"
 import { InstanceState } from "@/effect/instance-state"
 import { containsPath } from "@/project/instance-context"
-import { NonNegativeInt } from "@pentestcode/core/schema"
+import { NonNegativeInt } from "@opencode-harness/core/schema"
 import { RuntimeFlags } from "@/effect/runtime-flags"
-import { LspEvent } from "@pentestcode/schema/lsp-event"
+import { LspEvent } from "@opencode-harness/schema/lsp-event"
 
 export const Event = LspEvent
 
@@ -133,7 +133,7 @@ export interface Interface {
   readonly outgoingCalls: (input: LocInput) => Effect.Effect<any[]>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/LSP") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/LSP") {}
 
 const layer = Layer.effect(
   Service,

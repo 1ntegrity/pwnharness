@@ -1,8 +1,8 @@
 import { describe, expect } from "bun:test"
 import { Effect } from "effect"
-import { Credential } from "@pentestcode/core/credential"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { Integration } from "@pentestcode/core/integration"
+import { Credential } from "@opencode-harness/core/credential"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { Integration } from "@opencode-harness/core/integration"
 import { testEffect } from "./lib/effect"
 
 const it = testEffect(LayerNode.compile(Credential.node))

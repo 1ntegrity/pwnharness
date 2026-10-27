@@ -1,5 +1,5 @@
-import { Agent } from "@pentestcode/schema/agent"
-import { Location } from "@pentestcode/schema/location"
+import { Agent } from "@opencode-harness/schema/agent"
+import { Location } from "@opencode-harness/schema/location"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
 import { LocationQuery, locationQueryOpenApi } from "./location"

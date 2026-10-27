@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-import { Script } from "@pentestcode/script"
+import { Script } from "@opencode-harness/script"
 import { $ } from "bun"
 import { fileURLToPath } from "url"
 

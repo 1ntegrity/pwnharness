@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import type { QuestionRequest } from "@pentestcode/sdk/v2"
+import type { QuestionRequest } from "@opencode-harness/sdk/v2"
 import {
   createQuestionBodyState,
   questionConfirm,

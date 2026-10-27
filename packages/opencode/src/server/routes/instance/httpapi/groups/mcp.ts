@@ -1,5 +1,5 @@
 import { MCP } from "@/mcp"
-import { ConfigMCPV1 } from "@pentestcode/core/v1/config/mcp"
+import { ConfigMCPV1 } from "@opencode-harness/core/v1/config/mcp"
 import { Schema } from "effect"
 import { HttpApi, HttpApiEndpoint, HttpApiError, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
 import { McpServerNotFoundError } from "../errors"
@@ -149,7 +149,7 @@ export const McpApi = HttpApi.make("mcp")
   )
   .annotateMerge(
     OpenApi.annotations({
-      title: "pentestcode experimental HttpApi",
+      title: "opencode-harness experimental HttpApi",
       version: "0.0.1",
       description: "Experimental HttpApi surface for selected instance routes.",
     }),

@@ -1,3 +1,3 @@
 export * as V2Schema from "./v2-schema"
 
-export { DateTimeUtcFromMillis } from "@pentestcode/schema/schema"
+export { DateTimeUtcFromMillis } from "@opencode-harness/schema/schema"

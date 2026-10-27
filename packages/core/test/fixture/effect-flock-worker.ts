@@ -1,9 +1,9 @@
 import fs from "fs/promises"
 import os from "os"
 import { Effect } from "effect"
-import { AppNodeBuilder } from "@pentestcode/core/effect/app-node-builder"
-import { EffectFlock } from "@pentestcode/core/util/effect-flock"
-import { Global } from "@pentestcode/core/global"
+import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
+import { EffectFlock } from "@opencode-harness/core/util/effect-flock"
+import { Global } from "@opencode-harness/core/global"
 
 type Msg = {
   key: string

@@ -14,7 +14,7 @@ process.chdir(dir)
 
 const generated = await import("./generate.ts")
 
-import { Script } from "@pentestcode/script"
+import { Script } from "@opencode-harness/script"
 import pkg from "../package.json"
 
 const singleFlag = process.argv.includes("--single")
@@ -52,7 +52,7 @@ const embeddedFileMap = skipEmbedWebUi ? null : await createEmbeddedWebUIBundle(
 
 // Embed the default ("bundled") skill set into the binary. At runtime
 // src/skill/bundled.ts imports this generated module and seeds
-// ~/.pentestcode/skills/bundled on first run / version bump. Embedding (vs the
+// ~/.opencode-harness/skills/bundled on first run / version bump. Embedding (vs the
 // old skills.tar.gz download) means skills work offline/air-gapped and move in
 // lockstep with the prompts they support. Always embedded — no skip flag.
 const createEmbeddedSkillsBundle = async () => {
@@ -195,20 +195,20 @@ for (const item of targets) {
       autoloadTsconfig: true,
       autoloadPackageJson: true,
       target: name.replace(pkg.name, "bun") as any,
-      outfile: `dist/${name}/bin/pentestcode`,
-      execArgv: [`--user-agent=pentestcode/${Script.version}`, "--use-system-ca", "--"],
+      outfile: `dist/${name}/bin/opencode-harness`,
+      execArgv: [`--user-agent=opencode-harness/${Script.version}`, "--use-system-ca", "--"],
       windows: {},
     },
     files: {
       ...(embeddedFileMap ? { "opencode-web-ui.gen.ts": embeddedFileMap } : {}),
-      "pentestcode-skills.gen.ts": embeddedSkillsMap,
+      "opencode-harness-skills.gen.ts": embeddedSkillsMap,
     },
     entrypoints: [
       "./src/index.ts",
       parserWorker,
       workerPath,
       ...(embeddedFileMap ? ["opencode-web-ui.gen.ts"] : []),
-      "pentestcode-skills.gen.ts",
+      "opencode-harness-skills.gen.ts",
     ],
     define: {
       FFF_LIBC: JSON.stringify(item.abi === "musl" ? "musl" : "gnu"),
@@ -224,7 +224,7 @@ for (const item of targets) {
 
   // Smoke test: only run if binary is for current platform
   if (item.os === process.platform && item.arch === process.arch && !item.abi) {
-    const binaryPath = `dist/${name}/bin/pentestcode`
+    const binaryPath = `dist/${name}/bin/opencode-harness`
     console.log(`Running smoke test: ${binaryPath} --version`)
     try {
       const versionOutput = await $`${binaryPath} --version`.text()
@@ -262,7 +262,7 @@ if (Script.release) {
     }
   }
   // Skills are embedded in the binary (see createEmbeddedSkillsBundle) and
-  // seeded to ~/.pentestcode/skills/bundled on first run — no skills.tar.gz asset.
+  // seeded to ~/.opencode-harness/skills/bundled on first run — no skills.tar.gz asset.
   // install.sh is served from the repo root via raw.githubusercontent (the
   // public curl entrypoint) — do NOT also ship it as a release asset, to avoid
   // two divergent installers.

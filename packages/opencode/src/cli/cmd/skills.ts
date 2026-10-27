@@ -2,7 +2,7 @@ import os from "os"
 import path from "path"
 import fs from "fs/promises"
 import { Effect } from "effect"
-import { Global } from "@pentestcode/core/global"
+import { Global } from "@opencode-harness/core/global"
 import { Skill } from "../../skill"
 import { SkillOps } from "../../skill/ops"
 import { SkillManifest } from "../../skill/manifest"
@@ -312,11 +312,11 @@ const DoctorCommand = effectCmd({
     const skills = yield* skill.all()
     const names = new Set(skills.map((s) => s.name))
     const issues: string[] = []
-    const { InstallationVersion } = yield* Effect.promise(() => import("@pentestcode/core/installation/version"))
+    const { InstallationVersion } = yield* Effect.promise(() => import("@opencode-harness/core/installation/version"))
 
     for (const s of skills) {
-      if (s.requires?.pentestcode && !satisfiesMin(InstallationVersion, s.requires.pentestcode)) {
-        issues.push(`${s.name}: requires pentestcode ${s.requires.pentestcode} (have ${InstallationVersion})`)
+      if (s.requires?.["opencode-harness"] && !satisfiesMin(InstallationVersion, s.requires["opencode-harness"])) {
+        issues.push(`${s.name}: requires opencode-harness ${s.requires["opencode-harness"]} (have ${InstallationVersion})`)
       }
       for (const dep of s.dependencies ?? []) {
         if (!names.has(dep)) issues.push(`${s.name}: missing dependency "${dep}"`)

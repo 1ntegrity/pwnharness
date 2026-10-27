@@ -23,7 +23,7 @@ beforeAll(async () => {
     useLocation: () => ({ pathname: "", query: {} }),
     useNavigate: () => () => undefined,
   }))
-  mock.module("@pentestcode/ui/context", () => ({
+  mock.module("@opencode-harness/ui/context", () => ({
     createSimpleContext: () => ({
       use: () => undefined,
       provider: () => undefined,

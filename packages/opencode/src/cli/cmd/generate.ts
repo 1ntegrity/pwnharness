@@ -18,7 +18,7 @@ export const GenerateCommand = {
           {
             lang: "js",
             source: [
-              `import { createOpencodeClient } from "@pentestcode/sdk`,
+              `import { createOpencodeClient } from "@opencode-harness/sdk`,
               ``,
               `const client = createOpencodeClient()`,
               `await client.${operation.operationId}({`,

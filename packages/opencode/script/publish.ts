@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 import { $ } from "bun"
 import pkg from "../package.json"
-import { Script } from "@pentestcode/script"
+import { Script } from "@opencode-harness/script"
 import { fileURLToPath } from "url"
 
 const dir = fileURLToPath(new URL("..", import.meta.url))
@@ -78,7 +78,7 @@ const tasks = Object.entries(binaries).map(async ([name]) => {
 await Promise.all(tasks)
 await publish(`./dist/${pkg.name}`, `${pkg.name}-ai`, version)
 
-const image = "ghcr.io/s0ld13rr/pentestcode"
+const image = "ghcr.io/s0ld13rr/opencode-harness"
 const platforms = "linux/amd64,linux/arm64"
 const tags = [`${image}:${version}`, `${image}:${Script.channel}`]
 const tagFlags = tags.flatMap((t) => ["-t", t])
@@ -87,10 +87,10 @@ const tagFlags = tags.flatMap((t) => ["-t", t])
 if (!Script.preview) {
   await $`docker buildx build --platform ${platforms} ${tagFlags} --push .`
   // Calculate SHA values
-  const arm64Sha = await $`sha256sum ./dist/pentestcode-linux-arm64.tar.gz | cut -d' ' -f1`.text().then((x) => x.trim())
-  const x64Sha = await $`sha256sum ./dist/pentestcode-linux-x64.tar.gz | cut -d' ' -f1`.text().then((x) => x.trim())
-  const macX64Sha = await $`sha256sum ./dist/pentestcode-darwin-x64.zip | cut -d' ' -f1`.text().then((x) => x.trim())
-  const macArm64Sha = await $`sha256sum ./dist/pentestcode-darwin-arm64.zip | cut -d' ' -f1`.text().then((x) => x.trim())
+  const arm64Sha = await $`sha256sum ./dist/opencode-harness-linux-arm64.tar.gz | cut -d' ' -f1`.text().then((x) => x.trim())
+  const x64Sha = await $`sha256sum ./dist/opencode-harness-linux-x64.tar.gz | cut -d' ' -f1`.text().then((x) => x.trim())
+  const macX64Sha = await $`sha256sum ./dist/opencode-harness-darwin-x64.zip | cut -d' ' -f1`.text().then((x) => x.trim())
+  const macArm64Sha = await $`sha256sum ./dist/opencode-harness-darwin-arm64.zip | cut -d' ' -f1`.text().then((x) => x.trim())
 
   const [pkgver, _subver = ""] = Script.version.split(/(-.*)/, 2)
 
@@ -98,32 +98,32 @@ if (!Script.preview) {
   const binaryPkgbuild = [
     "# Maintainer: s0ld13rr",
     "",
-    "pkgname='pentestcode-bin'",
+    "pkgname='opencode-harness-bin'",
     `pkgver=${pkgver}`,
     `_subver=${_subver}`,
     "options=('!debug' '!strip')",
     "pkgrel=1",
     "pkgdesc='AI penetration testing agent for the terminal.'",
-    "url='https://github.com/s0ld13rr/pentestcode'",
+    "url='https://github.com/s0ld13rr/opencode-harness'",
     "arch=('aarch64' 'x86_64')",
     "license=('MIT')",
-    "provides=('pentestcode')",
-    "conflicts=('pentestcode')",
+    "provides=('opencode-harness')",
+    "conflicts=('opencode-harness')",
     "depends=('ripgrep')",
     "",
-    `source_aarch64=("\${pkgname}_\${pkgver}_aarch64.tar.gz::https://github.com/s0ld13rr/pentestcode/releases/download/v\${pkgver}\${_subver}/pentestcode-linux-arm64.tar.gz")`,
+    `source_aarch64=("\${pkgname}_\${pkgver}_aarch64.tar.gz::https://github.com/s0ld13rr/opencode-harness/releases/download/v\${pkgver}\${_subver}/opencode-harness-linux-arm64.tar.gz")`,
     `sha256sums_aarch64=('${arm64Sha}')`,
 
-    `source_x86_64=("\${pkgname}_\${pkgver}_x86_64.tar.gz::https://github.com/s0ld13rr/pentestcode/releases/download/v\${pkgver}\${_subver}/pentestcode-linux-x64.tar.gz")`,
+    `source_x86_64=("\${pkgname}_\${pkgver}_x86_64.tar.gz::https://github.com/s0ld13rr/opencode-harness/releases/download/v\${pkgver}\${_subver}/opencode-harness-linux-x64.tar.gz")`,
     `sha256sums_x86_64=('${x64Sha}')`,
     "",
     "package() {",
-    '  install -Dm755 ./pentestcode "${pkgdir}/usr/bin/pentestcode"',
+    '  install -Dm755 ./opencode-harness "${pkgdir}/usr/bin/opencode-harness"',
     "}",
     "",
   ].join("\n")
 
-  for (const [pkg, pkgbuild] of [["pentestcode-bin", binaryPkgbuild]]) {
+  for (const [pkg, pkgbuild] of [["opencode-harness-bin", binaryPkgbuild]]) {
     for (let i = 0; i < 30; i++) {
       try {
         await $`rm -rf ./dist/aur-${pkg}`
@@ -147,45 +147,45 @@ if (!Script.preview) {
     "# typed: false",
     "# frozen_string_literal: true",
     "",
-    "class Pentestcode < Formula",
+    "class OpenCodeHarness < Formula",
     `  desc "AI penetration testing agent for the terminal."`,
-    `  homepage "https://github.com/s0ld13rr/pentestcode"`,
+    `  homepage "https://github.com/s0ld13rr/opencode-harness"`,
     `  version "${Script.version.split("-")[0]}"`,
     "",
     `  depends_on "ripgrep"`,
     "",
     "  on_macos do",
     "    if Hardware::CPU.intel?",
-    `      url "https://github.com/s0ld13rr/pentestcode/releases/download/v${Script.version}/pentestcode-darwin-x64.zip"`,
+    `      url "https://github.com/s0ld13rr/opencode-harness/releases/download/v${Script.version}/opencode-harness-darwin-x64.zip"`,
     `      sha256 "${macX64Sha}"`,
     "",
     "      def install",
-    '        bin.install "pentestcode"',
+    '        bin.install "opencode-harness"',
     "      end",
     "    end",
     "    if Hardware::CPU.arm?",
-    `      url "https://github.com/s0ld13rr/pentestcode/releases/download/v${Script.version}/pentestcode-darwin-arm64.zip"`,
+    `      url "https://github.com/s0ld13rr/opencode-harness/releases/download/v${Script.version}/opencode-harness-darwin-arm64.zip"`,
     `      sha256 "${macArm64Sha}"`,
     "",
     "      def install",
-    '        bin.install "pentestcode"',
+    '        bin.install "opencode-harness"',
     "      end",
     "    end",
     "  end",
     "",
     "  on_linux do",
     "    if Hardware::CPU.intel? and Hardware::CPU.is_64_bit?",
-    `      url "https://github.com/s0ld13rr/pentestcode/releases/download/v${Script.version}/pentestcode-linux-x64.tar.gz"`,
+    `      url "https://github.com/s0ld13rr/opencode-harness/releases/download/v${Script.version}/opencode-harness-linux-x64.tar.gz"`,
     `      sha256 "${x64Sha}"`,
     "      def install",
-    '        bin.install "pentestcode"',
+    '        bin.install "opencode-harness"',
     "      end",
     "    end",
     "    if Hardware::CPU.arm? and Hardware::CPU.is_64_bit?",
-    `      url "https://github.com/s0ld13rr/pentestcode/releases/download/v${Script.version}/pentestcode-linux-arm64.tar.gz"`,
+    `      url "https://github.com/s0ld13rr/opencode-harness/releases/download/v${Script.version}/opencode-harness-linux-arm64.tar.gz"`,
     `      sha256 "${arm64Sha}"`,
     "      def install",
-    '        bin.install "pentestcode"',
+    '        bin.install "opencode-harness"',
     "      end",
     "    end",
     "  end",
@@ -202,8 +202,8 @@ if (!Script.preview) {
   const tap = `https://x-access-token:${token}@github.com/s0ld13rr/homebrew-tap.git`
   await $`rm -rf ./dist/homebrew-tap`
   await $`git clone ${tap} ./dist/homebrew-tap`
-  await Bun.file("./dist/homebrew-tap/pentestcode.rb").write(homebrewFormula)
-  await $`cd ./dist/homebrew-tap && git add pentestcode.rb`
+  await Bun.file("./dist/homebrew-tap/opencode-harness.rb").write(homebrewFormula)
+  await $`cd ./dist/homebrew-tap && git add opencode-harness.rb`
   if ((await $`cd ./dist/homebrew-tap && git diff --cached --quiet`.nothrow()).exitCode !== 0) {
     await $`cd ./dist/homebrew-tap && git commit -m "Update to v${Script.version}"`
     await $`cd ./dist/homebrew-tap && git push`

@@ -1,6 +1,6 @@
 /** @jsxImportSource @opentui/solid */
-import type { TuiPlugin, TuiPluginApi, TuiRouteCurrent } from "@pentestcode/plugin/tui"
-import type { SnapshotFileDiff, VcsFileDiff } from "@pentestcode/sdk/v2"
+import type { TuiPlugin, TuiPluginApi, TuiRouteCurrent } from "@opencode-harness/plugin/tui"
+import type { SnapshotFileDiff, VcsFileDiff } from "@opencode-harness/sdk/v2"
 import {
   TextAttributes,
   type BorderSides,

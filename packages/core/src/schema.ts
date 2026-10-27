@@ -7,7 +7,7 @@ import {
   PositiveInt,
   RelativePath,
   statics,
-} from "@pentestcode/schema/schema"
+} from "@opencode-harness/schema/schema"
 
 export { AbsolutePath, DateTimeUtcFromMillis, NonNegativeInt, optional, PositiveInt, RelativePath, statics }
 

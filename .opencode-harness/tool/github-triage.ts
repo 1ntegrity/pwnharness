@@ -1,5 +1,5 @@
 /// <reference path="../env.d.ts" />
-import { tool } from "@pentestcode/plugin"
+import { tool } from "@opencode-harness/plugin"
 
 const TEAM = {
   tui: ["kommander", "simonklee"],

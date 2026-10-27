@@ -1,2 +1,2 @@
-export { Failure, RegistrationError, make } from "@pentestcode/core/tool/tool"
-export type { AnyTool, Content, Context, Definition } from "@pentestcode/core/tool/tool"
+export { Failure, RegistrationError, make } from "@opencode-harness/core/tool/tool"
+export type { AnyTool, Content, Context, Definition } from "@opencode-harness/core/tool/tool"

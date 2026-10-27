@@ -1,8 +1,8 @@
-import { Npm } from "@pentestcode/core/npm"
+import { Npm } from "@opencode-harness/core/npm"
 import type { InstanceContext } from "../project/instance-context"
 import { Filesystem } from "@/util/filesystem"
 import { Process } from "@/util/process"
-import { which } from "@pentestcode/core/util/which"
+import { which } from "@opencode-harness/core/util/which"
 
 export interface Context extends Pick<InstanceContext, "directory" | "worktree"> {
   experimentalOxfmt: boolean

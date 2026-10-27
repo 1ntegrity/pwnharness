@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "version": "0.2.7",
-  "name": "pentestcode",
+  "name": "opencode-harness",
   "type": "module",
   "license": "MIT",
   "private": true,
@@ -16,7 +16,7 @@
     "dev:temporary": "bun run --conditions=browser ./src/temporary.ts"
   },
   "bin": {
-    "pentestcode": "./bin/pentestcode"
+    "opencode-harness": "./bin/opencode-harness"
   },
   "exports": {
     "./*": "./src/*.ts"
@@ -31,9 +31,9 @@
   "devDependencies": {
     "@babel/core": "7.28.4",
     "@octokit/webhooks-types": "7.6.1",
-    "@pentestcode/core": "workspace:*",
-    "@pentestcode/http-recorder": "workspace:*",
-    "@pentestcode/script": "workspace:*",
+    "@opencode-harness/core": "workspace:*",
+    "@opencode-harness/http-recorder": "workspace:*",
+    "@opencode-harness/script": "workspace:*",
     "@standard-schema/spec": "1.0.0",
     "@tsconfig/bun": "catalog:",
     "@types/babel__core": "7.20.5",
@@ -94,14 +94,14 @@
     "@opentui/keymap": "catalog:",
     "@opentui/solid": "catalog:",
     "@parcel/watcher": "2.5.1",
-    "@pentestcode/llm": "workspace:*",
-    "@pentestcode/plugin": "workspace:*",
-    "@pentestcode/protocol": "workspace:*",
-    "@pentestcode/schema": "workspace:*",
-    "@pentestcode/script": "workspace:*",
-    "@pentestcode/sdk": "workspace:*",
-    "@pentestcode/server": "workspace:*",
-    "@pentestcode/tui": "workspace:*",
+    "@opencode-harness/llm": "workspace:*",
+    "@opencode-harness/plugin": "workspace:*",
+    "@opencode-harness/protocol": "workspace:*",
+    "@opencode-harness/schema": "workspace:*",
+    "@opencode-harness/script": "workspace:*",
+    "@opencode-harness/sdk": "workspace:*",
+    "@opencode-harness/server": "workspace:*",
+    "@opencode-harness/tui": "workspace:*",
     "@pierre/diffs": "catalog:",
     "@silvia-odwyer/photon-node": "0.3.4",
     "@solid-primitives/event-bus": "1.1.2",

@@ -1,4 +1,4 @@
-import { NamedError } from "@pentestcode/core/util/error"
+import { NamedError } from "@opencode-harness/core/util/error"
 import { errorFormat } from "@/util/error"
 import { isRecord } from "@/util/record"
 
@@ -47,7 +47,7 @@ export function FormatError(input: unknown): string | undefined {
   // MCPFailed: { name: string }
   if (NamedError.hasName(input, "MCPFailed")) {
     const data = isRecord(input) && isRecord(input.data) ? stringField(input.data, "name") : undefined
-    return `MCP server "${data}" failed. Note, pentestcode does not support MCP authentication yet.`
+    return `MCP server "${data}" failed. Note, opencode-harness does not support MCP authentication yet.`
   }
 
   // AccountServiceError, AccountTransportError: TaggedErrorClass
@@ -64,8 +64,8 @@ export function FormatError(input: unknown): string | undefined {
     return [
       `Model not found: ${stringField(providerModelNotFound, "providerID")}/${stringField(providerModelNotFound, "modelID")}`,
       ...(suggestions.length ? ["Did you mean: " + suggestions.join(", ")] : []),
-      `Try: \`pentestcode models\` to list available models`,
-      `Or check your config (pentestcode.json) provider/model names`,
+      `Try: \`opencode-harness models\` to list available models`,
+      `Or check your config (opencode-harness.json) provider/model names`,
     ].join("\n")
   }
 
@@ -102,7 +102,7 @@ export function FormatError(input: unknown): string | undefined {
     return [
       `Failed to load remote config${remote ? ` from ${remote}` : ""}: the server returned a login page instead of JSON.`,
       `Authentication is missing or has expired (the endpoint is likely behind an SSO or identity-aware proxy).`,
-      ...(url ? [`Run \`pentestcode auth login ${url}\` to re-authenticate.`] : []),
+      ...(url ? [`Run \`opencode-harness auth login ${url}\` to re-authenticate.`] : []),
     ].join("\n")
   }
 

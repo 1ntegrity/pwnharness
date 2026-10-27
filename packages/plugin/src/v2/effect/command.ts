@@ -1,4 +1,4 @@
-import type { CommandV2Info } from "@pentestcode/sdk/v2/types"
+import type { CommandV2Info } from "@opencode-harness/sdk/v2/types"
 import type { Hooks } from "./registration.js"
 
 export interface CommandDraft {

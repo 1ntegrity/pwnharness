@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import type { PermissionRequest, Session } from "@pentestcode/sdk/v2/client"
-import { base64Encode } from "@pentestcode/core/util/encode"
+import type { PermissionRequest, Session } from "@opencode-harness/sdk/v2/client"
+import { base64Encode } from "@opencode-harness/core/util/encode"
 import { autoRespondsPermission, isDirectoryAutoAccepting } from "./permission-auto-respond"
 
 const session = (input: { id: string; parentID?: string }) =>

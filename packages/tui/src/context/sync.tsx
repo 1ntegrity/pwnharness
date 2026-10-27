@@ -19,7 +19,7 @@ import type {
   VcsInfo,
   SnapshotFileDiff,
   ConsoleState,
-} from "@pentestcode/sdk/v2"
+} from "@opencode-harness/sdk/v2"
 import { createStore, produce, reconcile } from "solid-js/store"
 import { useProject } from "./project"
 import { useEvent } from "./event"

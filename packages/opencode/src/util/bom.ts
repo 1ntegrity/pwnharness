@@ -1,5 +1,5 @@
 import { Effect } from "effect"
-import { FSUtil } from "@pentestcode/core/fs-util"
+import { FSUtil } from "@opencode-harness/core/fs-util"
 
 const BOM_CODE = 0xfeff
 const BOM = String.fromCharCode(BOM_CODE)

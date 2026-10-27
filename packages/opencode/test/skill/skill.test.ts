@@ -1,14 +1,14 @@
 import { describe, expect } from "bun:test"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
 import { Effect, Layer } from "effect"
 import { Skill } from "../../src/skill"
 import { Discovery } from "../../src/skill/discovery"
 import { RuntimeFlags } from "../../src/effect/runtime-flags"
 import { EventV2Bridge } from "../../src/event-v2-bridge"
 import { Config } from "../../src/config/config"
-import { CrossSpawnSpawner } from "@pentestcode/core/cross-spawn-spawner"
-import { FSUtil } from "@pentestcode/core/fs-util"
-import { Global } from "@pentestcode/core/global"
+import { CrossSpawnSpawner } from "@opencode-harness/core/cross-spawn-spawner"
+import { FSUtil } from "@opencode-harness/core/fs-util"
+import { Global } from "@opencode-harness/core/global"
 import { provideInstance, provideTmpdirInstance, testInstanceStoreLayer, tmpdir } from "../fixture/fixture"
 import { testEffect } from "../lib/effect"
 import path from "path"
@@ -61,17 +61,17 @@ Body for ${name}.
 `
 }
 
-// Exercises the global skills home (~/.pentestcode/skills) layering. global.home
+// Exercises the global skills home (~/["opencode-harness"]/skills) layering. global.home
 // is fixed at layer-construction to the ambient OPENCODE_TEST_HOME (preload.ts),
 // and withHome can't retroactively change it — so fixtures are written under
 // that ambient home and removed afterward. Assertions run in a fresh tmp
 // instance (unrelated cwd) so only the global home tree is under test.
-// `write` creates <home>/.pentestcode/skills/<rel>/SKILL.md.
+// `write` creates <home>/["opencode-harness"]/skills/<rel>/SKILL.md.
 const withGlobalSkills = (
   create: (write: (rel: string, body: string) => Promise<unknown>) => Promise<unknown>,
   assert: (skill: Skill.Interface) => Effect.Effect<void, any, any>,
 ) => {
-  const skillsRoot = path.join(process.env.OPENCODE_TEST_HOME!, ".pentestcode", "skills")
+  const skillsRoot = path.join(process.env.OPENCODE_TEST_HOME!, ".opencode-harness", "skills")
   return Effect.acquireUseRelease(
     Effect.promise(() => create((rel, body) => Bun.write(path.join(skillsRoot, rel, "SKILL.md"), body))),
     () =>
@@ -129,13 +129,13 @@ describe("skill", () => {
     }),
   )
 
-  it.live("discovers skills from .pentestcode/skill/ directory", () =>
+  it.live("discovers skills from .opencode-harness/skill/ directory", () =>
     provideTmpdirInstance(
       (dir) =>
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             Bun.write(
-              path.join(dir, ".pentestcode", "skill", "test-skill", "SKILL.md"),
+              path.join(dir, ".opencode-harness", "skill", "test-skill", "SKILL.md"),
               `---
 name: test-skill
 description: A test skill for verification.
@@ -168,7 +168,7 @@ Instructions here.
           Effect.gen(function* () {
             yield* Effect.promise(() =>
               Bun.write(
-                path.join(dir, ".pentestcode", "skill", "dir-skill", "SKILL.md"),
+                path.join(dir, ".opencode-harness", "skill", "dir-skill", "SKILL.md"),
                 `---
 name: dir-skill
 description: Skill for dirs test.
@@ -181,7 +181,7 @@ description: Skill for dirs test.
 
             const skill = yield* Skill.Service
             const dirs = yield* skill.dirs()
-            expect(dirs).toContain(path.join(dir, ".pentestcode", "skill", "dir-skill"))
+            expect(dirs).toContain(path.join(dir, ".opencode-harness", "skill", "dir-skill"))
             expect(dirs.length).toBe(1)
           }),
         ),
@@ -189,14 +189,14 @@ description: Skill for dirs test.
     ),
   )
 
-  it.live("discovers multiple skills from .pentestcode/skill/ directory", () =>
+  it.live("discovers multiple skills from .opencode-harness/skill/ directory", () =>
     provideTmpdirInstance(
       (dir) =>
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             Promise.all([
               Bun.write(
-                path.join(dir, ".pentestcode", "skill", "skill-one", "SKILL.md"),
+                path.join(dir, ".opencode-harness", "skill", "skill-one", "SKILL.md"),
                 `---
 name: skill-one
 description: First test skill.
@@ -206,7 +206,7 @@ description: First test skill.
 `,
               ),
               Bun.write(
-                path.join(dir, ".pentestcode", "skill", "skill-two", "SKILL.md"),
+                path.join(dir, ".opencode-harness", "skill", "skill-two", "SKILL.md"),
                 `---
 name: skill-two
 description: Second test skill.
@@ -234,7 +234,7 @@ description: Second test skill.
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             Bun.write(
-              path.join(dir, ".pentestcode", "skill", "no-frontmatter", "SKILL.md"),
+              path.join(dir, ".opencode-harness", "skill", "no-frontmatter", "SKILL.md"),
               `# No Frontmatter
 
 Just some content without YAML frontmatter.
@@ -255,7 +255,7 @@ Just some content without YAML frontmatter.
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             Bun.write(
-              path.join(dir, ".pentestcode", "skill", "manual-skill", "SKILL.md"),
+              path.join(dir, ".opencode-harness", "skill", "manual-skill", "SKILL.md"),
               `---
 name: manual-skill
 ---
@@ -545,10 +545,10 @@ description: A skill in the .agents/skills directory.
 `,
               ),
               Bun.write(
-                path.join(dir, ".pentestcode", "skill", "pentestcode-skill", "SKILL.md"),
+                path.join(dir, ".opencode-harness", "skill", "opencode-harness-skill", "SKILL.md"),
                 `---
-name: pentestcode-skill
-description: A skill in the .pentestcode/skill directory.
+name: opencode-harness-skill
+description: A skill in the .opencode-harness/skill directory.
 ---
 
 # OpenCode Skill
@@ -559,7 +559,7 @@ description: A skill in the .pentestcode/skill directory.
 
           const skill = yield* Skill.Service
           const list = (yield* skill.all()).filter((s) => s.location !== "<built-in>")
-          expect(list.map((s) => s.name)).toEqual(["pentestcode-skill"])
+          expect(list.map((s) => s.name)).toEqual(["opencode-harness-skill"])
         }),
       { git: true },
     ),
@@ -640,13 +640,13 @@ description: A skill in the .pentestcode/skill directory.
           `---
 name: rich-skill
 description: A skill with full metadata.
-id: pentestcode.services.rich
+id: opencode-harness.services.rich
 version: 2.3.1
-author: PentestCode
+author: OpenCode Harness
 tags: [smb, windows]
 dependencies: [svc-ldap]
 requires:
-  pentestcode: ">=0.2.0"
+  opencode-harness: ">=0.2.0"
 license: MIT
 ---
 
@@ -657,12 +657,12 @@ license: MIT
         Effect.gen(function* () {
           const item = (yield* skill.all()).find((s) => s.name === "rich-skill")
           expect(item).toBeDefined()
-          expect(item!.id).toBe("pentestcode.services.rich")
+          expect(item!.id).toBe("opencode-harness.services.rich")
           expect(item!.version).toBe("2.3.1")
-          expect(item!.author).toBe("PentestCode")
+          expect(item!.author).toBe("OpenCode Harness")
           expect(item!.tags).toEqual(["smb", "windows"])
           expect(item!.dependencies).toEqual(["svc-ldap"])
-          expect(item!.requires?.pentestcode).toBe(">=0.2.0")
+          expect(item!.requires?.["opencode-harness"]).toBe(">=0.2.0")
           expect(item!.license).toBe("MIT")
         }),
     ),
@@ -695,20 +695,20 @@ description: A skill in the .agents/skills directory.
 `,
               ),
               Bun.write(
-                path.join(dir, ".pentestcode", "skill", "agent-skill", "SKILL.md"),
+                path.join(dir, ".opencode-harness", "skill", "agent-skill", "SKILL.md"),
                 `---
-name: pentestcode-skill
-description: A skill in the .pentestcode/skill directory.
+name: opencode-harness-skill
+description: A skill in the .opencode-harness/skill directory.
 ---
 
 # OpenCode Skill
 `,
               ),
               Bun.write(
-                path.join(dir, ".pentestcode", "skills", "agent-skill", "SKILL.md"),
+                path.join(dir, ".opencode-harness", "skills", "agent-skill", "SKILL.md"),
                 `---
-name: pentestcode-skill
-description: A skill in the .pentestcode/skills directory.
+name: opencode-harness-skill
+description: A skill in the .opencode-harness/skills directory.
 ---
 
 # OpenCode Skill

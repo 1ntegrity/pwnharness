@@ -1,4 +1,4 @@
 import path from "path"
-import { Global } from "@pentestcode/core/global"
+import { Global } from "@opencode-harness/core/global"
 
 export const TRUNCATION_DIR = path.join(Global.Path.data, "tool-output")

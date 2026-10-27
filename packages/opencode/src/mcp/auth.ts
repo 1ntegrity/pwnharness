@@ -1,10 +1,10 @@
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
 import path from "path"
-import { serviceUse } from "@pentestcode/core/effect/service-use"
-import { Global } from "@pentestcode/core/global"
+import { serviceUse } from "@opencode-harness/core/effect/service-use"
+import { Global } from "@opencode-harness/core/global"
 import { Effect, Layer, Context, Option, Schema } from "effect"
-import { FSUtil } from "@pentestcode/core/fs-util"
-import { EffectFlock } from "@pentestcode/core/util/effect-flock"
+import { FSUtil } from "@opencode-harness/core/fs-util"
+import { EffectFlock } from "@opencode-harness/core/util/effect-flock"
 
 export const Tokens = Schema.Struct({
   accessToken: Schema.mutableKey(Schema.String),
@@ -52,7 +52,7 @@ export interface Interface {
   readonly clearOAuthState: (mcpName: string) => Effect.Effect<void>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/McpAuth") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/McpAuth") {}
 
 export const use = serviceUse(Service)
 

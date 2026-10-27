@@ -1,5 +1,5 @@
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { BackgroundJob as CoreBackgroundJob } from "@pentestcode/core/background-job"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { BackgroundJob as CoreBackgroundJob } from "@opencode-harness/core/background-job"
 import { InstanceState } from "@/effect/instance-state"
 import { Effect, Layer } from "effect"
 
@@ -12,7 +12,7 @@ export {
   type Status,
   type WaitInput,
   type WaitResult,
-} from "@pentestcode/core/background-job"
+} from "@opencode-harness/core/background-job"
 
 /** Keeps the legacy service instance-scoped while sharing the core registry engine. */
 const layer = Layer.effect(

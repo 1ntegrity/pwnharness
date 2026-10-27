@@ -1,9 +1,9 @@
 import { Component, For, Match, Show, Switch } from "solid-js"
-import { FileIcon } from "@pentestcode/ui/file-icon"
-import { Icon } from "@pentestcode/ui/icon"
-import { Tag } from "@pentestcode/ui/v2/badge-v2"
-import { KeybindV2 } from "@pentestcode/ui/v2/keybind-v2"
-import { getDirectory, getFilename } from "@pentestcode/core/util/path"
+import { FileIcon } from "@opencode-harness/ui/file-icon"
+import { Icon } from "@opencode-harness/ui/icon"
+import { Tag } from "@opencode-harness/ui/v2/badge-v2"
+import { KeybindV2 } from "@opencode-harness/ui/v2/keybind-v2"
+import { getDirectory, getFilename } from "@opencode-harness/core/util/path"
 
 export type AtOption =
   | { type: "agent"; name: string; display: string }

@@ -1,10 +1,10 @@
-import { Location } from "@pentestcode/core/location"
-import { PermissionV2 } from "@pentestcode/core/permission"
-import { PermissionSaved } from "@pentestcode/core/permission/saved"
+import { Location } from "@opencode-harness/core/location"
+import { PermissionV2 } from "@opencode-harness/core/permission"
+import { PermissionSaved } from "@opencode-harness/core/permission/saved"
 import { Effect } from "effect"
 import { HttpApiBuilder, HttpApiSchema } from "effect/unstable/httpapi"
 import { Api } from "../api"
-import { PermissionNotFoundError, SessionNotFoundError } from "@pentestcode/protocol/errors"
+import { PermissionNotFoundError, SessionNotFoundError } from "@opencode-harness/protocol/errors"
 import { response } from "../location"
 
 function missingRequest(id: PermissionV2.ID) {

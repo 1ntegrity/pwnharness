@@ -3,11 +3,11 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "pentestcode",
+      "name": "opencode-harness",
       "dependencies": {
-        "@pentestcode/plugin": "workspace:*",
-        "@pentestcode/script": "workspace:*",
-        "@pentestcode/sdk": "workspace:*",
+        "@opencode-harness/plugin": "workspace:*",
+        "@opencode-harness/script": "workspace:*",
+        "@opencode-harness/sdk": "workspace:*",
         "typescript": "catalog:",
       },
       "devDependencies": {
@@ -26,7 +26,7 @@
       },
     },
     "packages/app": {
-      "name": "@pentestcode/app",
+      "name": "@opencode-harness/app",
       "version": "0.1.0",
       "dependencies": {
         "@dnd-kit/abstract": "0.5.0",
@@ -34,11 +34,11 @@
         "@dnd-kit/helpers": "0.5.0",
         "@dnd-kit/solid": "0.5.0",
         "@kobalte/core": "catalog:",
-        "@pentestcode/core": "workspace:*",
-        "@pentestcode/schema": "workspace:*",
-        "@pentestcode/sdk": "workspace:*",
-        "@pentestcode/session-ui": "workspace:*",
-        "@pentestcode/ui": "workspace:*",
+        "@opencode-harness/core": "workspace:*",
+        "@opencode-harness/schema": "workspace:*",
+        "@opencode-harness/sdk": "workspace:*",
+        "@opencode-harness/session-ui": "workspace:*",
+        "@opencode-harness/ui": "workspace:*",
         "@pierre/trees": "1.0.0-beta.4",
         "@sentry/solid": "catalog:",
         "@shikijs/transformers": "3.9.2",
@@ -90,41 +90,41 @@
       },
     },
     "packages/cli": {
-      "name": "@pentestcode/cli",
+      "name": "@opencode-harness/cli",
       "version": "0.1.0",
       "bin": {
         "lildax": "./bin/lildax.cjs",
       },
       "dependencies": {
         "@effect/platform-node": "catalog:",
+        "@opencode-harness/core": "workspace:*",
+        "@opencode-harness/sdk": "workspace:*",
+        "@opencode-harness/server": "workspace:*",
+        "@opencode-harness/tui": "workspace:*",
         "@opentui/core": "catalog:",
         "@opentui/solid": "catalog:",
         "@parcel/watcher": "2.5.1",
-        "@pentestcode/core": "workspace:*",
-        "@pentestcode/sdk": "workspace:*",
-        "@pentestcode/server": "workspace:*",
-        "@pentestcode/tui": "workspace:*",
         "effect": "catalog:",
         "solid-js": "catalog:",
       },
       "devDependencies": {
-        "@pentestcode/script": "workspace:*",
+        "@opencode-harness/script": "workspace:*",
         "@tsconfig/bun": "catalog:",
         "@types/bun": "catalog:",
         "@typescript/native-preview": "catalog:",
       },
     },
     "packages/client": {
-      "name": "@pentestcode/client",
+      "name": "@opencode-harness/client",
       "dependencies": {
-        "@pentestcode/protocol": "workspace:*",
-        "@pentestcode/schema": "workspace:*",
+        "@opencode-harness/protocol": "workspace:*",
+        "@opencode-harness/schema": "workspace:*",
       },
       "devDependencies": {
         "@effect/platform-node": "catalog:",
-        "@pentestcode/core": "workspace:*",
-        "@pentestcode/httpapi-codegen": "workspace:*",
-        "@pentestcode/server": "workspace:*",
+        "@opencode-harness/core": "workspace:*",
+        "@opencode-harness/httpapi-codegen": "workspace:*",
+        "@opencode-harness/server": "workspace:*",
         "@tsconfig/bun": "catalog:",
         "@types/bun": "catalog:",
         "@typescript/native-preview": "catalog:",
@@ -138,7 +138,7 @@
       ],
     },
     "packages/core": {
-      "name": "@pentestcode/core",
+      "name": "@opencode-harness/core",
       "version": "0.1.0",
       "bin": {
         "opencode": "./bin/opencode",
@@ -172,17 +172,17 @@
         "@lydell/node-pty": "catalog:",
         "@npmcli/arborist": "9.4.0",
         "@npmcli/config": "10.8.1",
+        "@opencode-harness/effect-drizzle-sqlite": "workspace:*",
+        "@opencode-harness/effect-sqlite-node": "workspace:*",
+        "@opencode-harness/llm": "workspace:*",
+        "@opencode-harness/plugin": "workspace:*",
+        "@opencode-harness/schema": "workspace:*",
         "@openrouter/ai-sdk-provider": "2.9.0",
         "@opentelemetry/api": "1.9.0",
         "@opentelemetry/context-async-hooks": "2.6.1",
         "@opentelemetry/exporter-trace-otlp-http": "0.214.0",
         "@opentelemetry/sdk-trace-base": "2.6.1",
         "@parcel/watcher": "2.5.1",
-        "@pentestcode/effect-drizzle-sqlite": "workspace:*",
-        "@pentestcode/effect-sqlite-node": "workspace:*",
-        "@pentestcode/llm": "workspace:*",
-        "@pentestcode/plugin": "workspace:*",
-        "@pentestcode/schema": "workspace:*",
         "@silvia-odwyer/photon-node": "0.3.4",
         "ai-gateway-provider": "3.1.2",
         "bun-pty": "0.4.8",
@@ -210,6 +210,7 @@
         "zod": "catalog:",
       },
       "devDependencies": {
+        "@opencode-harness/http-recorder": "workspace:*",
         "@parcel/watcher-darwin-arm64": "2.5.1",
         "@parcel/watcher-darwin-x64": "2.5.1",
         "@parcel/watcher-linux-arm64-glibc": "2.5.1",
@@ -218,7 +219,6 @@
         "@parcel/watcher-linux-x64-musl": "2.5.1",
         "@parcel/watcher-win32-arm64": "2.5.1",
         "@parcel/watcher-win32-x64": "2.5.1",
-        "@pentestcode/http-recorder": "workspace:*",
         "@tsconfig/bun": "catalog:",
         "@types/bun": "catalog:",
         "@types/cross-spawn": "catalog:",
@@ -232,7 +232,7 @@
       },
     },
     "packages/effect-drizzle-sqlite": {
-      "name": "@pentestcode/effect-drizzle-sqlite",
+      "name": "@opencode-harness/effect-drizzle-sqlite",
       "version": "0.1.0",
       "dependencies": {
         "drizzle-orm": "catalog:",
@@ -246,7 +246,7 @@
       },
     },
     "packages/effect-sqlite-node": {
-      "name": "@pentestcode/effect-sqlite-node",
+      "name": "@opencode-harness/effect-sqlite-node",
       "version": "0.1.0",
       "dependencies": {
         "effect": "catalog:",
@@ -258,7 +258,7 @@
       },
     },
     "packages/function": {
-      "name": "@pentestcode/function",
+      "name": "@opencode-harness/function",
       "version": "0.1.0",
       "dependencies": {
         "@octokit/auth-app": "8.0.1",
@@ -274,7 +274,7 @@
       },
     },
     "packages/http-recorder": {
-      "name": "@pentestcode/http-recorder",
+      "name": "@opencode-harness/http-recorder",
       "version": "0.1.0",
       "dependencies": {
         "@effect/platform-node": "4.0.0-beta.83",
@@ -293,7 +293,7 @@
       },
     },
     "packages/httpapi-codegen": {
-      "name": "@pentestcode/httpapi-codegen",
+      "name": "@opencode-harness/httpapi-codegen",
       "dependencies": {
         "effect": "catalog:",
         "prettier": "3.6.2",
@@ -305,10 +305,10 @@
       },
     },
     "packages/llm": {
-      "name": "@pentestcode/llm",
+      "name": "@opencode-harness/llm",
       "version": "0.1.0",
       "dependencies": {
-        "@pentestcode/schema": "workspace:*",
+        "@opencode-harness/schema": "workspace:*",
         "@smithy/eventstream-codec": "4.2.14",
         "@smithy/util-utf8": "4.2.2",
         "aws4fetch": "1.0.20",
@@ -317,17 +317,17 @@
       "devDependencies": {
         "@clack/prompts": "1.0.0-alpha.1",
         "@effect/platform-node": "catalog:",
-        "@pentestcode/http-recorder": "workspace:*",
+        "@opencode-harness/http-recorder": "workspace:*",
         "@tsconfig/bun": "catalog:",
         "@types/bun": "catalog:",
         "@typescript/native-preview": "catalog:",
       },
     },
     "packages/opencode": {
-      "name": "pentestcode",
+      "name": "opencode-harness",
       "version": "0.2.7",
       "bin": {
-        "pentestcode": "./bin/pentestcode",
+        "opencode-harness": "./bin/opencode-harness",
       },
       "dependencies": {
         "@actions/core": "1.11.1",
@@ -362,6 +362,14 @@
         "@octokit/graphql": "9.0.2",
         "@octokit/rest": "catalog:",
         "@openauthjs/openauth": "catalog:",
+        "@opencode-harness/llm": "workspace:*",
+        "@opencode-harness/plugin": "workspace:*",
+        "@opencode-harness/protocol": "workspace:*",
+        "@opencode-harness/schema": "workspace:*",
+        "@opencode-harness/script": "workspace:*",
+        "@opencode-harness/sdk": "workspace:*",
+        "@opencode-harness/server": "workspace:*",
+        "@opencode-harness/tui": "workspace:*",
         "@openrouter/ai-sdk-provider": "2.9.0",
         "@opentelemetry/api": "1.9.0",
         "@opentelemetry/context-async-hooks": "2.6.1",
@@ -372,14 +380,6 @@
         "@opentui/keymap": "catalog:",
         "@opentui/solid": "catalog:",
         "@parcel/watcher": "2.5.1",
-        "@pentestcode/llm": "workspace:*",
-        "@pentestcode/plugin": "workspace:*",
-        "@pentestcode/protocol": "workspace:*",
-        "@pentestcode/schema": "workspace:*",
-        "@pentestcode/script": "workspace:*",
-        "@pentestcode/sdk": "workspace:*",
-        "@pentestcode/server": "workspace:*",
-        "@pentestcode/tui": "workspace:*",
         "@pierre/diffs": "catalog:",
         "@silvia-odwyer/photon-node": "0.3.4",
         "@solid-primitives/event-bus": "1.1.2",
@@ -432,9 +432,9 @@
       "devDependencies": {
         "@babel/core": "7.28.4",
         "@octokit/webhooks-types": "7.6.1",
-        "@pentestcode/core": "workspace:*",
-        "@pentestcode/http-recorder": "workspace:*",
-        "@pentestcode/script": "workspace:*",
+        "@opencode-harness/core": "workspace:*",
+        "@opencode-harness/http-recorder": "workspace:*",
+        "@opencode-harness/script": "workspace:*",
         "@standard-schema/spec": "1.0.0",
         "@tsconfig/bun": "catalog:",
         "@types/babel__core": "7.20.5",
@@ -454,11 +454,11 @@
       },
     },
     "packages/plugin": {
-      "name": "@pentestcode/plugin",
+      "name": "@opencode-harness/plugin",
       "version": "0.1.0",
       "dependencies": {
         "@ai-sdk/provider": "3.0.8",
-        "@pentestcode/sdk": "workspace:*",
+        "@opencode-harness/sdk": "workspace:*",
         "effect": "catalog:",
         "zod": "catalog:",
       },
@@ -483,9 +483,9 @@
       ],
     },
     "packages/protocol": {
-      "name": "@pentestcode/protocol",
+      "name": "@opencode-harness/protocol",
       "dependencies": {
-        "@pentestcode/schema": "workspace:*",
+        "@opencode-harness/schema": "workspace:*",
         "effect": "catalog:",
       },
       "devDependencies": {
@@ -495,7 +495,7 @@
       },
     },
     "packages/schema": {
-      "name": "@pentestcode/schema",
+      "name": "@opencode-harness/schema",
       "dependencies": {
         "effect": "catalog:",
       },
@@ -506,7 +506,7 @@
       },
     },
     "packages/script": {
-      "name": "@pentestcode/script",
+      "name": "@opencode-harness/script",
       "dependencies": {
         "semver": "^7.6.3",
       },
@@ -516,11 +516,11 @@
       },
     },
     "packages/sdk-next": {
-      "name": "@pentestcode/sdk-next",
+      "name": "@opencode-harness/sdk-next",
       "dependencies": {
-        "@pentestcode/client": "workspace:*",
-        "@pentestcode/core": "workspace:*",
-        "@pentestcode/server": "workspace:*",
+        "@opencode-harness/client": "workspace:*",
+        "@opencode-harness/core": "workspace:*",
+        "@opencode-harness/server": "workspace:*",
         "effect": "catalog:",
       },
       "devDependencies": {
@@ -530,7 +530,7 @@
       },
     },
     "packages/sdk/js": {
-      "name": "@pentestcode/sdk",
+      "name": "@opencode-harness/sdk",
       "version": "1.17.15",
       "dependencies": {
         "cross-spawn": "catalog:",
@@ -545,11 +545,11 @@
       },
     },
     "packages/server": {
-      "name": "@pentestcode/server",
+      "name": "@opencode-harness/server",
       "version": "0.1.0",
       "dependencies": {
-        "@pentestcode/core": "workspace:*",
-        "@pentestcode/protocol": "workspace:*",
+        "@opencode-harness/core": "workspace:*",
+        "@opencode-harness/protocol": "workspace:*",
         "drizzle-orm": "catalog:",
         "effect": "catalog:",
       },
@@ -560,13 +560,13 @@
       },
     },
     "packages/session-ui": {
-      "name": "@pentestcode/session-ui",
+      "name": "@opencode-harness/session-ui",
       "version": "0.1.0",
       "dependencies": {
         "@kobalte/core": "catalog:",
-        "@pentestcode/core": "workspace:*",
-        "@pentestcode/sdk": "workspace:*",
-        "@pentestcode/ui": "workspace:*",
+        "@opencode-harness/core": "workspace:*",
+        "@opencode-harness/sdk": "workspace:*",
+        "@opencode-harness/ui": "workspace:*",
         "@pierre/diffs": "catalog:",
         "@shikijs/stream": "catalog:",
         "@shikijs/transformers": "3.9.2",
@@ -604,16 +604,16 @@
       },
     },
     "packages/tui": {
-      "name": "@pentestcode/tui",
+      "name": "@opencode-harness/tui",
       "version": "0.1.0",
       "dependencies": {
+        "@opencode-harness/core": "workspace:*",
+        "@opencode-harness/plugin": "workspace:*",
+        "@opencode-harness/sdk": "workspace:*",
+        "@opencode-harness/ui": "workspace:*",
         "@opentui/core": "catalog:",
         "@opentui/keymap": "catalog:",
         "@opentui/solid": "catalog:",
-        "@pentestcode/core": "workspace:*",
-        "@pentestcode/plugin": "workspace:*",
-        "@pentestcode/sdk": "workspace:*",
-        "@pentestcode/ui": "workspace:*",
         "clipboardy": "4.0.0",
         "diff": "catalog:",
         "effect": "catalog:",
@@ -631,7 +631,7 @@
       },
     },
     "packages/ui": {
-      "name": "@pentestcode/ui",
+      "name": "@opencode-harness/ui",
       "version": "0.1.0",
       "dependencies": {
         "@kobalte/core": "catalog:",
@@ -1269,6 +1269,46 @@
 
     "@opencode-ai/sdk": ["@opencode-ai/sdk@1.17.13", "", { "dependencies": { "cross-spawn": "7.0.6" } }, "sha512-VItOGjMzRQx3zypwmeFLNhCiIx32kxS7FqzIJvVZLfyNGCifs3rfGC9qzNKWcxQo4SjNvAw++v4gWWU6Inv+JQ=="],
 
+    "@opencode-harness/app": ["@opencode-harness/app@workspace:packages/app"],
+
+    "@opencode-harness/cli": ["@opencode-harness/cli@workspace:packages/cli"],
+
+    "@opencode-harness/client": ["@opencode-harness/client@workspace:packages/client"],
+
+    "@opencode-harness/core": ["@opencode-harness/core@workspace:packages/core"],
+
+    "@opencode-harness/effect-drizzle-sqlite": ["@opencode-harness/effect-drizzle-sqlite@workspace:packages/effect-drizzle-sqlite"],
+
+    "@opencode-harness/effect-sqlite-node": ["@opencode-harness/effect-sqlite-node@workspace:packages/effect-sqlite-node"],
+
+    "@opencode-harness/function": ["@opencode-harness/function@workspace:packages/function"],
+
+    "@opencode-harness/http-recorder": ["@opencode-harness/http-recorder@workspace:packages/http-recorder"],
+
+    "@opencode-harness/httpapi-codegen": ["@opencode-harness/httpapi-codegen@workspace:packages/httpapi-codegen"],
+
+    "@opencode-harness/llm": ["@opencode-harness/llm@workspace:packages/llm"],
+
+    "@opencode-harness/plugin": ["@opencode-harness/plugin@workspace:packages/plugin"],
+
+    "@opencode-harness/protocol": ["@opencode-harness/protocol@workspace:packages/protocol"],
+
+    "@opencode-harness/schema": ["@opencode-harness/schema@workspace:packages/schema"],
+
+    "@opencode-harness/script": ["@opencode-harness/script@workspace:packages/script"],
+
+    "@opencode-harness/sdk": ["@opencode-harness/sdk@workspace:packages/sdk/js"],
+
+    "@opencode-harness/sdk-next": ["@opencode-harness/sdk-next@workspace:packages/sdk-next"],
+
+    "@opencode-harness/server": ["@opencode-harness/server@workspace:packages/server"],
+
+    "@opencode-harness/session-ui": ["@opencode-harness/session-ui@workspace:packages/session-ui"],
+
+    "@opencode-harness/tui": ["@opencode-harness/tui@workspace:packages/tui"],
+
+    "@opencode-harness/ui": ["@opencode-harness/ui@workspace:packages/ui"],
+
     "@openrouter/ai-sdk-provider": ["@openrouter/ai-sdk-provider@2.9.0", "", { "peerDependencies": { "ai": "^6.0.0", "zod": "^3.25.0 || ^4.0.0" } }, "sha512-Seva+NCa0WUQnJIUE5GzHsUv1WTIeyqwz0ELl2VtS6NP+eF+77yCXGFVOMbvoCM7QMjlnhv7931e89R+8pJdcQ=="],
 
     "@opentelemetry/api": ["@opentelemetry/api@1.9.0", "", {}, "sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg=="],
@@ -1406,46 +1446,6 @@
     "@parcel/watcher-win32-ia32": ["@parcel/watcher-win32-ia32@2.5.1", "", { "os": "win32", "cpu": "ia32" }, "sha512-c2KkcVN+NJmuA7CGlaGD1qJh1cLfDnQsHjE89E60vUEMlqduHGCdCLJCID5geFVM0dOtA3ZiIO8BoEQmzQVfpQ=="],
 
     "@parcel/watcher-win32-x64": ["@parcel/watcher-win32-x64@2.5.1", "", { "os": "win32", "cpu": "x64" }, "sha512-9lHBdJITeNR++EvSQVUcaZoWupyHfXe1jZvGZ06O/5MflPcuPLtEphScIBL+AiCWBO46tDSHzWyD0uDmmZqsgA=="],
-
-    "@pentestcode/app": ["@pentestcode/app@workspace:packages/app"],
-
-    "@pentestcode/cli": ["@pentestcode/cli@workspace:packages/cli"],
-
-    "@pentestcode/client": ["@pentestcode/client@workspace:packages/client"],
-
-    "@pentestcode/core": ["@pentestcode/core@workspace:packages/core"],
-
-    "@pentestcode/effect-drizzle-sqlite": ["@pentestcode/effect-drizzle-sqlite@workspace:packages/effect-drizzle-sqlite"],
-
-    "@pentestcode/effect-sqlite-node": ["@pentestcode/effect-sqlite-node@workspace:packages/effect-sqlite-node"],
-
-    "@pentestcode/function": ["@pentestcode/function@workspace:packages/function"],
-
-    "@pentestcode/http-recorder": ["@pentestcode/http-recorder@workspace:packages/http-recorder"],
-
-    "@pentestcode/httpapi-codegen": ["@pentestcode/httpapi-codegen@workspace:packages/httpapi-codegen"],
-
-    "@pentestcode/llm": ["@pentestcode/llm@workspace:packages/llm"],
-
-    "@pentestcode/plugin": ["@pentestcode/plugin@workspace:packages/plugin"],
-
-    "@pentestcode/protocol": ["@pentestcode/protocol@workspace:packages/protocol"],
-
-    "@pentestcode/schema": ["@pentestcode/schema@workspace:packages/schema"],
-
-    "@pentestcode/script": ["@pentestcode/script@workspace:packages/script"],
-
-    "@pentestcode/sdk": ["@pentestcode/sdk@workspace:packages/sdk/js"],
-
-    "@pentestcode/sdk-next": ["@pentestcode/sdk-next@workspace:packages/sdk-next"],
-
-    "@pentestcode/server": ["@pentestcode/server@workspace:packages/server"],
-
-    "@pentestcode/session-ui": ["@pentestcode/session-ui@workspace:packages/session-ui"],
-
-    "@pentestcode/tui": ["@pentestcode/tui@workspace:packages/tui"],
-
-    "@pentestcode/ui": ["@pentestcode/ui@workspace:packages/ui"],
 
     "@pierre/diffs": ["@pierre/diffs@1.2.10", "", { "dependencies": { "@pierre/theme": "1.0.3", "@pierre/theming": "0.0.1", "@shikijs/transformers": "^3.0.0 || ^4.0.0", "diff": "8.0.3", "hast-util-to-html": "9.0.5", "lru_map": "0.4.1", "shiki": "^3.0.0 || ^4.0.0" }, "peerDependencies": { "react": "^18.3.1 || ^19.0.0", "react-dom": "^18.3.1 || ^19.0.0" } }, "sha512-rPeAmDWarxFVTQpaf4y6wTxjZxU44xKJKoJti2zU21P06DVd9nRHZX+xSIObLB307Qjpaesyb1x/j0z94t7vLw=="],
 
@@ -2609,6 +2609,8 @@
 
     "opencode-gitlab-auth": ["opencode-gitlab-auth@2.1.0", "", { "dependencies": { "@fastify/rate-limit": "^10.2.0", "@opencode-ai/plugin": "*", "fastify": "^5.2.0", "open": "^10.0.0" } }, "sha512-ZCDYaY0V8Se6hOH2tqZqqcskrd0xLTgfiGhU0J1igkUP52oFtN9eSwxOPLT0ctvNXUq8b+zOmJ4sskAQoC/IUA=="],
 
+    "opencode-harness": ["opencode-harness@workspace:packages/opencode"],
+
     "opencode-poe-auth": ["opencode-poe-auth@0.0.1", "", { "dependencies": { "open": "^10.0.0", "poe-oauth": "*" }, "peerDependencies": { "@opencode-ai/plugin": "*" } }, "sha512-cXqTlS6AXHzo1oBdosnxbT47ZJEZ9WXn050X8Re6wZ1vaNnTpB/l2fMQt90evT7RBK0fB8UjXQUDMKyd7bbiqg=="],
 
     "openid-client": ["openid-client@5.6.4", "", { "dependencies": { "jose": "^4.15.4", "lru-cache": "^6.0.0", "object-hash": "^2.2.0", "oidc-token-hash": "^5.0.3" } }, "sha512-T1h3B10BRPKfcObdBklX639tVz+xh34O7GjofqrqiAQdm7eHsQ00ih18x6wuJ/E6FxdtS2u3FmUGPDeEcMwzNA=="],
@@ -2652,8 +2654,6 @@
     "path-to-regexp": ["path-to-regexp@8.4.2", "", {}, "sha512-qRcuIdP69NPm4qbACK+aDogI5CBDMi1jKe0ry5rSQJz8JVLsC7jV8XpiJjGRLLol3N+R5ihGYcrPLTno6pAdBA=="],
 
     "pathe": ["pathe@2.0.3", "", {}, "sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w=="],
-
-    "pentestcode": ["pentestcode@workspace:packages/opencode"],
 
     "perfect-debounce": ["perfect-debounce@2.1.0", "", {}, "sha512-LjgdTytVFXeUgtHZr9WYViYSM/g8MkcTPYDlPa3cDqMirHjKiSZPYd6DoL7pK8AJQr+uWkQvCjHNdiMqsrJs+g=="],
 
@@ -3257,15 +3257,15 @@
 
     "@openauthjs/openauth/jose": ["jose@5.9.6", "", {}, "sha512-AMlnetc9+CV9asI19zHmrgS/WYsWUwCn2R7RzlbJWD7F9eWYUTGyBmU9o6PxngtLGOiDGPRu+Uc4fhKzbpteZQ=="],
 
+    "@opencode-harness/session-ui/@solid-primitives/resize-observer": ["@solid-primitives/resize-observer@2.1.3", "", { "dependencies": { "@solid-primitives/event-listener": "^2.4.3", "@solid-primitives/rootless": "^1.5.2", "@solid-primitives/static-store": "^0.1.2", "@solid-primitives/utils": "^6.3.2" }, "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-zBLje5E06TgOg93S7rGPldmhDnouNGhvfZVKOp+oG2XU8snA+GoCSSCz1M+jpNAg5Ek2EakU5UVQqL152WmdXQ=="],
+
+    "@opencode-harness/ui/@solid-primitives/resize-observer": ["@solid-primitives/resize-observer@2.1.3", "", { "dependencies": { "@solid-primitives/event-listener": "^2.4.3", "@solid-primitives/rootless": "^1.5.2", "@solid-primitives/static-store": "^0.1.2", "@solid-primitives/utils": "^6.3.2" }, "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-zBLje5E06TgOg93S7rGPldmhDnouNGhvfZVKOp+oG2XU8snA+GoCSSCz1M+jpNAg5Ek2EakU5UVQqL152WmdXQ=="],
+
     "@opentui/core/diff": ["diff@9.0.0", "", {}, "sha512-svtcdpS8CgJyqAjEQIXdb3OjhFVVYjzGAPO8WGCmRbrml64SPw/jJD4GoE98aR7r25A0XcgrK3F02yw9R/vhQw=="],
 
     "@opentui/solid/@babel/core": ["@babel/core@7.28.0", "", { "dependencies": { "@ampproject/remapping": "^2.2.0", "@babel/code-frame": "^7.27.1", "@babel/generator": "^7.28.0", "@babel/helper-compilation-targets": "^7.27.2", "@babel/helper-module-transforms": "^7.27.3", "@babel/helpers": "^7.27.6", "@babel/parser": "^7.28.0", "@babel/template": "^7.27.2", "@babel/traverse": "^7.28.0", "@babel/types": "^7.28.0", "convert-source-map": "^2.0.0", "debug": "^4.1.0", "gensync": "^1.0.0-beta.2", "json5": "^2.2.3", "semver": "^6.3.1" } }, "sha512-UlLAnTPrFdNGoFtbSXwcGFQBtQZJCNjaN6hQNP3UPvuNXT1i82N26KL3dZeIpNalWywr9IuQuncaAfUaS1g6sQ=="],
 
     "@oslojs/jwt/@oslojs/encoding": ["@oslojs/encoding@0.4.1", "", {}, "sha512-hkjo6MuIK/kQR5CrGNdAPZhS01ZCXuWDRJ187zh6qqF2+yMHZpD9fAYpX8q2bOO6Ryhl3XpCT6kUX76N8hhm4Q=="],
-
-    "@pentestcode/session-ui/@solid-primitives/resize-observer": ["@solid-primitives/resize-observer@2.1.3", "", { "dependencies": { "@solid-primitives/event-listener": "^2.4.3", "@solid-primitives/rootless": "^1.5.2", "@solid-primitives/static-store": "^0.1.2", "@solid-primitives/utils": "^6.3.2" }, "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-zBLje5E06TgOg93S7rGPldmhDnouNGhvfZVKOp+oG2XU8snA+GoCSSCz1M+jpNAg5Ek2EakU5UVQqL152WmdXQ=="],
-
-    "@pentestcode/ui/@solid-primitives/resize-observer": ["@solid-primitives/resize-observer@2.1.3", "", { "dependencies": { "@solid-primitives/event-listener": "^2.4.3", "@solid-primitives/rootless": "^1.5.2", "@solid-primitives/static-store": "^0.1.2", "@solid-primitives/utils": "^6.3.2" }, "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-zBLje5E06TgOg93S7rGPldmhDnouNGhvfZVKOp+oG2XU8snA+GoCSSCz1M+jpNAg5Ek2EakU5UVQqL152WmdXQ=="],
 
     "@pierre/diffs/diff": ["diff@8.0.3", "", {}, "sha512-qejHi7bcSD4hQAZE0tNAawRK1ZtafHDmMTMkrrIGgSLl7hTnQHmKCeB45xAcbfTqK2zowkM3j3bHt/4b/ARbYQ=="],
 
@@ -3377,17 +3377,17 @@
 
     "nypm/tinyexec": ["tinyexec@1.2.4", "", {}, "sha512-SHf/r48b7vOrjve9PxJo3MN5v5yuyjHvdUcrQffT3WXMUfnGmHDVbC4k3sHJaJTgZCwpUplIaAo5ANtMyp3YHg=="],
 
+    "opencode-harness/@ai-sdk/cerebras": ["@ai-sdk/cerebras@2.0.60", "", { "dependencies": { "@ai-sdk/openai-compatible": "2.0.54", "@ai-sdk/provider": "3.0.12", "@ai-sdk/provider-utils": "4.0.33" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-Rnok3cThg6awBwaDSyiZpgRpbV7pqxGYrA89LODCo5cuEHeP2h0AM0lLHP7zIkclAdXfOm4wldKi/S2T/DGCOw=="],
+
+    "opencode-harness/@solid-primitives/scheduled": ["@solid-primitives/scheduled@1.5.2", "", { "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-/j2igE0xyNaHhj6kMfcUQn5rAVSTLbAX+CDEBm25hSNBmNiHLu2lM7Usj2kJJ5j36D67bE8wR1hBNA8hjtvsQA=="],
+
+    "opencode-harness/minimatch": ["minimatch@10.0.3", "", { "dependencies": { "@isaacs/brace-expansion": "^5.0.0" } }, "sha512-IPZ167aShDZZUMdRk66cyQAW3qr0WzbHkPdMYa8bzZhlHhO3jALbKdxcaak7W9FfT2rZNpQuUu4Od7ILEpXSaw=="],
+
     "openid-client/jose": ["jose@4.15.9", "", {}, "sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA=="],
 
     "openid-client/lru-cache": ["lru-cache@6.0.0", "", { "dependencies": { "yallist": "^4.0.0" } }, "sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA=="],
 
     "parse5/entities": ["entities@6.0.1", "", {}, "sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g=="],
-
-    "pentestcode/@ai-sdk/cerebras": ["@ai-sdk/cerebras@2.0.60", "", { "dependencies": { "@ai-sdk/openai-compatible": "2.0.54", "@ai-sdk/provider": "3.0.12", "@ai-sdk/provider-utils": "4.0.33" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-Rnok3cThg6awBwaDSyiZpgRpbV7pqxGYrA89LODCo5cuEHeP2h0AM0lLHP7zIkclAdXfOm4wldKi/S2T/DGCOw=="],
-
-    "pentestcode/@solid-primitives/scheduled": ["@solid-primitives/scheduled@1.5.2", "", { "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-/j2igE0xyNaHhj6kMfcUQn5rAVSTLbAX+CDEBm25hSNBmNiHLu2lM7Usj2kJJ5j36D67bE8wR1hBNA8hjtvsQA=="],
-
-    "pentestcode/minimatch": ["minimatch@10.0.3", "", { "dependencies": { "@isaacs/brace-expansion": "^5.0.0" } }, "sha512-IPZ167aShDZZUMdRk66cyQAW3qr0WzbHkPdMYa8bzZhlHhO3jALbKdxcaak7W9FfT2rZNpQuUu4Od7ILEpXSaw=="],
 
     "pkg-up/find-up": ["find-up@3.0.0", "", { "dependencies": { "locate-path": "^3.0.0" } }, "sha512-1yD6RmLI1XBfxugvORwlck6f75tYL+iR0jqwsOrOxMZyGYqUuDhJ0l4AXdO1iX/FTs9cBAMEk1gWSEx1kSbylg=="],
 
@@ -3633,11 +3633,11 @@
 
     "lazystream/readable-stream/string_decoder": ["string_decoder@1.1.1", "", { "dependencies": { "safe-buffer": "~5.1.0" } }, "sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg=="],
 
-    "pentestcode/@ai-sdk/cerebras/@ai-sdk/openai-compatible": ["@ai-sdk/openai-compatible@2.0.54", "", { "dependencies": { "@ai-sdk/provider": "3.0.12", "@ai-sdk/provider-utils": "4.0.33" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-OyXt0zK8y2/ZIyWlbxTv2r1M7AK227S+Gl4BYOEF42q0wz1n5m4fwR8L4Fy/MQ4Ho6xje47MPsFcRdIqIyP6Rw=="],
+    "opencode-harness/@ai-sdk/cerebras/@ai-sdk/openai-compatible": ["@ai-sdk/openai-compatible@2.0.54", "", { "dependencies": { "@ai-sdk/provider": "3.0.12", "@ai-sdk/provider-utils": "4.0.33" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-OyXt0zK8y2/ZIyWlbxTv2r1M7AK227S+Gl4BYOEF42q0wz1n5m4fwR8L4Fy/MQ4Ho6xje47MPsFcRdIqIyP6Rw=="],
 
-    "pentestcode/@ai-sdk/cerebras/@ai-sdk/provider": ["@ai-sdk/provider@3.0.12", "", { "dependencies": { "json-schema": "^0.4.0" } }, "sha512-sj9DWTJ2Ze0WR9qsiOPqoqzNx3OxL6iMxHImbhvoe9qOspekbzxNDMiJ4TIGfYHYh9w4OmBjz3prvqhzTi96+Q=="],
+    "opencode-harness/@ai-sdk/cerebras/@ai-sdk/provider": ["@ai-sdk/provider@3.0.12", "", { "dependencies": { "json-schema": "^0.4.0" } }, "sha512-sj9DWTJ2Ze0WR9qsiOPqoqzNx3OxL6iMxHImbhvoe9qOspekbzxNDMiJ4TIGfYHYh9w4OmBjz3prvqhzTi96+Q=="],
 
-    "pentestcode/@ai-sdk/cerebras/@ai-sdk/provider-utils": ["@ai-sdk/provider-utils@4.0.33", "", { "dependencies": { "@ai-sdk/provider": "3.0.12", "@standard-schema/spec": "^1.1.0", "eventsource-parser": "^3.0.8" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-nJ0bAfegMAIJtrzMJtbzer1cS3nb7c7DsyU1S4nrPm7ZU0Mn6SBBZv5IGZZGTbpWTJwqKTSPeZJTXalbAxt1BA=="],
+    "opencode-harness/@ai-sdk/cerebras/@ai-sdk/provider-utils": ["@ai-sdk/provider-utils@4.0.33", "", { "dependencies": { "@ai-sdk/provider": "3.0.12", "@standard-schema/spec": "^1.1.0", "eventsource-parser": "^3.0.8" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-nJ0bAfegMAIJtrzMJtbzer1cS3nb7c7DsyU1S4nrPm7ZU0Mn6SBBZv5IGZZGTbpWTJwqKTSPeZJTXalbAxt1BA=="],
 
     "pkg-up/find-up/locate-path": ["locate-path@3.0.0", "", { "dependencies": { "p-locate": "^3.0.0", "path-exists": "^3.0.0" } }, "sha512-7AO748wWnIhNqAuaty2ZWHkQHRSNfPVIsPIfwEOWO22AmaoVrWavlOcMR5nzTLNYvp36X220/maaRsrec1G65A=="],
 
@@ -3715,7 +3715,7 @@
 
     "babel-plugin-module-resolver/glob/path-scurry/minipass": ["minipass@7.1.3", "", {}, "sha512-tEBHqDnIoM/1rXME1zgka9g6Q2lcoCkxHLuc7ODJ5BxbP5d4c2Z5cGgtXAku59200Cx7diuHTOYfSBD8n6mm8A=="],
 
-    "pentestcode/@ai-sdk/cerebras/@ai-sdk/provider-utils/@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
+    "opencode-harness/@ai-sdk/cerebras/@ai-sdk/provider-utils/@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
     "pkg-up/find-up/locate-path/p-locate": ["p-locate@3.0.0", "", { "dependencies": { "p-limit": "^2.0.0" } }, "sha512-x+12w/To+4GFfgJhBEpiDcLozRJGegY+Ei7/z0tSLkMmxGZNybVMSfWj9aJn8Z5Fc7dBUNJOOVgPv2H7IwulSQ=="],
 

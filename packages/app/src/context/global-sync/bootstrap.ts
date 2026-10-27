@@ -8,10 +8,10 @@ import type {
   QuestionRequest,
   ReferenceInfo,
   Session,
-} from "@pentestcode/sdk/v2/client"
+} from "@opencode-harness/sdk/v2/client"
 import { showToast } from "@/utils/toast"
-import { getFilename } from "@pentestcode/core/util/path"
-import { retry } from "@pentestcode/core/util/retry"
+import { getFilename } from "@opencode-harness/core/util/path"
+import { retry } from "@opencode-harness/core/util/retry"
 import { batch } from "solid-js"
 import { produce, reconcile, type SetStoreFunction, type Store } from "solid-js/store"
 import type { State, VcsCache } from "./types"
@@ -20,7 +20,7 @@ import { cmp, normalizeAgentList, normalizeProviderList } from "./utils"
 import { formatServerError } from "@/utils/server-errors"
 import { QueryClient, queryOptions } from "@tanstack/solid-query"
 import { loadMcpQuery, loadMcpResourcesQuery } from "../server-sync"
-import { NormalizedProviderListResponse } from "@pentestcode/session-ui/context"
+import { NormalizedProviderListResponse } from "@opencode-harness/session-ui/context"
 import { ScopedKey, type ServerScope } from "@/utils/server-scope"
 
 type GlobalStore = {

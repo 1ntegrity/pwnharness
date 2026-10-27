@@ -1,4 +1,4 @@
-import { Flag } from "@pentestcode/core/flag/flag"
+import { Flag } from "@opencode-harness/core/flag/flag"
 import { Effect } from "effect"
 import path from "path"
 

@@ -1,19 +1,19 @@
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { AppNodeBuilder } from "@pentestcode/core/effect/app-node-builder"
-import { httpClient } from "@pentestcode/core/effect/app-node-platform"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
+import { httpClient } from "@opencode-harness/core/effect/app-node-platform"
 import { Effect, Layer, Schema, Context, Stream } from "effect"
-import { serviceUse } from "@pentestcode/core/effect/service-use"
+import { serviceUse } from "@opencode-harness/core/effect/service-use"
 import { HttpClient, HttpClientRequest, HttpClientResponse } from "effect/unstable/http"
 import { withTransientReadRetry } from "@/util/effect-http-client"
 import { errorMessage } from "@/util/error"
 import { ChildProcess } from "effect/unstable/process"
-import { AppProcess } from "@pentestcode/core/process"
+import { AppProcess } from "@opencode-harness/core/process"
 import path from "path"
-import { makeRuntime } from "@pentestcode/core/effect/runtime"
+import { makeRuntime } from "@opencode-harness/core/effect/runtime"
 import semver from "semver"
-import { InstallationChannel, InstallationVersion } from "@pentestcode/core/installation/version"
-import { NpmConfig } from "@pentestcode/core/npm-config"
-import { InstallationEvent } from "@pentestcode/schema/installation-event"
+import { InstallationChannel, InstallationVersion } from "@opencode-harness/core/installation/version"
+import { NpmConfig } from "@opencode-harness/core/npm-config"
+import { InstallationEvent } from "@opencode-harness/schema/installation-event"
 
 export type Method = "curl" | "npm" | "yarn" | "pnpm" | "bun" | "brew" | "scoop" | "choco" | "unknown"
 
@@ -39,7 +39,7 @@ export const Info = Schema.Struct({
 export type Info = Schema.Schema.Type<typeof Info>
 
 export function userAgent(client = "cli") {
-  return `pentestcode/${InstallationChannel}/${InstallationVersion}/${client}`
+  return `opencode-harness/${InstallationChannel}/${InstallationVersion}/${client}`
 }
 
 export const USER_AGENT = userAgent()
@@ -79,7 +79,7 @@ export interface Interface {
   readonly upgrade: (method: Method, target: string) => Effect.Effect<void, UpgradeFailedError>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/Installation") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Installation") {}
 
 export const use = serviceUse(Service)
 
@@ -123,11 +123,11 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
     )
 
     const getBrewFormula = Effect.fnUntraced(function* () {
-      const tapFormula = yield* text(["brew", "list", "--formula", "s0ld13rr/tap/pentestcode"])
-      if (tapFormula.includes("pentestcode")) return "s0ld13rr/tap/pentestcode"
-      const coreFormula = yield* text(["brew", "list", "--formula", "pentestcode"])
-      if (coreFormula.includes("pentestcode")) return "pentestcode"
-      return "pentestcode"
+      const tapFormula = yield* text(["brew", "list", "--formula", "s0ld13rr/tap/opencode-harness"])
+      if (tapFormula.includes("opencode-harness")) return "s0ld13rr/tap/opencode-harness"
+      const coreFormula = yield* text(["brew", "list", "--formula", "opencode-harness"])
+      if (coreFormula.includes("opencode-harness")) return "opencode-harness"
+      return "opencode-harness"
     })
 
     const upgradeFailure = (method: Method, result?: { code: number; stdout: string; stderr: string }) => {
@@ -145,7 +145,7 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
     const upgradeCurl = Effect.fnUntraced(
       function* (target: string) {
         const response = yield* httpOk.execute(
-          HttpClientRequest.get("https://raw.githubusercontent.com/s0ld13rr/pentestcode/main/install.sh"),
+          HttpClientRequest.get("https://raw.githubusercontent.com/s0ld13rr/opencode-harness/main/install.sh"),
         )
         const body = yield* response.text
         const bodyBytes = new TextEncoder().encode(body)
@@ -153,7 +153,7 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
         const result = yield* appProcess.run(
           ChildProcess.make(shell, [], {
             stdin: Stream.make(bodyBytes),
-            env: { PENTESTCODE_VERSION: target, VERSION: target },
+            env: { OPENCODE_HARNESS_VERSION: target, VERSION: target },
             extendEnv: true,
           }),
         )
@@ -174,7 +174,7 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
         }
       }),
       method: Effect.fn("Installation.method")(function* () {
-        if (process.execPath.includes(path.join(".pentestcode", "bin")) || process.execPath.includes(path.join(".opencode", "bin"))) return "curl" as Method
+        if (process.execPath.includes(path.join(".opencode-harness", "bin")) || process.execPath.includes(path.join(".opencode", "bin"))) return "curl" as Method
         if (process.execPath.includes(path.join(".local", "bin"))) return "curl" as Method
         const exec = process.execPath.toLowerCase()
 
@@ -183,9 +183,9 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
           { name: "yarn", command: () => text(["yarn", "global", "list"]) },
           { name: "pnpm", command: () => text(["pnpm", "list", "-g", "--depth=0"]) },
           { name: "bun", command: () => text(["bun", "pm", "ls", "-g"]) },
-          { name: "brew", command: () => text(["brew", "list", "--formula", "pentestcode"]) },
-          { name: "scoop", command: () => text(["scoop", "list", "pentestcode"]) },
-          { name: "choco", command: () => text(["choco", "list", "--limit-output", "pentestcode"]) },
+          { name: "brew", command: () => text(["brew", "list", "--formula", "opencode-harness"]) },
+          { name: "scoop", command: () => text(["scoop", "list", "opencode-harness"]) },
+          { name: "choco", command: () => text(["choco", "list", "--limit-output", "opencode-harness"]) },
         ]
 
         checks.sort((a, b) => {
@@ -199,7 +199,7 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
         for (const check of checks) {
           const output = yield* check.command()
           const installedName =
-            check.name === "brew" || check.name === "choco" || check.name === "scoop" ? "pentestcode" : "pentestcode-ai"
+            check.name === "brew" || check.name === "choco" || check.name === "scoop" ? "opencode-harness" : "opencode-harness-ai"
           if (output.includes(installedName)) {
             return check.name
           }
@@ -218,7 +218,7 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
             return info.formulae[0].versions.stable
           }
           const response = yield* httpOk.execute(
-            HttpClientRequest.get("https://formulae.brew.sh/api/formula/pentestcode.json").pipe(
+            HttpClientRequest.get("https://formulae.brew.sh/api/formula/opencode-harness.json").pipe(
               HttpClientRequest.acceptJson,
             ),
           )
@@ -229,7 +229,7 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
         if (detectedMethod === "npm" || detectedMethod === "bun" || detectedMethod === "pnpm") {
           const response = yield* httpOk.execute(
             HttpClientRequest.get(
-              `${yield* NpmConfig.registry(process.cwd())}/pentestcode-ai/${InstallationChannel}`,
+              `${yield* NpmConfig.registry(process.cwd())}/opencode-harness-ai/${InstallationChannel}`,
             ).pipe(HttpClientRequest.acceptJson),
           )
           const data = yield* HttpClientResponse.schemaBodyJson(NpmPackage)(response)
@@ -239,7 +239,7 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
         if (detectedMethod === "choco") {
           const response = yield* httpOk.execute(
             HttpClientRequest.get(
-              "https://community.chocolatey.org/api/v2/Packages?$filter=Id%20eq%20%27pentestcode%27%20and%20IsLatestVersion&$select=Version",
+              "https://community.chocolatey.org/api/v2/Packages?$filter=Id%20eq%20%27opencode-harness%27%20and%20IsLatestVersion&$select=Version",
             ).pipe(HttpClientRequest.setHeaders({ Accept: "application/json;odata=verbose" })),
           )
           const data = yield* HttpClientResponse.schemaBodyJson(ChocoPackage)(response)
@@ -249,7 +249,7 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
         if (detectedMethod === "scoop") {
           const response = yield* httpOk.execute(
             HttpClientRequest.get(
-              "https://raw.githubusercontent.com/ScoopInstaller/Main/master/bucket/pentestcode.json",
+              "https://raw.githubusercontent.com/ScoopInstaller/Main/master/bucket/opencode-harness.json",
             ).pipe(HttpClientRequest.setHeaders({ Accept: "application/json" })),
           )
           const data = yield* HttpClientResponse.schemaBodyJson(ScoopManifest)(response)
@@ -257,7 +257,7 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
         }
 
         const response = yield* httpOk.execute(
-          HttpClientRequest.get("https://api.github.com/repos/s0ld13rr/pentestcode/releases/latest").pipe(
+          HttpClientRequest.get("https://api.github.com/repos/s0ld13rr/opencode-harness/releases/latest").pipe(
             HttpClientRequest.acceptJson,
           ),
         )
@@ -271,13 +271,13 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
             upgradeResult = yield* upgradeCurl(target)
             break
           case "npm":
-            upgradeResult = yield* run(["npm", "install", "-g", `pentestcode-ai@${target}`])
+            upgradeResult = yield* run(["npm", "install", "-g", `opencode-harness-ai@${target}`])
             break
           case "pnpm":
-            upgradeResult = yield* run(["pnpm", "install", "-g", `pentestcode-ai@${target}`])
+            upgradeResult = yield* run(["pnpm", "install", "-g", `opencode-harness-ai@${target}`])
             break
           case "bun":
-            upgradeResult = yield* run(["bun", "install", "-g", `pentestcode-ai@${target}`])
+            upgradeResult = yield* run(["bun", "install", "-g", `opencode-harness-ai@${target}`])
             break
           case "brew": {
             const formula = yield* getBrewFormula()
@@ -302,10 +302,10 @@ const layer: Layer.Layer<Service, never, HttpClient.HttpClient | AppProcess.Serv
             break
           }
           case "choco":
-            upgradeResult = yield* run(["choco", "upgrade", "pentestcode", `--version=${target}`, "-y"])
+            upgradeResult = yield* run(["choco", "upgrade", "opencode-harness", `--version=${target}`, "-y"])
             break
           case "scoop":
-            upgradeResult = yield* run(["scoop", "install", `pentestcode@${target}`])
+            upgradeResult = yield* run(["scoop", "install", `opencode-harness@${target}`])
             break
           default:
             return yield* new UpgradeFailedError({ stderr: `Unknown installation method: ${m}` })

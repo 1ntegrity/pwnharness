@@ -1,6 +1,6 @@
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
 import { Effect, Layer, Context, Schema } from "effect"
-import { SessionV1 } from "@pentestcode/core/v1/session"
+import { SessionV1 } from "@opencode-harness/core/v1/session"
 import { EventV2Bridge } from "@/event-v2-bridge"
 import { Snapshot } from "../snapshot"
 import { Storage } from "@/storage/storage"
@@ -23,7 +23,7 @@ export interface Interface {
   readonly cleanup: (session: Session.Info) => Effect.Effect<void>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/SessionRevert") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/SessionRevert") {}
 
 const layer = Layer.effect(
   Service,

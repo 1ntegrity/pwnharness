@@ -1,5 +1,5 @@
-import { Binary } from "@pentestcode/core/util/binary"
-import type { AssistantMessage, Message, Part, SessionStatus, UserMessage } from "@pentestcode/sdk/v2"
+import { Binary } from "@opencode-harness/core/util/binary"
+import type { AssistantMessage, Message, Part, SessionStatus, UserMessage } from "@opencode-harness/sdk/v2"
 import { createMemo, mapArray, type Accessor } from "solid-js"
 import { reuseTimelineRows } from "./row-reconciliation"
 import { Timeline, TimelineRow } from "./rows"

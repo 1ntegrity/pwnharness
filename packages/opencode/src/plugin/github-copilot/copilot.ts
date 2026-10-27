@@ -1,6 +1,6 @@
-import type { Hooks, PluginInput } from "@pentestcode/plugin"
-import type { Model } from "@pentestcode/sdk/v2"
-import { InstallationVersion } from "@pentestcode/core/installation/version"
+import type { Hooks, PluginInput } from "@opencode-harness/plugin"
+import type { Model } from "@opencode-harness/sdk/v2"
+import { InstallationVersion } from "@opencode-harness/core/installation/version"
 import { iife } from "@/util/iife"
 import { setTimeout as sleep } from "node:timers/promises"
 import { CopilotModels } from "./models"
@@ -72,7 +72,7 @@ export async function CopilotAuthPlugin(input: PluginInput): Promise<Hooks> {
           {
             ...(provider.options?.headers as Record<string, string> | undefined),
             Authorization: `Bearer ${auth.refresh}`,
-            "User-Agent": `pentestcode/${InstallationVersion}`,
+            "User-Agent": `opencode-harness/${InstallationVersion}`,
             "X-GitHub-Api-Version": API_VERSION,
           },
           provider.models,
@@ -160,7 +160,7 @@ export async function CopilotAuthPlugin(input: PluginInput): Promise<Hooks> {
             const headers: Record<string, string> = {
               "x-initiator": isAgent ? "agent" : "user",
               ...(init?.headers as Record<string, string>),
-              "User-Agent": `pentestcode/${InstallationVersion}`,
+              "User-Agent": `opencode-harness/${InstallationVersion}`,
               Authorization: `Bearer ${info.refresh}`,
               "Openai-Intent": "conversation-edits",
             }
@@ -236,7 +236,7 @@ export async function CopilotAuthPlugin(input: PluginInput): Promise<Hooks> {
               headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                "User-Agent": `pentestcode/${InstallationVersion}`,
+                "User-Agent": `opencode-harness/${InstallationVersion}`,
               },
               body: JSON.stringify({
                 client_id: CLIENT_ID,
@@ -266,7 +266,7 @@ export async function CopilotAuthPlugin(input: PluginInput): Promise<Hooks> {
                     headers: {
                       Accept: "application/json",
                       "Content-Type": "application/json",
-                      "User-Agent": `pentestcode/${InstallationVersion}`,
+                      "User-Agent": `opencode-harness/${InstallationVersion}`,
                     },
                     body: JSON.stringify({
                       client_id: CLIENT_ID,

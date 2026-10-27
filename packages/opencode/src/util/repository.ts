@@ -1,7 +1,7 @@
 import path from "path"
 import { fileURLToPath } from "url"
 import { Schema } from "effect"
-import { Global } from "@pentestcode/core/global"
+import { Global } from "@opencode-harness/core/global"
 
 type BaseReference = {
   host: string

@@ -1,8 +1,8 @@
-import { run } from "@pentestcode/tui"
-import { TuiConfig } from "@pentestcode/tui/config"
+import { run } from "@opencode-harness/tui"
+import { TuiConfig } from "@opencode-harness/tui/config"
 import { Effect } from "effect"
-import { AppNodeBuilder } from "@pentestcode/core/effect/app-node-builder"
-import { Global } from "@pentestcode/core/global"
+import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
+import { Global } from "@opencode-harness/core/global"
 
 export function runTui(transport: { url: string; headers: RequestInit["headers"] }) {
   const config = TuiConfig.resolve({}, { terminalSuspend: false })

@@ -1,5 +1,5 @@
-import { Skill } from "@pentestcode/schema/skill"
-import { Location } from "@pentestcode/schema/location"
+import { Skill } from "@opencode-harness/schema/skill"
+import { Location } from "@opencode-harness/schema/location"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
 import { LocationQuery, locationQueryOpenApi } from "./location"

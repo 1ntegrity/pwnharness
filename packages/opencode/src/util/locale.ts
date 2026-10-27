@@ -1,2 +1,2 @@
-export * from "@pentestcode/tui/util/locale"
-export { Locale } from "@pentestcode/tui/util/locale"
+export * from "@opencode-harness/tui/util/locale"
+export { Locale } from "@opencode-harness/tui/util/locale"

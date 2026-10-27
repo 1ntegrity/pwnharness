@@ -7,7 +7,7 @@ import { Process } from "@/util/process"
 
 export const PrCommand = effectCmd({
   command: "pr <number>",
-  describe: "fetch and checkout a GitHub PR branch, then run pentestcode",
+  describe: "fetch and checkout a GitHub PR branch, then run opencode-harness",
   builder: (yargs) =>
     yargs.positional("number", {
       type: "number",
@@ -76,11 +76,11 @@ export const PrCommand = effectCmd({
         const sessionMatch = prInfo.body.match(/https:\/\/opncd\.ai\/s\/([a-zA-Z0-9_-]+)/)
         if (sessionMatch) {
           const sessionUrl = sessionMatch[0]
-          UI.println(`Found pentestcode session: ${sessionUrl}`)
+          UI.println(`Found opencode-harness session: ${sessionUrl}`)
           UI.println(`Importing session...`)
 
           const importResult = yield* Effect.promise(() =>
-            Process.text(["pentestcode", "import", sessionUrl], { nothrow: true }),
+            Process.text(["opencode-harness", "import", sessionUrl], { nothrow: true }),
           )
           if (importResult.code === 0) {
             const sessionIdMatch = importResult.text.trim().match(/Imported session: ([a-zA-Z0-9_-]+)/)
@@ -95,13 +95,13 @@ export const PrCommand = effectCmd({
 
     UI.println(`Successfully checked out PR #${prNumber} as branch '${localBranchName}'`)
     UI.println()
-    UI.println("Starting pentestcode...")
+    UI.println("Starting opencode-harness...")
     UI.println()
 
-    const pentestcodeArgs = sessionId ? ["-s", sessionId] : []
+    const harnessArgs = sessionId ? ["-s", sessionId] : []
     const code = yield* Effect.promise(
       () =>
-        Process.spawn(["pentestcode", ...pentestcodeArgs], {
+        Process.spawn(["opencode-harness", ...harnessArgs], {
           stdin: "inherit",
           stdout: "inherit",
           stderr: "inherit",
@@ -110,6 +110,6 @@ export const PrCommand = effectCmd({
     )
     // Match legacy throw semantics — propagate as a defect so the top-level
     // index.ts catch handles it identically (exit 1, "Unexpected error" banner).
-    if (code !== 0) return yield* Effect.die(new Error(`pentestcode exited with code ${code}`))
+    if (code !== 0) return yield* Effect.die(new Error(`opencode-harness exited with code ${code}`))
   }),
 })

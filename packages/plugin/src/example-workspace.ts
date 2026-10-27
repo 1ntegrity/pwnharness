@@ -1,4 +1,4 @@
-import type { Plugin } from "@pentestcode/plugin"
+import type { Plugin } from "@opencode-harness/plugin"
 import { mkdir, rm } from "node:fs/promises"
 
 export const FolderWorkspacePlugin: Plugin = async ({ experimental_workspace }) => {

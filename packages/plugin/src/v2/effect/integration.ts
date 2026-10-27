@@ -8,7 +8,7 @@ import type {
   IntegrationMethod,
   IntegrationOAuthMethod,
   IntegrationRef,
-} from "@pentestcode/sdk/v2/types"
+} from "@opencode-harness/sdk/v2/types"
 import type { Effect, Scope } from "effect"
 import type { Hooks } from "./registration.js"
 

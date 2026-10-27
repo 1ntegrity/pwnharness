@@ -2,12 +2,12 @@ import { expect, test } from "bun:test"
 import { Effect } from "effect"
 import * as DateTime from "effect/DateTime"
 import { SessionID } from "../../src/session/schema"
-import { EventV2 } from "@pentestcode/core/event"
-import { ModelV2 } from "@pentestcode/core/model"
-import { ProviderV2 } from "@pentestcode/core/provider"
-import { SessionEvent } from "@pentestcode/core/session/event"
-import { SessionMessageUpdater } from "@pentestcode/core/session/message-updater"
-import { SessionMessage } from "@pentestcode/core/session/message"
+import { EventV2 } from "@opencode-harness/core/event"
+import { ModelV2 } from "@opencode-harness/core/model"
+import { ProviderV2 } from "@opencode-harness/core/provider"
+import { SessionEvent } from "@opencode-harness/core/session/event"
+import { SessionMessageUpdater } from "@opencode-harness/core/session/message-updater"
+import { SessionMessage } from "@opencode-harness/core/session/message"
 
 test.skip("step snapshots carry over to assistant messages", () => {
   const state: SessionMessageUpdater.MemoryState = { messages: [] }

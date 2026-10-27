@@ -1,7 +1,7 @@
-import { Event } from "@pentestcode/schema/event"
-import { EventManifest } from "@pentestcode/schema/event-manifest"
-import { Location } from "@pentestcode/schema/location"
-import type { Definition } from "@pentestcode/schema/event"
+import { Event } from "@opencode-harness/schema/event"
+import { EventManifest } from "@opencode-harness/schema/event-manifest"
+import { Location } from "@opencode-harness/schema/location"
+import type { Definition } from "@opencode-harness/schema/event"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, HttpApiSchema, OpenApi } from "effect/unstable/httpapi"
 

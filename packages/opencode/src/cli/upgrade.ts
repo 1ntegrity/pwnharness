@@ -1,8 +1,8 @@
 import { Config } from "@/config/config"
 import { AppRuntime } from "@/effect/app-runtime"
-import { Flag } from "@pentestcode/core/flag/flag"
+import { Flag } from "@opencode-harness/core/flag/flag"
 import { Installation } from "@/installation"
-import { InstallationVersion } from "@pentestcode/core/installation/version"
+import { InstallationVersion } from "@opencode-harness/core/installation/version"
 import { GlobalBus } from "@/bus/global"
 
 export async function upgrade() {

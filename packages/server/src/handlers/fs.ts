@@ -1,5 +1,5 @@
-import { FileSystem } from "@pentestcode/core/filesystem"
-import { RelativePath } from "@pentestcode/core/schema"
+import { FileSystem } from "@opencode-harness/core/filesystem"
+import { RelativePath } from "@opencode-harness/core/schema"
 import { Effect } from "effect"
 import { HttpServerResponse } from "effect/unstable/http"
 import { HttpApiBuilder } from "effect/unstable/httpapi"

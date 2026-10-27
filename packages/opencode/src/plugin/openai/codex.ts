@@ -1,11 +1,11 @@
-import type { Hooks, PluginInput } from "@pentestcode/plugin"
-import { InstallationVersion } from "@pentestcode/core/installation/version"
+import type { Hooks, PluginInput } from "@opencode-harness/plugin"
+import { InstallationVersion } from "@opencode-harness/core/installation/version"
 import { OAUTH_DUMMY_KEY } from "../../auth"
 import os from "os"
 import { setTimeout as sleep } from "node:timers/promises"
 import { createServer } from "http"
 import { OpenAIWebSocketPool } from "./ws-pool"
-import { OauthCallbackPage } from "@pentestcode/core/oauth/page"
+import { OauthCallbackPage } from "@opencode-harness/core/oauth/page"
 
 const CLIENT_ID = "app_EMoamEEZ73f0CkXaXp7hrann"
 const ISSUER = "https://auth.openai.com"
@@ -86,7 +86,7 @@ function buildAuthorizeUrl(redirectUri: string, pkce: PkceCodes, state: string):
     id_token_add_organizations: "true",
     codex_cli_simplified_flow: "true",
     state,
-    originator: "pentestcode",
+    originator: "opencode-harness",
   })
   return `${ISSUER}/oauth/authorize?${params.toString()}`
 }
@@ -456,7 +456,7 @@ export async function CodexAuthPlugin(input: PluginInput, options: CodexAuthPlug
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "User-Agent": `pentestcode/${InstallationVersion}`,
+                "User-Agent": `opencode-harness/${InstallationVersion}`,
               },
               body: JSON.stringify({ client_id: CLIENT_ID }),
             })
@@ -480,7 +480,7 @@ export async function CodexAuthPlugin(input: PluginInput, options: CodexAuthPlug
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
-                      "User-Agent": `pentestcode/${InstallationVersion}`,
+                      "User-Agent": `opencode-harness/${InstallationVersion}`,
                     },
                     body: JSON.stringify({
                       device_auth_id: deviceData.device_auth_id,
@@ -539,8 +539,8 @@ export async function CodexAuthPlugin(input: PluginInput, options: CodexAuthPlug
     },
     "chat.headers": async (input, output) => {
       if (input.model.providerID !== "openai") return
-      output.headers.originator = "pentestcode"
-      output.headers["User-Agent"] = `pentestcode/${InstallationVersion} (${os.platform()} ${os.release()}; ${os.arch()})`
+      output.headers.originator = "opencode-harness"
+      output.headers["User-Agent"] = `opencode-harness/${InstallationVersion} (${os.platform()} ${os.release()}; ${os.arch()})`
       output.headers["session-id"] = input.sessionID
       // Temporary fetch-layer hack: title generation currently shares the conversation
       // session ID, so the OpenAI plugin marks it for HTTP fallback until transport

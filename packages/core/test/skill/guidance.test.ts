@@ -1,12 +1,12 @@
 import path from "path"
 import { describe, expect } from "bun:test"
 import { Effect, Layer } from "effect"
-import { AgentV2 } from "@pentestcode/core/agent"
-import { AppNodeBuilder } from "@pentestcode/core/effect/app-node-builder"
-import { AbsolutePath } from "@pentestcode/core/schema"
-import { SkillV2 } from "@pentestcode/core/skill"
-import { SystemContext } from "@pentestcode/core/system-context"
-import { SkillGuidance } from "@pentestcode/core/skill/guidance"
+import { AgentV2 } from "@opencode-harness/core/agent"
+import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
+import { AbsolutePath } from "@opencode-harness/core/schema"
+import { SkillV2 } from "@opencode-harness/core/skill"
+import { SystemContext } from "@opencode-harness/core/system-context"
+import { SkillGuidance } from "@opencode-harness/core/skill/guidance"
 import { it } from "../lib/effect"
 
 const build = AgentV2.ID.make("build")

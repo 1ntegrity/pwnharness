@@ -1,17 +1,17 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "version": "0.1.0",
-  "name": "@pentestcode/http-recorder",
+  "name": "@opencode-harness/http-recorder",
   "description": "Record and replay Effect HTTP client traffic with deterministic cassettes",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/s0ld13rr/pentestcode.git",
+    "url": "git+https://github.com/s0ld13rr/opencode-harness.git",
     "directory": "packages/http-recorder"
   },
-  "homepage": "https://github.com/s0ld13rr/pentestcode/tree/dev/packages/http-recorder",
-  "bugs": "https://github.com/s0ld13rr/pentestcode/issues",
+  "homepage": "https://github.com/s0ld13rr/opencode-harness/tree/dev/packages/http-recorder",
+  "bugs": "https://github.com/s0ld13rr/opencode-harness/issues",
   "keywords": [
     "effect",
     "http",

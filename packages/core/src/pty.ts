@@ -3,7 +3,7 @@ export * as Pty from "./pty"
 import { makeLocationNode } from "./effect/app-node"
 import type { Disp, Proc } from "#pty"
 import { Context, Effect, Layer, Schema, Types } from "effect"
-import { Pty } from "@pentestcode/schema/pty"
+import { Pty } from "@opencode-harness/schema/pty"
 import { Config } from "./config"
 import { EventV2 } from "./event"
 import { Location } from "./location"
@@ -87,7 +87,7 @@ export interface Interface {
   readonly attach: (id: PtyID, input: AttachInput) => Effect.Effect<Attachment, NotFoundError | ExitedError>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/v2/Pty") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/v2/Pty") {}
 
 const layer = Layer.effect(
   Service,

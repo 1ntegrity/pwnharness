@@ -1,5 +1,5 @@
-import { NonNegativeInt } from "@pentestcode/core/schema"
-import { EventV2 } from "@pentestcode/core/event"
+import { NonNegativeInt } from "@opencode-harness/core/schema"
+import { EventV2 } from "@opencode-harness/core/event"
 import { SessionID } from "@/session/schema"
 import { Schema } from "effect"
 import { HttpApi, HttpApiEndpoint, HttpApiError, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
@@ -106,7 +106,7 @@ export const SyncApi = HttpApi.make("sync")
   )
   .annotateMerge(
     OpenApi.annotations({
-      title: "pentestcode experimental HttpApi",
+      title: "opencode-harness experimental HttpApi",
       version: "0.0.1",
       description: "Experimental HttpApi surface for selected instance routes.",
     }),

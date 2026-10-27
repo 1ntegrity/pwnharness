@@ -1,5 +1,5 @@
 import { Schema } from "effect"
-import { NamedError } from "@pentestcode/core/util/error"
+import { NamedError } from "@opencode-harness/core/util/error"
 
 export const OutputLengthError = NamedError.create("MessageOutputLengthError", {})
 

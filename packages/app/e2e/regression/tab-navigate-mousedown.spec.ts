@@ -1,5 +1,5 @@
 import { expect, test, type Page, type Route } from "@playwright/test"
-import { base64Encode } from "@pentestcode/core/util/encode"
+import { base64Encode } from "@opencode-harness/core/util/encode"
 
 const server = "http://127.0.0.1:4096"
 const sessionA = session("ses_tab_a", "Tab A session")

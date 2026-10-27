@@ -1,5 +1,5 @@
 import { Config } from "@/config/config"
-import { ConfigV1 } from "@pentestcode/core/v1/config/config"
+import { ConfigV1 } from "@opencode-harness/core/v1/config/config"
 import { Provider } from "@/provider/provider"
 import { HttpApi, HttpApiEndpoint, HttpApiError, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
 import { Authorization } from "../middleware/authorization"
@@ -20,7 +20,7 @@ export const ConfigApi = HttpApi.make("config")
           OpenApi.annotations({
             identifier: "config.get",
             summary: "Get configuration",
-            description: "Retrieve the current PentestCode configuration settings and preferences.",
+            description: "Retrieve the current OpenCode Harness configuration settings and preferences.",
           }),
         ),
         HttpApiEndpoint.patch("update", root, {
@@ -32,7 +32,7 @@ export const ConfigApi = HttpApi.make("config")
           OpenApi.annotations({
             identifier: "config.update",
             summary: "Update configuration",
-            description: "Update PentestCode configuration settings and preferences.",
+            description: "Update OpenCode Harness configuration settings and preferences.",
           }),
         ),
         HttpApiEndpoint.get("providers", `${root}/providers`, {
@@ -58,7 +58,7 @@ export const ConfigApi = HttpApi.make("config")
   )
   .annotateMerge(
     OpenApi.annotations({
-      title: "pentestcode experimental HttpApi",
+      title: "opencode-harness experimental HttpApi",
       version: "0.0.1",
       description: "Experimental HttpApi surface for selected instance routes.",
     }),

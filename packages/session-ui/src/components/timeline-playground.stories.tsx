@@ -11,9 +11,9 @@ import type {
   ToolPart,
   FilePart,
   AgentPart,
-} from "@pentestcode/sdk/v2"
+} from "@opencode-harness/sdk/v2"
 import { DataProvider } from "../context/data"
-import { FileComponentProvider } from "@pentestcode/ui/context/file"
+import { FileComponentProvider } from "@opencode-harness/ui/context/file"
 import { SessionTurn } from "./session-turn"
 
 // ---------------------------------------------------------------------------

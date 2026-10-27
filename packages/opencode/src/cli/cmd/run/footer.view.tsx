@@ -10,8 +10,8 @@
 /** @jsxImportSource @opentui/solid */
 import { useTerminalDimensions } from "@opentui/solid"
 import { For, Match, Show, Switch, createEffect, createMemo, createSignal, onCleanup } from "solid-js"
-import { registerOpencodeSpinner } from "@pentestcode/tui/component/register-spinner"
-import { createColors, createFrames } from "@pentestcode/tui/ui/spinner"
+import { registerOpencodeSpinner } from "@opencode-harness/tui/component/register-spinner"
+import { createColors, createFrames } from "@opencode-harness/tui/ui/spinner"
 import {
   RUN_SUBAGENT_PANEL_ROWS,
   RunCommandMenuBody,
@@ -34,7 +34,7 @@ import {
   useBindings,
   useKeymapSelector,
   type OpenTuiKeymap,
-} from "@pentestcode/tui/keymap"
+} from "@opencode-harness/tui/keymap"
 import type {
   FooterPromptRoute,
   FooterQueuedPrompt,

@@ -1,29 +1,29 @@
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { httpClient } from "@pentestcode/core/effect/app-node-platform"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { httpClient } from "@opencode-harness/core/effect/app-node-platform"
 import { Context, Effect, FiberMap, Iterable, Layer, Schema, Stream } from "effect"
-import { serviceUse } from "@pentestcode/core/effect/service-use"
+import { serviceUse } from "@opencode-harness/core/effect/service-use"
 import { FetchHttpClient, HttpBody, HttpClient, HttpClientError, HttpClientRequest } from "effect/unstable/http"
-import { Database } from "@pentestcode/core/database/database"
+import { Database } from "@opencode-harness/core/database/database"
 import { asc } from "drizzle-orm"
 import { eq } from "drizzle-orm"
 import { inArray } from "drizzle-orm"
 import { Project } from "@/project/project"
 import { GlobalBus } from "@/bus/global"
 import { Auth } from "@/auth"
-import { EventV2 } from "@pentestcode/core/event"
+import { EventV2 } from "@opencode-harness/core/event"
 import { EventV2Bridge } from "@/event-v2-bridge"
-import { EventSequenceTable, EventTable } from "@pentestcode/core/event/sql"
-import { FSUtil } from "@pentestcode/core/fs-util"
+import { EventSequenceTable, EventTable } from "@opencode-harness/core/event/sql"
+import { FSUtil } from "@opencode-harness/core/fs-util"
 import { RuntimeFlags } from "@/effect/runtime-flags"
-import { ProjectV2 } from "@pentestcode/core/project"
-import { Slug } from "@pentestcode/core/util/slug"
-import { WorkspaceTable } from "@pentestcode/core/control-plane/workspace.sql"
+import { ProjectV2 } from "@opencode-harness/core/project"
+import { Slug } from "@opencode-harness/core/util/slug"
+import { WorkspaceTable } from "@opencode-harness/core/control-plane/workspace.sql"
 import { getAdapter, registeredAdapters } from "./adapters"
 import { type Target, type WorkspaceInfo, WorkspaceInfo as WorkspaceInfoSchema } from "./types"
-import { WorkspaceV2 } from "@pentestcode/core/workspace"
+import { WorkspaceV2 } from "@opencode-harness/core/workspace"
 import { Session } from "@/session/session"
 import { SessionPrompt } from "@/session/prompt"
-import { SessionTable } from "@pentestcode/core/session/sql"
+import { SessionTable } from "@opencode-harness/core/session/sql"
 import { SessionID } from "@/session/schema"
 import { NotFoundError } from "@/storage/storage"
 import { errorData } from "@/util/error"
@@ -33,7 +33,7 @@ import { Vcs } from "@/project/vcs"
 import { InstanceStore } from "@/project/instance-store"
 import { WorkspaceAdapterRuntime } from "./workspace-adapter-runtime"
 import { AppNodeBuilderV1 } from "@/effect/app-node-builder-v1"
-import { WorkspaceEvent } from "@pentestcode/schema/workspace-event"
+import { WorkspaceEvent } from "@opencode-harness/schema/workspace-event"
 
 export const Info = Schema.Struct({
   ...WorkspaceInfoSchema.fields,
@@ -146,7 +146,7 @@ export interface Interface {
   readonly startWorkspaceSyncing: (projectID: ProjectV2.ID) => Effect.Effect<void>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/Workspace") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Workspace") {}
 
 export const use = serviceUse(Service)
 

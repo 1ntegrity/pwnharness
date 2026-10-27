@@ -1,8 +1,8 @@
 import { Effect } from "effect"
-import { Fff } from "@pentestcode/core/filesystem/fff.bun"
+import { Fff } from "@opencode-harness/core/filesystem/fff.bun"
 import { AppRuntime } from "@/effect/app-runtime"
-import { FileSystem } from "@pentestcode/core/filesystem"
-import { AbsolutePath } from "@pentestcode/core/schema"
+import { FileSystem } from "@opencode-harness/core/filesystem"
+import { AbsolutePath } from "@opencode-harness/core/schema"
 import { InstanceStore } from "@/project/instance-store"
 
 const dir = AbsolutePath.make(process.cwd())

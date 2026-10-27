@@ -1,13 +1,13 @@
 import path from "path"
 import { createHash } from "crypto"
 import { Effect } from "effect"
-import { FSUtil } from "@pentestcode/core/fs-util"
-import { Global } from "@pentestcode/core/global"
+import { FSUtil } from "@opencode-harness/core/fs-util"
+import { Global } from "@opencode-harness/core/global"
 
 export * as BundledSkills from "./bundled"
 
 // The default ("bundled") skill set is embedded into the binary at build time
-// (see script/build.ts, which emits the `pentestcode-skills.gen.ts` virtual
+// (see script/build.ts, which emits the `opencode-harness-skills.gen.ts` virtual
 // module). In dev the binary is not compiled and the module does not exist;
 // loadBundle then returns null and seeding is skipped — dev discovers skills
 // from the repo ./skills via the `skills.paths` config instead.
@@ -22,7 +22,7 @@ export type EmbeddedBundle = {
 async function loadBundle(): Promise<EmbeddedBundle | null> {
   try {
     // @ts-expect-error - generated at build time by script/build.ts
-    const mod = await import("pentestcode-skills.gen.ts")
+    const mod = await import("opencode-harness-skills.gen.ts")
     const files = mod.default as Record<string, string> | undefined
     if (!files || typeof files !== "object") return null
     return { version: (mod.version as string | undefined) ?? "0.0.0", files }
@@ -35,7 +35,7 @@ function sha256(data: Uint8Array): string {
   return createHash("sha256").update(data).digest("hex")
 }
 
-// Seed ~/.pentestcode/skills/bundled from the binary-embedded skill set. Runs on
+// Seed ~/.opencode-harness/skills/bundled from the binary-embedded skill set. Runs on
 // first launch and whenever the embedded bundle version differs from what is on
 // disk. No-op in dev (nothing embedded). Best-effort — see apply.
 export const seed = Effect.fn("Skill.seedBundled")(function* (fsys: FSUtil.Interface, global: Global.Interface) {
@@ -53,7 +53,7 @@ export const apply = Effect.fn("Skill.applyBundled")(function* (
   global: Global.Interface,
   bundle: EmbeddedBundle,
 ) {
-  const target = path.join(global.home, ".pentestcode", "skills", "bundled")
+  const target = path.join(global.home, ".opencode-harness", "skills", "bundled")
   const manifestPath = path.join(target, ".manifest.json")
 
   const currentRaw = yield* fsys.readFileStringSafe(manifestPath).pipe(Effect.catch(() => Effect.succeed(undefined)))

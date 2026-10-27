@@ -1,4 +1,4 @@
-import type { Hooks, PluginInput } from "@pentestcode/plugin"
+import type { Hooks, PluginInput } from "@opencode-harness/plugin"
 
 export async function AzureAuthPlugin(_input: PluginInput): Promise<Hooks> {
   const prompts = []

@@ -1,7 +1,7 @@
 import { Schema } from "effect"
 
 import { Identifier } from "@/id/id"
-import { statics } from "@pentestcode/core/schema"
+import { statics } from "@opencode-harness/core/schema"
 
 const toolIdSchema = Schema.String.check(Schema.isStartsWith("tool")).pipe(Schema.brand("ToolID"))
 

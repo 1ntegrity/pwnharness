@@ -29,9 +29,9 @@ import {
   type SetSessionModeRequest,
   type SetSessionModeResponse,
 } from "@agentclientprotocol/sdk"
-import { InstallationVersion } from "@pentestcode/core/installation/version"
-import { AppNodeBuilder } from "@pentestcode/core/effect/app-node-builder"
-import type { AssistantMessage, Message, OpencodeClient, SessionMessageResponse } from "@pentestcode/sdk/v2"
+import { InstallationVersion } from "@opencode-harness/core/installation/version"
+import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
+import type { AssistantMessage, Message, OpencodeClient, SessionMessageResponse } from "@opencode-harness/sdk/v2"
 import { Context, Effect, Layer, ManagedRuntime } from "effect"
 import * as ACPError from "./error"
 import { buildConfigOptions, parseModelSelection } from "./config-option"
@@ -41,12 +41,12 @@ import { ACPEvent } from "./event"
 import { ACPSession } from "./session"
 import { UsageService } from "./usage"
 import { ACPProfile } from "./profile"
-import { ProviderV2 } from "@pentestcode/core/provider"
-import { ModelV2 } from "@pentestcode/core/model"
+import { ProviderV2 } from "@opencode-harness/core/provider"
+import { ModelV2 } from "@opencode-harness/core/model"
 import { Provider } from "@/provider/provider"
 import type { Command } from "@/command"
 
-export const AuthMethodID = "pentestcode-login"
+export const AuthMethodID = "opencode-harness-login"
 
 export type Error = ACPError.Error
 type ServiceConnection = Pick<AgentSideConnection, "sessionUpdate"> &
@@ -70,7 +70,7 @@ export type Interface = {
   readonly cancel: (input: CancelNotification) => Effect.Effect<void, Error>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/ACP/Service") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/ACP/Service") {}
 
 export function make(input: {
   sdk: OpencodeClient
@@ -92,17 +92,17 @@ export function make(input: {
   const initialize = Effect.fn("ACP.initialize")(function* (params: InitializeRequest) {
     const started = performance.now()
     const authMethod: AuthMethod = {
-      description: "Run `pentestcode auth login` in the terminal",
-      name: "Login with pentestcode",
+      description: "Run `opencode-harness auth login` in the terminal",
+      name: "Login with opencode-harness",
       id: AuthMethodID,
     }
 
     if (params.clientCapabilities?._meta?.["terminal-auth"] === true) {
       authMethod._meta = {
         "terminal-auth": {
-          command: "pentestcode",
+          command: "opencode-harness",
           args: ["auth", "login"],
-          label: "PentestCode Login",
+          label: "OpenCode Harness Login",
         },
       }
     }
@@ -128,7 +128,7 @@ export function make(input: {
       },
       authMethods: [authMethod],
       agentInfo: {
-        name: "PentestCode",
+        name: "OpenCode Harness",
         version: InstallationVersion,
       },
     }
@@ -866,7 +866,7 @@ const promptResponse = Effect.fn("ACP.promptResponse")(function* (
 
 function promptErrorMessage(error: AssistantError) {
   if ("message" in error.data && typeof error.data.message === "string") return error.data.message
-  return "PentestCode prompt failed"
+  return "OpenCode Harness prompt failed"
 }
 
 function sendUsageUpdate(
@@ -1059,7 +1059,7 @@ function fromUnknownError(error: unknown, service?: string): Error {
   if (isAuthRequired(error)) {
     return new ACPError.AuthRequiredError({ providerId: findProviderID(error) })
   }
-  return new ACPError.ServiceFailureError({ safeMessage: "PentestCode service failure", service })
+  return new ACPError.ServiceFailureError({ safeMessage: "OpenCode Harness service failure", service })
 }
 
 function isACPError(error: unknown): error is Error {

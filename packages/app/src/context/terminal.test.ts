@@ -12,7 +12,7 @@ beforeAll(async () => {
     useLocation: () => ({}),
     useSearchParams: () => [{}, () => undefined],
   }))
-  mock.module("@pentestcode/ui/context", () => ({
+  mock.module("@opencode-harness/ui/context", () => ({
     createSimpleContext: () => ({
       use: () => undefined,
       provider: () => undefined,

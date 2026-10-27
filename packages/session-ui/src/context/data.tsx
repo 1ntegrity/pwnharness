@@ -1,5 +1,5 @@
-import type { Message, Session, Part, SnapshotFileDiff, SessionStatus, Provider } from "@pentestcode/sdk/v2"
-import { createSimpleContext } from "@pentestcode/ui/context"
+import type { Message, Session, Part, SnapshotFileDiff, SessionStatus, Provider } from "@opencode-harness/sdk/v2"
+import { createSimpleContext } from "@opencode-harness/ui/context"
 import { PreloadMultiFileDiffResult } from "@pierre/diffs/ssr"
 
 export type NormalizedProviderListResponse = {

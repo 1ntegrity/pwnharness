@@ -1,4 +1,4 @@
-import type { HttpRecorder } from "@pentestcode/http-recorder"
+import type { HttpRecorder } from "@opencode-harness/http-recorder"
 import { describe } from "bun:test"
 import { Effect } from "effect"
 import type { Model } from "../src"

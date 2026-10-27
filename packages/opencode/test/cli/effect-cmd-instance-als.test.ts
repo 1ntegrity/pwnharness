@@ -1,6 +1,6 @@
 import { afterEach, expect } from "bun:test"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { FSUtil } from "@pentestcode/core/fs-util"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { FSUtil } from "@opencode-harness/core/fs-util"
 import { Effect } from "effect"
 import { fileURLToPath } from "url"
 import { InstanceRef } from "../../src/effect/instance-ref"

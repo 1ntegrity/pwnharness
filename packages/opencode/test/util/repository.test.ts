@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
 import path from "path"
 import { pathToFileURL } from "url"
-import { Global } from "@pentestcode/core/global"
+import { Global } from "@opencode-harness/core/global"
 import {
   InvalidRepositoryBranchError,
   InvalidRepositoryReferenceError,

@@ -1,4 +1,4 @@
-import { createOpencodeClient } from "@pentestcode/sdk/v2/client"
+import { createOpencodeClient } from "@opencode-harness/sdk/v2/client"
 import type { ServerConnection } from "@/context/server"
 import { decode64 } from "@/utils/base64"
 

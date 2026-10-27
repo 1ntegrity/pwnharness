@@ -1,4 +1,4 @@
-import { Catalog } from "@pentestcode/core/catalog"
+import { Catalog } from "@opencode-harness/core/catalog"
 import { Effect } from "effect"
 import { HttpApiBuilder } from "effect/unstable/httpapi"
 import { Api } from "../api"

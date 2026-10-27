@@ -1,4 +1,4 @@
-import type { AssistantMessage, Part, Provider, UserMessage } from "@pentestcode/sdk/v2"
+import type { AssistantMessage, Part, Provider, UserMessage } from "@opencode-harness/sdk/v2"
 import { Locale } from "./locale"
 import * as Model from "./model"
 

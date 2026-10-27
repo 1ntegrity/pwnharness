@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test"
 import path from "path"
-import { Shell } from "@pentestcode/core/shell"
-import { FSUtil } from "@pentestcode/core/fs-util"
-import { which } from "@pentestcode/core/util/which"
+import { Shell } from "@opencode-harness/core/shell"
+import { FSUtil } from "@opencode-harness/core/fs-util"
+import { which } from "@opencode-harness/core/util/which"
 
 const withShell = async (shell: string | undefined, fn: () => void | Promise<void>) => {
   const prev = process.env.SHELL

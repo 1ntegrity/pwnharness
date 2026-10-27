@@ -1,7 +1,7 @@
 import { describe, test, expect } from "bun:test"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
 import { Effect } from "effect"
-import { FSUtil } from "@pentestcode/core/fs-util"
+import { FSUtil } from "@opencode-harness/core/fs-util"
 import { testEffect } from "../lib/effect"
 import path from "path"
 

@@ -1,6 +1,6 @@
 import { Filesystem } from "@/util/filesystem"
-import { FrontmatterError } from "@pentestcode/core/v1/config/error"
-import { ConfigMarkdown as ConfigMarkdownCore } from "@pentestcode/core/config/markdown"
+import { FrontmatterError } from "@opencode-harness/core/v1/config/error"
+import { ConfigMarkdown as ConfigMarkdownCore } from "@opencode-harness/core/config/markdown"
 
 export const FILE_REGEX = /(?<![\w`])@(\.?[^\s`,.]*(?:\.[^\s`,.]+)*)/g
 export const SHELL_REGEX = /!`([^`]+)`/g

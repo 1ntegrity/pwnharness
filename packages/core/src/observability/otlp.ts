@@ -35,13 +35,13 @@ function resourceAttributes() {
 
 export function resource(): { serviceName: string; serviceVersion: string; attributes: Record<string, string> } {
   return {
-    serviceName: "pentestcode",
+    serviceName: "opencode-harness",
     serviceVersion: InstallationVersion,
     attributes: {
       ...resourceAttributes(),
       "deployment.environment.name": InstallationChannel,
-      "pentestcode.client": Flag.OPENCODE_CLIENT,
-      "pentestcode.run": runID,
+      "opencode-harness.client": Flag.OPENCODE_CLIENT,
+      "opencode-harness.run": runID,
       "service.instance.id": runID,
     },
   }

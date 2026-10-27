@@ -24,8 +24,8 @@ import { createStore, produce } from "solid-js/store"
 import { createSimpleContext } from "./helper"
 import { useKV } from "./kv"
 import { useTuiConfig } from "../config"
-import { Global } from "@pentestcode/core/global"
-import { Glob } from "@pentestcode/core/util/glob"
+import { Global } from "@opencode-harness/core/global"
+import { Glob } from "@opencode-harness/core/util/glob"
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 
@@ -38,7 +38,7 @@ const themeSource: ThemeSource = {
   async discover() {
     const directories = [Global.Path.config]
     for (let current = process.cwd(); ; current = path.dirname(current)) {
-      directories.push(path.join(current, ".pentestcode"))
+      directories.push(path.join(current, ".opencode-harness"))
       if (path.dirname(current) === current) break
     }
     return discoverThemes(directories)

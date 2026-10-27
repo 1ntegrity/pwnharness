@@ -1,5 +1,5 @@
-import { Model } from "@pentestcode/schema/model"
-import { Location } from "@pentestcode/schema/location"
+import { Model } from "@opencode-harness/schema/model"
+import { Location } from "@opencode-harness/schema/location"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
 import { ServiceUnavailableError } from "../errors"

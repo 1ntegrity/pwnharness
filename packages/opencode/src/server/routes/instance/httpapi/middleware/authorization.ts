@@ -7,7 +7,7 @@ import { isPublicUIPath } from "@/server/shared/public-ui"
 export {
   Authorization as ServerAuthorization,
   authorizationLayer as serverAuthorizationLayer,
-} from "@pentestcode/server/middleware/authorization"
+} from "@opencode-harness/server/middleware/authorization"
 
 const AUTH_TOKEN_QUERY = "auth_token"
 const UNAUTHORIZED = 401
@@ -17,14 +17,14 @@ const WWW_AUTHENTICATE = 'Basic realm="Secure Area"'
 // full handler, so a downstream failure can make the next auth alternative run
 // and remap an authorized NotFound into Unauthorized.
 export class Authorization extends HttpApiMiddleware.Service<Authorization>()(
-  "@pentestcode/ExperimentalHttpApiAuthorization",
+  "@opencode-harness/ExperimentalHttpApiAuthorization",
   {
     error: HttpApiError.UnauthorizedNoContent,
   },
 ) {}
 
 export class PtyConnectAuthorization extends HttpApiMiddleware.Service<PtyConnectAuthorization>()(
-  "@pentestcode/ExperimentalHttpApiPtyConnectAuthorization",
+  "@opencode-harness/ExperimentalHttpApiPtyConnectAuthorization",
   {
     error: HttpApiError.UnauthorizedNoContent,
   },

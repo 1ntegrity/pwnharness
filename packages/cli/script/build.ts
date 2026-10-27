@@ -4,7 +4,7 @@ import { $ } from "bun"
 import fs from "fs"
 import { rm } from "fs/promises"
 import path from "path"
-import { Script } from "@pentestcode/script"
+import { Script } from "@opencode-harness/script"
 import { createSolidTransformPlugin } from "@opentui/solid/bun-plugin"
 import pkg from "../package.json"
 import { modelsData } from "./generate"
@@ -111,10 +111,10 @@ for (const item of targets) {
     `./dist/${name}/package.json`,
     JSON.stringify(
       {
-        name: `@pentestcode/${name}`,
+        name: `@opencode-harness/${name}`,
         version: Script.version,
         license: "MIT",
-        repository: { type: "git", url: "git+https://github.com/s0ld13rr/pentestcode.git" },
+        repository: { type: "git", url: "git+https://github.com/s0ld13rr/opencode-harness.git" },
         os: [item.os],
         cpu: [item.arch],
       },

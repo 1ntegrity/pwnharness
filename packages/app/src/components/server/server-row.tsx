@@ -1,4 +1,4 @@
-import { Tooltip } from "@pentestcode/ui/tooltip"
+import { Tooltip } from "@opencode-harness/ui/tooltip"
 import { createResizeObserver } from "@solid-primitives/resize-observer"
 import {
   children,

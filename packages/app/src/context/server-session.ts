@@ -1,5 +1,5 @@
-import { Binary } from "@pentestcode/core/util/binary"
-import { retry } from "@pentestcode/core/util/retry"
+import { Binary } from "@opencode-harness/core/util/binary"
+import { retry } from "@opencode-harness/core/util/retry"
 import type {
   Message,
   OpencodeClient,
@@ -10,7 +10,7 @@ import type {
   SessionStatus,
   SnapshotFileDiff,
   Todo,
-} from "@pentestcode/sdk/v2/client"
+} from "@opencode-harness/sdk/v2/client"
 import { batch } from "solid-js"
 import { createStore, produce, reconcile } from "solid-js/store"
 import { diffs as cleanDiffs, message as cleanMessage } from "@/utils/diffs"

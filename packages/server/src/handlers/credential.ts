@@ -1,4 +1,4 @@
-import { Integration } from "@pentestcode/core/integration"
+import { Integration } from "@opencode-harness/core/integration"
 import { Effect } from "effect"
 import { HttpApiBuilder, HttpApiSchema } from "effect/unstable/httpapi"
 import { Api } from "../api"

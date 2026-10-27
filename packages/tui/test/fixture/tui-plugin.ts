@@ -1,4 +1,4 @@
-import type { TuiPluginApi } from "@pentestcode/plugin/tui"
+import type { TuiPluginApi } from "@opencode-harness/plugin/tui"
 import { RGBA } from "@opentui/core"
 import { createTuiResolvedConfig } from "./tui-runtime"
 

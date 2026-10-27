@@ -1,27 +1,27 @@
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
 import { and, eq, sql } from "drizzle-orm"
-import { Database } from "@pentestcode/core/database/database"
-import { ProjectDirectoryTable, ProjectTable } from "@pentestcode/core/project/sql"
-import { ProjectDirectories } from "@pentestcode/core/project/directories"
-import { SessionTable } from "@pentestcode/core/session/sql"
-import { WorkspaceTable } from "@pentestcode/core/control-plane/workspace.sql"
-import { Flag } from "@pentestcode/core/flag/flag"
+import { Database } from "@opencode-harness/core/database/database"
+import { ProjectDirectoryTable, ProjectTable } from "@opencode-harness/core/project/sql"
+import { ProjectDirectories } from "@opencode-harness/core/project/directories"
+import { SessionTable } from "@opencode-harness/core/session/sql"
+import { WorkspaceTable } from "@opencode-harness/core/control-plane/workspace.sql"
+import { Flag } from "@opencode-harness/core/flag/flag"
 import { GlobalBus } from "@/bus/global"
-import { which } from "@pentestcode/core/util/which"
+import { which } from "@opencode-harness/core/util/which"
 import { Command } from "@/command"
 import { InstanceState } from "@/effect/instance-state"
 import { Effect, Layer, Scope, Context, Stream, Types, Schema } from "effect"
 import { ChildProcess, ChildProcessSpawner } from "effect/unstable/process"
-import { FSUtil } from "@pentestcode/core/fs-util"
-import { AppProcess } from "@pentestcode/core/process"
-import { ProjectV2 } from "@pentestcode/core/project"
-import { CrossSpawnSpawner } from "@pentestcode/core/cross-spawn-spawner"
-import { AbsolutePath } from "@pentestcode/core/schema"
-import { serviceUse } from "@pentestcode/core/effect/service-use"
+import { FSUtil } from "@opencode-harness/core/fs-util"
+import { AppProcess } from "@opencode-harness/core/process"
+import { ProjectV2 } from "@opencode-harness/core/project"
+import { CrossSpawnSpawner } from "@opencode-harness/core/cross-spawn-spawner"
+import { AbsolutePath } from "@opencode-harness/core/schema"
+import { serviceUse } from "@opencode-harness/core/effect/service-use"
 import { RuntimeFlags } from "@/effect/runtime-flags"
 import { EventV2Bridge } from "@/event-v2-bridge"
-import { EventV2 } from "@pentestcode/core/event"
-import { Project } from "@pentestcode/schema/project"
+import { EventV2 } from "@opencode-harness/core/event"
+import { Project } from "@opencode-harness/schema/project"
 
 export const Info = Project.Info
 export type Info = Types.DeepMutable<Schema.Schema.Type<typeof Info>>
@@ -99,7 +99,7 @@ export interface Interface {
   readonly removeSandbox: (id: ProjectV2.ID, directory: string) => Effect.Effect<void>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/Project") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Project") {}
 
 type GitResult = { code: number; text: string; stderr: string }
 

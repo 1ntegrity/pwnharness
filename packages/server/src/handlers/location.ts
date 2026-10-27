@@ -1,4 +1,4 @@
-import { Location } from "@pentestcode/core/location"
+import { Location } from "@opencode-harness/core/location"
 import { Effect } from "effect"
 import { HttpApiBuilder } from "effect/unstable/httpapi"
 import { Api } from "../api"

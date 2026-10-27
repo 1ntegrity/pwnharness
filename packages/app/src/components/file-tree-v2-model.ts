@@ -1,4 +1,4 @@
-import type { FileNode } from "@pentestcode/sdk/v2"
+import type { FileNode } from "@opencode-harness/sdk/v2"
 
 export type FileTreeV2Model = {
   children: ReadonlyMap<string, readonly FileTreeV2Node[]>

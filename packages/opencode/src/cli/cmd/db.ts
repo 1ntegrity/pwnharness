@@ -1,6 +1,6 @@
 import type { Argv } from "yargs"
 import { spawn } from "child_process"
-import { Database } from "@pentestcode/core/database/database"
+import { Database } from "@opencode-harness/core/database/database"
 import { Effect } from "effect"
 import { sql } from "drizzle-orm"
 import { effectCmd } from "../effect-cmd"

@@ -1,6 +1,6 @@
-import { AgentV2 } from "@pentestcode/core/agent"
-import { SessionMessage } from "@pentestcode/core/session/message"
-import { ToolRegistry } from "@pentestcode/core/tool/registry"
+import { AgentV2 } from "@opencode-harness/core/agent"
+import { SessionMessage } from "@opencode-harness/core/session/message"
+import { ToolRegistry } from "@opencode-harness/core/tool/registry"
 import { Effect } from "effect"
 
 export const toolIdentity = {

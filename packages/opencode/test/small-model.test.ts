@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
 import { Effect, Stream } from "effect"
-import { LLMEvent } from "@pentestcode/llm"
+import { LLMEvent } from "@opencode-harness/llm"
 import { makeToolOutputSummarizer, SUMMARIZE_THRESHOLD, SUMMARIZE_TOOLS } from "../src/session/small-model"
 
 // A fake `llm.stream` that emits the given text as one text-delta. If `text` is

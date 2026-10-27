@@ -1,5 +1,5 @@
 import { Types } from "effect"
-import { Model } from "@pentestcode/schema/model"
+import { Model } from "@opencode-harness/schema/model"
 import { ProviderV2 } from "./provider"
 
 export const ID = Model.ID

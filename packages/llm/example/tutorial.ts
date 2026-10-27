@@ -1,7 +1,7 @@
 import { Config, Effect, Formatter, Layer, Schema, Stream } from "effect"
-import { LLM, LLMClient, Message, ProviderID, Tool, ToolRuntime } from "@pentestcode/llm"
-import { Route, Auth, Endpoint, Framing, Protocol, RequestExecutor, WebSocketExecutor } from "@pentestcode/llm/route"
-import { OpenAI } from "@pentestcode/llm/providers"
+import { LLM, LLMClient, Message, ProviderID, Tool, ToolRuntime } from "@opencode-harness/llm"
+import { Route, Auth, Endpoint, Framing, Protocol, RequestExecutor, WebSocketExecutor } from "@opencode-harness/llm/route"
+import { OpenAI } from "@opencode-harness/llm/providers"
 
 /**
  * A runnable walkthrough of the LLM package use-site API.

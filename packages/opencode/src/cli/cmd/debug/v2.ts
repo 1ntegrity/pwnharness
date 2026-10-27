@@ -1,9 +1,9 @@
 import { EOL } from "os"
 import { Effect } from "effect"
-import { Catalog } from "@pentestcode/core/catalog"
-import { LocationServiceMap, locationServiceMapLayer } from "@pentestcode/core/location-services"
-import { Location } from "@pentestcode/core/location"
-import { AbsolutePath } from "@pentestcode/core/schema"
+import { Catalog } from "@opencode-harness/core/catalog"
+import { LocationServiceMap, locationServiceMapLayer } from "@opencode-harness/core/location-services"
+import { Location } from "@opencode-harness/core/location"
+import { AbsolutePath } from "@opencode-harness/core/schema"
 import { effectCmd } from "../../effect-cmd"
 
 export const V2Command = effectCmd({

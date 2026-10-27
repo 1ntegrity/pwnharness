@@ -1,8 +1,8 @@
-import { Binary } from "@pentestcode/core/util/binary"
+import { Binary } from "@opencode-harness/core/util/binary"
 import { createMemo } from "solid-js"
 import { useServerSync } from "./server-sync"
 import { useSDK } from "./sdk"
-import type { Message, Part } from "@pentestcode/sdk/v2/client"
+import type { Message, Part } from "@opencode-harness/sdk/v2/client"
 
 const SKIP_PARTS = new Set(["patch", "step-start", "step-finish"])
 

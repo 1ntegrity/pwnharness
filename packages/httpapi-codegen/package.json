@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@pentestcode/httpapi-codegen",
+  "name": "@opencode-harness/httpapi-codegen",
   "private": true,
   "type": "module",
   "exports": {

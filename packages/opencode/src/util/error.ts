@@ -1,1 +1,1 @@
-export * from "@pentestcode/tui/util/error"
+export * from "@opencode-harness/tui/util/error"

@@ -25,7 +25,7 @@ export interface Interface {
   readonly entries: () => ReadonlyMap<string, Entry>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/ApplicationTools") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/ApplicationTools") {}
 
 const layer = Layer.effect(
   Service,

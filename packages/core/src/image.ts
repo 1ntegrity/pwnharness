@@ -42,7 +42,7 @@ export interface Interface {
   >
 }
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/Image") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Image") {}
 
 const layer = Layer.effect(
   Service,

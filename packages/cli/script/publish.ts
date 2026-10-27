@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 import { $ } from "bun"
 import pkg from "../package.json"
-import { Script } from "@pentestcode/script"
+import { Script } from "@opencode-harness/script"
 import { fileURLToPath } from "url"
 
 const dir = fileURLToPath(new URL("..", import.meta.url))
@@ -35,7 +35,7 @@ await Bun.file(`./dist/${pkg.name}/package.json`).write(
       bin: { lildax: "./bin/lildax" },
       version,
       license: pkg.license,
-      repository: { type: "git", url: "git+https://github.com/s0ld13rr/pentestcode.git" },
+      repository: { type: "git", url: "git+https://github.com/s0ld13rr/opencode-harness.git" },
       os: ["darwin", "linux", "win32"],
       cpu: ["arm64", "x64"],
       optionalDependencies: binaries,
@@ -47,7 +47,7 @@ await Bun.file(`./dist/${pkg.name}/package.json`).write(
 
 await Promise.all(
   Object.entries(binaries).map(([name, version]) =>
-    publish(`./dist/${name.replace("@pentestcode/", "")}`, name, version),
+    publish(`./dist/${name.replace("@opencode-harness/", "")}`, name, version),
   ),
 )
 await publish(`./dist/${pkg.name}`, pkg.name, version)

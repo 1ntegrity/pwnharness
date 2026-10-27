@@ -1,17 +1,17 @@
 import type { ChildProcessWithoutNullStreams } from "child_process"
 import path from "path"
 import os from "os"
-import { Global } from "@pentestcode/core/global"
+import { Global } from "@opencode-harness/core/global"
 import { text } from "node:stream/consumers"
 import fs from "fs/promises"
 import { Filesystem } from "@/util/filesystem"
 import type { InstanceContext } from "../project/instance-context"
 import { Archive } from "@/util/archive"
 import { Process } from "@/util/process"
-import { which } from "@pentestcode/core/util/which"
-import { Module } from "@pentestcode/core/util/module"
+import { which } from "@opencode-harness/core/util/which"
+import { Module } from "@opencode-harness/core/util/module"
 import { spawn } from "./launch"
-import { Npm } from "@pentestcode/core/npm"
+import { Npm } from "@opencode-harness/core/npm"
 import type { RuntimeFlags } from "@/effect/runtime-flags"
 
 const pathExists = async (p: string) =>
@@ -1243,7 +1243,7 @@ export const JDTLS: Info = {
         }
       })(),
     )
-    const dataDir = await fs.mkdtemp(path.join(os.tmpdir(), "pentestcode-jdtls-data"))
+    const dataDir = await fs.mkdtemp(path.join(os.tmpdir(), "opencode-harness-jdtls-data"))
     return {
       process: spawn(
         java,

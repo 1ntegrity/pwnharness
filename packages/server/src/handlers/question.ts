@@ -1,8 +1,8 @@
-import { QuestionV2 } from "@pentestcode/core/question"
+import { QuestionV2 } from "@opencode-harness/core/question"
 import { Effect } from "effect"
 import { HttpApiBuilder, HttpApiSchema } from "effect/unstable/httpapi"
 import { Api } from "../api"
-import { QuestionNotFoundError } from "@pentestcode/protocol/errors"
+import { QuestionNotFoundError } from "@opencode-harness/protocol/errors"
 import { response } from "../location"
 
 function missingRequest(id: QuestionV2.ID) {

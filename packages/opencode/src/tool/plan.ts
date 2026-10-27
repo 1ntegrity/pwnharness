@@ -1,5 +1,5 @@
 import path from "path"
-import { SessionV1 } from "@pentestcode/core/v1/session"
+import { SessionV1 } from "@opencode-harness/core/v1/session"
 import { Effect, Schema } from "effect"
 import * as Tool from "./tool"
 import { Question } from "../question"

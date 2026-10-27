@@ -5,8 +5,8 @@ import type {
   RequestPermissionResponse,
   SessionUpdate,
 } from "@agentclientprotocol/sdk"
-import type { Event, OpencodeClient } from "@pentestcode/sdk/v2"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
+import type { Event, OpencodeClient } from "@opencode-harness/sdk/v2"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
 import { createTwoFilesPatch } from "diff"
 import { Effect, ManagedRuntime } from "effect"
 import { mkdtemp, rm } from "node:fs/promises"

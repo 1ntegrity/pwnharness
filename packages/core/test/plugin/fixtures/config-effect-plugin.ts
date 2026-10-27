@@ -1,4 +1,4 @@
-import { define } from "@pentestcode/plugin/v2/effect"
+import { define } from "@opencode-harness/plugin/v2/effect"
 import { Effect } from "effect"
 
 export default define({

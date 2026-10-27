@@ -1,5 +1,5 @@
-import { FileSystem } from "@pentestcode/core/filesystem"
-import { NonNegativeInt } from "@pentestcode/core/schema"
+import { FileSystem } from "@opencode-harness/core/filesystem"
+import { NonNegativeInt } from "@opencode-harness/core/schema"
 import { LSP } from "@/lsp/lsp"
 import { Schema } from "effect"
 import { HttpApi, HttpApiEndpoint, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
@@ -178,7 +178,7 @@ export const FileApi = HttpApi.make("file")
   )
   .annotateMerge(
     OpenApi.annotations({
-      title: "pentestcode experimental HttpApi",
+      title: "opencode-harness experimental HttpApi",
       version: "0.0.1",
       description: "Experimental HttpApi surface for selected instance routes.",
     }),

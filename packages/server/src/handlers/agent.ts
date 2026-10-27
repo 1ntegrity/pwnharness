@@ -1,4 +1,4 @@
-import { AgentV2 } from "@pentestcode/core/agent"
+import { AgentV2 } from "@opencode-harness/core/agent"
 import { Effect } from "effect"
 import { HttpApiBuilder } from "effect/unstable/httpapi"
 import { Api } from "../api"

@@ -3,7 +3,7 @@ import { ProviderError } from "@/provider/error"
 import { isRecord } from "@/util/record"
 import { OpenAIWebSocket } from "./ws"
 
-export const TITLE_HEADER = "x-pentestcode-title"
+export const TITLE_HEADER = "x-opencode-harness-title"
 
 export interface CreateWebSocketFetchOptions {
   httpFetch?: typeof globalThis.fetch

@@ -1,11 +1,11 @@
 import { describe, expect } from "bun:test"
 import { Duration, Effect, Exit, Fiber, Scope, Stream } from "effect"
 import * as TestClock from "effect/testing/TestClock"
-import { Credential } from "@pentestcode/core/credential"
-import { AppNodeBuilder } from "@pentestcode/core/effect/app-node-builder"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { EventV2 } from "@pentestcode/core/event"
-import { Integration } from "@pentestcode/core/integration"
+import { Credential } from "@opencode-harness/core/credential"
+import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { EventV2 } from "@opencode-harness/core/event"
+import { Integration } from "@opencode-harness/core/integration"
 import { testEffect } from "./lib/effect"
 
 const it = testEffect(AppNodeBuilder.build(LayerNode.group([Integration.node, Credential.node, EventV2.node])))

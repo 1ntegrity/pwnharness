@@ -1,6 +1,6 @@
 import { EOL } from "os"
 import { Effect } from "effect"
-import { Ripgrep } from "@pentestcode/core/ripgrep"
+import { Ripgrep } from "@opencode-harness/core/ripgrep"
 import { effectCmd } from "../../effect-cmd"
 import { cmd } from "../cmd"
 import { InstanceRef } from "@/effect/instance-ref"

@@ -1,4 +1,4 @@
-import { Credential } from "@pentestcode/schema/credential"
+import { Credential } from "@opencode-harness/schema/credential"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, HttpApiSchema, OpenApi } from "effect/unstable/httpapi"
 import { LocationQuery, locationQueryOpenApi } from "./location"

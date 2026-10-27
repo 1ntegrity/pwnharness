@@ -1,1 +1,1 @@
-export * as Identifier from "@pentestcode/schema/identifier"
+export * as Identifier from "@opencode-harness/schema/identifier"

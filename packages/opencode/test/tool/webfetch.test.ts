@@ -1,6 +1,6 @@
 import { describe, expect } from "bun:test"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { httpClient } from "@pentestcode/core/effect/app-node-platform"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { httpClient } from "@opencode-harness/core/effect/app-node-platform"
 import { Effect, Layer } from "effect"
 import { FetchHttpClient, HttpClient } from "effect/unstable/http"
 import { Agent } from "../../src/agent/agent"

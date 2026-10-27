@@ -35,20 +35,20 @@ describe("resource", () => {
     process.env.OTEL_RESOURCE_ATTRIBUTES = "service.namespace=anomalyco,broken"
 
     expect(resource().attributes["service.namespace"]).toBeUndefined()
-    expect(resource().attributes["pentestcode.client"]).toBeDefined()
+    expect(resource().attributes["opencode-harness.client"]).toBeDefined()
   })
 
   test("keeps built-in attributes when env values conflict", () => {
     process.env.OPENCODE_CLIENT = "cli"
     process.env.OTEL_RESOURCE_ATTRIBUTES =
-      "pentestcode.client=web,service.instance.id=override,service.namespace=anomalyco"
+      "opencode-harness.client=web,service.instance.id=override,service.namespace=anomalyco"
 
     expect(resource().attributes).toMatchObject({
-      "pentestcode.client": "cli",
+      "opencode-harness.client": "cli",
       "service.namespace": "anomalyco",
     })
     expect(resource().attributes["service.instance.id"]).not.toBe("override")
-    expect(resource().attributes["pentestcode.run"]).toMatch(/^[0-9a-f]{8}$/)
+    expect(resource().attributes["opencode-harness.run"]).toMatch(/^[0-9a-f]{8}$/)
   })
 })
 

@@ -1,12 +1,12 @@
 import { createEffect, onCleanup, type JSX } from "solid-js"
 import { makeEventListener } from "@solid-primitives/event-listener"
-import type { SnapshotFileDiff, VcsFileDiff } from "@pentestcode/sdk/v2"
-import { SessionReview } from "@pentestcode/session-ui/session-review"
+import type { SnapshotFileDiff, VcsFileDiff } from "@opencode-harness/sdk/v2"
+import { SessionReview } from "@opencode-harness/session-ui/session-review"
 import type {
   SessionReviewCommentActions,
   SessionReviewCommentDelete,
   SessionReviewCommentUpdate,
-} from "@pentestcode/session-ui/session-review"
+} from "@opencode-harness/session-ui/session-review"
 import type { SelectedLineRange } from "@/context/file"
 import { useSDK } from "@/context/sdk"
 import { useLayout } from "@/context/layout"

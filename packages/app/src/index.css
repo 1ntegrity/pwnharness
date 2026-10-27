@@ -1,6 +1,6 @@
-@import "@pentestcode/ui/styles/tailwind";
-@import "@pentestcode/session-ui/styles";
-@import "@pentestcode/ui/v2/styles/tailwind.css";
+@import "@opencode-harness/ui/styles/tailwind";
+@import "@opencode-harness/session-ui/styles";
+@import "@opencode-harness/ui/v2/styles/tailwind.css";
 @import "tw-animate-css";
 
 @font-face {

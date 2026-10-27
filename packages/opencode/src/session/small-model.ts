@@ -1,8 +1,8 @@
 import { Effect, Stream } from "effect"
-import { LLMEvent } from "@pentestcode/llm"
+import { LLMEvent } from "@opencode-harness/llm"
 import type { Agent } from "../agent/agent"
 import type { Provider } from "@/provider/provider"
-import type { SessionV1 } from "@pentestcode/core/v1/session"
+import type { SessionV1 } from "@opencode-harness/core/v1/session"
 import type { LLM } from "./llm"
 import { isRecord } from "@/util/record"
 

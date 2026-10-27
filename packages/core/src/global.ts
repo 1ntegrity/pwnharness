@@ -7,7 +7,7 @@ import { Flock } from "./util/flock"
 import { Flag } from "./flag/flag"
 import { makeGlobalNode } from "./effect/app-node"
 
-const app = "pentestcode"
+const app = "opencode-harness"
 const data = path.join(xdgData!, app)
 const cache = path.join(xdgCache!, app)
 const config = path.join(xdgConfig!, app)
@@ -42,7 +42,7 @@ await Promise.all([
   fs.mkdir(Path.repos, { recursive: true }),
 ])
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/Global") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Global") {}
 
 export interface Interface {
   readonly home: string

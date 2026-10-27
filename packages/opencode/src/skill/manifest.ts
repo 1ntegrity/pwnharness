@@ -1,17 +1,17 @@
 import path from "path"
 import { Effect, Option, Schema } from "effect"
-import { FSUtil } from "@pentestcode/core/fs-util"
+import { FSUtil } from "@opencode-harness/core/fs-util"
 
 export * as SkillManifest from "./manifest"
 
 // ---------------------------------------------------------------------------
-// Layout — physical separation of provenance under ~/.pentestcode/skills.
+// Layout — physical separation of provenance under ~/.opencode-harness/skills.
 // bundled/ (release-owned) < packs/ (imported) < user/ (user-owned). Updates
 // only ever rewrite the layer they own; user/ and packs/<id> survive refreshes.
 // ---------------------------------------------------------------------------
 
 export function skillsHome(home: string) {
-  return path.join(home, ".pentestcode", "skills")
+  return path.join(home, ".opencode-harness", "skills")
 }
 export function bundledDir(home: string) {
   return path.join(skillsHome(home), "bundled")

@@ -3,15 +3,15 @@
 // Variants are provider-specific reasoning effort levels (e.g., "high", "max").
 // Resolution priority: CLI --variant flag > saved preference > session history.
 //
-// The saved variant persists across sessions in ~/.local/state/pentestcode/model.json
+// The saved variant persists across sessions in ~/.local/state/opencode-harness/model.json
 // so your last-used variant sticks. Cycling (ctrl+t) updates both the active
 // variant and the persisted file.
 import path from "path"
-import { FSUtil } from "@pentestcode/core/fs-util"
-import { AppNodeBuilder } from "@pentestcode/core/effect/app-node-builder"
+import { FSUtil } from "@opencode-harness/core/fs-util"
+import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
 import { Context, Effect, Layer } from "effect"
 import { makeRuntime } from "@/effect/run-service"
-import { Global } from "@pentestcode/core/global"
+import { Global } from "@opencode-harness/core/global"
 import { isRecord } from "@/util/record"
 import { createSession, sessionVariant, type RunSession, type SessionMessages } from "./session.shared"
 import type { RunInput, RunProvider } from "./types"
@@ -30,7 +30,7 @@ type VariantRuntime = {
   saveVariant(model: RunInput["model"], variant: string | undefined): Promise<void>
 }
 
-class Service extends Context.Service<Service, VariantService>()("@pentestcode/RunVariant") {}
+class Service extends Context.Service<Service, VariantService>()("@opencode-harness/RunVariant") {}
 
 function modelKey(provider: string, model: string): string {
   return `${provider}/${model}`

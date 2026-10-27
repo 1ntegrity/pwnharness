@@ -1,12 +1,12 @@
 import type { AgentSideConnection, Usage } from "@agentclientprotocol/sdk"
-import type { AssistantMessage as OpenCodeAssistantMessage, Message } from "@pentestcode/sdk/v2"
+import type { AssistantMessage as OpenCodeAssistantMessage, Message } from "@opencode-harness/sdk/v2"
 import { InstanceRef } from "@/effect/instance-ref"
 import { InstanceBootstrap } from "@/project/bootstrap"
 import { InstanceStore } from "@/project/instance-store"
-import { makeGlobalNode, Node } from "@pentestcode/core/effect/app-node"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
-import { ProviderV2 } from "@pentestcode/core/provider"
-import { ModelV2 } from "@pentestcode/core/model"
+import { makeGlobalNode, Node } from "@opencode-harness/core/effect/app-node"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { ProviderV2 } from "@opencode-harness/core/provider"
+import { ModelV2 } from "@opencode-harness/core/model"
 import { Provider } from "@/provider/provider"
 import { Context, Effect, Layer, SynchronizedRef } from "effect"
 
@@ -61,14 +61,14 @@ export interface Interface {
 }
 
 export class MessageLoader extends Context.Service<MessageLoader, MessageLoaderInterface>()(
-  "@pentestcode/ACPUsageMessageLoader",
+  "@opencode-harness/ACPUsageMessageLoader",
 ) {}
 
 export class ContextLimitLoader extends Context.Service<ContextLimitLoader, ContextLimitLoaderInterface>()(
-  "@pentestcode/ACPUsageContextLimitLoader",
+  "@opencode-harness/ACPUsageContextLimitLoader",
 ) {}
 
-export class Service extends Context.Service<Service, Interface>()("@pentestcode/ACPUsage") {}
+export class Service extends Context.Service<Service, Interface>()("@opencode-harness/ACPUsage") {}
 
 export function messageLoaderFromSDK(sdk: SDK): MessageLoaderInterface {
   return MessageLoader.of({

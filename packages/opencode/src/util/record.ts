@@ -1,1 +1,1 @@
-export * from "@pentestcode/tui/util/record"
+export * from "@opencode-harness/tui/util/record"

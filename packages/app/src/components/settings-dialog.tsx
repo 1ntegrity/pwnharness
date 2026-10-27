@@ -2,7 +2,7 @@ import { useParams } from "@solidjs/router"
 import { onCleanup } from "solid-js"
 import { useCommand } from "@/context/command"
 import { useLanguage } from "@/context/language"
-import { useDialog } from "@pentestcode/ui/context/dialog"
+import { useDialog } from "@opencode-harness/ui/context/dialog"
 
 export function useSettingsDialog() {
   const dialog = useDialog()

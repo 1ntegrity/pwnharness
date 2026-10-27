@@ -1,5 +1,5 @@
 import fs from "fs/promises"
-import { Flock } from "@pentestcode/core/util/flock"
+import { Flock } from "@opencode-harness/core/util/flock"
 
 type Msg = {
   key: string

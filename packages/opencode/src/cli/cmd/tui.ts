@@ -4,16 +4,16 @@ import { type rpc } from "../tui/worker"
 import path from "path"
 import { fileURLToPath } from "url"
 import { UI } from "@/cli/ui"
-import { errorMessage } from "@pentestcode/tui/util/error"
+import { errorMessage } from "@opencode-harness/tui/util/error"
 import { withTimeout } from "@/util/timeout"
 import { withNetworkOptions, resolveNetworkOptionsNoConfig, hasArg } from "@/cli/network"
 import { Filesystem } from "@/util/filesystem"
-import type { GlobalEvent } from "@pentestcode/sdk/v2"
-import type { EventSource } from "@pentestcode/tui/context/sdk"
+import type { GlobalEvent } from "@opencode-harness/sdk/v2"
+import type { EventSource } from "@opencode-harness/tui/context/sdk"
 import { writeHeapSnapshot } from "v8"
 import { ServerAuth } from "@/server/auth"
 import { validateSession } from "../tui/validate-session"
-import { win32InstallCtrlCGuard } from "@pentestcode/tui/terminal-win32"
+import { win32InstallCtrlCGuard } from "@opencode-harness/tui/terminal-win32"
 
 declare global {
   const OPENCODE_WORKER_PATH: string
@@ -71,12 +71,12 @@ export function resolveThreadDirectory(project?: string, envPWD = process.env.PW
 
 export const TuiThreadCommand = cmd({
   command: "$0 [project]",
-  describe: "start pentestcode tui",
+  describe: "start opencode-harness tui",
   builder: (yargs) =>
     withNetworkOptions(yargs)
       .positional("project", {
         type: "string",
-        describe: "path to start pentestcode in",
+        describe: "path to start opencode-harness in",
       })
       .option("model", {
         type: "string",
@@ -239,7 +239,7 @@ export const TuiThreadCommand = cmd({
             headers,
           }
         : {
-            url: "http://pentestcode.internal",
+            url: "http://opencode-harness.internal",
             fetch: createWorkerFetch(client),
             events: createEventSource(client),
           }

@@ -4,7 +4,7 @@ import npa from "npm-package-arg"
 import semver from "semver"
 import { Filesystem } from "@/util/filesystem"
 import { isRecord } from "@/util/record"
-import { Npm } from "@pentestcode/core/npm"
+import { Npm } from "@opencode-harness/core/npm"
 
 // Old npm package names for plugins that are now built-in
 export const DEPRECATED_PLUGIN_PACKAGES = ["opencode-openai-codex-auth", "opencode-copilot-auth"]
@@ -200,7 +200,7 @@ export async function checkPluginCompatibility(target: string, opencodeVersion: 
   const range = engines.opencode
   if (typeof range !== "string") return
   if (!semver.satisfies(opencodeVersion, range)) {
-    throw new Error(`Plugin requires pentestcode ${range} but running ${opencodeVersion}`)
+    throw new Error(`Plugin requires opencode-harness ${range} but running ${opencodeVersion}`)
   }
 }
 

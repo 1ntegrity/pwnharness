@@ -1,7 +1,7 @@
 import { afterEach, describe, expect } from "bun:test"
 import { Effect, Layer } from "effect"
-import { Npm } from "@pentestcode/core/npm"
-import { Ripgrep } from "@pentestcode/core/ripgrep"
+import { Npm } from "@opencode-harness/core/npm"
+import { Ripgrep } from "@opencode-harness/core/ripgrep"
 import path from "path"
 import { pathToFileURL } from "url"
 import { Auth } from "../../src/auth"
@@ -17,8 +17,8 @@ import { testEffect } from "../lib/effect"
 import { AccountTest } from "../fake/account"
 import { AuthTest } from "../fake/auth"
 import { NpmTest } from "../fake/npm"
-import { AppNodeBuilder } from "@pentestcode/core/effect/app-node-builder"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
+import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
 
 const noopBootstrapLayer = Layer.succeed(InstanceBootstrap.Service, InstanceBootstrap.Service.of({ run: Effect.void }))
 const it = testEffect(

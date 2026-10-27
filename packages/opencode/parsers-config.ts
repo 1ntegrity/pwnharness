@@ -1,1 +1,1 @@
-export { default } from "@pentestcode/tui/parsers-config"
+export { default } from "@opencode-harness/tui/parsers-config"

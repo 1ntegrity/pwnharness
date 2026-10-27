@@ -13,23 +13,23 @@
  */
 import { expect } from "bun:test"
 import { Effect, Layer } from "effect"
-import { LayerNode } from "@pentestcode/core/effect/layer-node"
+import { LayerNode } from "@opencode-harness/core/effect/layer-node"
 import fs from "fs/promises"
 import path from "path"
 import { Session } from "@/session/session"
 import { SessionPrompt } from "../../src/session/prompt"
 import { SessionSummary } from "../../src/session/summary"
 import { MessageV2 } from "../../src/session/message-v2"
-import { SessionV1 } from "@pentestcode/core/v1/session"
-import { Database } from "@pentestcode/core/database/database"
-import { SessionProjector } from "@pentestcode/core/session/projector"
+import { SessionV1 } from "@opencode-harness/core/v1/session"
+import { Database } from "@opencode-harness/core/database/database"
+import { SessionProjector } from "@opencode-harness/core/session/projector"
 import { provideTmpdirServer } from "../fixture/fixture"
 import { testEffect } from "../lib/effect"
 import { TestLLMServer } from "../lib/llm-server"
 
 import { LSP } from "@/lsp/lsp"
 import { MCP } from "../../src/mcp"
-import { CrossSpawnSpawner } from "@pentestcode/core/cross-spawn-spawner"
+import { CrossSpawnSpawner } from "@opencode-harness/core/cross-spawn-spawner"
 import { RuntimeFlags } from "@/effect/runtime-flags"
 
 const mcp = Layer.succeed(

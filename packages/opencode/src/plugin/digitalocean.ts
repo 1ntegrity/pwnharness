@@ -1,7 +1,7 @@
-import type { Hooks, PluginInput } from "@pentestcode/plugin"
-import type { Model } from "@pentestcode/sdk/v2"
-import { InstallationVersion } from "@pentestcode/core/installation/version"
-import { OauthCallbackPage } from "@pentestcode/core/oauth/page"
+import type { Hooks, PluginInput } from "@opencode-harness/plugin"
+import type { Model } from "@opencode-harness/sdk/v2"
+import { InstallationVersion } from "@opencode-harness/core/installation/version"
+import { OauthCallbackPage } from "@opencode-harness/core/oauth/page"
 import { createServer } from "http"
 import open from "open"
 
@@ -171,7 +171,7 @@ async function listRouters(
     headers: {
       Authorization: `Bearer ${bearer}`,
       Accept: "application/json",
-      "User-Agent": `pentestcode/${InstallationVersion}`,
+      "User-Agent": `opencode-harness/${InstallationVersion}`,
     },
     signal: AbortSignal.timeout(10_000),
   }).catch(() => undefined)
@@ -283,7 +283,7 @@ export async function DigitalOceanAuthPlugin(input: PluginInput): Promise<Hooks>
             return {
               url,
               instructions:
-                "Sign in to DigitalOcean in your browser. PentestCode will use your DigitalOcean API token directly for inference and load your Inference Routers. Re-run /connect to refresh routers later.",
+                "Sign in to DigitalOcean in your browser. OpenCode Harness will use your DigitalOcean API token directly for inference and load your Inference Routers. Re-run /connect to refresh routers later.",
               method: "auto" as const,
               async callback() {
                 try {
