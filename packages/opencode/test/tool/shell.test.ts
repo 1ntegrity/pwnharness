@@ -21,7 +21,6 @@ import { testEffect } from "../lib/effect"
 import { Tool } from "@/tool/tool"
 import { RuntimeFlags } from "@/effect/runtime-flags"
 import { InstanceStore } from "@/project/instance-store"
-import { EngagementStore } from "@pentestcode/core/engagement/store"
 import { EventV2Bridge } from "@/event-v2-bridge"
 
 const shellLayer = Layer.mergeAll(
@@ -34,7 +33,6 @@ const shellLayer = Layer.mergeAll(
       Config.node,
       Agent.node,
       RuntimeFlags.node,
-      EngagementStore.node,
       EventV2Bridge.node,
     ]),
   ),

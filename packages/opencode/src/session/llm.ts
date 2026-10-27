@@ -41,10 +41,10 @@ export type StreamInput = {
   permission?: PermissionV1.Ruleset
   system: string[]
   /**
-   * Volatile, per-turn system context (e.g. engagement state). Kept separate
-   * from `system` so it can be lowered as its own trailing system block: the
-   * large static prefix (base prompt + skills + refs) then stays a stable,
-   * cacheable prefix across turns instead of being invalidated every turn.
+   * Volatile, per-turn system context. Kept separate from `system` so it can be
+   * lowered as its own trailing system block: the large static prefix (base
+   * prompt + skills + refs) then stays a stable, cacheable prefix across turns
+   * instead of being invalidated every turn.
    */
   volatileSystem?: string
   messages: ModelMessage[]

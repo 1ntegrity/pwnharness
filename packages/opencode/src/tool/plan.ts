@@ -55,7 +55,7 @@ export const PlanExitTool = Tool.define(
             sessionID: ctx.sessionID,
             role: "user",
             time: { created: Date.now() },
-            agent: "pentest",
+            agent: "build",
             model,
           }
           yield* session.updateMessage(msg)

@@ -160,11 +160,10 @@ export const resolve = Effect.fn("SessionTools.resolve")(function* (input: {
               }
             }
             // C-4: universal backstop cap. AR2 only covers `bash` (and only with a
-            // small model); parser tools, state_query, or bash-without-small-model
+            // small model); other verbose tools, or bash-without-small-model,
             // could still dump 10-50KB verbatim into the transcript. If an output
             // is still large AND the tool did not already summarize/truncate/ref it,
             // cap the transcript copy and keep the full text retrievable by ref.
-            // Parsers also persist full results to engagement state (state_query).
             if (shouldCapOutput(processed.output, processed.metadata)) {
               const raw = processed.output
               const ref = yield* truncate.write(raw).pipe(Effect.catch(() => Effect.succeed(undefined)))

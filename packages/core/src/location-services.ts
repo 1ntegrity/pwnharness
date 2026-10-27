@@ -36,9 +36,6 @@ import { BuiltInTools } from "./tool/builtins"
 import { ReadToolFileSystem } from "./tool/read-filesystem"
 import { ToolRegistry } from "./tool/registry"
 import { ToolOutputStore } from "./tool-output-store"
-import { EngagementStore } from "./engagement/store"
-import { EngagementContext } from "./engagement/context"
-import { KnowledgeStore } from "./knowledge/store"
 
 export { LocationServiceMap } from "./location-service-map"
 
@@ -79,9 +76,6 @@ export const locationServices = LayerNode.group([
   SessionRunnerModel.node,
   Snapshot.node,
   SessionRunnerLLM.node,
-  EngagementStore.node,
-  EngagementContext.node,
-  KnowledgeStore.node,
 ])
 
 export type LocationServices = LayerNode.Output<typeof locationServices>

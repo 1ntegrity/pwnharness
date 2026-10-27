@@ -15,8 +15,8 @@ import { HomeSessionDestinationProvider } from "./home/session-destination"
 
 let once = false
 const placeholder = {
-  normal: ["Scan 10.10.10.0/24 for open ports", "Create a new engagement for target.htb", "Enumerate SMB shares on the domain controller"],
-  shell: ["nmap -sV 10.10.10.1", "gobuster dir -u http://target.htb -w /usr/share/wordlists/common.txt", "sudo -l"],
+  normal: ["Ask anything, run a shell command, or open a file", "Explain what this codebase does and how it fits together", "Refactor a function, write tests, or fix a failing build"],
+  shell: ["rg -n 'TODO' src/", "git log --oneline -10", "npm test -- --watch"],
 }
 
 export function Home() {

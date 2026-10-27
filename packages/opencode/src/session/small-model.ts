@@ -30,14 +30,14 @@ export const SUMMARIZE_THRESHOLD = 10000
 export const MAX_DIGEST_INPUT = 16000
 
 // Only these tools' raw output is offloaded. Deliberately narrow: `bash` is where
-// the 10-50 KB scan/enumeration dumps come from. Structured/precision tools
-// (parsers, state_query, read, report_gen, …) are never summarized — their output
+// the 10-50 KB build/test dumps come from. Structured/precision tools
+// (read, edit, grep, …) are never summarized — their output
 // is already compact and the agent needs it verbatim.
 export const SUMMARIZE_TOOLS = new Set(["bash"])
 
 // Universal backstop cap (C-4). AR2 offload only covers `bash` and only when a
-// small model is configured; every other large output (a parser dumping a big
-// /24 scan, state_query, or bash with no small model) previously rode the
+// small model is configured; every other large output (a test runner dumping a
+// long log, or bash with no small model) previously rode the
 // expensive transcript verbatim. Any tool output above this that the tool did
 // NOT already summarize/truncate/ref is capped at the result boundary, with the
 // full text kept retrievable by ref. Set above SUMMARIZE_THRESHOLD so the
@@ -73,18 +73,17 @@ export function buildCappedOutput(
   }
 }
 
-const SYSTEM = `You are a compression worker for a penetration-testing agent. You receive the raw stdout/stderr of a shell command (nmap, nuclei, gobuster, netexec, curl, cat, etc.). Produce a DENSE, factual digest that keeps everything the strategist needs and drops the rest.
+const SYSTEM = `You are a compression worker for a coding agent. You receive the raw stdout/stderr of a shell command (build tools, test runners, curl, cat, grep, etc.). Produce a DENSE, factual digest that keeps everything the agent needs and drops the rest.
 
 KEEP (verbatim, never mask or omit):
-- credentials, tokens, hashes, API keys, secrets, session cookies
-- open ports/services + versions, hostnames, URLs, endpoints, IPs, usernames
-- vulnerabilities, CVEs, error/stack-trace lines that indicate a finding
-- file paths, config values, flags, interesting response bodies
+- file paths, commands, URLs, endpoints, IPs, hostnames, and numbers (line numbers, exit codes, byte counts, versions)
+- error messages, stack traces, and assertion failures, exactly as printed
+- config values, flags, and short relevant response bodies
 
 DROP: banners, ASCII art, progress bars, spinners, decorative separators, repeated boilerplate, timing/percentage noise, help text.
 
 RULES:
-- Preserve exact strings for anything exploitable (creds/tokens/paths/versions/payloads). Do NOT paraphrase those.
+- Preserve exact strings for paths, commands, numbers, and error text. Do NOT paraphrase those.
 - Do NOT invent, infer, or add commentary, recommendations, or next steps.
 - If the output is an error, a timeout, or empty, say so in one line.
 - Output plain text. No markdown headers, no preamble like "Here is the digest".`

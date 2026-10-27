@@ -9,18 +9,6 @@ import { MCP } from "../mcp"
 import { Skill } from "../skill"
 import PROMPT_INITIALIZE from "./template/initialize.txt"
 import PROMPT_REVIEW from "./template/review.txt"
-import PROMPT_STATUS from "./template/pentest-status.txt"
-import PROMPT_TARGETS from "./template/pentest-targets.txt"
-import PROMPT_VULNS from "./template/pentest-vulns.txt"
-import PROMPT_CREDS from "./template/pentest-creds.txt"
-import PROMPT_SCOPE from "./template/pentest-scope.txt"
-import PROMPT_PHASE from "./template/pentest-phase.txt"
-import PROMPT_MODE from "./template/pentest-mode.txt"
-import PROMPT_REPORT from "./template/pentest-report.txt"
-import PROMPT_OBJECTIVES from "./template/pentest-objectives.txt"
-import PROMPT_PAUSE from "./template/pentest-pause.txt"
-import PROMPT_GOAL from "./template/pentest-goal.txt"
-import PROMPT_REFLECT from "./template/pentest-reflect.txt"
 import { LegacyEvent } from "@pentestcode/schema/legacy-event"
 
 type State = {
@@ -58,18 +46,6 @@ export function hints(template: string) {
 export const Default = {
   INIT: "init",
   REVIEW: "review",
-  STATUS: "status",
-  TARGETS: "targets",
-  VULNS: "vulns",
-  CREDS: "creds",
-  SCOPE: "scope",
-  PHASE: "phase",
-  MODE: "mode",
-  REPORT: "report",
-  OBJECTIVES: "objectives",
-  PAUSE: "pause",
-  GOAL: "goal",
-  REFLECT: "reflect",
 } as const
 
 export interface Interface {
@@ -109,95 +85,6 @@ const layer = Layer.effect(
         },
         subtask: true,
         hints: hints(PROMPT_REVIEW),
-      }
-
-      commands[Default.STATUS] = {
-        name: Default.STATUS,
-        description: "show engagement status overview",
-        source: "command",
-        template: PROMPT_STATUS,
-        hints: hints(PROMPT_STATUS),
-      }
-      commands[Default.TARGETS] = {
-        name: Default.TARGETS,
-        description: "show discovered hosts and services [filter]",
-        source: "command",
-        template: PROMPT_TARGETS,
-        hints: hints(PROMPT_TARGETS),
-      }
-      commands[Default.VULNS] = {
-        name: Default.VULNS,
-        description: "show vulnerabilities [severity|host|status]",
-        source: "command",
-        template: PROMPT_VULNS,
-        hints: hints(PROMPT_VULNS),
-      }
-      commands[Default.CREDS] = {
-        name: Default.CREDS,
-        description: "show captured credentials",
-        source: "command",
-        template: PROMPT_CREDS,
-        hints: hints(PROMPT_CREDS),
-      }
-      commands[Default.SCOPE] = {
-        name: Default.SCOPE,
-        description: "show or update engagement scope [targets]",
-        source: "command",
-        template: PROMPT_SCOPE,
-        hints: hints(PROMPT_SCOPE),
-      }
-      commands[Default.PHASE] = {
-        name: Default.PHASE,
-        description: "show or change pentest phase [next|phase_name]",
-        source: "command",
-        template: PROMPT_PHASE,
-        hints: hints(PROMPT_PHASE),
-      }
-      commands[Default.MODE] = {
-        name: Default.MODE,
-        description: "show or switch mode [auto|free|guided]",
-        source: "command",
-        template: PROMPT_MODE,
-        hints: hints(PROMPT_MODE),
-      }
-      commands[Default.REPORT] = {
-        name: Default.REPORT,
-        description: "generate pentest report [format] [sections] [output_path]",
-        source: "command",
-        template: PROMPT_REPORT,
-        hints: hints(PROMPT_REPORT),
-      }
-      commands[Default.OBJECTIVES] = {
-        name: Default.OBJECTIVES,
-        description: "show or manage engagement objectives [filter|add|complete]",
-        source: "command",
-        template: PROMPT_OBJECTIVES,
-        hints: hints(PROMPT_OBJECTIVES),
-      }
-      commands[Default.PAUSE] = {
-        name: Default.PAUSE,
-        description: "set pause behavior on findings [never|always|checkpoint]",
-        source: "command",
-        template: PROMPT_PAUSE,
-        hints: hints(PROMPT_PAUSE),
-      }
-
-      commands[Default.GOAL] = {
-        name: Default.GOAL,
-        description: "set or check engagement goal [text|clear|status]",
-        source: "command",
-        template: PROMPT_GOAL,
-        hints: hints(PROMPT_GOAL),
-      }
-
-      commands[Default.REFLECT] = {
-        name: Default.REFLECT,
-        description: "reflect on engagement — extract learned skills and knowledge [engagement_name]",
-        source: "command",
-        template: PROMPT_REFLECT,
-        subtask: true,
-        agent: "reflector",
-        hints: hints(PROMPT_REFLECT),
       }
 
       for (const [name, command] of Object.entries(cfg.command ?? {})) {

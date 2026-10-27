@@ -54,8 +54,6 @@ import { EventV2Bridge } from "@/event-v2-bridge"
 import { LayerNode } from "@pentestcode/core/effect/layer-node"
 import { AppNodeBuilderV1 } from "./app-node-builder-v1"
 import { SessionProjector } from "@pentestcode/core/session/projector"
-import { EngagementStore } from "@pentestcode/core/engagement/store"
-import { KnowledgeStore } from "@pentestcode/core/knowledge/store"
 
 export const AppLayer = AppNodeBuilderV1.build(
   LayerNode.group([
@@ -107,8 +105,6 @@ export const AppLayer = AppNodeBuilderV1.build(
     Installation.node,
     ShareNext.node,
     SessionShare.node,
-    EngagementStore.node,
-    KnowledgeStore.node,
   ]),
 ).pipe(Layer.provideMerge(AppNodeBuilderV1.build(Ripgrep.node)), Layer.provideMerge(Observability.layer))
 

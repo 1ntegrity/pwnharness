@@ -57,59 +57,6 @@ import { SessionTable } from "@pentestcode/core/session/sql"
 import { SessionReminders } from "./reminders"
 import { SessionTools } from "./tools"
 import { LLMEvent } from "@pentestcode/llm"
-import { EngagementStore } from "@pentestcode/core/engagement/store"
-import { EngagementSchema } from "@pentestcode/core/engagement/schema"
-import { TaskGraph } from "@pentestcode/core/engagement/task-graph"
-import { Orchestrator } from "@pentestcode/core/engagement/orchestrator"
-import { BackgroundJob } from "@/background/job"
-
-const modeDirectives: Record<string, string> = {
-  auto: "Mode: AUTO — Drive the methodology autonomously. Execute scans, enumerate services, and follow up on findings without waiting for confirmation. Ask before destructive or noisy actions (exploits, brute force). Report significant discoveries inline.",
-  free: "Mode: FREE — User directs all actions. Wait for explicit instructions before scanning, enumerating, or exploiting. Execute what the user asks, report results, suggest next steps only when asked.",
-  guided: "Mode: GUIDED — Walk through each step with explanations. Before executing any action, explain what you'll do, why, and what to expect. After each result, explain what it means and present options for the next step.",
-}
-
-const pauseDirectives: Record<string, string> = {
-  always: `PAUSE BEHAVIOR: ALWAYS
-After recording ANY vulnerability (add_vuln), credential (add_credential), or access (add_access):
-1. STOP all further work immediately
-2. Present the finding: severity, target, evidence, what it means
-3. Summarize progress so far
-4. Wait for user to say "continue" or give new direction
-Do NOT proceed until the user responds.`,
-  checkpoint: `PAUSE BEHAVIOR: CHECKPOINT
-After recording ANY vulnerability (add_vuln), credential (add_credential), or access (add_access):
-1. Present the finding with severity and evidence
-2. Show cumulative summary of ALL findings (use state_query summary)
-3. Ask: "Continue with current approach, or adjust?"
-4. If user says continue or doesn't redirect — proceed autonomously
-Between checkpoints, work autonomously.`,
-}
-
-function phaseTransitionHint(state: EngagementSchema.State): string | undefined {
-  const s = EngagementSchema.summary(state)
-  switch (state.current_phase) {
-    case "recon":
-      if (s.hosts_discovered > 0) return "Recon has discovered hosts. Consider advancing to enumeration phase (/phase next)."
-      break
-    case "enumeration":
-      if (s.unchecked_services === 0 && s.hosts_discovered > 0) return "All discovered services have been enumerated. Consider advancing to vuln_assess phase (/phase next)."
-      break
-    case "vuln_assess": {
-      const confirmed = Object.values(state.hosts).some((h) => h.vulns.some((v) => v.status === "confirmed"))
-      if (confirmed) return "Confirmed vulnerabilities found. Consider advancing to exploitation phase (/phase next)."
-      break
-    }
-    case "exploitation":
-      if (s.hosts_compromised > 0) return "Access gained on hosts. Consider advancing to post_exploit phase (/phase next)."
-      break
-    case "post_exploit":
-      return undefined
-    case "reporting":
-      return undefined
-  }
-  return undefined
-}
 
 // @ts-ignore
 globalThis.AI_SDK_LOG_WARNINGS = false
@@ -194,8 +141,6 @@ const layer = Layer.effect(
     const events = yield* EventV2Bridge.Service
     const flags = yield* RuntimeFlags.Service
     const database = yield* Database.Service
-    const engagement = yield* EngagementStore.Service
-    const background = yield* BackgroundJob.Service
     const { db } = database
     const ops = Effect.fn("SessionPrompt.ops")(function* () {
       return {
@@ -1141,21 +1086,6 @@ const layer = Layer.effect(
         let step = 0
         const session = yield* sessions.get(sessionID).pipe(Effect.orDie)
 
-        // Auto-load engagement: .selected file (from TUI dialog) > .last fallback
-        yield* Effect.gen(function* () {
-          const current = yield* engagement.get()
-          if (current) return
-          const selected = yield* engagement.readSelected()
-          if (selected === "__none__") return
-          if (selected === "__new__") return
-          if (selected) {
-            yield* engagement.load(selected)
-            return
-          }
-          const lastName = yield* engagement.lastEngagement()
-          if (lastName) yield* engagement.load(lastName)
-        }).pipe(Effect.ignore)
-
         while (true) {
           yield* status.set(sessionID, { type: "busy" })
           yield* Effect.logInfo("loop", { "session.id": sessionID, step })
@@ -1357,358 +1287,21 @@ const layer = Layer.effect(
 
             yield* plugin.trigger("experimental.chat.messages.transform", {}, { messages: msgs })
 
-            const [skills, env, instructions, mcpInstructions, modelMsgs, engagementCtx, kernel, knowledgeCtx] = yield* Effect.all([
+            const [skills, env, instructions, mcpInstructions, modelMsgs] = yield* Effect.all([
               sys.skills(agent),
               sys.environment(model),
               instruction.system().pipe(Effect.orDie),
               sys.mcp(agent, session.permission),
               MessageV2.toModelMessagesEffect(msgs, model),
-              Effect.gen(function* () {
-                try {
-                  const state = yield* engagement.get()
-                  if (!state) return undefined
-                  // Orchestration bookkeeping (task graph, live subagents, user
-                  // command hints) is a coordinator concern — injecting it into
-                  // every focused subagent's turn is pure noise. See redesign QW2.
-                  const isCoordinator = agent.mode !== "subagent"
-                  const modeDirective = modeDirectives[state.mode] ?? ""
-                  const transitionHint = phaseTransitionHint(state)
-                  const lines = [
-                    "<pentest-engagement>",
-                  ]
-
-                  // Drain interrupt alerts for immediate visibility
-                  const interruptAlerts = yield* engagement.drainInterruptAlerts()
-                  if (interruptAlerts.length > 0) {
-                    lines.push("")
-                    lines.push("<INTERRUPT-ALERTS>")
-                    lines.push("CRITICAL: The following alerts require IMMEDIATE attention. Reprioritize current work.")
-                    for (const a of interruptAlerts) {
-                      lines.push(`  [${a.severity.toUpperCase()}] ${a.title}${a.host_ip ? ` on ${a.host_ip}` : ""}`)
-                      if (a.details) lines.push(`    ${a.details}`)
-                      if (a.source_agent) lines.push(`    Source: ${a.source_agent}`)
-                    }
-                    lines.push("</INTERRUPT-ALERTS>")
-                    lines.push("")
-                  }
-
-                  lines.push(`  Phase: ${state.current_phase}`)
-                  lines.push(`  Mode: ${state.mode}`)
-                  // modeDirective is a rarely-changing instruction — emitted in the
-                  // cached static prefix (staticLines below), not this volatile block.
-                  if (transitionHint) lines.push("", transitionHint)
-
-                  // #3 subagent-cost: the diff / OODA / full-state blocks are the
-                  // COORDINATOR's strategic view. In the field run they were NOT gated,
-                  // so every focused subagent got the whole multi-host state re-injected
-                  // — and `recentChanges>15` (true almost every turn in a busy run) forced
-                  // a FULL compact-state dump each turn → ~4x tokens + a busted prefix
-                  // cache. A subagent has its task + target in the objective prompt and
-                  // pulls the rest via state_query.
-                  let recentChanges: EngagementSchema.ChangelogEntry[] = []
-                  if (isCoordinator) {
-                    let diffShown = false
-                    const lastTs = yield* engagement.getLastInjectedTimestamp()
-                    if (lastTs) {
-                      recentChanges = yield* engagement.getChangelogSince(lastTs)
-                      const diff = EngagementSchema.toDiffContext(recentChanges)
-                      if (diff) {
-                        lines.push("", diff)
-                        diffShown = true
-                      }
-                    }
-                    yield* engagement.markInjected()
-
-                    // C-1 dedup: the diff block already lists the mutations since last
-                    // turn — pass [] so OODA skips its "Recent changes" rollup.
-                    lines.push("", EngagementSchema.toOODAContext(state, diffShown ? [] : recentChanges))
-
-                    // #1 vector-ledger: the coordinator's PRIMARY strategic lens — a
-                    // compact ranked board of attack vectors (live / confirmed / dead)
-                    // so it decides allocation over a short list, not a raw state dump.
-                    const ledger = EngagementSchema.toVectorLedger(state, recentChanges)
-                    if (ledger) lines.push("", ledger)
-
-                    const shouldInjectFull = step <= 2 || step % 12 === 0
-                    if (shouldInjectFull) {
-                      lines.push(
-                        "",
-                        "Current engagement state:",
-                        EngagementSchema.toCompactContext(state, 20, { excludeOODAFields: true }),
-                      )
-                    } else {
-                      const ss = EngagementSchema.summary(state)
-                      lines.push(
-                        "",
-                        `State summary (full state injected every 12 turns, use state_query for details):`,
-                        `  hosts:${ss.hosts_discovered} compromised:${ss.hosts_compromised} vulns:${ss.vulnerabilities} creds:${ss.credentials} flags:${ss.flags} phase:${ss.current_phase}`,
-                      )
-                    }
-                  } else {
-                    lines.push(
-                      "",
-                      "Use state_query for host/service/cred/vuln/session details as needed — full engagement state is NOT injected here; your task target is in the objective above.",
-                    )
-                  }
-                  // Real subagent liveness from the background-job registry —
-                  // the source of truth, unlike task-graph's self-reported status.
-                  const liveJobs = isCoordinator
-                    ? (yield* background.list()).filter(
-                        (j) => j.type === "task" && j.metadata?.parentSessionId === sessionID,
-                      )
-                    : []
-                  const liveRunning = liveJobs.filter((j) => j.status === "running")
-
-                  const taskGraph = isCoordinator ? yield* engagement.getTaskGraph() : {}
-                  const taskEntries = Object.values(taskGraph)
-                  if (taskEntries.length > 0) {
-                    const counts = TaskGraph.statusSummary(taskGraph)
-                    const ready = TaskGraph.getReady(taskGraph)
-                    const running = TaskGraph.getRunning(taskGraph)
-                    lines.push(
-                      "",
-                      "<task-graph>",
-                      `  Total: ${taskEntries.length} | ${Object.entries(counts).map(([k, v]) => `${k}:${v}`).join(" ")}`,
-                    )
-                    if (running.length > 0) {
-                      lines.push(`  Active (self-reported): ${running.map((t) => `${t.id}→${t.assignedAgent ?? "?"}`).join(", ")}`)
-                      if (running.length > liveRunning.length) {
-                        lines.push(
-                          `  ⚠ ${running.length} task(s) marked dispatched/running but only ${liveRunning.length} subagent(s) actually running. task_graph dispatch does NOT spawn — some were never launched via the task tool, or already ended. Verify with state_query subagents / the <live-subagents> block below.`,
-                        )
-                      }
-                    }
-                    if (ready.length > 0) {
-                      lines.push(`  Ready to dispatch: ${ready.map((t) => t.id).join(", ")}`)
-                    }
-                    // AR1 wake-time advance nudge. Keyed off REAL liveness
-                    // (background registry), not graph status, so it fires even if
-                    // a completion inject was missed: whenever the coordinator takes
-                    // any turn with nothing actually running and a wave ready, it is
-                    // told to launch it. Advancement no longer depends on every
-                    // per-completion inject landing.
-                    if (flags.experimentalOrchestrator && liveRunning.length === 0 && ready.length > 0) {
-                      lines.push(
-                        `  ⚡ WAVE READY — no subagent is running and ${ready.length} task(s) are ready (${ready
-                          .map((t) => t.id)
-                          .join(", ")}). Call task_graph plan with NO new tasks NOW to launch this wave. Do not poll or wait.`,
-                      )
-                    }
-                    // A-4 in-context stall surface (belt-and-suspenders to the active
-                    // watchdog wake, which can race a turn boundary): a gating task
-                    // that has run too long while dependents starve — the coordinator
-                    // must kill/complete/re-plan so its dependents can launch.
-                    if (flags.experimentalOrchestrator) {
-                      const stalls = Orchestrator.detectStall(taskGraph, {
-                        stallMs: flags.orchestratorStallMs ?? 300_000,
-                        nowMs: Date.now(),
-                      })
-                      for (const s of stalls) {
-                        const mins = Math.floor(s.ageMs / 60_000)
-                        const age = mins >= 1 ? `${mins}min` : `${Math.floor(s.ageMs / 1_000)}s`
-                        lines.push(
-                          `  ⚠ STALLED — ${s.stalled.id} has run ${age} and has NOT returned; ${s.starvedDependents.length} dependent(s) blocked: ${s.starvedDependents
-                            .map((d) => d.id)
-                            .join(", ")}. Decide NOW: task_graph kill (stuck), complete (deliverable already met — verify via state_query), or plan to re-scope. Do NOT leave dependents stranded.`,
-                        )
-                      }
-                    }
-                    lines.push("</task-graph>")
-                  }
-
-                  // batch-4 (B+C): surface REACHED-but-unattacked hosts — open
-                  // services, no access yet, and no active task working them. These
-                  // are the cheapest remaining markers; showing them (plus a spray
-                  // reminder for harvested creds) fixes both the "harvested a DB root
-                  // but never applied it" gap and the "sank budget into one hard host
-                  // while a reached one sat idle" gap. Coordinator-only.
-                  if (isCoordinator) {
-                    const ACTIVE = new Set(["planned", "ready", "dispatched", "running"])
-                    const targeted = Object.values(taskGraph)
-                      .filter((t) => ACTIVE.has(t.status) && t.target)
-                      .map((t) => t.target as string)
-                    const reachedNotAttacked = Object.values(state.hosts).filter((h) => {
-                      const hasOpen = (h.services ?? []).some((s) => !s.state || s.state === "open")
-                      const noAccess = (h.access ?? []).length === 0
-                      const hasTask = targeted.some((tgt) => tgt.includes(h.ip))
-                      return hasOpen && noAccess && !hasTask
-                    })
-                    if (reachedNotAttacked.length > 0) {
-                      const credCount = Object.keys(state.credentials ?? {}).length
-                      lines.push(
-                        "",
-                        "<reachable-not-yet-attacked>",
-                        `${reachedNotAttacked.length} reached host(s) have OPEN services, NO access yet, and NO task working them — your CHEAPEST remaining markers. Plan these BEFORE pouring more budget into a host that is already grinding (2+ re-dispatches / a subagent that hit its step cap = STOP, bank these first, return later):`,
-                      )
-                      for (const h of reachedNotAttacked.slice(0, 15)) {
-                        const svc = (h.services ?? [])
-                          .map((s) => `${s.port}/${s.service ?? "?"}`)
-                          .slice(0, 6)
-                          .join(",")
-                        lines.push(`  - ${h.ip}${h.hostname ? ` (${h.hostname})` : ""}: ${svc}`)
-                      }
-                      if (credCount > 0) {
-                        lines.push(
-                          `You hold ${credCount} harvested credential(s). SPRAY them against these services NOW — every DB/admin root and the Range<Service>@2026 pattern against every reachable same-class service. A reached service that accepts a harvested cred is a free marker; do not leave it unattacked.`,
-                        )
-                      }
-                      lines.push("</reachable-not-yet-attacked>")
-                    }
-                  }
-
-                  if (liveJobs.length > 0) {
-                    lines.push("", "<live-subagents>", "REAL subagent processes this session (trust this over task-graph status):")
-                    if (liveRunning.length > 0) {
-                      lines.push("  RUNNING:")
-                      for (const j of liveRunning) {
-                        const sid = typeof j.metadata?.sessionId === "string" ? j.metadata.sessionId : j.id
-                        lines.push(`    - ${j.title ?? "task"} (session ${sid})`)
-                      }
-                    }
-                    const finished = liveJobs.filter((j) => j.status !== "running").slice(-5)
-                    if (finished.length > 0) {
-                      lines.push("  RECENTLY FINISHED:")
-                      for (const j of finished) {
-                        const sid = typeof j.metadata?.sessionId === "string" ? j.metadata.sessionId : j.id
-                        lines.push(`    - [${j.status}] ${j.title ?? "task"} (session ${sid})`)
-                      }
-                    }
-                    lines.push("</live-subagents>")
-                  }
-                  // P3: only the actionable failure-escalation stays in the volatile
-                  // lane; the full decision list is pull-on-demand (`state_query decisions`)
-                  // rather than re-generated English every turn.
-                  const failedDecisions = (yield* engagement.getDecisions(10)).filter((dec) => dec.outcome === "failed")
-                  if (failedDecisions.length >= 3) {
-                    const recentFailedVectors = failedDecisions.slice(-3).map((d) => d.decision).join("; ")
-                    lines.push("")
-                    lines.push("<decision-history>")
-                    lines.push(`  ⚠ ${failedDecisions.length} failed decisions. Avoid repeating: ${recentFailedVectors}`)
-                    lines.push("  Spawn a critic to analyze the blocker or switch attack vector. (state_query decisions for the full history.)")
-                    lines.push("</decision-history>")
-                  }
-
-                  // C-1 dedup: only the dynamic trigger (which findings need review)
-                  // stays in the volatile block; the static "how to run a critic"
-                  // instruction moved to the cached prefix (<critic-protocol> below).
-                  const criticReminder = EngagementSchema.criticHint(state)
-                  if (criticReminder) {
-                    lines.push("")
-                    lines.push("<auto-critic>")
-                    lines.push(criticReminder)
-                    lines.push("Validate these per the <critic-protocol> in the system prompt.")
-                    lines.push("</auto-critic>")
-                  }
-
-                  // REMINDER (static tool-usage instruction) moved to the cached
-                  // static prefix — see staticLines below (C-2).
-
-                  // P3: slash-command tips dropped from the per-turn volatile lane —
-                  // the coordinator prompt already lists the available commands, so
-                  // re-generating tips every turn was pure bloat.
-
-                  // Resolved-vectors ledger (R6 fix) — injected for BOTH coordinator
-                  // and subagents so no agent re-opens a dead vector cross-session.
-                  const resolvedVectorsCtx = EngagementSchema.toResolvedVectorsContext(state)
-                  if (resolvedVectorsCtx) {
-                    lines.push("")
-                    lines.push(resolvedVectorsCtx)
-                  }
-
-                  // NEW-2: new leverage can re-open a vector that was resolved WITHOUT
-                  // it. When creds/access just landed this cycle, nudge reconsideration
-                  // of resolved dead ends (host-exhaustion / credential-reuse). One-shot:
-                  // only fires while the new creds/access are in the diff window.
-                  const newLeverage = recentChanges.some(
-                    (c) => c.action === "add_credential" || c.action === "add_access",
-                  )
-                  const resolvedCount = (state.resolved_vectors ?? []).filter((v) => v.status === "resolved").length
-                  if (newLeverage && resolvedCount > 0) {
-                    lines.push("")
-                    lines.push("<revisit-hint>")
-                    lines.push(
-                      `New credentials/access just landed. ${resolvedCount} vector(s) are marked RESOLVED — some were likely resolved WITHOUT this leverage (e.g. tested unauthenticated). A resolved verdict only holds for the info available when it was made: reconsider auth-gated dead ends now. state_query resolved_vectors for the list.`,
-                    )
-                    lines.push("</revisit-hint>")
-                  }
-
-                  // Wordlist usage context — subagents only (the coordinator never
-                  // fuzzes; the kernel already tells subagents to state_query wordlists
-                  // before fuzzing, so this push is a convenience for the workers).
-                  const wordlistUsages = isCoordinator ? [] : yield* engagement.getWordlistUsages()
-                  if (wordlistUsages.length > 0) {
-                    const wlSummary = EngagementSchema.wordlistSummary(wordlistUsages.slice(-50))
-                    lines.push("")
-                    lines.push("<wordlist-usage>")
-                    lines.push("Wordlists already used (DO NOT repeat on same target:port:tool_type):")
-                    lines.push(wlSummary)
-                    lines.push("</wordlist-usage>")
-                  }
-
-                  lines.push("</pentest-engagement>")
-
-                  // --- Static / rarely-changing directives (C-2) ---
-                  // These depend only on mode/pause/agent/flags, not on per-turn facts,
-                  // so they belong in the CACHED system prefix, not the volatile block.
-                  const staticLines: string[] = [
-                    "REMINDER: call state_update IMMEDIATELY after every discovery. Use parser tools (nmap_parse, cme_parse, nuclei_parse, gobuster_parse, sqlmap_parse) after their corresponding bash commands — they auto-update state. Use cred_spray when new creds found.",
-                    "",
-                    "<critic-protocol>",
-                    "When <auto-critic> lists unvalidated findings: spawn a critic subagent (task tool, agent_type=critic) with the vuln IDs + host IPs. Critic is READ-ONLY and returns a verdict (CONFIRMED/FALSE_POSITIVE/NEEDS_MORE_EVIDENCE/DOWNGRADE/UPGRADE). After the verdict, update status + confidence via state_update update_vuln.",
-                    "</critic-protocol>",
-                  ]
-                  if (modeDirective) staticLines.push("", modeDirective)
-
-                  if (state.goal && state.goal.status === "active") {
-                    staticLines.push("", `GOAL: ${state.goal.text}`, "All actions must serve this goal. When the goal is achieved, call state_update update_goal with status='achieved' and evidence.")
-                  }
-
-                  const pauseBehavior = state.pause_on_finding ?? "never"
-                  if (pauseBehavior !== "never" && pauseDirectives[pauseBehavior]) {
-                    staticLines.push("", pauseDirectives[pauseBehavior]!)
-                  }
-
-                  // AR1: when the deterministic orchestrator is enabled, `plan` is
-                  // the single orchestration verb — the harness runs dispatch,
-                  // collection, and status. Only the coordinator plans.
-                  if (flags.experimentalOrchestrator && isCoordinator) {
-                    staticLines.push(
-                      "",
-                      "<orchestrator-dag>",
-                      "Deterministic orchestrator is ON. `task_graph plan` is your ONLY orchestration verb.",
-                      "- Emit objectives once: {tasks:[{id, description, assignedAgent, target?, technique?, dependsOn?}]}. The harness immediately dispatches the ready wave (deps satisfied) up to the concurrency cap and runs every subagent in the background.",
-                      "- Do NOT call task_graph dispatch/complete/status/list_ready and do NOT spawn subagents by hand with the task tool — the harness owns dispatch, result collection, and status. Do NOT poll.",
-                      "- You are notified as each subagent finishes. When a wave completes you'll see the next ready set: call `plan` with NO new tasks to launch it as-is, or `plan` with new/changed objectives to adapt based on what the finished wave found.",
-                      "- Every strategic decision stays yours: what to plan, whether to launch the next wave, and whether the engagement is done. A wave finishing is NOT completion — judge that against objectives and coverage, and do not stop early.",
-                      "- Vectors already settled appear in <resolved-vectors>; the harness will not re-dispatch a resolved dead end.",
-                      "- Two ways to drop a subagent (both affect only that one, never siblings): task_graph abandon = de-track but LET IT FINISH (use when it merely LOOKS redundant — it may still succeed, and its result is still reported); task_graph kill = HARD-STOP now and reclaim tokens (use only when you're sure it's stuck/looping/wrong — killing loses whatever it might still produce). When unsure, prefer abandon.",
-                      "</orchestrator-dag>",
-                    )
-                  }
-
-                  return { volatile: lines.join("\n"), static: staticLines.join("\n") }
-                } catch {
-                  return undefined
-                }
-              }),
-              sys.kernel(agent),
-              sys.knowledge(),
             ])
-            // Static prefix only — the volatile engagement state is passed
+            // Static prefix only — a trailing volatile system block can be passed
             // separately as `volatileSystem` so this block stays cacheable
-            // across turns (see redesign QW1). Ordered most-stable first.
+            // across turns. Ordered most-stable first.
             const system = [
               ...env,
-              // Shared operator-protocol kernel (P1) — one copy for every agent,
-              // on the cached prefix; specialty prompts no longer repeat it.
-              ...(kernel ? [kernel] : []),
               ...instructions,
               ...(mcpInstructions ? [mcpInstructions] : []),
               ...(skills ? [skills] : []),
-              // Rarely-changing engagement directives ride the cached prefix (C-2),
-              // not the volatile trailing block.
-              ...(engagementCtx?.static ? [engagementCtx.static] : []),
-              ...(knowledgeCtx ? [knowledgeCtx] : []),
             ]
             const format = lastUser.format ?? { type: "text" as const }
             if (format.type === "json_schema") system.push(STRUCTURED_OUTPUT_SYSTEM_PROMPT)
@@ -1719,7 +1312,7 @@ const layer = Layer.effect(
               sessionID,
               parentSessionID: session.parentID,
               system,
-              volatileSystem: engagementCtx?.volatile,
+              volatileSystem: undefined,
               messages: [
                 ...modelMsgs,
                 ...(isLastStep ? [{ role: "assistant" as const, content: MAX_STEPS_PROMPT }] : []),
@@ -2069,8 +1662,6 @@ export const node = LayerNode.make({
     EventV2Bridge.node,
     RuntimeFlags.node,
     Database.node,
-    EngagementStore.node,
-    BackgroundJob.node,
   ],
 })
 

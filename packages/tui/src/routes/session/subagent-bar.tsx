@@ -56,12 +56,10 @@ export function SubagentBar() {
   }
 
   const subagents = createMemo<Entry[]>(() => {
-    // Derive from CHILD SESSIONS, not from `task` tool parts. Both spawn paths —
-    // the manual `task` tool and the deterministic orchestrator (which dispatches
-    // from inside a single `task_graph` call, so there is no per-subagent `task`
-    // part) — create a child session titled "<desc> (@<agent> subagent)". Keying
-    // off child sessions makes the bar work for either, and matches how the nav
-    // and session tree already enumerate children (routes/session/index.tsx).
+    // Derive from CHILD SESSIONS, not from `task` tool parts. The `task` tool
+    // creates a child session titled "<desc> (@<agent> subagent)". Keying
+    // off child sessions matches how the nav and session tree already
+    // enumerate children (routes/session/index.tsx).
     const rootID = route.sessionID
     const entries: Entry[] = []
     for (const child of sync.data.session) {

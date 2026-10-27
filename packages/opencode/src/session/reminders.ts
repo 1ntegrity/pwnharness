@@ -8,9 +8,9 @@ import { RuntimeFlags } from "@/effect/runtime-flags"
 import { PartID } from "./schema"
 import { MessageV2 } from "./message-v2"
 import { Session } from "./session"
-import PROMPT_RECON from "./prompt/recon-mode.txt"
-import PENTEST_SWITCH from "./prompt/pentest-switch.txt"
-import RECON_MODE from "./prompt/recon-plan-mode.txt"
+import PLAN_REMINDER from "./prompt/plan-reminder-anthropic.txt"
+import BUILD_SWITCH from "./prompt/build-switch.txt"
+import PLAN_MODE from "./prompt/plan-mode.txt"
 
 export const apply = Effect.fn("SessionReminders.apply")(function* (input: {
   messages: SessionV1.WithParts[]
@@ -24,24 +24,13 @@ export const apply = Effect.fn("SessionReminders.apply")(function* (input: {
   if (!userMessage) return input.messages
 
   if (!flags.experimentalPlanMode) {
-    if (input.agent.name === "recon") {
+    if (input.agent.name === "plan") {
       userMessage.parts.push({
         id: PartID.ascending(),
         messageID: userMessage.info.id,
         sessionID: userMessage.info.sessionID,
         type: "text",
-        text: PROMPT_RECON,
-        synthetic: true,
-      })
-    }
-    const wasPlan = input.messages.some((msg) => msg.info.role === "assistant" && msg.info.agent === "recon")
-    if (wasPlan && input.agent.name === "pentest") {
-      userMessage.parts.push({
-        id: PartID.ascending(),
-        messageID: userMessage.info.id,
-        sessionID: userMessage.info.sessionID,
-        type: "text",
-        text: PENTEST_SWITCH,
+        text: PLAN_REMINDER,
         synthetic: true,
       })
     }
@@ -49,7 +38,7 @@ export const apply = Effect.fn("SessionReminders.apply")(function* (input: {
   }
 
   const assistantMessage = input.messages.findLast((msg) => msg.info.role === "assistant")
-  if (input.agent.name !== "recon" && assistantMessage?.info.agent === "recon") {
+  if (input.agent.name !== "plan" && assistantMessage?.info.agent === "plan") {
     const ctx = yield* InstanceState.context
     const plan = Session.plan(input.session, ctx)
     const exists = yield* fsys.existsSafe(plan)
@@ -59,15 +48,15 @@ export const apply = Effect.fn("SessionReminders.apply")(function* (input: {
       sessionID: userMessage.info.sessionID,
       type: "text",
       text: exists
-        ? `${PENTEST_SWITCH}\n\nA plan file exists at ${plan}. You should execute on the plan defined within it`
-        : PENTEST_SWITCH,
+        ? `${BUILD_SWITCH}\n\nA plan file exists at ${plan}. You should execute on the plan defined within it`
+        : BUILD_SWITCH,
       synthetic: true,
     })
     userMessage.parts.push(part)
     return input.messages
   }
 
-  if (input.agent.name !== "recon" || assistantMessage?.info.agent === "recon") return input.messages
+  if (input.agent.name !== "plan" || assistantMessage?.info.agent === "plan") return input.messages
 
   const ctx = yield* InstanceState.context
   const plan = Session.plan(input.session, ctx)
@@ -78,7 +67,7 @@ export const apply = Effect.fn("SessionReminders.apply")(function* (input: {
     messageID: userMessage.info.id,
     sessionID: userMessage.info.sessionID,
     type: "text",
-    text: RECON_MODE.replace("${planInfo}", () =>
+    text: PLAN_MODE.replace("${planInfo}", () =>
       exists
         ? `A plan file already exists at ${plan}. You can read it and make incremental edits using the edit tool.`
         : `No plan file exists yet. You should create your plan at ${plan} using the write tool.`,

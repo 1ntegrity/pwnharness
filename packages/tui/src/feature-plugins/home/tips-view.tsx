@@ -243,10 +243,6 @@ const TIPS: Tip[] = [
   "Run {highlight}pentestcode upgrade{/highlight} to update to the latest version",
   "Run {highlight}pentestcode auth list{/highlight} to see all configured providers",
   "Run {highlight}pentestcode agent create{/highlight} for guided agent creation",
-  "Use {highlight}/status{/highlight} to check engagement status, hosts, and vulns",
-  "Use {highlight}/scope{/highlight} to view or update the engagement scope",
-  "Use {highlight}/phase next{/highlight} to advance to the next pentest phase",
-  "Use {highlight}/report{/highlight} to generate a pentest report from findings",
   'Use {highlight}"theme": "system"{/highlight} to match your terminal\'s colors',
   "Create JSON theme files in {highlight}.pentestcode/themes/{/highlight} directory",
   "Themes support dark/light variants for both modes",
@@ -274,11 +270,6 @@ const TIPS: Tip[] = [
     shortcuts.commandList()
       ? `Toggle username display in chat via the command palette (${shortcutText(shortcuts.commandList())})`
       : "Toggle username display in chat via the command palette",
-  "Use {highlight}/targets{/highlight} to list discovered hosts and services",
-  "Use {highlight}/vulns{/highlight} to see discovered vulnerabilities by severity",
-  "Use {highlight}/creds{/highlight} to view all captured credentials during an engagement",
-  "Use {highlight}/mode auto{/highlight} for autonomous pentesting, {highlight}/mode free{/highlight} for user-directed",
-  "Use {highlight}/pause always{/highlight} to review each finding before the agent continues",
   "Commit your project's {highlight}AGENTS.md{/highlight} file to Git for team sharing",
   "Use {highlight}/review{/highlight} to review uncommitted changes, branches, or PRs",
   (shortcuts) => `Use ${commandText("/help", shortcuts.helpShow())} to show the help dialog`,

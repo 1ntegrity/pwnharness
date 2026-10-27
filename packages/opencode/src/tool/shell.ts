@@ -1,4 +1,4 @@
-import { Effect, Semaphore, Stream } from "effect"
+import { Effect, Stream } from "effect"
 import os from "os"
 import { createWriteStream } from "node:fs"
 import * as Tool from "./tool"
@@ -9,8 +9,6 @@ import { lazy } from "@/util/lazy"
 import { Language, type Node } from "web-tree-sitter"
 
 import { FSUtil } from "@pentestcode/core/fs-util"
-import { EngagementStore } from "@pentestcode/core/engagement/store"
-import { ScopeMatcher } from "@pentestcode/core/engagement/scope-matcher"
 import { fileURLToPath } from "url"
 import { Config } from "@/config/config"
 import { RuntimeFlags } from "@/effect/runtime-flags"
@@ -346,37 +344,7 @@ export const ShellTool = Tool.define(
     const trunc = yield* Truncate.Service
     const plugin = yield* Plugin.Service
     const flags = yield* RuntimeFlags.Service
-    const engStore = yield* EngagementStore.Service
-    // Pentest default: scans (nuclei/nmap -p-/ffuf/sqlmap) routinely run several
-    // minutes, so the upstream 2min coding default was killing them mid-run and
-    // pushing the agent into wrong shortcuts (e.g. grepping the nuclei template lib
-    // by product name instead of running the scan). 5min fits scoped scans; the
-    // agent still raises per-command (up to 600000ms) for a broad sweep.
-    // Override via OPENCODE_BASH_DEFAULT_TIMEOUT_MS.
-    const defaultTimeoutMs = flags.bashDefaultTimeoutMs ?? 5 * 60 * 1000
-
-    // C (safety rail): serialize concurrent shell execs against the SAME host so the
-    // fleet can't self-DoS a foothold/target by hammering it in parallel — the dev.9
-    // incident (3 agents concurrently firing the stateless-RCE driver crashed the
-    // Next.js entry host). Per-host semaphore, shared across ALL sessions (ShellTool
-    // is a per-runtime singleton). Cap default 2; OPENCODE_PER_HOST_EXEC_CONCURRENCY=1
-    // fully serializes. Host is the target IP parsed from the command (reuses the
-    // scope matcher); localhost/no-IP commands are never throttled.
-    const perHostExecCap = Math.max(1, flags.perHostExecConcurrency ?? 2)
-    const hostExecSemaphores = new Map<string, Semaphore.Semaphore>()
-    const hostExecSem = (host: string) => {
-      let sem = hostExecSemaphores.get(host)
-      if (!sem) {
-        sem = Semaphore.makeUnsafe(perHostExecCap)
-        hostExecSemaphores.set(host, sem)
-      }
-      return sem
-    }
-    const execTargetHost = (command: string): string | undefined =>
-      ScopeMatcher.extractTargetsWithWarning(command)
-        .targets.map((t) => ScopeMatcher.extractHost(t))
-        .find((h) => ScopeMatcher.isIp(h) && !h.startsWith("127.") && h !== "0.0.0.0" && h !== "::1")
-
+    const defaultTimeoutMs = flags.bashDefaultTimeoutMs ?? 2 * 60 * 1000
     const cygpath = Effect.fn("ShellTool.cygpath")(function* (shell: string, text: string) {
       const lines = yield* spawner
         .lines(ChildProcess.make(shell, ["-lc", 'cygpath -w -- "$1"', "_", text]))
@@ -659,68 +627,9 @@ export const ShellTool = Tool.define(
                 }),
               )
 
-              // Scope gate — evaluated BEFORE running the command. Genuinely-external
-              // out-of-scope targets are gated interactively: ask the operator to add
-              // them to scope (approve → added + command proceeds; deny → command not run).
-              // Chain-reachable targets (inside a discovered network segment, i.e. reached
-              // via a compromised in-scope host) are auto-in-scope — no prompt. Without an
-              // operator (no TTY) we never block or hang — warn only and proceed. free mode
-              // bypasses the whole gate.
-              let scopePrefix = ""
-              const engStatePre = yield* engStore.get()
-              if (engStatePre && engStatePre.scope.targets.length > 0 && engStatePre.mode !== "free") {
-                const { targets, warning } = ScopeMatcher.extractTargetsWithWarning(params.command)
-                const oos = targets.filter((t) => !ScopeMatcher.checkScope(t, engStatePre.scope).inScope)
-                const segments = engStatePre.network_segments ?? []
-                const external = oos.filter((t) => {
-                  const host = ScopeMatcher.extractHost(t)
-                  if (!ScopeMatcher.isIp(host)) return true // domains: can't segment-check → treat as external
-                  // chain-expansion: reached via a compromised host if inside a discovered segment
-                  return !segments.some((s) => s.cidr && ScopeMatcher.isInCidr(host, s.cidr))
-                })
-                if (external.length > 0) {
-                  const interactive = process.stdin.isTTY === true
-                  if (interactive) {
-                    // Two-button Yes/No: approve adds the target(s) to scope (persists,
-                    // so no re-ask for them) and runs the command; deny skips. No blanket
-                    // "always allow everything" option — each new out-of-scope target is
-                    // the operator's explicit call.
-                    const approved = yield* ctx
-                      .ask({
-                        permission: "scope",
-                        patterns: external,
-                        always: [],
-                        metadata: { scopeExpansion: true, targets: external, command: params.command.slice(0, 200) },
-                      })
-                      .pipe(
-                        Effect.as(true),
-                        Effect.catch(() => Effect.succeed(false)),
-                      )
-                    if (!approved) {
-                      return {
-                        title: "Scope: blocked",
-                        metadata: { output: `blocked out-of-scope: ${external.join(", ")}`, exit: null, truncated: false },
-                        output: `Command not run: out-of-scope target(s) not approved: ${external.join(", ")}.\nApprove to add them to scope, or switch to mode=free to bypass scope checks.`,
-                      }
-                    }
-                    yield* engStore.updateScope({ targets: [...engStatePre.scope.targets, ...external] })
-                    const after = yield* engStore.get()
-                    if (after) yield* engStore.save(after)
-                    scopePrefix = `[SCOPE: added to scope by operator: ${external.join(", ")}]\n\n`
-                  } else {
-                    scopePrefix = `[SCOPE WARNING: out-of-scope target(s) — no operator to approve, not added: ${external.join(", ")}]\n\n`
-                  }
-                }
-                if (warning) scopePrefix = `[${warning}]\n\n` + scopePrefix
-              }
 
               const env = yield* shellEnv(ctx, cwd)
-              const runEffect = run({ shell, command: params.command, cwd, env, timeout }, ctx)
-              // C (safety rail): serialize concurrent execs to the same target host.
-              const execHost = execTargetHost(params.command)
-              const result = yield* (execHost ? hostExecSem(execHost).withPermits(1)(runEffect) : runEffect)
-
-              if (scopePrefix) result.output = scopePrefix + result.output
+              const result = yield* run({ shell, command: params.command, cwd, env, timeout }, ctx)
               return result
             }),
         }

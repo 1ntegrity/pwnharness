@@ -511,19 +511,6 @@ const layer = Layer.effect(
   }),
 )
 
-// Scale the advertised skill set: with hundreds of skills you cannot inject
-// every description into the prompt. A skill opts into scoping by declaring
-// `tags` — it is then advertised only when one of `relevantTags` (e.g. the
-// current engagement phase) matches. Untagged skills are always advertised, so
-// this is a no-op until skills adopt tags. Empty `relevantTags` disables scoping.
-export function scopeByTags(list: Info[], relevantTags: string[]): Info[] {
-  if (relevantTags.length === 0) return list
-  const relevant = new Set(relevantTags.map((t) => t.toLowerCase()))
-  return list.filter((skill) => {
-    if (!skill.tags || skill.tags.length === 0) return true
-    return skill.tags.some((tag) => relevant.has(tag.toLowerCase()))
-  })
-}
 
 export function fmt(list: Info[], opts: { verbose: boolean }) {
   const described = list.filter((skill) => skill.description !== undefined)

@@ -25,30 +25,7 @@ import { Plugin } from "../plugin"
 import { Provider } from "@/provider/provider"
 
 import { WebSearchTool } from "./websearch"
-import { StateQueryTool } from "./state-query"
-import { StateUpdateTool } from "./state-update"
-import { NmapParseTool } from "./nmap-parse"
-import { NucleiParseTool } from "./nuclei-parse"
-import { GobusterParseTool } from "./gobuster-parse"
-import { CmeParseTool } from "./cme-parse"
-import { BloodHoundParseTool } from "./bloodhound-parse"
-import { ScopeCheckTool } from "./scope-check"
-import { PhaseControlTool } from "./phase-control"
-import { ReportGenTool } from "./report-gen"
-import { TaskGraphTool } from "./task-graph"
-import { CredSprayTool } from "./cred-spray"
-import { SqlmapParseTool } from "./sqlmap-parse"
-import { XssDetectTool } from "./xss-detect"
-import { JwtAnalyzeTool } from "./jwt-analyze"
-import { TunnelManageTool } from "./tunnel-manage"
-import { AttackPathSuggestTool } from "./attack-path-suggest"
-import { EnsureToolsTool } from "./ensure-tools"
-import { OsHookTool } from "./os-hook"
-import { InjectProbeTool } from "./inject-probe"
-import { KnowledgeTool } from "./knowledge"
 import { ScreenshotTool } from "./screenshot"
-import { EngagementStore } from "@pentestcode/core/engagement/store"
-import { KnowledgeStore } from "@pentestcode/core/knowledge/store"
 import * as Truncate from "./truncate"
 import { Glob } from "@pentestcode/core/util/glob"
 import path from "path"
@@ -127,29 +104,8 @@ const layer = Layer.effect(
     const edit = yield* EditTool
     const greptool = yield* GrepTool
     const skilltool = yield* SkillTool
-    const statequery = yield* StateQueryTool
-    const stateupdate = yield* StateUpdateTool
-    const nmapparse = yield* NmapParseTool
-    const nucleiparse = yield* NucleiParseTool
-    const scopecheck = yield* ScopeCheckTool
-    const phasecontrol = yield* PhaseControlTool
-    const reportgen = yield* ReportGenTool
-    const taskgraph = yield* TaskGraphTool
-    const credspray = yield* CredSprayTool
-    const gobusterparse = yield* GobusterParseTool
-    const cmeparse = yield* CmeParseTool
-    const bloodhoundparse = yield* BloodHoundParseTool
-    const sqlmapparse = yield* SqlmapParseTool
-    const xssdetect = yield* XssDetectTool
-    const jwtanalyze = yield* JwtAnalyzeTool
-    const tunnelmanage = yield* TunnelManageTool
-    const attackpathsuggest = yield* AttackPathSuggestTool
-    const ensuretools = yield* EnsureToolsTool
-    const oshook = yield* OsHookTool
-    const injectprobe = yield* InjectProbeTool
-    const knowledge = yield* KnowledgeTool
-    const screenshot = yield* ScreenshotTool
-    const agent = yield* Agent.Service
+  const screenshot = yield* ScreenshotTool
+  const agent = yield* Agent.Service
 
     const state = yield* InstanceState.make<State>(
       Effect.fn("ToolRegistry.state")(function* (ctx) {
@@ -253,27 +209,6 @@ const layer = Layer.effect(
           skill: Tool.init(skilltool),
           question: Tool.init(question),
           plan: Tool.init(plan),
-          statequery: Tool.init(statequery),
-          stateupdate: Tool.init(stateupdate),
-          nmapparse: Tool.init(nmapparse),
-          nucleiparse: Tool.init(nucleiparse),
-          scopecheck: Tool.init(scopecheck),
-          phasecontrol: Tool.init(phasecontrol),
-          reportgen: Tool.init(reportgen),
-          taskgraph: Tool.init(taskgraph),
-          credspray: Tool.init(credspray),
-          gobusterparse: Tool.init(gobusterparse),
-          cmeparse: Tool.init(cmeparse),
-          bloodhoundparse: Tool.init(bloodhoundparse),
-          sqlmapparse: Tool.init(sqlmapparse),
-          xssdetect: Tool.init(xssdetect),
-          jwtanalyze: Tool.init(jwtanalyze),
-          tunnelmanage: Tool.init(tunnelmanage),
-          attackpathsuggest: Tool.init(attackpathsuggest),
-          ensuretools: Tool.init(ensuretools),
-          oshook: Tool.init(oshook),
-          injectprobe: Tool.init(injectprobe),
-          knowledge: Tool.init(knowledge),
           screenshot: Tool.init(screenshot),
         })
 
@@ -292,27 +227,6 @@ const layer = Layer.effect(
             tool.fetch,
             tool.search,
             tool.skill,
-            tool.statequery,
-            tool.stateupdate,
-            tool.nmapparse,
-            tool.nucleiparse,
-            tool.scopecheck,
-            tool.phasecontrol,
-            tool.reportgen,
-            tool.taskgraph,
-            tool.credspray,
-            tool.gobusterparse,
-            tool.cmeparse,
-            tool.bloodhoundparse,
-            tool.sqlmapparse,
-            tool.xssdetect,
-            tool.jwtanalyze,
-            tool.tunnelmanage,
-            tool.attackpathsuggest,
-            tool.ensuretools,
-            tool.oshook,
-            tool.injectprobe,
-            tool.knowledge,
             tool.screenshot,
             ...(flags.experimentalPlanMode && flags.client === "cli" ? [tool.plan] : []),
           ],
@@ -497,8 +411,6 @@ export const node = LayerNode.make({
     MCP.node,
     Database.node,
     Ripgrep.node,
-    EngagementStore.node,
-    KnowledgeStore.node,
   ],
 })
 

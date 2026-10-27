@@ -3,15 +3,7 @@ import { Context, Effect, Layer } from "effect"
 
 import { InstanceState } from "@/effect/instance-state"
 
-import PROMPT_PENTEST from "./prompt/pentest.txt"
-import PROMPT_KERNEL from "./prompt/kernel.txt"
-import PROMPT_KERNEL_SUBAGENT from "./prompt/kernel-subagent.txt"
-import PROMPT_KERNEL_EXPLOIT from "./prompt/kernel-exploit.txt"
-
-// Agents whose core job is exploiting a vuln/CVE — they get the shared exploitation
-// methodology addendum. Recon/scanner/enumerator/critic/reporter/identity/post_exploit
-// do NOT (their doctrine is elsewhere), keeping their kernel lean.
-const EXPLOIT_AGENTS = new Set(["exploiter", "exploit_dev", "webapp", "infrastructure"])
+import PROMPT_BUILD from "./prompt/build.txt"
 import type { Provider } from "@/provider/provider"
 import type { Agent } from "@/agent/agent"
 import { Permission } from "@/permission"
@@ -22,20 +14,15 @@ import { LocationServiceMap, locationServiceMapLayer } from "@pentestcode/core/l
 import { Reference } from "@pentestcode/core/reference"
 import { MCP } from "@/mcp"
 import { PermissionV1 } from "@pentestcode/core/v1/permission"
-import { EngagementStore } from "@pentestcode/core/engagement/store"
-import { KnowledgeStore } from "@pentestcode/core/knowledge/store"
 
 export function provider(model: Provider.Model) {
-  // PentestCode: always use the pentest prompt as the base, regardless of model
-  return [PROMPT_PENTEST]
+  return [PROMPT_BUILD]
 }
 
 export interface Interface {
   readonly environment: (model: Provider.Model) => Effect.Effect<string[]>
-  readonly kernel: (agent: Agent.Info) => Effect.Effect<string>
   readonly skills: (agent: Agent.Info) => Effect.Effect<string | undefined>
   readonly mcp: (agent: Agent.Info, permission?: PermissionV1.Ruleset) => Effect.Effect<string | undefined>
-  readonly knowledge: () => Effect.Effect<string | undefined>
 }
 
 export class Service extends Context.Service<Service, Interface>()("@pentestcode/SystemPrompt") {}
@@ -46,20 +33,8 @@ const layer = Layer.effect(
     const skill = yield* Skill.Service
     const mcp = yield* MCP.Service
     const locations = yield* LocationServiceMap.Service
-    const engagement = yield* EngagementStore.Service
-    const knowledgeStore = yield* KnowledgeStore.Service
 
     return Service.of({
-      // Shared operator-protocol kernel injected for EVERY agent (coordinator +
-      // specialists) so cross-cutting doctrine lives ONCE instead of being
-      // copy-pasted into each prompt. Subagents also get the specialist-common
-      // addendum. Rides the cached system prefix.
-      kernel: Effect.fn("SystemPrompt.kernel")(function* (agent: Agent.Info) {
-        const parts = [PROMPT_KERNEL]
-        if (agent.mode === "subagent") parts.push(PROMPT_KERNEL_SUBAGENT)
-        if (EXPLOIT_AGENTS.has(agent.name)) parts.push(PROMPT_KERNEL_EXPLOIT)
-        return parts.join("\n\n")
-      }),
       environment: Effect.fn("SystemPrompt.environment")(function* (model: Provider.Model) {
         const ctx = yield* InstanceState.context
         const references = yield* Effect.gen(function* () {
@@ -103,40 +78,15 @@ const layer = Layer.effect(
 
         const list = yield* skill.available(agent)
 
-        // Scale advertising: scope tagged skills to the current engagement phase
-        // so a session doesn't carry every skill's description once there are
-        // hundreds. Untagged skills are always advertised (no-op until adopted).
-        const state = yield* engagement.get().pipe(Effect.catch(() => Effect.succeed(undefined)))
-        const scoped = state?.current_phase ? Skill.scopeByTags(list, [state.current_phase]) : list
-
         return [
           "Skills provide specialized instructions and workflows for specific tasks.",
           "Use the skill tool to load a skill when a task matches its description.",
           // the agents seem to ingest the information about skills a bit better if we present a more verbose
           // version of them here and a less verbose version in tool description, rather than vice versa.
-          Skill.fmt(scoped, { verbose: true }),
+          Skill.fmt(list, { verbose: true }),
         ].join("\n")
       }),
 
-      knowledge: Effect.fn("SystemPrompt.knowledge")(function* () {
-        const state = yield* engagement.get().pipe(Effect.catch(() => Effect.succeed(undefined)))
-        if (!state) return undefined
-        const services: string[] = []
-        for (const host of Object.values(state.hosts)) {
-          for (const svc of host.services) {
-            if (svc.service) services.push(svc.service)
-          }
-        }
-        if (services.length === 0) return undefined
-        const unique = [...new Set(services)]
-        const suggestion = yield* knowledgeStore.suggest(unique, state.current_phase)
-        if (!suggestion) return undefined
-        return [
-          "<cross-engagement-knowledge>",
-          suggestion,
-          "</cross-engagement-knowledge>",
-        ].join("\n")
-      }),
 
       mcp: Effect.fn("SystemPrompt.mcp")(function* (agent: Agent.Info, permission?: PermissionV1.Ruleset) {
         const ruleset = Permission.merge(agent.permission, permission ?? [])
@@ -168,7 +118,7 @@ const locationServiceMapNode = LayerNode.make({
 export const node = LayerNode.make({
   service: Service,
   layer: layer,
-  deps: [Skill.node, MCP.node, locationServiceMapNode, EngagementStore.node, KnowledgeStore.node],
+  deps: [Skill.node, MCP.node, locationServiceMapNode],
 })
 
 export * as SystemPrompt from "./system"
