@@ -1,12 +1,12 @@
 import { cmd } from "./cmd"
 import { UI } from "@/cli/ui"
-import { errorMessage } from "@opencode-harness/tui/util/error"
+import { errorMessage } from "@pwncode/tui/util/error"
 import { validateSession } from "../tui/validate-session"
 import { ServerAuth } from "@/server/auth"
 
 export const AttachCommand = cmd({
   command: "attach <url>",
-  describe: "attach to a running opencode-harness server",
+  describe: "attach to a running pwncode server",
   builder: (yargs) =>
     yargs
       .positional("url", {
@@ -40,7 +40,7 @@ export const AttachCommand = cmd({
       .option("username", {
         alias: ["u"],
         type: "string",
-        describe: "basic auth username (defaults to OPENCODE_SERVER_USERNAME or 'opencode-harness')",
+        describe: "basic auth username (defaults to OPENCODE_SERVER_USERNAME or 'pwncode')",
       })
       .option("mini", {
         type: "boolean",

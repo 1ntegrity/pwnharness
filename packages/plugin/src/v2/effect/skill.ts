@@ -1,4 +1,4 @@
-import type { SkillV2Source } from "@opencode-harness/sdk/v2/types"
+import type { SkillV2Source } from "@pwncode/sdk/v2/types"
 import type { Hooks } from "./registration.js"
 
 export interface SkillDraft {

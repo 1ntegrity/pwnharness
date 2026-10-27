@@ -2,21 +2,21 @@ import fs from "fs/promises"
 import path from "path"
 import { describe, expect } from "bun:test"
 import { DateTime, Effect, Equal, Hash, Schema } from "effect"
-import { Tool } from "@opencode-harness/core/tool/tool"
-import { define } from "@opencode-harness/plugin/v2/effect"
-import { AgentV2 } from "@opencode-harness/core/agent"
-import { Catalog } from "@opencode-harness/core/catalog"
-import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { LocationServiceMap } from "@opencode-harness/core/location-services"
-import { Location } from "@opencode-harness/core/location"
-import { PluginV2 } from "@opencode-harness/core/plugin"
-import { ModelV2 } from "@opencode-harness/core/model"
-import { ProjectV2 } from "@opencode-harness/core/project"
-import { ProviderV2 } from "@opencode-harness/core/provider"
-import { AbsolutePath } from "@opencode-harness/core/schema"
-import { SessionV2 } from "@opencode-harness/core/session"
-import { SessionRunnerModel } from "@opencode-harness/core/session/runner/model"
+import { Tool } from "@pwncode/core/tool/tool"
+import { define } from "@pwncode/plugin/v2/effect"
+import { AgentV2 } from "@pwncode/core/agent"
+import { Catalog } from "@pwncode/core/catalog"
+import { AppNodeBuilder } from "@pwncode/core/effect/app-node-builder"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { LocationServiceMap } from "@pwncode/core/location-services"
+import { Location } from "@pwncode/core/location"
+import { PluginV2 } from "@pwncode/core/plugin"
+import { ModelV2 } from "@pwncode/core/model"
+import { ProjectV2 } from "@pwncode/core/project"
+import { ProviderV2 } from "@pwncode/core/provider"
+import { AbsolutePath } from "@pwncode/core/schema"
+import { SessionV2 } from "@pwncode/core/session"
+import { SessionRunnerModel } from "@pwncode/core/session/runner/model"
 import { tmpdir } from "./fixture/tmpdir"
 import { testEffect } from "./lib/effect"
 import { toolDefinitions } from "./lib/tool"
@@ -78,7 +78,7 @@ describe("LocationServiceMap", () => {
           })
           yield* Effect.promise(() =>
             fs.writeFile(
-              path.join(blocked.path, "opencode-harness.json"),
+              path.join(blocked.path, "pwncode.json"),
               JSON.stringify({
                 experimental: { policies: [{ effect: "deny", action: "provider.use", resource: "test" }] },
               }),
@@ -144,7 +144,7 @@ describe("LocationServiceMap", () => {
           const location = Location.Ref.make({ directory: AbsolutePath.make(dir.path) })
           yield* Effect.promise(() =>
             fs.writeFile(
-              path.join(dir.path, "opencode-harness.json"),
+              path.join(dir.path, "pwncode.json"),
               JSON.stringify({
                 providers: {
                   unavailable: {

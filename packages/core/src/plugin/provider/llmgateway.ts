@@ -15,9 +15,9 @@ export const LLMGatewayPlugin = define({
           if (item.provider.api.url !== "https://api.llmgateway.io/v1") continue
           if (!(yield* integrations.get(Integration.ID.make(item.provider.id)))) continue
           evt.provider.update(item.provider.id, (provider) => {
-            provider.request.headers["HTTP-Referer"] = "https://github.com/s0ld13rr/opencode-harness"
-            provider.request.headers["X-Title"] = "opencode-harness"
-            provider.request.headers["X-Source"] = "opencode-harness"
+            provider.request.headers["HTTP-Referer"] = "https://github.com/s0ld13rr/pwncode"
+            provider.request.headers["X-Title"] = "pwncode"
+            provider.request.headers["X-Source"] = "pwncode"
           })
         }
       }),

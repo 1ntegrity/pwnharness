@@ -1,11 +1,11 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { httpClient, path } from "@opencode-harness/core/effect/app-node-platform"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { httpClient, path } from "@pwncode/core/effect/app-node-platform"
 import { NodePath } from "@effect/platform-node"
 import { Effect, Layer, Path, Schema, Context } from "effect"
 import { FetchHttpClient, HttpClient, HttpClientRequest, HttpClientResponse } from "effect/unstable/http"
 import { withTransientReadRetry } from "@/util/effect-http-client"
-import { FSUtil } from "@opencode-harness/core/fs-util"
-import { Global } from "@opencode-harness/core/global"
+import { FSUtil } from "@pwncode/core/fs-util"
+import { Global } from "@pwncode/core/global"
 
 const skillConcurrency = 4
 const fileConcurrency = 8
@@ -24,7 +24,7 @@ export interface Interface {
   readonly pull: (url: string) => Effect.Effect<string[]>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/SkillDiscovery") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/SkillDiscovery") {}
 
 const layer: Layer.Layer<Service, never, FSUtil.Service | Path.Path | HttpClient.HttpClient> = Layer.effect(
   Service,
@@ -77,7 +77,7 @@ const layer: Layer.Layer<Service, never, FSUtil.Service | Path.Path | HttpClient
         (skill) =>
           Effect.gen(function* () {
             const root = path.join(cache, skill.name)
-            const versionFile = path.join(root, ".opencode-harness-version")
+            const versionFile = path.join(root, ".pwncode-version")
             const version = skill.version
             const current =
               version === undefined
@@ -102,7 +102,7 @@ const layer: Layer.Layer<Service, never, FSUtil.Service | Path.Path | HttpClient
                 )
                 if (!downloaded.every(Boolean)) return
                 if (!(yield* fs.exists(path.join(staging, "SKILL.md")).pipe(Effect.orDie))) return
-                yield* fs.writeFileString(path.join(staging, ".opencode-harness-version"), version)
+                yield* fs.writeFileString(path.join(staging, ".pwncode-version"), version)
                 yield* Effect.uninterruptible(
                   Effect.gen(function* () {
                     const cached = yield* fs.exists(root).pipe(Effect.orDie)

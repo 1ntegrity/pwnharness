@@ -1,5 +1,5 @@
-import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { AppNodeBuilder } from "@pwncode/core/effect/app-node-builder"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import { InstanceBootstrap } from "@/project/bootstrap"
 import { InstanceStore } from "@/project/instance-store"
 

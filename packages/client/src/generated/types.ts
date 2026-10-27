@@ -1,4 +1,4 @@
-import type { OpenCodeEventEncoded } from "@opencode-harness/protocol/groups/event"
+import type { OpenCodeEventEncoded } from "@pwncode/protocol/groups/event"
 
 export type JsonValue =
   | null

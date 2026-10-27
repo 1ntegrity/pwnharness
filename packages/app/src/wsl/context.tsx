@@ -1,4 +1,4 @@
-import { createSimpleContext } from "@opencode-harness/ui/context"
+import { createSimpleContext } from "@pwncode/ui/context"
 import { queryOptions, useQuery, useQueryClient } from "@tanstack/solid-query"
 import { createEffect, onCleanup } from "solid-js"
 import type { WslServersState } from "./types"

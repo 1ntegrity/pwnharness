@@ -1,5 +1,5 @@
-import type { SnapshotFileDiff } from "@opencode-harness/sdk/v2"
-import type { PartGroup } from "@opencode-harness/session-ui/message-part"
+import type { SnapshotFileDiff } from "@pwncode/sdk/v2"
+import type { PartGroup } from "@pwncode/session-ui/message-part"
 import { Data, Equal } from "effect"
 
 export type SummaryDiff = SnapshotFileDiff & { file: string }

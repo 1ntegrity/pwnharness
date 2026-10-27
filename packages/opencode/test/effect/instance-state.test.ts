@@ -1,6 +1,6 @@
 import { expect } from "bun:test"
-import { CrossSpawnSpawner } from "@opencode-harness/core/cross-spawn-spawner"
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { CrossSpawnSpawner } from "@pwncode/core/cross-spawn-spawner"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import { $ } from "bun"
 import { Context, Deferred, Duration, Effect, Exit, Fiber, Layer } from "effect"
 import { InstanceState } from "@/effect/instance-state"

@@ -1,4 +1,4 @@
-import type { ReferenceGitSource, ReferenceLocalSource } from "@opencode-harness/sdk/v2/types"
+import type { ReferenceGitSource, ReferenceLocalSource } from "@pwncode/sdk/v2/types"
 import type { Hooks } from "./registration.js"
 
 export interface ReferenceDraft {

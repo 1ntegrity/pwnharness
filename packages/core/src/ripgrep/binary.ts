@@ -26,7 +26,7 @@ export namespace RipgrepBinary {
     readonly filepath: Effect.Effect<string, Error>
   }
 
-  export class Service extends Context.Service<Service, Interface>()("@opencode-harness/RipgrepBinary") {}
+  export class Service extends Context.Service<Service, Interface>()("@pwncode/RipgrepBinary") {}
 
   const layer = Layer.effect(
     Service,

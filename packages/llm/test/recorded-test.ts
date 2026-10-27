@@ -1,6 +1,6 @@
 import { NodeFileSystem } from "@effect/platform-node"
-import { HttpRecorder } from "@opencode-harness/http-recorder"
-import { HttpRecorderInternal } from "@opencode-harness/http-recorder/internal"
+import { HttpRecorder } from "@pwncode/http-recorder"
+import { HttpRecorderInternal } from "@pwncode/http-recorder/internal"
 import { Layer } from "effect"
 import { FetchHttpClient } from "effect/unstable/http"
 import * as path from "node:path"

@@ -10,8 +10,8 @@ export const VercelPlugin = define({
           if (item.provider.api.type !== "aisdk") continue
           if (item.provider.api.package !== "@ai-sdk/vercel") continue
           evt.provider.update(item.provider.id, (provider) => {
-            provider.request.headers["http-referer"] = "https://github.com/s0ld13rr/opencode-harness"
-            provider.request.headers["x-title"] = "opencode-harness"
+            provider.request.headers["http-referer"] = "https://github.com/s0ld13rr/pwncode"
+            provider.request.headers["x-title"] = "pwncode"
           })
         }
       }),

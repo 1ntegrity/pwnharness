@@ -1,4 +1,4 @@
-import { sampledChecksum } from "@opencode-harness/core/util/encode"
+import { sampledChecksum } from "@pwncode/core/util/encode"
 import {
   areFilesEqual,
   areOptionsEqual,

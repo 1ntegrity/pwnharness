@@ -1,27 +1,27 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import { and, eq, sql } from "drizzle-orm"
-import { Database } from "@opencode-harness/core/database/database"
-import { ProjectDirectoryTable, ProjectTable } from "@opencode-harness/core/project/sql"
-import { ProjectDirectories } from "@opencode-harness/core/project/directories"
-import { SessionTable } from "@opencode-harness/core/session/sql"
-import { WorkspaceTable } from "@opencode-harness/core/control-plane/workspace.sql"
-import { Flag } from "@opencode-harness/core/flag/flag"
+import { Database } from "@pwncode/core/database/database"
+import { ProjectDirectoryTable, ProjectTable } from "@pwncode/core/project/sql"
+import { ProjectDirectories } from "@pwncode/core/project/directories"
+import { SessionTable } from "@pwncode/core/session/sql"
+import { WorkspaceTable } from "@pwncode/core/control-plane/workspace.sql"
+import { Flag } from "@pwncode/core/flag/flag"
 import { GlobalBus } from "@/bus/global"
-import { which } from "@opencode-harness/core/util/which"
+import { which } from "@pwncode/core/util/which"
 import { Command } from "@/command"
 import { InstanceState } from "@/effect/instance-state"
 import { Effect, Layer, Scope, Context, Stream, Types, Schema } from "effect"
 import { ChildProcess, ChildProcessSpawner } from "effect/unstable/process"
-import { FSUtil } from "@opencode-harness/core/fs-util"
-import { AppProcess } from "@opencode-harness/core/process"
-import { ProjectV2 } from "@opencode-harness/core/project"
-import { CrossSpawnSpawner } from "@opencode-harness/core/cross-spawn-spawner"
-import { AbsolutePath } from "@opencode-harness/core/schema"
-import { serviceUse } from "@opencode-harness/core/effect/service-use"
+import { FSUtil } from "@pwncode/core/fs-util"
+import { AppProcess } from "@pwncode/core/process"
+import { ProjectV2 } from "@pwncode/core/project"
+import { CrossSpawnSpawner } from "@pwncode/core/cross-spawn-spawner"
+import { AbsolutePath } from "@pwncode/core/schema"
+import { serviceUse } from "@pwncode/core/effect/service-use"
 import { RuntimeFlags } from "@/effect/runtime-flags"
 import { EventV2Bridge } from "@/event-v2-bridge"
-import { EventV2 } from "@opencode-harness/core/event"
-import { Project } from "@opencode-harness/schema/project"
+import { EventV2 } from "@pwncode/core/event"
+import { Project } from "@pwncode/schema/project"
 
 export const Info = Project.Info
 export type Info = Types.DeepMutable<Schema.Schema.Type<typeof Info>>
@@ -99,7 +99,7 @@ export interface Interface {
   readonly removeSandbox: (id: ProjectV2.ID, directory: string) => Effect.Effect<void>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Project") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Project") {}
 
 type GitResult = { code: number; text: string; stderr: string }
 

@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js"
-import { Dialog } from "@opencode-harness/ui/dialog"
-import { Button } from "@opencode-harness/ui/button"
-import { useDialog } from "@opencode-harness/ui/context/dialog"
+import { Dialog } from "@pwncode/ui/dialog"
+import { Button } from "@pwncode/ui/button"
+import { useDialog } from "@pwncode/ui/context/dialog"
 import { useLanguage } from "@/context/language"
 import { useSettings } from "@/context/settings"
 

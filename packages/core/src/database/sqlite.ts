@@ -4,5 +4,5 @@ import { Context } from "effect"
 import type { drizzle } from "drizzle-orm/bun-sqlite"
 
 export type DrizzleClient = ReturnType<typeof drizzle>
-export class Native extends Context.Service<Native, unknown>()("@opencode-harness/core/database/SqliteNative") {}
-export class Drizzle extends Context.Service<Drizzle, DrizzleClient>()("@opencode-harness/core/database/SqliteDrizzle") {}
+export class Native extends Context.Service<Native, unknown>()("@pwncode/core/database/SqliteNative") {}
+export class Drizzle extends Context.Service<Drizzle, DrizzleClient>()("@pwncode/core/database/SqliteDrizzle") {}

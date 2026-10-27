@@ -10,7 +10,7 @@ export class InstanceContextMiddleware extends HttpApiMiddleware.Service<
   {
     requires: WorkspaceRouteContext
   }
->()("@opencode-harness/ExperimentalHttpApiInstanceContext") {}
+>()("@pwncode/ExperimentalHttpApiInstanceContext") {}
 
 function decode(input: string): string {
   try {

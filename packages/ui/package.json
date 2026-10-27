@@ -1,11 +1,11 @@
 {
-  "name": "@opencode-harness/ui",
+  "name": "@pwncode/ui",
   "version": "0.1.0",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/s0ld13rr/opencode-harness.git",
+    "url": "git+https://github.com/s0ld13rr/pwncode.git",
     "directory": "packages/ui"
   },
   "publishConfig": {

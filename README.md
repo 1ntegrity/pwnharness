@@ -1,4 +1,4 @@
-# opencode-harness
+# pwncode
 
 Standalone agent harness: the OpenCode engine extracted from
 [PentestCode](https://github.com/s0ld13rr/pentestcode) (`s0ld13rr/pentestcode` @ `63e379c`),
@@ -19,14 +19,14 @@ headless server + TUI — with the entire penetration-testing layer removed:
   the deterministic orchestrator, pentest slash-commands, skills/phases/playbooks, TUI
   engagement surfaces
 
-- everything renamed `@pentestcode/*` → `@opencode-harness/*`; config/data dirs are
-  `opencode-harness.json(c)` / `.opencode-harness/` / `~/.opencode-harness/` (legacy
+- everything renamed `@pentestcode/*` → `@pwncode/*`; config/data dirs are
+  `pwncode.json(c)` / `.pwncode/` / `~/.pwncode/` (legacy
   `opencode.*` names still accepted), so it does not touch an installed PentestCode
 
 ## Quickstart (2 minutes)
 
 ```bash
-git clone <this-repo> && cd opencode-harness
+git clone <this-repo> && cd pwncode
 bun install                                # needs bun >= 1.3
 bun run dev serve --port 4097              # headless server on 127.0.0.1:4097
 ```
@@ -34,8 +34,8 @@ bun run dev serve --port 4097              # headless server on 127.0.0.1:4097
 Point any OpenAI-compatible provider at it:
 
 ```bash
-mkdir -p ~/.config/opencode-harness ~/.local/share/opencode-harness
-cat > ~/.config/opencode-harness/opencode-harness.json <<'EOF'
+mkdir -p ~/.config/pwncode ~/.local/share/pwncode
+cat > ~/.config/pwncode/pwncode.json <<'EOF'
 {
   "model": "my-provider/my-model",
   "provider": {
@@ -46,8 +46,8 @@ cat > ~/.config/opencode-harness/opencode-harness.json <<'EOF'
   }
 }
 EOF
-echo '{"my-provider": {"type": "api", "key": "sk-..."}}' > ~/.local/share/opencode-harness/auth.json
-chmod 600 ~/.local/share/opencode-harness/auth.json
+echo '{"my-provider": {"type": "api", "key": "sk-..."}}' > ~/.local/share/pwncode/auth.json
+chmod 600 ~/.local/share/pwncode/auth.json
 ```
 
 Verify: `curl -X POST localhost:4097/session -d '{}' -H 'content-type: application/json'`
@@ -56,7 +56,7 @@ API docs: `GET /doc`.
 
 Default agents: `build` (primary), `plan` (read-only planning), plus the internal
 compaction/title/summary agents. Bundled-skill seeding is content-agnostic: the repo
-ships zero skills; drop skill packs into `~/.opencode-harness/skills/` or wire
+ships zero skills; drop skill packs into `~/.pwncode/skills/` or wire
 `skills.paths` in config.
 
 ## Run

@@ -1,4 +1,4 @@
-import { Reference } from "@opencode-harness/core/reference"
+import { Reference } from "@pwncode/core/reference"
 import { HttpApiBuilder } from "effect/unstable/httpapi"
 import { Api } from "../api"
 import { response } from "../location"

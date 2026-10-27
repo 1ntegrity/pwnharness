@@ -2,8 +2,8 @@ import { describe, expect, test } from "bun:test"
 import { Effect } from "effect"
 import { ProviderTransform } from "@/provider/transform"
 import { LLMRequestPrep } from "@/session/llm/request"
-import { ProviderV2 } from "@opencode-harness/core/provider"
-import { ModelV2 } from "@opencode-harness/core/model"
+import { ProviderV2 } from "@pwncode/core/provider"
+import { ModelV2 } from "@pwncode/core/model"
 import { jsonSchema } from "ai"
 
 describe("ProviderTransform.options - setCacheKey", () => {

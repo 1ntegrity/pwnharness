@@ -1,6 +1,6 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { SessionV1 } from "@opencode-harness/core/v1/session"
-import { ConfigV1 } from "@opencode-harness/core/v1/config/config"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { SessionV1 } from "@pwncode/core/v1/session"
+import { ConfigV1 } from "@pwncode/core/v1/config/config"
 import { Session } from "./session"
 import { Truncate } from "../tool/truncate"
 import { SessionID, MessageID, PartID } from "./schema"
@@ -16,13 +16,13 @@ import { NotFoundError } from "@/storage/storage"
 import { Effect, Layer, Context } from "effect"
 import { InstanceState } from "@/effect/instance-state"
 import { isOverflow as overflow, usable } from "./overflow"
-import { serviceUse } from "@opencode-harness/core/effect/service-use"
+import { serviceUse } from "@pwncode/core/effect/service-use"
 import { RuntimeFlags } from "@/effect/runtime-flags"
 import { EventV2Bridge } from "@/event-v2-bridge"
-import { ProviderV2 } from "@opencode-harness/core/provider"
-import { ModelV2 } from "@opencode-harness/core/model"
-import { buildPrompt } from "@opencode-harness/core/session/compaction"
-import { SessionCompactionEvent } from "@opencode-harness/schema/session-compaction-event"
+import { ProviderV2 } from "@pwncode/core/provider"
+import { ModelV2 } from "@pwncode/core/model"
+import { buildPrompt } from "@pwncode/core/session/compaction"
+import { SessionCompactionEvent } from "@pwncode/schema/session-compaction-event"
 
 export const Event = SessionCompactionEvent
 
@@ -198,7 +198,7 @@ export interface Interface {
   }) => Effect.Effect<void>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/SessionCompaction") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/SessionCompaction") {}
 
 export const use = serviceUse(Service)
 

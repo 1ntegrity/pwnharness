@@ -1,9 +1,9 @@
 import { EOL } from "os"
 import { Effect } from "effect"
-import { ModelsDev } from "@opencode-harness/core/models-dev"
+import { ModelsDev } from "@pwncode/core/models-dev"
 import { effectCmd, fail } from "../effect-cmd"
 import { UI } from "../ui"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { ProviderV2 } from "@pwncode/core/provider"
 
 export const ModelsCommand = effectCmd({
   command: "models [provider]",

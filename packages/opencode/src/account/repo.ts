@@ -1,10 +1,10 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import { eq } from "drizzle-orm"
-import { serviceUse } from "@opencode-harness/core/effect/service-use"
+import { serviceUse } from "@pwncode/core/effect/service-use"
 import { Effect, Layer, Option, Schema, Context } from "effect"
 
-import { Database } from "@opencode-harness/core/database/database"
-import { AccountStateTable, AccountTable } from "@opencode-harness/core/account/sql"
+import { Database } from "@pwncode/core/database/database"
+import { AccountStateTable, AccountTable } from "@pwncode/core/account/sql"
 import { AccessToken, AccountID, AccountRepoError, Info, OrgID, RefreshToken } from "./schema"
 import { normalizeServerUrl } from "./url"
 
@@ -35,7 +35,7 @@ export interface Interface {
   }) => Effect.Effect<void, AccountRepoError>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/AccountRepo") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/AccountRepo") {}
 
 export const use = serviceUse(Service)
 

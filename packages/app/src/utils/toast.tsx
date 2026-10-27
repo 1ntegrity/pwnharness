@@ -1,6 +1,6 @@
-import { Icon, type IconProps } from "@opencode-harness/ui/icon"
-import { Toast, showToast as showLegacyToast, type ToastOptions, type ToastVariant } from "@opencode-harness/ui/toast"
-import { ToastV2, showToastV2 } from "@opencode-harness/ui/v2/toast-v2"
+import { Icon, type IconProps } from "@pwncode/ui/icon"
+import { Toast, showToast as showLegacyToast, type ToastOptions, type ToastVariant } from "@pwncode/ui/toast"
+import { ToastV2, showToastV2 } from "@pwncode/ui/v2/toast-v2"
 
 let v2 = false
 

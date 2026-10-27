@@ -1,6 +1,6 @@
 import { Effect, Schema } from "effect"
 import * as path from "path"
-import { FSUtil } from "@opencode-harness/core/fs-util"
+import { FSUtil } from "@pwncode/core/fs-util"
 import * as Bom from "../util/bom"
 
 export const PatchSchema = Schema.Struct({

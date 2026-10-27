@@ -1,5 +1,5 @@
 import { Component, Show } from "solid-js"
-import { Icon } from "@opencode-harness/ui/icon"
+import { Icon } from "@pwncode/ui/icon"
 
 type PromptDragOverlayProps = {
   type: "image" | "@mention" | null

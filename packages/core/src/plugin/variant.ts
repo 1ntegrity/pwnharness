@@ -1,6 +1,6 @@
 export * as VariantPlugin from "./variant"
 
-import type { ModelV2Info } from "@opencode-harness/sdk/v2/types"
+import type { ModelV2Info } from "@pwncode/sdk/v2/types"
 import { Effect } from "effect"
 import { define } from "./internal"
 

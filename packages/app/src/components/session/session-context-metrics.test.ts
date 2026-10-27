@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import type { Message } from "@opencode-harness/sdk/v2/client"
+import type { Message } from "@pwncode/sdk/v2/client"
 import { getSessionContext, getSessionTokenTotal } from "./session-context-metrics"
 
 const assistant = (

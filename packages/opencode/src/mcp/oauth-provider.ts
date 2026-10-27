@@ -43,8 +43,8 @@ export class McpOAuthProvider implements OAuthClientProvider {
   get clientMetadata(): OAuthClientMetadata {
     return {
       redirect_uris: [this.redirectUrl],
-      client_name: "OpenCode Harness",
-      client_uri: "https://github.com/s0ld13rr/opencode-harness",
+      client_name: "PwnCode",
+      client_uri: "https://github.com/s0ld13rr/pwncode",
       grant_types: ["authorization_code", "refresh_token"],
       response_types: ["code"],
       token_endpoint_auth_method: this.config.clientSecret ? "client_secret_post" : "none",

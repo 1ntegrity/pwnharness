@@ -1,13 +1,13 @@
-import { makeDefaultApi } from "@opencode-harness/protocol/api"
-import { InvalidRequestError, SessionNotFoundError } from "@opencode-harness/protocol/errors"
+import { makeDefaultApi } from "@pwncode/protocol/api"
+import { InvalidRequestError, SessionNotFoundError } from "@pwncode/protocol/errors"
 import { HttpApiMiddleware } from "effect/unstable/httpapi"
 
 class LocationMiddleware extends HttpApiMiddleware.Service<LocationMiddleware>()(
-  "@opencode-harness/client/LocationMiddleware",
+  "@pwncode/client/LocationMiddleware",
 ) {}
 
 class SessionLocationMiddleware extends HttpApiMiddleware.Service<SessionLocationMiddleware>()(
-  "@opencode-harness/client/SessionLocationMiddleware",
+  "@pwncode/client/SessionLocationMiddleware",
   { error: [InvalidRequestError, SessionNotFoundError] },
 ) {}
 

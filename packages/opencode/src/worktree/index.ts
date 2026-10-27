@@ -1,22 +1,22 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { path } from "@opencode-harness/core/effect/app-node-platform"
-import { Global } from "@opencode-harness/core/global"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { path } from "@pwncode/core/effect/app-node-platform"
+import { Global } from "@pwncode/core/global"
 import { InstanceStore } from "@/project/instance-store"
 import { Project } from "@/project/project"
-import { Database } from "@opencode-harness/core/database/database"
+import { Database } from "@pwncode/core/database/database"
 import { eq } from "drizzle-orm"
-import { ProjectTable } from "@opencode-harness/core/project/sql"
-import type { ProjectV2 } from "@opencode-harness/core/project"
-import { Slug } from "@opencode-harness/core/util/slug"
+import { ProjectTable } from "@pwncode/core/project/sql"
+import type { ProjectV2 } from "@pwncode/core/project"
+import { Slug } from "@pwncode/core/util/slug"
 import { errorMessage } from "../util/error"
 import { GlobalBus } from "@/bus/global"
 import { Git } from "@/git"
 import { Effect, Layer, Path, Schema, Scope, Context } from "effect"
 import { ChildProcess } from "effect/unstable/process"
-import { FSUtil } from "@opencode-harness/core/fs-util"
-import { AppProcess } from "@opencode-harness/core/process"
+import { FSUtil } from "@pwncode/core/fs-util"
+import { AppProcess } from "@pwncode/core/process"
 import { InstanceState } from "@/effect/instance-state"
-import { WorktreeEvent } from "@opencode-harness/schema/worktree-event"
+import { WorktreeEvent } from "@pwncode/schema/worktree-event"
 
 export const Event = WorktreeEvent
 
@@ -125,7 +125,7 @@ export interface Interface {
   readonly reset: (input: ResetInput) => Effect.Effect<boolean, Error>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Worktree") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Worktree") {}
 
 type GitResult = { code: number; text: string; stderr: string }
 
@@ -180,7 +180,7 @@ const layer: Layer.Layer<
       const ctx = yield* InstanceState.context
       for (const attempt of Array.from({ length: MAX_NAME_ATTEMPTS }, (_, i) => i)) {
         const name = input.name ? (attempt === 0 ? input.name : `${input.name}-${Slug.create()}`) : Slug.create()
-        const branch = input.detached ? undefined : `opencode-harness/${name}`
+        const branch = input.detached ? undefined : `pwncode/${name}`
         const directory = pathSvc.join(input.root, name)
 
         if (yield* fs.exists(directory).pipe(Effect.orDie)) continue

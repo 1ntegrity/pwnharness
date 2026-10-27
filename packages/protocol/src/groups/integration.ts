@@ -1,5 +1,5 @@
-import { Integration } from "@opencode-harness/schema/integration"
-import { Location } from "@opencode-harness/schema/location"
+import { Integration } from "@pwncode/schema/integration"
+import { Location } from "@pwncode/schema/location"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, HttpApiSchema, OpenApi } from "effect/unstable/httpapi"
 import { InvalidRequestError } from "../errors"

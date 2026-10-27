@@ -1,11 +1,11 @@
 export * as SessionRunnerModel from "./model"
 
 import { makeLocationNode } from "../../effect/app-node"
-import { type Model } from "@opencode-harness/llm"
-import * as AnthropicMessages from "@opencode-harness/llm/protocols/anthropic-messages"
-import * as OpenAICompatibleChat from "@opencode-harness/llm/protocols/openai-compatible-chat"
-import * as OpenAIResponses from "@opencode-harness/llm/protocols/openai-responses"
-import { Auth, type AnyRoute } from "@opencode-harness/llm/route"
+import { type Model } from "@pwncode/llm"
+import * as AnthropicMessages from "@pwncode/llm/protocols/anthropic-messages"
+import * as OpenAICompatibleChat from "@pwncode/llm/protocols/openai-compatible-chat"
+import * as OpenAIResponses from "@pwncode/llm/protocols/openai-responses"
+import { Auth, type AnyRoute } from "@pwncode/llm/route"
 import { Context, Effect, Layer, Schema } from "effect"
 import { produce } from "immer"
 import { Catalog } from "../../catalog"
@@ -75,7 +75,7 @@ export interface Interface {
   readonly resolve: (session: SessionSchema.Info) => Effect.Effect<Model, Error>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/v2/SessionRunnerModel") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/v2/SessionRunnerModel") {}
 
 /** Test or embedding seam for supplying a model resolver directly. */
 export const layerWith = (resolve: Interface["resolve"]) => Layer.succeed(Service, Service.of({ resolve }))

@@ -1,5 +1,5 @@
-import { Session } from "@opencode-harness/schema/session"
-import { SessionMessage } from "@opencode-harness/schema/session-message"
+import { Session } from "@pwncode/schema/session"
+import { SessionMessage } from "@pwncode/schema/session-message"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
 import { InvalidCursorError, SessionNotFoundError, UnknownError } from "../errors"

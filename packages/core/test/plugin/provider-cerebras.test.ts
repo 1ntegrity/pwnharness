@@ -1,12 +1,12 @@
-import { AISDK } from "@opencode-harness/core/aisdk"
+import { AISDK } from "@pwncode/core/aisdk"
 import { describe, expect, mock } from "bun:test"
 import { Effect } from "effect"
-import { Catalog } from "@opencode-harness/core/catalog"
-import { ModelV2 } from "@opencode-harness/core/model"
-import { PluginV2 } from "@opencode-harness/core/plugin"
-import { PluginHost } from "@opencode-harness/core/plugin/host"
-import { CerebrasPlugin } from "@opencode-harness/core/plugin/provider/cerebras"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { Catalog } from "@pwncode/core/catalog"
+import { ModelV2 } from "@pwncode/core/model"
+import { PluginV2 } from "@pwncode/core/plugin"
+import { PluginHost } from "@pwncode/core/plugin/host"
+import { CerebrasPlugin } from "@pwncode/core/plugin/provider/cerebras"
+import { ProviderV2 } from "@pwncode/core/provider"
 import { testEffect } from "../lib/effect"
 import { PluginTestLayer } from "./fixture"
 
@@ -43,7 +43,7 @@ describe("CerebrasPlugin", () => {
       yield* addPlugin()
       expect((yield* catalog.provider.get(ProviderV2.ID.make("cerebras")))?.request.headers).toEqual({
         Existing: "1",
-        "X-Cerebras-3rd-Party-Integration": "opencode-harness",
+        "X-Cerebras-3rd-Party-Integration": "pwncode",
       })
     }),
   )

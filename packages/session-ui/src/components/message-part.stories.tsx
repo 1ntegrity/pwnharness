@@ -1,6 +1,6 @@
 // @ts-nocheck
 import * as mod from "./message-part"
-import { create } from "@opencode-harness/ui/storybook/scaffold"
+import { create } from "@pwncode/ui/storybook/scaffold"
 
 const story = create({ title: "UI/MessagePart", mod })
 export default { title: "UI/MessagePart", id: "components-message-part", component: story.meta.component }

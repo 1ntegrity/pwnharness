@@ -2,14 +2,14 @@ import { describe, expect, test } from "bun:test"
 import { Duration, Effect, Fiber, Layer, Schema } from "effect"
 import * as TestClock from "effect/testing/TestClock"
 import { HttpClient, HttpClientRequest, HttpClientResponse } from "effect/unstable/http"
-import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { LayerNodePlatform } from "@opencode-harness/core/effect/app-node-platform"
-import { PermissionV2 } from "@opencode-harness/core/permission"
-import { SessionV2 } from "@opencode-harness/core/session"
-import { ToolRegistry } from "@opencode-harness/core/tool/registry"
-import { WebFetchTool } from "@opencode-harness/core/tool/webfetch"
-import { ToolOutputStore } from "@opencode-harness/core/tool-output-store"
+import { AppNodeBuilder } from "@pwncode/core/effect/app-node-builder"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { LayerNodePlatform } from "@pwncode/core/effect/app-node-platform"
+import { PermissionV2 } from "@pwncode/core/permission"
+import { SessionV2 } from "@pwncode/core/session"
+import { ToolRegistry } from "@pwncode/core/tool/registry"
+import { WebFetchTool } from "@pwncode/core/tool/webfetch"
+import { ToolOutputStore } from "@pwncode/core/tool-output-store"
 import { testEffect } from "./lib/effect"
 import { toolIdentity, executeTool, settleTool, toolDefinitions } from "./lib/tool"
 
@@ -260,7 +260,7 @@ describe("WebFetchTool registration", () => {
       })
       expect(requests).toHaveLength(2)
       expect(requests[0]?.headers["user-agent"]).toContain("Mozilla/5.0")
-      expect(requests[1]?.headers["user-agent"]).toBe("opencode-harness")
+      expect(requests[1]?.headers["user-agent"]).toBe("pwncode")
     }),
   )
 

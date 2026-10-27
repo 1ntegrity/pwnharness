@@ -1,5 +1,5 @@
 import { rm } from "fs/promises"
-import { Database } from "@opencode-harness/core/database/database"
+import { Database } from "@pwncode/core/database/database"
 import { disposeAllInstances } from "./fixture"
 
 export async function resetDatabase() {

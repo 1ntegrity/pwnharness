@@ -2,7 +2,7 @@ export * as QuestionV2 from "./question"
 
 import { makeLocationNode } from "./effect/app-node"
 import { Context, Deferred, Effect, Layer, Schema } from "effect"
-import { Question } from "@opencode-harness/schema/question"
+import { Question } from "@pwncode/schema/question"
 import { EventV2 } from "./event"
 import { SessionSchema } from "./session/schema"
 
@@ -60,7 +60,7 @@ export interface Interface {
   readonly list: () => Effect.Effect<ReadonlyArray<Request>>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/v2/Question") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/v2/Question") {}
 
 interface Pending {
   readonly request: Request

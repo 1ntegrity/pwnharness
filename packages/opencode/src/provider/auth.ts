@@ -1,11 +1,11 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import type { AuthOAuthResult, Hooks } from "@opencode-harness/plugin"
-import { serviceUse } from "@opencode-harness/core/effect/service-use"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import type { AuthOAuthResult, Hooks } from "@pwncode/plugin"
+import { serviceUse } from "@pwncode/core/effect/service-use"
 import { Auth } from "@/auth"
 import { InstanceState } from "@/effect/instance-state"
-import { optional } from "@opencode-harness/core/schema"
+import { optional } from "@pwncode/core/schema"
 import { Plugin } from "../plugin"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { ProviderV2 } from "@pwncode/core/provider"
 import { Array as Arr, Effect, Layer, Record, Result, Context, Schema } from "effect"
 
 const When = Schema.Struct({
@@ -102,7 +102,7 @@ interface State {
   pending: Map<ProviderV2.ID, AuthOAuthResult>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/ProviderAuth") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/ProviderAuth") {}
 
 export const use = serviceUse(Service)
 

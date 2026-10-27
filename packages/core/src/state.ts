@@ -26,7 +26,7 @@ export interface Transformable<DraftApi> {
   readonly reload: Reload
 }
 
-const CurrentBatch = Context.Reference<Set<Reload> | undefined>("@opencode-harness/State/CurrentBatch", {
+const CurrentBatch = Context.Reference<Set<Reload> | undefined>("@pwncode/State/CurrentBatch", {
   defaultValue: () => undefined,
 })
 

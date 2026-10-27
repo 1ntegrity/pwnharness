@@ -1,1 +1,1 @@
-export { TuiEvent } from "@opencode-harness/schema/tui-event"
+export { TuiEvent } from "@pwncode/schema/tui-event"

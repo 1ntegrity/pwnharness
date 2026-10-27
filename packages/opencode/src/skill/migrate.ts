@@ -6,7 +6,7 @@ import { SkillManifest } from "./manifest"
 export * as SkillMigrate from "./migrate"
 
 // One-time migration from the pre-layered flat layout (SKILL.md files directly
-// under ~/.opencode-harness/skills/{phases,services,playbooks,...}) to the layered
+// under ~/.pwncode/skills/{phases,services,playbooks,...}) to the layered
 // layout. Non-destructive: everything is backed up first, pristine bundled
 // copies are dropped (reseeded into bundled/), and modified/unknown skills are
 // relocated into user/ so customizations survive. Idempotent — after the first
@@ -79,7 +79,7 @@ export async function run(home: string): Promise<MigrationReport | null> {
 
   const manifest = await readBundledManifestJson(home)
   const version = manifest?.bundleVersion ?? "unknown"
-  const backupDir = path.join(home, ".opencode-harness", `skills.bak-${version}`)
+  const backupDir = path.join(home, ".pwncode", `skills.bak-${version}`)
   const userRoot = SkillManifest.userDir(home)
 
   const dropped: string[] = []
@@ -142,7 +142,7 @@ function renderReport(input: {
   const lines = [
     `# Skills layout migration`,
     ``,
-    `The flat \`~/.opencode-harness/skills\` layout was migrated to the layered layout`,
+    `The flat \`~/.pwncode/skills\` layout was migrated to the layered layout`,
     `(bundled/ · packs/ · user/). A full backup was taken first — nothing was lost.`,
     ``,
     `- Bundle version: \`${input.version}\``,

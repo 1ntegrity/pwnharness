@@ -1,4 +1,4 @@
-import { PermissionV1 } from "@opencode-harness/core/v1/permission"
+import { PermissionV1 } from "@pwncode/core/v1/permission"
 import { Permission } from "@/permission"
 import { Effect } from "effect"
 import { HttpApiBuilder } from "effect/unstable/httpapi"

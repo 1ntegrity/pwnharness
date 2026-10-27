@@ -1,13 +1,13 @@
-import { Pty } from "@opencode-harness/schema/pty"
-import { PtyTicket } from "@opencode-harness/schema/pty-ticket"
-import { Location } from "@opencode-harness/schema/location"
+import { Pty } from "@pwncode/schema/pty"
+import { PtyTicket } from "@pwncode/schema/pty-ticket"
+import { Location } from "@pwncode/schema/location"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, HttpApiSchema, OpenApi } from "effect/unstable/httpapi"
 import { ForbiddenError, PtyNotFoundError } from "../errors"
 import { LocationQuery, locationQueryOpenApi } from "./location"
 
 export const PTY_CONNECT_TICKET_QUERY = "ticket"
-export const PTY_CONNECT_TOKEN_HEADER = "x-opencode-harness-ticket"
+export const PTY_CONNECT_TOKEN_HEADER = "x-pwncode-ticket"
 export const PTY_CONNECT_TOKEN_HEADER_VALUE = "1"
 
 const PTY_CONNECT_PATH = /^\/api\/pty\/[^/]+\/connect$/

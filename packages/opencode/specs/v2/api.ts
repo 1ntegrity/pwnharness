@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { OpenCode } from "@opencode-harness/core"
-import { ReadTool } from "@opencode-harness/core/tools"
+import { OpenCode } from "@pwncode/core"
+import { ReadTool } from "@pwncode/core/tools"
 
 const opencode = OpenCode.make({})
 

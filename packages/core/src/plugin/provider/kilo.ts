@@ -11,8 +11,8 @@ export const KiloPlugin = define({
           if (item.provider.api.package !== "@ai-sdk/openai-compatible") continue
           if (item.provider.api.url !== "https://api.kilo.ai/api/gateway") continue
           evt.provider.update(item.provider.id, (provider) => {
-            provider.request.headers["HTTP-Referer"] = "https://github.com/s0ld13rr/opencode-harness"
-            provider.request.headers["X-Title"] = "opencode-harness"
+            provider.request.headers["HTTP-Referer"] = "https://github.com/s0ld13rr/pwncode"
+            provider.request.headers["X-Title"] = "pwncode"
           })
         }
       }),

@@ -1,7 +1,7 @@
 import { Component, createSignal, startTransition } from "solid-js"
-import { Dialog } from "@opencode-harness/ui/v2/dialog-v2"
-import { TabsV2 } from "@opencode-harness/ui/v2/tabs-v2"
-import { Icon } from "@opencode-harness/ui/icon"
+import { Dialog } from "@pwncode/ui/v2/dialog-v2"
+import { TabsV2 } from "@pwncode/ui/v2/tabs-v2"
+import { Icon } from "@pwncode/ui/icon"
 import { useLanguage } from "@/context/language"
 import { usePlatform } from "@/context/platform"
 import { SettingsGeneralV2 } from "./general"
@@ -10,7 +10,7 @@ import { SettingsProvidersV2 } from "./providers"
 import { SettingsModelsV2 } from "./models"
 import "./settings-v2.css"
 import { SettingsServersV2 } from "./servers"
-import { useDialog } from "@opencode-harness/ui/context/dialog"
+import { useDialog } from "@pwncode/ui/context/dialog"
 
 export const DialogSettings: Component<{
   sessionID?: string

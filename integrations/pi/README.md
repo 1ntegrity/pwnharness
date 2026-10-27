@@ -14,7 +14,7 @@ The extension registers one tool, `harness`. Prerequisites:
 
 - the harness server is running: `bun run dev serve --port 4097` (or the
   provided systemd unit)
-- a provider is configured (`~/.config/opencode-harness/opencode-harness.json`
+- a provider is configured (`~/.config/pwncode/pwncode.json`
   + `auth.json` — see the root README Quickstart)
 
 ## Environment

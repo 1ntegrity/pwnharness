@@ -1,10 +1,10 @@
-import { SessionMessage } from "@opencode-harness/schema/session-message"
-import { SessionInput } from "@opencode-harness/schema/session-input"
-import { PromptInput } from "@opencode-harness/schema/prompt-input"
-import { Session } from "@opencode-harness/schema/session"
-import { Project } from "@opencode-harness/schema/project"
-import { AbsolutePath, NonNegativeInt, PositiveInt, RelativePath, statics } from "@opencode-harness/schema/schema"
-import { Workspace } from "@opencode-harness/schema/workspace"
+import { SessionMessage } from "@pwncode/schema/session-message"
+import { SessionInput } from "@pwncode/schema/session-input"
+import { PromptInput } from "@pwncode/schema/prompt-input"
+import { Session } from "@pwncode/schema/session"
+import { Project } from "@pwncode/schema/project"
+import { AbsolutePath, NonNegativeInt, PositiveInt, RelativePath, statics } from "@pwncode/schema/schema"
+import { Workspace } from "@pwncode/schema/workspace"
 import { Context, Effect, Encoding, Result, Schema, Struct } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, HttpApiMiddleware, HttpApiSchema, OpenApi } from "effect/unstable/httpapi"
 import {
@@ -16,11 +16,11 @@ import {
   SessionNotFoundError,
   UnknownError,
 } from "../errors"
-import { Agent } from "@opencode-harness/schema/agent"
-import { Model } from "@opencode-harness/schema/model"
-import { Location } from "@opencode-harness/schema/location"
-import { Revert } from "@opencode-harness/schema/revert"
-import { SessionEvent } from "@opencode-harness/schema/session-event"
+import { Agent } from "@pwncode/schema/agent"
+import { Model } from "@pwncode/schema/model"
+import { Location } from "@pwncode/schema/location"
+import { Revert } from "@pwncode/schema/revert"
+import { SessionEvent } from "@pwncode/schema/session-event"
 
 const SessionsQueryFields = {
   workspace: Workspace.ID.pipe(Schema.optional),

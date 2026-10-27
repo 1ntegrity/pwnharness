@@ -1,4 +1,4 @@
-import type { UserMessage } from "@opencode-harness/sdk/v2"
+import type { UserMessage } from "@pwncode/sdk/v2"
 
 type Local = {
   session: {

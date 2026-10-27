@@ -1,4 +1,4 @@
-import type { Model } from "@opencode-harness/sdk/v2"
+import type { Model } from "@pwncode/sdk/v2"
 import { Option, Schema } from "effect"
 
 const item = Schema.Struct({

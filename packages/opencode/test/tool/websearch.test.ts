@@ -5,7 +5,7 @@ import { selectWebSearchProvider, webSearchModelName, webSearchProviderLabel } f
 
 import { webSearchEnabled } from "../../src/tool/registry"
 import { it } from "../lib/effect"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { ProviderV2 } from "@pwncode/core/provider"
 
 const SESSION_ID = "ses_0196aabbccddeeff001122334455"
 

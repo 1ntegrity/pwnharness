@@ -1,4 +1,4 @@
-import { checksum } from "@opencode-harness/core/util/encode"
+import { checksum } from "@pwncode/core/util/encode"
 import DOMPurify from "dompurify"
 import { project } from "./markdown-stream"
 

@@ -1,9 +1,9 @@
 import { EOL } from "os"
 import { Effect } from "effect"
-import { FileSystem } from "@opencode-harness/core/filesystem"
-import { LocationServiceMap, locationServiceMapLayer } from "@opencode-harness/core/location-services"
-import { Location } from "@opencode-harness/core/location"
-import { AbsolutePath, RelativePath } from "@opencode-harness/core/schema"
+import { FileSystem } from "@pwncode/core/filesystem"
+import { LocationServiceMap, locationServiceMapLayer } from "@pwncode/core/location-services"
+import { Location } from "@pwncode/core/location"
+import { AbsolutePath, RelativePath } from "@pwncode/core/schema"
 import { effectCmd } from "../../effect-cmd"
 import { cmd } from "../cmd"
 

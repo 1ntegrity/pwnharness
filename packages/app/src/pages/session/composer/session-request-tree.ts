@@ -1,4 +1,4 @@
-import type { PermissionRequest, QuestionRequest, Session } from "@opencode-harness/sdk/v2/client"
+import type { PermissionRequest, QuestionRequest, Session } from "@pwncode/sdk/v2/client"
 
 function sessionTreeRequest<T>(
   session: Session[],

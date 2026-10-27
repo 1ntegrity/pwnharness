@@ -1,8 +1,8 @@
-import { UserMessage } from "@opencode-harness/sdk/v2"
+import { UserMessage } from "@pwncode/sdk/v2"
 import { HoverCard } from "@kobalte/core/hover-card"
 import { ComponentProps, For, Match, Show, createSignal, splitProps, Switch } from "solid-js"
-import { DiffChanges } from "@opencode-harness/ui/diff-changes"
-import { useI18n } from "@opencode-harness/ui/context/i18n"
+import { DiffChanges } from "@pwncode/ui/diff-changes"
+import { useI18n } from "@pwncode/ui/context/i18n"
 
 export function MessageNav(
   props: ComponentProps<"ul"> & {

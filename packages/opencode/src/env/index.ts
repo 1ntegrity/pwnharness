@@ -1,6 +1,6 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import { Context, Effect, Layer } from "effect"
-import { serviceUse } from "@opencode-harness/core/effect/service-use"
+import { serviceUse } from "@pwncode/core/effect/service-use"
 import { InstanceState } from "@/effect/instance-state"
 
 type State = Record<string, string | undefined>
@@ -12,7 +12,7 @@ export interface Interface {
   readonly remove: (key: string) => Effect.Effect<void>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Env") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Env") {}
 
 export const use = serviceUse(Service)
 

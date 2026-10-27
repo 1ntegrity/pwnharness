@@ -1,5 +1,5 @@
 {
-  "name": "@opencode-harness/session-ui",
+  "name": "@pwncode/session-ui",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -35,9 +35,9 @@
   },
   "dependencies": {
     "@kobalte/core": "catalog:",
-    "@opencode-harness/core": "workspace:*",
-    "@opencode-harness/sdk": "workspace:*",
-    "@opencode-harness/ui": "workspace:*",
+    "@pwncode/core": "workspace:*",
+    "@pwncode/sdk": "workspace:*",
+    "@pwncode/ui": "workspace:*",
     "@pierre/diffs": "catalog:",
     "@shikijs/stream": "catalog:",
     "@shikijs/transformers": "3.9.2",

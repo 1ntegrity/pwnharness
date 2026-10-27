@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "opencode-harness",
+  "name": "pwncode",
   "description": "Standalone agent harness extracted from PentestCode (a hard fork of OpenCode)",
   "private": true,
   "type": "module",
@@ -96,9 +96,9 @@
     "turbo": "2.10.2"
   },
   "dependencies": {
-    "@opencode-harness/plugin": "workspace:*",
-    "@opencode-harness/script": "workspace:*",
-    "@opencode-harness/sdk": "workspace:*",
+    "@pwncode/plugin": "workspace:*",
+    "@pwncode/script": "workspace:*",
+    "@pwncode/sdk": "workspace:*",
     "typescript": "catalog:"
   },
   "license": "MIT",

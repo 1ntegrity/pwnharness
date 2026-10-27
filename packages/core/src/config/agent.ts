@@ -1,7 +1,7 @@
 export * as ConfigAgent from "./agent"
 
 import { Schema } from "effect"
-import { Permission } from "@opencode-harness/schema/permission"
+import { Permission } from "@pwncode/schema/permission"
 import { ConfigProvider } from "./provider"
 import { PositiveInt } from "../schema"
 

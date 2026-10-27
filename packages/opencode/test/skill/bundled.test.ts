@@ -1,7 +1,7 @@
 import { describe, expect } from "bun:test"
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { FSUtil } from "@opencode-harness/core/fs-util"
-import { Global } from "@opencode-harness/core/global"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { FSUtil } from "@pwncode/core/fs-util"
+import { Global } from "@pwncode/core/global"
 import { Effect } from "effect"
 import { BundledSkills } from "../../src/skill/bundled"
 import { testEffect } from "../lib/effect"
@@ -40,12 +40,12 @@ describe("bundled skill seeding", () => {
       const fsys = yield* FSUtil.Service
       const home = yield* Effect.promise(() => fs.mkdtemp(path.join(os.tmpdir(), "pc-home-")))
       const global = Global.make({ home })
-      const bundledDir = path.join(home, ".opencode-harness", "skills", "bundled")
+      const bundledDir = path.join(home, ".pwncode", "skills", "bundled")
       const smb = path.join(bundledDir, "services", "smb", "SKILL.md")
       const ftp = path.join(bundledDir, "services", "ftp", "SKILL.md")
 
       // A pre-existing user skill must survive every seed.
-      const userSkill = path.join(home, ".opencode-harness", "skills", "user", "mine", "SKILL.md")
+      const userSkill = path.join(home, ".pwncode", "skills", "user", "mine", "SKILL.md")
       yield* Effect.promise(() => fs.mkdir(path.dirname(userSkill), { recursive: true }))
       yield* Effect.promise(() => fs.writeFile(userSkill, "user content"))
 

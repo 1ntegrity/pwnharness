@@ -13,19 +13,19 @@
       "outputs": [],
       "passThroughEnv": ["*"]
     },
-    "@opencode-harness/core#test": {
+    "@pwncode/core#test": {
       "dependsOn": ["^build"],
       "outputs": []
     },
-    "@opencode-harness/app#test": {
+    "@pwncode/app#test": {
       "dependsOn": ["^build"],
       "outputs": []
     },
-    "@opencode-harness/ui#test": {
+    "@pwncode/ui#test": {
       "dependsOn": ["^build"],
       "outputs": []
     },
-    "@opencode-harness/session-ui#test": {
+    "@pwncode/session-ui#test": {
       "dependsOn": ["^build"],
       "outputs": []
     }

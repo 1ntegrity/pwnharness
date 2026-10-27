@@ -1,9 +1,9 @@
 import { describe, expect } from "bun:test"
 import { Effect, Layer } from "effect"
-import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
-import { Location } from "@opencode-harness/core/location"
-import { Policy } from "@opencode-harness/core/policy"
-import { AbsolutePath } from "@opencode-harness/core/schema"
+import { AppNodeBuilder } from "@pwncode/core/effect/app-node-builder"
+import { Location } from "@pwncode/core/location"
+import { Policy } from "@pwncode/core/policy"
+import { AbsolutePath } from "@pwncode/core/schema"
 import { location } from "./fixture/location"
 import { testEffect } from "./lib/effect"
 

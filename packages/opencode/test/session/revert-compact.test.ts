@@ -1,10 +1,10 @@
 import { describe, expect } from "bun:test"
-import { SessionV1 } from "@opencode-harness/core/v1/session"
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { SessionProjector } from "@opencode-harness/core/session/projector"
+import { SessionV1 } from "@pwncode/core/v1/session"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { SessionProjector } from "@pwncode/core/session/projector"
 import fs from "fs/promises"
 import path from "path"
-import { CrossSpawnSpawner } from "@opencode-harness/core/cross-spawn-spawner"
+import { CrossSpawnSpawner } from "@pwncode/core/cross-spawn-spawner"
 import { Effect } from "effect"
 import { Session } from "@/session/session"
 
@@ -14,8 +14,8 @@ import { Snapshot } from "../../src/snapshot"
 import { MessageID, PartID, SessionID } from "../../src/session/schema"
 import { provideTmpdirInstance } from "../fixture/fixture"
 import { testEffect } from "../lib/effect"
-import { ProviderV2 } from "@opencode-harness/core/provider"
-import { ModelV2 } from "@opencode-harness/core/model"
+import { ProviderV2 } from "@pwncode/core/provider"
+import { ModelV2 } from "@pwncode/core/model"
 
 const it = testEffect(
   LayerNode.compile(

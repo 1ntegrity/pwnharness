@@ -1,21 +1,21 @@
-import { Database } from "@opencode-harness/core/database/database"
-import { LocationServiceMap } from "@opencode-harness/core/location-services"
-import { Location } from "@opencode-harness/core/location"
-import { AbsolutePath } from "@opencode-harness/core/schema"
-import { SessionV2 } from "@opencode-harness/core/session"
-import { SessionTable } from "@opencode-harness/core/session/sql"
-import { WorkspaceV2 } from "@opencode-harness/core/workspace"
+import { Database } from "@pwncode/core/database/database"
+import { LocationServiceMap } from "@pwncode/core/location-services"
+import { Location } from "@pwncode/core/location"
+import { AbsolutePath } from "@pwncode/core/schema"
+import { SessionV2 } from "@pwncode/core/session"
+import { SessionTable } from "@pwncode/core/session/sql"
+import { WorkspaceV2 } from "@pwncode/core/workspace"
 import { eq } from "drizzle-orm"
 import { Effect, Layer, Schema } from "effect"
 import { HttpRouter } from "effect/unstable/http"
 import { HttpApiMiddleware } from "effect/unstable/httpapi"
-import { InvalidRequestError, SessionNotFoundError } from "@opencode-harness/protocol/errors"
+import { InvalidRequestError, SessionNotFoundError } from "@pwncode/protocol/errors"
 import type { LocationServices } from "../location"
 
 export class SessionLocationMiddleware extends HttpApiMiddleware.Service<
   SessionLocationMiddleware,
   { provides: LocationServices }
->()("@opencode-harness/HttpApiSessionLocation", {
+>()("@pwncode/HttpApiSessionLocation", {
   error: [InvalidRequestError, SessionNotFoundError],
 }) {}
 

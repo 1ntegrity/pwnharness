@@ -6,7 +6,7 @@ import {
   type ContentPart,
   type Model,
   type ProviderMetadata,
-} from "@opencode-harness/llm"
+} from "@pwncode/llm"
 import { SessionMessage } from "../message"
 import type { FileAttachment } from "../prompt"
 
@@ -166,6 +166,6 @@ ${message.recent}
   }
 }
 
-/** Translate projected V2 Session history into canonical @opencode-harness/llm context. */
+/** Translate projected V2 Session history into canonical @pwncode/llm context. */
 export const toLLMMessages = (messages: readonly SessionMessage.Message[], model: Model) =>
   messages.flatMap((message) => toLLMMessage(message, model))

@@ -1,4 +1,4 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import { Context, Effect, Layer } from "effect"
 import open from "open"
 
@@ -6,7 +6,7 @@ export interface Interface {
   readonly open: (url: string) => Effect.Effect<void, Error>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/McpBrowser") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/McpBrowser") {}
 
 const layer = Layer.succeed(
   Service,

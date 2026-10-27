@@ -1,4 +1,4 @@
-import type { AssistantMessage, Message, Session } from "@opencode-harness/sdk/v2/client"
+import type { AssistantMessage, Message, Session } from "@pwncode/sdk/v2/client"
 
 type Provider = {
   id: string

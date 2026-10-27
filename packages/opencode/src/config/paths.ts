@@ -1,11 +1,11 @@
 export * as ConfigPaths from "./paths"
 
 import path from "path"
-import { Flag } from "@opencode-harness/core/flag/flag"
-import { Global } from "@opencode-harness/core/global"
+import { Flag } from "@pwncode/core/flag/flag"
+import { Global } from "@pwncode/core/global"
 import { unique } from "remeda"
 import * as Effect from "effect/Effect"
-import { FSUtil } from "@opencode-harness/core/fs-util"
+import { FSUtil } from "@pwncode/core/fs-util"
 
 export const files = Effect.fn("ConfigPaths.projectFiles")(function* (
   name: string,
@@ -26,13 +26,13 @@ export const directories = Effect.fn("ConfigPaths.directories")(function* (direc
     Global.Path.config,
     ...(!Flag.OPENCODE_DISABLE_PROJECT_CONFIG
       ? yield* afs.up({
-          targets: [".opencode-harness"],
+          targets: [".pwncode"],
           start: directory,
           stop: worktree,
         })
       : []),
     ...(yield* afs.up({
-      targets: [".opencode-harness"],
+      targets: [".pwncode"],
       start: Global.Path.home,
       stop: Global.Path.home,
     })),

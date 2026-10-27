@@ -1,12 +1,12 @@
-import { AISDK } from "@opencode-harness/core/aisdk"
+import { AISDK } from "@pwncode/core/aisdk"
 import { describe, expect } from "bun:test"
 import { Effect } from "effect"
-import { Catalog } from "@opencode-harness/core/catalog"
-import { ModelV2 } from "@opencode-harness/core/model"
-import { PluginV2 } from "@opencode-harness/core/plugin"
-import { PluginHost } from "@opencode-harness/core/plugin/host"
-import { VercelPlugin } from "@opencode-harness/core/plugin/provider/vercel"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { Catalog } from "@pwncode/core/catalog"
+import { ModelV2 } from "@pwncode/core/model"
+import { PluginV2 } from "@pwncode/core/plugin"
+import { PluginHost } from "@pwncode/core/plugin/host"
+import { VercelPlugin } from "@pwncode/core/plugin/provider/vercel"
+import { ProviderV2 } from "@pwncode/core/provider"
 import { testEffect } from "../lib/effect"
 import { PluginTestLayer } from "./fixture"
 
@@ -32,8 +32,8 @@ describe("VercelPlugin", () => {
       yield* addPlugin()
       expect((yield* catalog.provider.get(ProviderV2.ID.make("vercel")))?.request.headers).toEqual({
         Existing: "1",
-        "http-referer": "https://github.com/s0ld13rr/opencode-harness",
-        "x-title": "opencode-harness",
+        "http-referer": "https://github.com/s0ld13rr/pwncode",
+        "x-title": "pwncode",
       })
     }),
   )

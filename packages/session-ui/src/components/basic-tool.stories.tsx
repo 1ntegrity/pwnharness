@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { createSignal } from "solid-js"
 import * as mod from "./basic-tool"
-import { create } from "@opencode-harness/ui/storybook/scaffold"
+import { create } from "@pwncode/ui/storybook/scaffold"
 
 const docs = `### Overview
 Expandable tool panel with a structured trigger and optional details.

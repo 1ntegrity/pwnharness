@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import { SessionEvent } from "@opencode-harness/core/session/event"
-import { EventManifest as SchemaEventManifest } from "@opencode-harness/schema/event-manifest"
+import { SessionEvent } from "@pwncode/core/session/event"
+import { EventManifest as SchemaEventManifest } from "@pwncode/schema/event-manifest"
 import { Todo } from "@/session/todo"
 import { EventManifest } from "@/event-manifest"
 

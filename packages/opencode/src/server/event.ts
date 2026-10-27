@@ -1,5 +1,5 @@
 import { Schema } from "effect"
-import { ServerEvent } from "@opencode-harness/schema/server-event"
+import { ServerEvent } from "@pwncode/schema/server-event"
 
 export const Event = ServerEvent
 

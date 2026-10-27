@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
 import { Schema } from "effect"
-import { ModelV2 } from "@opencode-harness/core/model"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { ModelV2 } from "@pwncode/core/model"
+import { ProviderV2 } from "@pwncode/core/provider"
 
 const decode = Schema.decodeUnknownSync(ModelV2.Ref)
 

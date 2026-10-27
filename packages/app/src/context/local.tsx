@@ -1,5 +1,5 @@
-import { createSimpleContext } from "@opencode-harness/ui/context"
-import { base64Encode } from "@opencode-harness/core/util/encode"
+import { createSimpleContext } from "@pwncode/ui/context"
+import { base64Encode } from "@pwncode/core/util/encode"
 import { useParams } from "@solidjs/router"
 import { batch, createEffect, createMemo, startTransition } from "solid-js"
 import { createStore } from "solid-js/store"

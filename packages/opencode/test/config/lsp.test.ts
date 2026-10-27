@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
 import { Schema } from "effect"
-import { ConfigLSPV1 } from "@opencode-harness/core/v1/config/lsp"
+import { ConfigLSPV1 } from "@pwncode/core/v1/config/lsp"
 
 // The LSP config refinement enforces: any custom (non-builtin) LSP server
 // entry must declare an `extensions` array so the client knows which files

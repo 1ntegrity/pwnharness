@@ -1,5 +1,5 @@
-import { Flag } from "@opencode-harness/core/flag/flag"
-import { Database } from "@opencode-harness/core/database/database"
+import { Flag } from "@pwncode/core/flag/flag"
+import { Database } from "@pwncode/core/database/database"
 import { Effect } from "effect"
 import { HttpRouter, HttpServerRequest, HttpServerResponse } from "effect/unstable/http"
 import * as Fence from "@/server/shared/fence"

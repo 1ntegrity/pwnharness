@@ -1,9 +1,9 @@
 import { createEffect, createMemo, createSignal, on, onCleanup, Show } from "solid-js"
-import type { SessionStatus } from "@opencode-harness/sdk/v2/client"
-import { useI18n } from "@opencode-harness/ui/context/i18n"
-import { Card } from "@opencode-harness/ui/card"
-import { Tooltip } from "@opencode-harness/ui/tooltip"
-import { Spinner } from "@opencode-harness/ui/spinner"
+import type { SessionStatus } from "@pwncode/sdk/v2/client"
+import { useI18n } from "@pwncode/ui/context/i18n"
+import { Card } from "@pwncode/ui/card"
+import { Tooltip } from "@pwncode/ui/tooltip"
+import { Spinner } from "@pwncode/ui/spinner"
 
 export function SessionRetry(props: { status: SessionStatus; show?: boolean }) {
   const i18n = useI18n()

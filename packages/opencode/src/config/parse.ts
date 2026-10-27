@@ -2,8 +2,8 @@ export * as ConfigParse from "./parse"
 
 import { type ParseError as JsoncParseError, parse as parseJsoncImpl, printParseErrorCode } from "jsonc-parser"
 import { Cause, Exit, Schema as EffectSchema, SchemaIssue } from "effect"
-import type { DeepMutable } from "@opencode-harness/core/schema"
-import { InvalidError, JsonError } from "@opencode-harness/core/v1/config/error"
+import type { DeepMutable } from "@pwncode/core/schema"
+import { InvalidError, JsonError } from "@pwncode/core/v1/config/error"
 
 export function jsonc(text: string, filepath: string): unknown {
   const errors: JsoncParseError[] = []

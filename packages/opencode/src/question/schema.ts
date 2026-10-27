@@ -1,4 +1,4 @@
-import { QuestionV1 } from "@opencode-harness/schema/question-v1"
+import { QuestionV1 } from "@pwncode/schema/question-v1"
 
 export const QuestionID = QuestionV1.ID
 export type QuestionID = typeof QuestionID.Type

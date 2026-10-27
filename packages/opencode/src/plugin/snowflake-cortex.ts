@@ -1,7 +1,7 @@
-import type { Hooks, PluginInput } from "@opencode-harness/plugin"
+import type { Hooks, PluginInput } from "@pwncode/plugin"
 import { OAUTH_DUMMY_KEY } from "../auth"
-import { InstallationVersion } from "@opencode-harness/core/installation/version"
-import { OauthCallbackPage } from "@opencode-harness/core/oauth/page"
+import { InstallationVersion } from "@pwncode/core/installation/version"
+import { OauthCallbackPage } from "@pwncode/core/oauth/page"
 import { createServer } from "http"
 import open from "open"
 
@@ -80,7 +80,7 @@ function authHeaders() {
   return {
     "Content-Type": "application/x-www-form-urlencoded",
     Accept: "application/json",
-    "User-Agent": `opencode-harness/${InstallationVersion}`,
+    "User-Agent": `pwncode/${InstallationVersion}`,
   }
 }
 
@@ -380,7 +380,7 @@ export async function SnowflakeCortexAuthPlugin(_input: PluginInput): Promise<Ho
                 }
               }
               headers.set("authorization", `Bearer ${currentOauth.access}`)
-              headers.set("User-Agent", `opencode-harness/${InstallationVersion}`)
+              headers.set("User-Agent", `pwncode/${InstallationVersion}`)
 
               let body = init?.body
               if (body && typeof body === "string") {
@@ -475,7 +475,7 @@ export async function SnowflakeCortexAuthPlugin(_input: PluginInput): Promise<Ho
             return {
               url,
               instructions:
-                "Complete Snowflake sign-in in your browser. OpenCode Harness will capture the OAuth callback and store the bearer token automatically.",
+                "Complete Snowflake sign-in in your browser. PwnCode will capture the OAuth callback and store the bearer token automatically.",
               method: "auto" as const,
               async callback() {
                 try {

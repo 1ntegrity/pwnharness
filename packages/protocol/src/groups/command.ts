@@ -1,5 +1,5 @@
-import { Command } from "@opencode-harness/schema/command"
-import { Location } from "@opencode-harness/schema/location"
+import { Command } from "@pwncode/schema/command"
+import { Location } from "@pwncode/schema/location"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
 import { LocationQuery, locationQueryOpenApi } from "./location"

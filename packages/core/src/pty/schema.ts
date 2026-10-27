@@ -1,1 +1,1 @@
-export { ID as PtyID } from "@opencode-harness/schema/pty"
+export { ID as PtyID } from "@pwncode/schema/pty"

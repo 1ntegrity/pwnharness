@@ -1,5 +1,5 @@
-import type { WorkspaceV2 } from "@opencode-harness/core/workspace"
-import { Flag } from "@opencode-harness/core/flag/flag"
+import type { WorkspaceV2 } from "@pwncode/core/workspace"
+import { Flag } from "@pwncode/core/flag/flag"
 import { Effect, Scope } from "effect"
 
 /**

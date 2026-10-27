@@ -1,1 +1,1 @@
-export * from "@opencode-harness/tui/prompt/display"
+export * from "@pwncode/tui/prompt/display"

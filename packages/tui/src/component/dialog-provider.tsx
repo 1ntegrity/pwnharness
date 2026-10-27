@@ -8,7 +8,7 @@ import { DialogPrompt } from "../ui/dialog-prompt"
 import { Link } from "../ui/link"
 import { useTheme } from "../context/theme"
 import { TextAttributes } from "@opentui/core"
-import type { ProviderAuthAuthorization, ProviderAuthMethod } from "@opencode-harness/sdk/v2"
+import type { ProviderAuthAuthorization, ProviderAuthMethod } from "@pwncode/sdk/v2"
 import { DialogModel } from "./dialog-model"
 import { useToast } from "../ui/toast"
 import { isConsoleManagedProvider } from "../util/provider-origin"
@@ -96,7 +96,7 @@ export function createDialogProviderOptions() {
       placeholder: "Provider id",
       description: () => (
         <text fg={theme.textMuted}>
-          This only stores a credential. Configure the provider in opencode-harness.json to use it.
+          This only stores a credential. Configure the provider in pwncode.json to use it.
         </text>
       ),
     })
@@ -371,21 +371,21 @@ function ApiMethod(props: ApiMethodProps) {
           opencode: (
             <box gap={1}>
               <text fg={theme.textMuted}>
-                OpenCode Harness Zen gives you access to all the best models at the cheapest prices with a single API key.
+                PwnCode Zen gives you access to all the best models at the cheapest prices with a single API key.
               </text>
               <text fg={theme.text}>
-                Go to <span style={{ fg: theme.primary }}>https://github.com/s0ld13rr/opencode-harness</span> to get a key
+                Go to <span style={{ fg: theme.primary }}>https://github.com/s0ld13rr/pwncode</span> to get a key
               </text>
             </box>
           ),
           "opencode-go": (
             <box gap={1}>
               <text fg={theme.textMuted}>
-                OpenCode Harness Go is a $10 per month subscription that provides reliable access to popular open models with
+                PwnCode Go is a $10 per month subscription that provides reliable access to popular open models with
                 generous usage limits.
               </text>
               <text fg={theme.text}>
-                Go to <span style={{ fg: theme.primary }}>https://github.com/s0ld13rr/opencode-harness</span> and enable OpenCode Harness Go
+                Go to <span style={{ fg: theme.primary }}>https://github.com/s0ld13rr/pwncode</span> and enable PwnCode Go
               </text>
             </box>
           ),
@@ -406,7 +406,7 @@ function ApiMethod(props: ApiMethodProps) {
         if (props.custom && !sync.data.provider_next.all.some((provider) => provider.id === props.providerID)) {
           toast.show({
             variant: "info",
-            message: `Saved credential for ${props.providerID}. Configure it in opencode-harness.json to use it.`,
+            message: `Saved credential for ${props.providerID}. Configure it in pwncode.json to use it.`,
           })
           dialog.clear()
           return

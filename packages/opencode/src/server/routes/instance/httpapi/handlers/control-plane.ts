@@ -1,5 +1,5 @@
-import { MoveSession } from "@opencode-harness/core/control-plane/move-session"
-import { SessionV2 } from "@opencode-harness/core/session"
+import { MoveSession } from "@pwncode/core/control-plane/move-session"
+import { SessionV2 } from "@pwncode/core/session"
 import { Effect } from "effect"
 import { HttpApiBuilder } from "effect/unstable/httpapi"
 import { RootHttpApi } from "../api"

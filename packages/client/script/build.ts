@@ -1,5 +1,5 @@
 import { NodeFileSystem } from "@effect/platform-node"
-import { compile, emitEffectImported, emitPromise, write } from "@opencode-harness/httpapi-codegen"
+import { compile, emitEffectImported, emitPromise, write } from "@pwncode/httpapi-codegen"
 import { ClientApi, endpointNames, groupNames, omitEndpoints } from "../src/contract"
 import { Effect } from "effect"
 import { fileURLToPath } from "url"
@@ -14,7 +14,7 @@ await Effect.runPromise(
           outputTypes: {
             "events.subscribe": {
               name: "OpenCodeEventEncoded",
-              import: 'import type { OpenCodeEventEncoded } from "@opencode-harness/protocol/groups/event"',
+              import: 'import type { OpenCodeEventEncoded } from "@pwncode/protocol/groups/event"',
             },
           },
         }),

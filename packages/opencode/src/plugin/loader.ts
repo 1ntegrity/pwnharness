@@ -9,8 +9,8 @@ import {
   type PluginSource,
 } from "./shared"
 import { ConfigPlugin } from "@/config/plugin"
-import { ConfigPluginV1 } from "@opencode-harness/core/v1/config/plugin"
-import { InstallationVersion } from "@opencode-harness/core/installation/version"
+import { ConfigPluginV1 } from "@pwncode/core/v1/config/plugin"
+import { InstallationVersion } from "@pwncode/core/installation/version"
 
 export namespace PluginLoader {
   // A normalized plugin declaration derived from config before any filesystem or npm work happens.
@@ -120,7 +120,7 @@ export namespace PluginLoader {
         },
       }
 
-    // npm plugins can declare which opencode-harness versions they support; file plugins are treated
+    // npm plugins can declare which pwncode versions they support; file plugins are treated
     // as local development code and skip this compatibility gate.
     if (base.source === "npm") {
       try {

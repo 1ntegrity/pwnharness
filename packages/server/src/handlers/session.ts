@@ -1,8 +1,8 @@
-import { SessionV2 } from "@opencode-harness/core/session"
+import { SessionV2 } from "@pwncode/core/session"
 import { DateTime, Effect, Stream } from "effect"
 import { HttpApiBuilder, HttpApiSchema } from "effect/unstable/httpapi"
 import { Api } from "../api"
-import { SessionsCursor } from "@opencode-harness/protocol/groups/session"
+import { SessionsCursor } from "@pwncode/protocol/groups/session"
 import {
   ConflictError,
   InvalidCursorError,
@@ -10,8 +10,8 @@ import {
   ServiceUnavailableError,
   SessionNotFoundError,
   UnknownError,
-} from "@opencode-harness/protocol/errors"
-import { AbsolutePath } from "@opencode-harness/core/schema"
+} from "@pwncode/protocol/errors"
+import { AbsolutePath } from "@pwncode/core/schema"
 
 const DefaultSessionsLimit = 50
 const DefaultSessionHistoryLimit = 50

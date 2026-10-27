@@ -32,7 +32,7 @@ export const Splash = (props: Pick<ComponentProps<"svg">, "ref" | "class">) => {
 }
 
 export const Logo = (props: { class?: string }) => {
-  // Pixel wordmark spelling "opencode-harness" on a 6px grid, cell pitch 30.
+  // Pixel wordmark spelling "pwncode" on a 6px grid, cell pitch 30.
   // The six glyphs shared with the old "opencode" mark (p, e, n, c, o, d) are
   // reused verbatim and translated into place; t and s are drawn as rects in
   // the same style. "pentest" uses --icon-base, "code" uses --icon-strong-base

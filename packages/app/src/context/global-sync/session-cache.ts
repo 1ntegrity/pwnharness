@@ -6,7 +6,7 @@ import type {
   SessionStatus,
   SnapshotFileDiff,
   Todo,
-} from "@opencode-harness/sdk/v2/client"
+} from "@pwncode/sdk/v2/client"
 
 export const SESSION_CACHE_LIMIT = 40
 

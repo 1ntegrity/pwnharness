@@ -23,7 +23,7 @@ export interface Interface {
   ) => Effect.Effect<{ readonly sessionID: SessionSchema.ID; readonly message: SessionMessage.Message } | undefined>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/v2/SessionStore") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/v2/SessionStore") {}
 
 const layer = Layer.effect(
   Service,

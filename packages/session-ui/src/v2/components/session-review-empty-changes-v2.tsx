@@ -1,5 +1,5 @@
-import { useI18n } from "@opencode-harness/ui/context/i18n"
-import { Icon } from "@opencode-harness/ui/v2/icon"
+import { useI18n } from "@pwncode/ui/context/i18n"
+import { Icon } from "@pwncode/ui/v2/icon"
 import "./session-review-v2.css"
 
 export function SessionReviewEmptyChangesV2() {

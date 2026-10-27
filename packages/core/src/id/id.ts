@@ -1,4 +1,4 @@
-import { create as createIdentifier } from "@opencode-harness/schema/identifier"
+import { create as createIdentifier } from "@pwncode/schema/identifier"
 
 const prefixes = {
   job: "job",

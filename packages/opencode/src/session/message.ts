@@ -1,11 +1,11 @@
 import { Schema } from "effect"
 import { SessionID } from "./schema"
 
-import { NonNegativeInt } from "@opencode-harness/core/schema"
+import { NonNegativeInt } from "@pwncode/core/schema"
 import { MessageError } from "./message-error"
 import { AuthError, OutputLengthError } from "./message-error"
-import { ProviderV2 } from "@opencode-harness/core/provider"
-import { ModelV2 } from "@opencode-harness/core/model"
+import { ProviderV2 } from "@pwncode/core/provider"
+import { ModelV2 } from "@pwncode/core/model"
 export { AuthError, OutputLengthError } from "./message-error"
 
 export const ToolCall = Schema.Struct({

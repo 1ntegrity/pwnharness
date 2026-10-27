@@ -1,4 +1,4 @@
-import type { Message, Part } from "@opencode-harness/sdk/v2/client"
+import type { Message, Part } from "@pwncode/sdk/v2/client"
 
 export type SessionContextBreakdownKey = "system" | "user" | "assistant" | "tool" | "other"
 

@@ -1,6 +1,6 @@
 import { describe, expect } from "bun:test"
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { FSUtil } from "@opencode-harness/core/fs-util"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { FSUtil } from "@pwncode/core/fs-util"
 import { Effect, Layer } from "effect"
 import path from "path"
 import { resetDatabase } from "../fixture/db"

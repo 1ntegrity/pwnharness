@@ -3,18 +3,18 @@ import fs from "fs/promises"
 import { describe, expect } from "bun:test"
 import { Effect, Layer, Schema } from "effect"
 import { FastCheck } from "effect/testing"
-import { Config } from "@opencode-harness/core/config"
-import { ConfigProvider } from "@opencode-harness/core/config/provider"
-import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { ConfigMigrateV1 } from "@opencode-harness/core/v1/config/migrate"
-import { ConfigV1 } from "@opencode-harness/core/v1/config/config"
-import { FSUtil } from "@opencode-harness/core/fs-util"
-import { Global } from "@opencode-harness/core/global"
-import { Location } from "@opencode-harness/core/location"
-import { Policy } from "@opencode-harness/core/policy"
-import { Project } from "@opencode-harness/core/project"
-import { AbsolutePath } from "@opencode-harness/core/schema"
+import { Config } from "@pwncode/core/config"
+import { ConfigProvider } from "@pwncode/core/config/provider"
+import { AppNodeBuilder } from "@pwncode/core/effect/app-node-builder"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { ConfigMigrateV1 } from "@pwncode/core/v1/config/migrate"
+import { ConfigV1 } from "@pwncode/core/v1/config/config"
+import { FSUtil } from "@pwncode/core/fs-util"
+import { Global } from "@pwncode/core/global"
+import { Location } from "@pwncode/core/location"
+import { Policy } from "@pwncode/core/policy"
+import { Project } from "@pwncode/core/project"
+import { AbsolutePath } from "@pwncode/core/schema"
 import { location } from "../fixture/location"
 import { tmpdir } from "../fixture/tmpdir"
 import { testEffect } from "../lib/effect"
@@ -161,7 +161,7 @@ describe("Config", () => {
     ),
   )
 
-  it.live("loads opencode-harness JSON and JSONC files from lowest to highest priority", () =>
+  it.live("loads pwncode JSON and JSONC files from lowest to highest priority", () =>
     Effect.acquireRelease(
       Effect.promise(() => tmpdir()),
       (tmp) => Effect.promise(() => tmp[Symbol.asyncDispose]()),
@@ -171,11 +171,11 @@ describe("Config", () => {
           yield* Effect.promise(() =>
             Promise.all([
               fs.writeFile(
-                path.join(tmp.path, "opencode-harness.json"),
+                path.join(tmp.path, "pwncode.json"),
                 JSON.stringify({ $schema: "base", providers: { base: provider } }),
               ),
               fs.writeFile(
-                path.join(tmp.path, "opencode-harness.jsonc"),
+                path.join(tmp.path, "pwncode.jsonc"),
                 `{
                   // Later global files override scalar fields while retaining providers.
                   "$schema": "last",
@@ -192,11 +192,11 @@ describe("Config", () => {
             expect(documents.map((document) => document.type)).toEqual(["document", "document"])
             expect(documents.map((document) => document.info.$schema)).toEqual(["base", "last"])
             expect(documents[0]).toBeInstanceOf(Config.Document)
-            expect(documents[0]?.path).toBe(path.join(tmp.path, "opencode-harness.json"))
+            expect(documents[0]?.path).toBe(path.join(tmp.path, "pwncode.json"))
             expect(documents[1]?.info.providers?.last).toBeInstanceOf(ConfigProvider.Info)
 
             yield* Effect.promise(() =>
-              fs.writeFile(path.join(tmp.path, "opencode-harness.jsonc"), JSON.stringify({ $schema: "changed" })),
+              fs.writeFile(path.join(tmp.path, "pwncode.jsonc"), JSON.stringify({ $schema: "changed" })),
             )
             expect(
               (yield* config.entries())
@@ -238,7 +238,7 @@ describe("Config", () => {
     ).pipe(
       Effect.flatMap((tmp) =>
         Effect.gen(function* () {
-          const file = path.join(tmp.path, "opencode-harness.json")
+          const file = path.join(tmp.path, "pwncode.json")
           const contents = JSON.stringify({
             shell: "/bin/zsh",
             experimental: { policies: [{ effect: "deny", action: "provider.use", resource: "openai" }] },
@@ -273,7 +273,7 @@ describe("Config", () => {
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             fs.writeFile(
-              path.join(tmp.path, "opencode-harness.json"),
+              path.join(tmp.path, "pwncode.json"),
               JSON.stringify({
                 shell: "/bin/bash",
                 model: "anthropic/claude",
@@ -461,7 +461,7 @@ describe("Config", () => {
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             fs.writeFile(
-              path.join(tmp.path, "opencode-harness.json"),
+              path.join(tmp.path, "pwncode.json"),
               JSON.stringify({
                 reference: {
                   local: { path: "../library" },
@@ -497,7 +497,7 @@ describe("Config", () => {
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             fs.writeFile(
-              path.join(tmp.path, "opencode-harness.json"),
+              path.join(tmp.path, "pwncode.json"),
               JSON.stringify({
                 shell: "/bin/zsh",
                 default_agent: "reviewer",
@@ -675,8 +675,8 @@ describe("Config", () => {
         Effect.gen(function* () {
           yield* Effect.promise(() =>
             Promise.all([
-              fs.writeFile(path.join(tmp.path, "opencode-harness.json"), JSON.stringify({ $schema: "base" })),
-              fs.writeFile(path.join(tmp.path, "opencode-harness.jsonc"), "{ invalid"),
+              fs.writeFile(path.join(tmp.path, "pwncode.json"), JSON.stringify({ $schema: "base" })),
+              fs.writeFile(path.join(tmp.path, "pwncode.jsonc"), "{ invalid"),
             ]),
           )
           return yield* Effect.gen(function* () {
@@ -701,13 +701,13 @@ describe("Config", () => {
           yield* Effect.promise(async () => {
             await fs.mkdir(global, { recursive: true })
             await fs.writeFile(
-              path.join(global, "opencode-harness.json"),
+              path.join(global, "pwncode.json"),
               JSON.stringify({
                 experimental: { policies: [{ effect: "deny", action: "provider.use", resource: "openai" }] },
               }),
             )
             await fs.writeFile(
-              path.join(tmp.path, "opencode-harness.json"),
+              path.join(tmp.path, "pwncode.json"),
               JSON.stringify({
                 experimental: { policies: [{ effect: "allow", action: "provider.use", resource: "openai" }] },
               }),
@@ -724,7 +724,7 @@ describe("Config", () => {
     ),
   )
 
-  it.live("loads global, ancestor, and .opencode-harness configuration up to the project boundary", () =>
+  it.live("loads global, ancestor, and .pwncode configuration up to the project boundary", () =>
     Effect.acquireRelease(
       Effect.promise(() => tmpdir()),
       (tmp) => Effect.promise(() => tmp[Symbol.asyncDispose]()),
@@ -738,17 +738,17 @@ describe("Config", () => {
           yield* Effect.promise(async () => {
             await fs.mkdir(global, { recursive: true })
             await fs.mkdir(directory, { recursive: true })
-            await fs.mkdir(path.join(root, ".opencode-harness"), { recursive: true })
-            await fs.mkdir(path.join(directory, ".opencode-harness"), { recursive: true })
+            await fs.mkdir(path.join(root, ".pwncode"), { recursive: true })
+            await fs.mkdir(path.join(directory, ".pwncode"), { recursive: true })
             await Promise.all([
-              fs.writeFile(path.join(tmp.path, "opencode-harness.json"), JSON.stringify({ $schema: "outside" })),
-              fs.writeFile(path.join(global, "opencode-harness.json"), JSON.stringify({ $schema: "global" })),
-              fs.writeFile(path.join(root, "opencode-harness.json"), JSON.stringify({ $schema: "root" })),
-              fs.writeFile(path.join(parent, "opencode-harness.jsonc"), JSON.stringify({ $schema: "parent" })),
-              fs.writeFile(path.join(directory, "opencode-harness.json"), JSON.stringify({ $schema: "directory" })),
-              fs.writeFile(path.join(root, ".opencode-harness", "opencode-harness.json"), JSON.stringify({ $schema: "root-dot" })),
+              fs.writeFile(path.join(tmp.path, "pwncode.json"), JSON.stringify({ $schema: "outside" })),
+              fs.writeFile(path.join(global, "pwncode.json"), JSON.stringify({ $schema: "global" })),
+              fs.writeFile(path.join(root, "pwncode.json"), JSON.stringify({ $schema: "root" })),
+              fs.writeFile(path.join(parent, "pwncode.jsonc"), JSON.stringify({ $schema: "parent" })),
+              fs.writeFile(path.join(directory, "pwncode.json"), JSON.stringify({ $schema: "directory" })),
+              fs.writeFile(path.join(root, ".pwncode", "pwncode.json"), JSON.stringify({ $schema: "root-dot" })),
               fs.writeFile(
-                path.join(directory, ".opencode-harness", "opencode-harness.jsonc"),
+                path.join(directory, ".pwncode", "pwncode.jsonc"),
                 JSON.stringify({ $schema: "directory-dot" }),
               ),
             ])
@@ -761,8 +761,8 @@ describe("Config", () => {
 
             expect(entries.filter((entry) => entry.type === "directory").map((entry) => entry.path)).toEqual([
               AbsolutePath.make(global),
-              AbsolutePath.make(path.join(root, ".opencode-harness")),
-              AbsolutePath.make(path.join(directory, ".opencode-harness")),
+              AbsolutePath.make(path.join(root, ".pwncode")),
+              AbsolutePath.make(path.join(directory, ".pwncode")),
             ])
             expect(documents.map((document) => document.info.$schema)).toEqual([
               "global",
@@ -779,9 +779,9 @@ describe("Config", () => {
               "parent",
               "directory",
               "root-dot",
-              AbsolutePath.make(path.join(root, ".opencode-harness")),
+              AbsolutePath.make(path.join(root, ".pwncode")),
               "directory-dot",
-              AbsolutePath.make(path.join(directory, ".opencode-harness")),
+              AbsolutePath.make(path.join(directory, ".pwncode")),
             ])
           }).pipe(
             Effect.provide(

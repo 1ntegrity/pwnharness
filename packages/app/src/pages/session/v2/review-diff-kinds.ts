@@ -1,4 +1,4 @@
-import type { SnapshotFileDiff, VcsFileDiff } from "@opencode-harness/sdk/v2"
+import type { SnapshotFileDiff, VcsFileDiff } from "@pwncode/sdk/v2"
 import type { Kind } from "@/components/file-tree-v2"
 import { normalizeFileTreeV2Path } from "@/components/file-tree-v2-model"
 

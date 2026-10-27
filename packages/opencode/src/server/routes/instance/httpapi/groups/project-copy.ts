@@ -1,4 +1,4 @@
-import { ProjectV2 } from "@opencode-harness/core/project"
+import { ProjectV2 } from "@pwncode/core/project"
 import { Schema } from "effect"
 import { HttpApi, HttpApiEndpoint, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
 import { Authorization } from "../middleware/authorization"

@@ -1,5 +1,5 @@
-import type { Event } from "@opencode-harness/sdk/v2"
-import type { TuiAttentionSoundName, TuiPlugin, TuiPluginApi } from "@opencode-harness/plugin/tui"
+import type { Event } from "@pwncode/sdk/v2"
+import type { TuiAttentionSoundName, TuiPlugin, TuiPluginApi } from "@pwncode/plugin/tui"
 import type { BuiltinTuiPlugin } from "../builtins"
 
 const id = "internal:notifications"

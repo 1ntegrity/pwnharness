@@ -84,19 +84,19 @@ beforeAll(async () => {
     useSearchParams: () => [search, () => undefined],
   }))
 
-  mock.module("@opencode-harness/sdk/v2/client", () => ({
+  mock.module("@pwncode/sdk/v2/client", () => ({
     createOpencodeClient: (input: { directory: string }) => {
       createdClients.push(input.directory)
       return clientFor(input.directory)
     },
   }))
 
-  mock.module("@opencode-harness/ui/toast", () => ({
+  mock.module("@pwncode/ui/toast", () => ({
     Toast: { Region: () => null },
     showToast: () => 0,
   }))
 
-  mock.module("@opencode-harness/core/util/encode", () => ({
+  mock.module("@pwncode/core/util/encode", () => ({
     base64Encode: (value: string) => value,
   }))
 

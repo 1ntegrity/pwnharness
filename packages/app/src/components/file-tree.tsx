@@ -1,8 +1,8 @@
 import { useFile } from "@/context/file"
 import { encodeFilePath } from "@/context/file/path"
-import { Collapsible } from "@opencode-harness/ui/collapsible"
-import { FileIcon } from "@opencode-harness/ui/file-icon"
-import { Icon } from "@opencode-harness/ui/icon"
+import { Collapsible } from "@pwncode/ui/collapsible"
+import { FileIcon } from "@pwncode/ui/file-icon"
+import { Icon } from "@pwncode/ui/icon"
 import {
   createEffect,
   createMemo,
@@ -17,7 +17,7 @@ import {
   type ParentProps,
 } from "solid-js"
 import { Dynamic } from "solid-js/web"
-import type { FileNode } from "@opencode-harness/sdk/v2"
+import type { FileNode } from "@pwncode/sdk/v2"
 
 const MAX_DEPTH = 128
 

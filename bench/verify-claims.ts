@@ -93,7 +93,7 @@ function verifyDecisionInjection(): boolean {
 
 function main() {
   console.log("╔══════════════════════════════════════════╗")
-  console.log("║     OpenCode Harness — Verify Claims          ║")
+  console.log("║     PwnCode — Verify Claims          ║")
   console.log("╚══════════════════════════════════════════╝")
   console.log()
 

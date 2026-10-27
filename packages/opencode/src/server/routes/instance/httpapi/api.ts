@@ -1,10 +1,10 @@
 import { Schema } from "effect"
 import { HttpApi } from "effect/unstable/httpapi"
-import { EventV2 } from "@opencode-harness/core/event"
+import { EventV2 } from "@pwncode/core/event"
 import { EventManifest } from "@/event-manifest"
-import { Credential } from "@opencode-harness/core/credential"
-import { Integration } from "@opencode-harness/core/integration"
-import { SkillV2 } from "@opencode-harness/core/skill"
+import { Credential } from "@pwncode/core/credential"
+import { Integration } from "@pwncode/core/integration"
+import { SkillV2 } from "@pwncode/core/skill"
 import { InstanceDisposed } from "@/server/event"
 import { Question } from "@/question"
 import { ConfigApi } from "./groups/config"
@@ -25,9 +25,9 @@ import { SessionApi } from "./groups/session"
 import { SyncApi } from "./groups/sync"
 import { TuiApi } from "./groups/tui"
 import { WorkspaceApi } from "./groups/workspace"
-import { makeApi } from "@opencode-harness/protocol/api"
-import { LocationMiddleware } from "@opencode-harness/server/location"
-import { SessionLocationMiddleware } from "@opencode-harness/server/middleware/session-location"
+import { makeApi } from "@pwncode/protocol/api"
+import { LocationMiddleware } from "@pwncode/server/location"
+import { SessionLocationMiddleware } from "@pwncode/server/middleware/session-location"
 import { GlobalApi } from "./groups/global"
 import { Authorization } from "./middleware/authorization"
 import { SchemaErrorMiddleware } from "./middleware/schema-error"
@@ -51,14 +51,14 @@ export const ServerApi = makeApi({
   sessionLocationMiddleware: SessionLocationMiddleware,
 })
 
-export const RootHttpApi = HttpApi.make("opencode-harness-root")
+export const RootHttpApi = HttpApi.make("pwncode-root")
   .addHttpApi(ControlApi)
   .addHttpApi(ControlPlaneApi)
   .addHttpApi(GlobalApi)
   .middleware(SchemaErrorMiddleware)
   .middleware(Authorization)
 
-export const InstanceHttpApi = HttpApi.make("opencode-harness-instance")
+export const InstanceHttpApi = HttpApi.make("pwncode-instance")
   .addHttpApi(ConfigApi)
   .addHttpApi(ExperimentalApi)
   .addHttpApi(FileApi)
@@ -76,7 +76,7 @@ export const InstanceHttpApi = HttpApi.make("opencode-harness-instance")
   .addHttpApi(WorkspaceApi)
   .middleware(SchemaErrorMiddleware)
 
-export const OpenCodeHttpApi = HttpApi.make("opencode-harness")
+export const OpenCodeHttpApi = HttpApi.make("pwncode")
   .addHttpApi(RootHttpApi)
   .addHttpApi(EventApi)
   .addHttpApi(InstanceHttpApi)

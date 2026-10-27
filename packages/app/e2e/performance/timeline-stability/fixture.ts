@@ -1,7 +1,7 @@
-import { base64Encode } from "@opencode-harness/core/util/encode"
-import { Event } from "@opencode-harness/schema/event"
-import { SessionStatusEvent } from "@opencode-harness/schema/session-status-event"
-import { SessionV1 } from "@opencode-harness/schema/session-v1"
+import { base64Encode } from "@pwncode/core/util/encode"
+import { Event } from "@pwncode/schema/event"
+import { SessionStatusEvent } from "@pwncode/schema/session-status-event"
+import { SessionV1 } from "@pwncode/schema/session-v1"
 import type {
   AssistantMessage,
   GlobalEvent,
@@ -12,7 +12,7 @@ import type {
   ToolPart,
   ToolState,
   UserMessage,
-} from "@opencode-harness/sdk/v2/client"
+} from "@pwncode/sdk/v2/client"
 import { expect, type Page } from "@playwright/test"
 import { Schema } from "effect"
 import { mockOpenCodeServer } from "../../utils/mock-server"

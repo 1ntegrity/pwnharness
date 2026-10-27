@@ -11,9 +11,9 @@ export const NvidiaPlugin = define({
           if (item.provider.api.package !== "@ai-sdk/openai-compatible") continue
           if (item.provider.api.url !== "https://integrate.api.nvidia.com/v1") continue
           evt.provider.update(item.provider.id, (provider) => {
-            provider.request.headers["HTTP-Referer"] = "https://github.com/s0ld13rr/opencode-harness"
-            provider.request.headers["X-Title"] = "opencode-harness"
-            provider.request.headers["X-BILLING-INVOKE-ORIGIN"] ??= "OpenCode Harness"
+            provider.request.headers["HTTP-Referer"] = "https://github.com/s0ld13rr/pwncode"
+            provider.request.headers["X-Title"] = "pwncode"
+            provider.request.headers["X-BILLING-INVOKE-ORIGIN"] ??= "PwnCode"
           })
         }
       }),

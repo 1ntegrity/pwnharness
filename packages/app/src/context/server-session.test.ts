@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import type { retry } from "@opencode-harness/core/util/retry"
-import type { Message, OpencodeClient, Part, Session } from "@opencode-harness/sdk/v2/client"
+import type { retry } from "@pwncode/core/util/retry"
+import type { Message, OpencodeClient, Part, Session } from "@pwncode/sdk/v2/client"
 import { createServerSession } from "./server-session"
 
 const session = (id: string, parentID?: string): Session => ({

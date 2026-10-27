@@ -1,5 +1,5 @@
-import { Provider } from "@opencode-harness/schema/provider"
-import { Location } from "@opencode-harness/schema/location"
+import { Provider } from "@pwncode/schema/provider"
+import { Location } from "@pwncode/schema/location"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
 import { ProviderNotFoundError, ServiceUnavailableError } from "../errors"

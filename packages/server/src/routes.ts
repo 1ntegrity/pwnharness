@@ -1,16 +1,16 @@
-import { Database } from "@opencode-harness/core/database/database"
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { httpClient } from "@opencode-harness/core/effect/app-node-platform"
-import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
-import { EventV2 } from "@opencode-harness/core/event"
-import { Credential } from "@opencode-harness/core/credential"
-import { PermissionSaved } from "@opencode-harness/core/permission/saved"
-import { PtyTicket } from "@opencode-harness/core/pty/ticket"
-import { SessionV2 } from "@opencode-harness/core/session"
-import { SessionExecution } from "@opencode-harness/core/session/execution"
-import { LocationServiceMap } from "@opencode-harness/core/location-service-map"
-import { SessionExecutionLocal } from "@opencode-harness/core/session/execution/local"
-import { ToolOutputStore } from "@opencode-harness/core/tool-output-store"
+import { Database } from "@pwncode/core/database/database"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { httpClient } from "@pwncode/core/effect/app-node-platform"
+import { AppNodeBuilder } from "@pwncode/core/effect/app-node-builder"
+import { EventV2 } from "@pwncode/core/event"
+import { Credential } from "@pwncode/core/credential"
+import { PermissionSaved } from "@pwncode/core/permission/saved"
+import { PtyTicket } from "@pwncode/core/pty/ticket"
+import { SessionV2 } from "@pwncode/core/session"
+import { SessionExecution } from "@pwncode/core/session/execution"
+import { LocationServiceMap } from "@pwncode/core/location-service-map"
+import { SessionExecutionLocal } from "@pwncode/core/session/execution/local"
+import { ToolOutputStore } from "@pwncode/core/tool-output-store"
 import { HttpRouter, HttpServer } from "effect/unstable/http"
 import { HttpApiBuilder } from "effect/unstable/httpapi"
 import { Layer, Option } from "effect"
@@ -39,13 +39,13 @@ const applicationServices = LayerNode.group([
 export function createRoutes(password?: string) {
   return makeRoutes(
     password
-      ? ServerAuth.Config.configLayer({ username: "opencode-harness", password: Option.some(password) })
+      ? ServerAuth.Config.configLayer({ username: "pwncode", password: Option.some(password) })
       : ServerAuth.Config.layer,
   )
 }
 
 export function createEmbeddedRoutes() {
-  return makeRoutes(ServerAuth.Config.configLayer({ username: "opencode-harness", password: Option.none() }))
+  return makeRoutes(ServerAuth.Config.configLayer({ username: "pwncode", password: Option.none() }))
 }
 
 function makeRoutes<AuthError, AuthServices>(auth: Layer.Layer<ServerAuth.Config, AuthError, AuthServices>) {

@@ -1,6 +1,6 @@
-import { PermissionV1 } from "@opencode-harness/core/v1/permission"
+import { PermissionV1 } from "@pwncode/core/v1/permission"
 import { Permission } from "@/permission"
-import { SessionV1 } from "@opencode-harness/core/v1/session"
+import { SessionV1 } from "@pwncode/core/v1/session"
 
 import { Session } from "@/session/session"
 import { MessageV2 } from "@/session/message-v2"
@@ -23,8 +23,8 @@ import {
 import { ApiNotFoundError, PermissionNotFoundError, SessionBusyError } from "../errors"
 import { described } from "./metadata"
 import { QueryBoolean } from "./query"
-import { ProviderV2 } from "@opencode-harness/core/provider"
-import { ModelV2 } from "@opencode-harness/core/model"
+import { ProviderV2 } from "@pwncode/core/provider"
+import { ModelV2 } from "@pwncode/core/model"
 
 const root = "/session"
 export const ListQuery = Schema.Struct({
@@ -115,7 +115,7 @@ export const SessionApi = HttpApi.make("session")
           OpenApi.annotations({
             identifier: "session.list",
             summary: "List sessions",
-            description: "Get a list of all OpenCode Harness sessions, sorted by most recently updated.",
+            description: "Get a list of all PwnCode sessions, sorted by most recently updated.",
           }),
         ),
         HttpApiEndpoint.get("status", SessionPaths.status, {
@@ -138,7 +138,7 @@ export const SessionApi = HttpApi.make("session")
           OpenApi.annotations({
             identifier: "session.get",
             summary: "Get session",
-            description: "Retrieve detailed information about a specific OpenCode Harness session.",
+            description: "Retrieve detailed information about a specific PwnCode session.",
           }),
         ),
         HttpApiEndpoint.get("children", SessionPaths.children, {
@@ -209,7 +209,7 @@ export const SessionApi = HttpApi.make("session")
           OpenApi.annotations({
             identifier: "session.create",
             summary: "Create session",
-            description: "Create a new OpenCode Harness session for interacting with AI assistants and managing conversations.",
+            description: "Create a new PwnCode session for interacting with AI assistants and managing conversations.",
           }),
         ),
         HttpApiEndpoint.delete("remove", SessionPaths.remove, {
@@ -455,7 +455,7 @@ export const SessionApi = HttpApi.make("session")
   )
   .annotateMerge(
     OpenApi.annotations({
-      title: "opencode-harness experimental HttpApi",
+      title: "pwncode experimental HttpApi",
       version: "0.0.1",
       description: "Experimental HttpApi surface for selected instance routes.",
     }),

@@ -1,5 +1,5 @@
-import type { GlobalEvent } from "@opencode-harness/sdk/v2"
-import type { EventSource } from "@opencode-harness/tui/context/sdk"
+import type { GlobalEvent } from "@pwncode/sdk/v2"
+import type { EventSource } from "@pwncode/tui/context/sdk"
 
 export const worktree = "/tmp/opencode"
 export const directory = `${worktree}/packages/opencode`

@@ -1,16 +1,16 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { httpClient } from "@opencode-harness/core/effect/app-node-platform"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { httpClient } from "@pwncode/core/effect/app-node-platform"
 import path from "path"
-import { SessionV1 } from "@opencode-harness/core/v1/session"
+import { SessionV1 } from "@pwncode/core/v1/session"
 import { Effect, Layer, Context } from "effect"
 import { FetchHttpClient, HttpClient, HttpClientRequest } from "effect/unstable/http"
 import { Config } from "@/config/config"
 import { InstanceState } from "@/effect/instance-state"
 import { RuntimeFlags } from "@/effect/runtime-flags"
-import { Flag } from "@opencode-harness/core/flag/flag"
-import { FSUtil } from "@opencode-harness/core/fs-util"
+import { Flag } from "@pwncode/core/flag/flag"
+import { FSUtil } from "@pwncode/core/fs-util"
 import { withTransientReadRetry } from "@/util/effect-http-client"
-import { Global } from "@opencode-harness/core/global"
+import { Global } from "@pwncode/core/global"
 import type { MessageV2 } from "./message-v2"
 import type { MessageID } from "./schema"
 
@@ -43,7 +43,7 @@ export interface Interface {
   ) => Effect.Effect<{ filepath: string; content: string }[], FSUtil.Error>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Instruction") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Instruction") {}
 
 const layer: Layer.Layer<
   Service,

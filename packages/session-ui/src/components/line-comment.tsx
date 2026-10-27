@@ -1,11 +1,11 @@
-import { useFilteredList } from "@opencode-harness/ui/hooks"
-import { getDirectory, getFilename } from "@opencode-harness/core/util/path"
+import { useFilteredList } from "@pwncode/ui/hooks"
+import { getDirectory, getFilename } from "@pwncode/core/util/path"
 import { createSignal, For, onMount, Show, splitProps, type JSX } from "solid-js"
-import { Button } from "@opencode-harness/ui/button"
-import { FileIcon } from "@opencode-harness/ui/file-icon"
-import { Icon } from "@opencode-harness/ui/icon"
+import { Button } from "@pwncode/ui/button"
+import { FileIcon } from "@pwncode/ui/file-icon"
+import { Icon } from "@pwncode/ui/icon"
 import { installLineCommentStyles } from "./line-comment-styles"
-import { useI18n } from "@opencode-harness/ui/context/i18n"
+import { useI18n } from "@pwncode/ui/context/i18n"
 
 installLineCommentStyles()
 

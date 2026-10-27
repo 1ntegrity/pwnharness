@@ -1,13 +1,13 @@
 <!--
   Built-in skill. Name and description are registered in code at
   packages/core/src/plugin/skill.ts
-  and CUSTOMIZE_OPENCODE_HARNESS_SKILL_DESCRIPTION). The body below becomes the
+  and CUSTOMIZE_PWNCODE_SKILL_DESCRIPTION). The body below becomes the
   skill's content.
 -->
 
-# Customizing opencode-harness
+# Customizing pwncode
 
-opencode-harness validates its own config strictly and refuses to start when a field
+pwncode validates its own config strictly and refuses to start when a field
 is wrong. The shapes below cover the common surface area, but they are a
 **summary, not the source of truth**.
 
@@ -20,18 +20,18 @@ defaults, and descriptions — lives in the published JSON Schema:
 
 If a field is not documented in this skill, or you need to confirm an exact
 shape before writing config, **fetch that URL and read the schema directly**
-rather than guessing. opencode-harness hard-fails on invalid config, so the cost of a
+rather than guessing. pwncode hard-fails on invalid config, so the cost of a
 wrong shape is a broken startup.
 
-Independently, every `opencode-harness.json` should declare
+Independently, every `pwncode.json` should declare
 `"$schema": "https://opencode.ai/config.json"` so the user's editor catches
 mistakes as they type.
 
 ## Applying changes
 
-Config is loaded once when opencode-harness starts and is not hot-reloaded. After
-saving changes to `opencode-harness.json`, an agent file, a skill, a plugin, or any
-other config-time file, **tell the user to quit and restart opencode-harness** for
+Config is loaded once when pwncode starts and is not hot-reloaded. After
+saving changes to `pwncode.json`, an agent file, a skill, a plugin, or any
+other config-time file, **tell the user to quit and restart pwncode** for
 the changes to take effect. The running session will keep using the
 already-loaded config until then.
 
@@ -39,20 +39,20 @@ already-loaded config until then.
 
 | Scope                         | Path                                                                                                                      |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Project config                | `./opencode-harness.json`, `./opencode-harness.jsonc`, or `.opencode-harness/opencode-harness.json` (opencode-harness walks up from the cwd to the worktree root) |
-| Global config                 | `~/.config/opencode-harness/opencode-harness.json` (NOT `~/.opencode-harness/`)                                                                   |
-| Project agents                | `.opencode-harness/agent/<name>.md` or `.opencode-harness/agents/<name>.md`                                                               |
-| Global agents                 | `~/.config/opencode-harness/agent(s)/<name>.md`                                                                                   |
-| Project commands              | `.opencode-harness/command/<name>.md` or `.opencode-harness/commands/<name>.md`                                                           |
-| Global commands               | `~/.config/opencode-harness/command(s)/<name>.md`                                                                                 |
-| Project skills                | `.opencode-harness/skill(s)/<name>/SKILL.md`                                                                                      |
-| Global skills                 | `~/.config/opencode-harness/skill(s)/<name>/SKILL.md`                                                                             |
+| Project config                | `./pwncode.json`, `./pwncode.jsonc`, or `.pwncode/pwncode.json` (pwncode walks up from the cwd to the worktree root) |
+| Global config                 | `~/.config/pwncode/pwncode.json` (NOT `~/.pwncode/`)                                                                   |
+| Project agents                | `.pwncode/agent/<name>.md` or `.pwncode/agents/<name>.md`                                                               |
+| Global agents                 | `~/.config/pwncode/agent(s)/<name>.md`                                                                                   |
+| Project commands              | `.pwncode/command/<name>.md` or `.pwncode/commands/<name>.md`                                                           |
+| Global commands               | `~/.config/pwncode/command(s)/<name>.md`                                                                                 |
+| Project skills                | `.pwncode/skill(s)/<name>/SKILL.md`                                                                                      |
+| Global skills                 | `~/.config/pwncode/skill(s)/<name>/SKILL.md`                                                                             |
 | External skills (auto-loaded) | `~/.claude/skills/<name>/SKILL.md`, `~/.agents/skills/<name>/SKILL.md`                                                    |
 
 Configs from each scope are deep-merged. Project overrides global. Unknown
-top-level keys in `opencode-harness.json` are rejected with `ConfigInvalidError`.
+top-level keys in `pwncode.json` are rejected with `ConfigInvalidError`.
 
-## opencode-harness.json
+## pwncode.json
 
 Every field is optional.
 
@@ -72,7 +72,7 @@ Every field is optional.
   "instructions": ["AGENTS.md", "docs/style.md"],
 
   "skills": {
-    "paths": [".opencode-harness/skills", "/abs/path/to/skills"],
+    "paths": [".pwncode/skills", "/abs/path/to/skills"],
     "urls": ["https://example.com/.well-known/skills/"]
   },
 
@@ -123,10 +123,10 @@ Every field is optional.
   },
 
   "plugin": [
-    "opencode-harness-gemini-auth",
-    "opencode-harness-foo@1.2.3",
+    "pwncode-gemini-auth",
+    "pwncode-foo@1.2.3",
     "./local-plugin.ts",
-    ["opencode-harness-bar", { "option": "value" }]
+    ["pwncode-bar", { "option": "value" }]
   ],
 
   "permission": {
@@ -162,12 +162,12 @@ Shape notes worth being explicit about:
 
 ## Skills
 
-opencode-harness's skill loader scans for `**/SKILL.md` inside skill directories. The
+pwncode's skill loader scans for `**/SKILL.md` inside skill directories. The
 file is named `SKILL.md` exactly, and lives in its own folder named after the
 skill:
 
 ```
-.opencode-harness/skills/my-skill/SKILL.md
+.pwncode/skills/my-skill/SKILL.md
 ```
 
 Frontmatter:
@@ -227,7 +227,7 @@ Local `path` values may be relative to the declaring config, absolute, or use
 
 Two ways to define an agent. Use the file form for anything non-trivial.
 
-### Inline (in `opencode-harness.json`)
+### Inline (in `pwncode.json`)
 
 ```json
 {
@@ -246,7 +246,7 @@ Two ways to define an agent. Use the file form for anything non-trivial.
 ### File
 
 ```
-.opencode-harness/agent/my-reviewer.md      OR     .opencode-harness/agents/my-reviewer.md
+.pwncode/agent/my-reviewer.md      OR     .pwncode/agents/my-reviewer.md
 ```
 
 ```markdown
@@ -278,17 +278,17 @@ file, `disable: true` in frontmatter.
 
 ### Built-in agents
 
-opencode-harness ships with `build`, `plan`, `general`, `explore`. Hidden internal agents:
+pwncode ships with `build`, `plan`, `general`, `explore`. Hidden internal agents:
 `compaction`, `title`, `summary`. To override a built-in's fields, define the
 same key in `agent: { <name>: { ... } }`.
 
 ## Commands
 
-opencode-harness's command loader scans for `**/*.md` inside command directories. The
+pwncode's command loader scans for `**/*.md` inside command directories. The
 file is named after the command, and lives directly inside the `command` folder:
 
 ```
-.opencode-harness/command/deploy.md
+.pwncode/command/deploy.md
 ```
 
 Frontmatter:
@@ -300,10 +300,10 @@ agent: build
 model: anthropic/claude-sonnet-4-6
 ---
 
-(command body in markdown: the prompt opencode-harness runs, with $ARGUMENTS for the user's input)
+(command body in markdown: the prompt pwncode runs, with $ARGUMENTS for the user's input)
 ```
 
-- `template` is the command body — everything below the frontmatter — and is required: it is the prompt opencode-harness runs when the command is invoked. Do not also put a `template:` key in the frontmatter.
+- `template` is the command body — everything below the frontmatter — and is required: it is the prompt pwncode runs when the command is invoked. Do not also put a `template:` key in the frontmatter.
 - `$ARGUMENTS` is replaced with everything the user typed after the command; `$1`, `$2`, … pull individual positional arguments.
 - Optional: `description`, `agent`, `model`, `variant`, `subtask`.
 
@@ -313,16 +313,16 @@ model: anthropic/claude-sonnet-4-6
 
 ```json
 "plugin": [
-  "opencode-harness-gemini-auth",            // npm spec, latest
-  "opencode-harness-foo@1.2.3",              // npm spec, pinned
+  "pwncode-gemini-auth",            // npm spec, latest
+  "pwncode-foo@1.2.3",              // npm spec, pinned
   "./local-plugin.ts",               // file path, relative to the declaring config
   "file:///abs/path/plugin.js",      // file URL
-  ["opencode-harness-bar", { "key": "val" }] // tuple form with options
+  ["pwncode-bar", { "key": "val" }] // tuple form with options
 ]
 ```
 
 Auto-discovered plugins (no config entry needed): any `*.ts` or `*.js` file in
-`.opencode-harness/plugin/` or `.opencode-harness/plugins/`.
+`.pwncode/plugin/` or `.pwncode/plugins/`.
 
 A plugin module exports `default` (or any named export) of type
 `Plugin = (input: PluginInput, options?) => Promise<Hooks>`. The export is a
@@ -405,7 +405,7 @@ Actions: `"allow"`, `"ask"`, `"deny"`.
 
 Per-tool value forms: `"allow"` shorthand (treated as `{"*": "allow"}`), or an
 object `{ pattern: action }`. Within an object, **insertion order matters**.
-opencode-harness evaluates the LAST matching rule, so put broad rules first and narrow
+pwncode evaluates the LAST matching rule, so put broad rules first and narrow
 rules last.
 
 `permission: "allow"` (a string at the top level) is shorthand for "allow
@@ -425,10 +425,10 @@ the `plan` agent's permission ruleset (`edit: deny *`).
 
 ## Escape hatches
 
-When a user's config is broken and opencode-harness won't start, these env vars help:
+When a user's config is broken and pwncode won't start, these env vars help:
 
-- `OPENCODE_DISABLE_PROJECT_CONFIG=1`: skip the project's local `opencode-harness.json`
-  and start from globals only. Run from the project directory, opencode-harness loads,
+- `OPENCODE_DISABLE_PROJECT_CONFIG=1`: skip the project's local `pwncode.json`
+  and start from globals only. Run from the project directory, pwncode loads,
   the user edits the broken file, then they restart without the flag.
 - `OPENCODE_CONFIG=/path/to/file.json`: load an additional explicit config.
 - `OPENCODE_CONFIG_CONTENT='{"$schema":"https://opencode.ai/config.json"}'`:
@@ -446,9 +446,9 @@ When a user's config is broken and opencode-harness won't start, these env vars 
   `https://opencode.ai/config.json` and read the schema rather than guessing.
 - Preserve `$schema` and any existing fields the user did not ask to change.
 - For agent, command, skill, and plugin definitions, prefer creating new files
-  in the correct location over inlining everything in `opencode-harness.json`.
+  in the correct location over inlining everything in `pwncode.json`.
 - If the user's existing config is malformed, point them at the env-var escape
-  hatches above so they can edit from inside opencode-harness without breaking their
+  hatches above so they can edit from inside pwncode without breaking their
   session.
-- After saving any config change, remind the user to quit and restart opencode-harness
+- After saving any config change, remind the user to quit and restart pwncode
   — running sessions keep using the already-loaded config.

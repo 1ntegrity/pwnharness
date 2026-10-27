@@ -1,10 +1,10 @@
 import yargs from "yargs"
 import { TuiThreadCommand } from "./cli/cmd/tui"
-import { InstallationVersion } from "@opencode-harness/core/installation/version"
+import { InstallationVersion } from "@pwncode/core/installation/version"
 import { hideBin } from "yargs/helpers"
 const cli = yargs(hideBin(process.argv))
   .parserConfiguration({ "populate--": true })
-  .scriptName("opencode-harness")
+  .scriptName("pwncode")
   .wrap(100)
   .help("help", "show help")
   .alias("help", "h")

@@ -1,6 +1,6 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import { Config } from "@/config/config"
-import { SessionV1 } from "@opencode-harness/core/v1/session"
+import { SessionV1 } from "@pwncode/core/v1/session"
 import type { MessageV2 } from "@/session/message-v2"
 import photonWasm from "@silvia-odwyer/photon-node/photon_rs_bg.wasm" with { type: "file" }
 import { Context, Effect, Layer, Schema } from "effect"
@@ -54,7 +54,7 @@ export interface Interface {
   readonly normalize: (input: SessionV1.FilePart) => Effect.Effect<SessionV1.FilePart, Error>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Image") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Image") {}
 
 const layer = Layer.effect(
   Service,

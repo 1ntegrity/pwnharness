@@ -1,10 +1,10 @@
 import { createEffect, For, Match, on, onCleanup, onMount, Show, Switch, type Accessor, type JSX } from "solid-js"
 import { animate, type AnimationPlaybackControls } from "motion"
-import { useI18n } from "@opencode-harness/ui/context/i18n"
+import { useI18n } from "@pwncode/ui/context/i18n"
 import { createStore } from "solid-js/store"
-import { Collapsible } from "@opencode-harness/ui/collapsible"
-import type { IconProps } from "@opencode-harness/ui/icon"
-import { TextShimmer } from "@opencode-harness/ui/text-shimmer"
+import { Collapsible } from "@pwncode/ui/collapsible"
+import type { IconProps } from "@pwncode/ui/icon"
+import { TextShimmer } from "@pwncode/ui/text-shimmer"
 
 export type TriggerTitle = {
   title: string

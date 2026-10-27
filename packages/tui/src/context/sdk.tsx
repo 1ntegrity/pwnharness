@@ -1,6 +1,6 @@
-import { createOpencodeClient } from "@opencode-harness/sdk/v2"
-import type { GlobalEvent } from "@opencode-harness/sdk/v2"
-import { Flag } from "@opencode-harness/core/flag/flag"
+import { createOpencodeClient } from "@pwncode/sdk/v2"
+import type { GlobalEvent } from "@pwncode/sdk/v2"
+import { Flag } from "@pwncode/core/flag/flag"
 import { createSimpleContext } from "./helper"
 import { batch, onCleanup, onMount } from "solid-js"
 

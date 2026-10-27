@@ -1,5 +1,5 @@
-import { getFilename } from "@opencode-harness/core/util/path"
-import { type Session } from "@opencode-harness/sdk/v2/client"
+import { getFilename } from "@pwncode/core/util/path"
+import { type Session } from "@pwncode/sdk/v2/client"
 import { pathKey } from "@/utils/path-key"
 import type { ServerConnection } from "@/context/server"
 import type { HomeProjectSelection } from "@/context/layout"

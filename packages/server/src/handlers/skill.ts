@@ -1,4 +1,4 @@
-import { SkillV2 } from "@opencode-harness/core/skill"
+import { SkillV2 } from "@pwncode/core/skill"
 import { HttpApiBuilder } from "effect/unstable/httpapi"
 import { Api } from "../api"
 import { response } from "../location"

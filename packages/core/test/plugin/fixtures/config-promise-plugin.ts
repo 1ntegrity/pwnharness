@@ -1,4 +1,4 @@
-import { define } from "@opencode-harness/plugin/v2/promise"
+import { define } from "@pwncode/plugin/v2/promise"
 
 export default define({
   id: "config-promise-plugin",

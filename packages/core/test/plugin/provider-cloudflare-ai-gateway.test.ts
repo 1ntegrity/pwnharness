@@ -1,11 +1,11 @@
-import { AISDK } from "@opencode-harness/core/aisdk"
+import { AISDK } from "@pwncode/core/aisdk"
 import { describe, expect, mock } from "bun:test"
 import { Effect } from "effect"
-import { ModelV2 } from "@opencode-harness/core/model"
-import { PluginV2 } from "@opencode-harness/core/plugin"
-import { PluginHost } from "@opencode-harness/core/plugin/host"
-import { CloudflareAIGatewayPlugin } from "@opencode-harness/core/plugin/provider/cloudflare-ai-gateway"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { ModelV2 } from "@pwncode/core/model"
+import { PluginV2 } from "@pwncode/core/plugin"
+import { PluginHost } from "@pwncode/core/plugin/host"
+import { CloudflareAIGatewayPlugin } from "@pwncode/core/plugin/provider/cloudflare-ai-gateway"
+import { ProviderV2 } from "@pwncode/core/provider"
 import { testEffect } from "../lib/effect"
 import { PluginTestLayer } from "./fixture"
 
@@ -164,7 +164,7 @@ describe("CloudflareAIGatewayPlugin", () => {
             skipCache: true,
             collectLog: false,
             headers: {
-              "User-Agent": expect.stringContaining("opencode-harness/"),
+              "User-Agent": expect.stringContaining("pwncode/"),
             },
           },
         })

@@ -2,8 +2,8 @@ import { useIsRouting, useLocation } from "@solidjs/router"
 import { batch, createEffect, onCleanup, onMount } from "solid-js"
 import { createStore } from "solid-js/store"
 import { makeEventListener } from "@solid-primitives/event-listener"
-import { Tooltip } from "@opencode-harness/ui/tooltip"
-import { TooltipV2 } from "@opencode-harness/ui/v2/tooltip-v2"
+import { Tooltip } from "@pwncode/ui/tooltip"
+import { TooltipV2 } from "@pwncode/ui/v2/tooltip-v2"
 import { useLanguage } from "@/context/language"
 
 type Mem = Performance & {

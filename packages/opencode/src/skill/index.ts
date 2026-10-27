@@ -1,20 +1,20 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import path from "path"
 import { realpathSync } from "fs"
 import { Effect, Layer, Context, Schema } from "effect"
-import { NamedError } from "@opencode-harness/core/util/error"
+import { NamedError } from "@pwncode/core/util/error"
 import type { Agent } from "@/agent/agent"
 import { EventV2Bridge } from "@/event-v2-bridge"
 import { InstanceState } from "@/effect/instance-state"
-import { Global } from "@opencode-harness/core/global"
-import { SkillPlugin } from "@opencode-harness/core/plugin/skill"
+import { Global } from "@pwncode/core/global"
+import { SkillPlugin } from "@pwncode/core/plugin/skill"
 import { Permission } from "@/permission"
-import { FSUtil } from "@opencode-harness/core/fs-util"
+import { FSUtil } from "@pwncode/core/fs-util"
 import { Config } from "@/config/config"
-import { FrontmatterError } from "@opencode-harness/core/v1/config/error"
+import { FrontmatterError } from "@pwncode/core/v1/config/error"
 import { ConfigMarkdown } from "@/config/markdown"
 import { RuntimeFlags } from "@/effect/runtime-flags"
-import { Glob } from "@opencode-harness/core/util/glob"
+import { Glob } from "@pwncode/core/util/glob"
 import { Discovery } from "./discovery"
 import { BundledSkills } from "./bundled"
 import { SkillMigrate } from "./migrate"
@@ -30,8 +30,8 @@ const SKILL_PATTERN = "**/SKILL.md"
 // Provenance layers for a discovered skill. Precedence is by priority: a
 // higher-priority layer shadows a lower one when two skills share a `name`.
 // bundled (ships with the binary) < pack (imported/community) < user
-// (user-authored & forks) < project (repo-local .opencode-harness/.claude).
-// `legacy` is the pre-layered flat ~/["opencode-harness"]/skills root, kept as a
+// (user-authored & forks) < project (repo-local .pwncode/.claude).
+// `legacy` is the pre-layered flat ~/["pwncode"]/skills root, kept as a
 // deprecation fallback until migration runs; it sits just above bundled.
 // `builtin` is reserved for skills registered in-code so any on-disk skill of
 // the same name overrides them without a duplicate warning.
@@ -56,15 +56,15 @@ function canonicalize(p: string): string {
   }
 }
 
-// Built-in skill that ships with opencode-harness. The model's intuition for what an
-// opencode-harness.json should look like is often wrong, and opencode-harness hard-fails on
+// Built-in skill that ships with pwncode. The model's intuition for what an
+// pwncode.json should look like is often wrong, and pwncode hard-fails on
 // invalid config, so users hit cryptic startup errors. Loading this skill
-// when the model is asked to touch opencode-harness's own config files gives it the
+// when the model is asked to touch pwncode's own config files gives it the
 // actual schemas instead of guesses.
-const CUSTOMIZE_OPENCODE_HARNESS_SKILL_NAME = "customize-opencode-harness"
-const CUSTOMIZE_OPENCODE_HARNESS_SKILL_DESCRIPTION =
-  "Use ONLY when the user is editing or creating opencode-harness's own configuration: opencode-harness.json, opencode-harness.jsonc, files under .opencode-harness/, or files under ~/.config/opencode-harness/. Also use when creating or fixing opencode-harness agents, subagents, skills, plugins, MCP servers, or permission rules. Do not use for the user's own application code, or for any project that is not configuring opencode-harness itself."
-const CUSTOMIZE_OPENCODE_HARNESS_SKILL_BODY = SkillPlugin.CustomizeHarnessContent
+const CUSTOMIZE_PWNCODE_SKILL_NAME = "customize-pwncode"
+const CUSTOMIZE_PWNCODE_SKILL_DESCRIPTION =
+  "Use ONLY when the user is editing or creating pwncode's own configuration: pwncode.json, pwncode.jsonc, files under .pwncode/, or files under ~/.config/pwncode/. Also use when creating or fixing pwncode agents, subagents, skills, plugins, MCP servers, or permission rules. Do not use for the user's own application code, or for any project that is not configuring pwncode itself."
+const CUSTOMIZE_PWNCODE_SKILL_BODY = SkillPlugin.CustomizeHarnessContent
 
 export const Info = Schema.Struct({
   name: Schema.String,
@@ -77,7 +77,7 @@ export const Info = Schema.Struct({
   layer: Schema.optional(Schema.String),
   source: Schema.optional(Schema.String),
   // Optional metadata read from SKILL.md frontmatter (all backward-compatible;
-  // absent fields are simply undefined). `requires["opencode-harness"]` is a min-host
+  // absent fields are simply undefined). `requires["pwncode"]` is a min-host
   // semver range — enforced as warn-and-load (see `skills doctor`), never a
   // hard failure, so a live engagement is never bricked.
   version: Schema.optional(Schema.String),
@@ -85,7 +85,7 @@ export const Info = Schema.Struct({
   author: Schema.optional(Schema.String),
   tags: Schema.optional(Schema.Array(Schema.String)),
   dependencies: Schema.optional(Schema.Array(Schema.String)),
-  requires: Schema.optional(Schema.Struct({ "opencode-harness": Schema.optional(Schema.String) })),
+  requires: Schema.optional(Schema.Struct({ "pwncode": Schema.optional(Schema.String) })),
   license: Schema.optional(Schema.String),
 })
 export type Info = Schema.Schema.Type<typeof Info>
@@ -116,14 +116,14 @@ function readSkillMeta(data: Record<string, unknown>): SkillMeta {
     Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : undefined
   const tags = strArray(data.tags)
   const dependencies = strArray(data.dependencies)
-  const requiresRaw = isRecord(data.requires) ? str(data.requires["opencode-harness"]) : undefined
+  const requiresRaw = isRecord(data.requires) ? str(data.requires["pwncode"]) : undefined
   return {
     version: str(data.version),
     id: str(data.id),
     author: str(data.author),
     tags: tags && tags.length > 0 ? tags : undefined,
     dependencies: dependencies && dependencies.length > 0 ? dependencies : undefined,
-    requires: requiresRaw ? { "opencode-harness": requiresRaw } : undefined,
+    requires: requiresRaw ? { "pwncode": requiresRaw } : undefined,
     license: str(data.license),
   }
 }
@@ -228,7 +228,7 @@ const scan = Effect.fnUntraced(function* (
 
   // Canonicalize so the same physical file always yields the same key: two
   // roots reaching one file via different symlink forms (e.g. the global home
-  // and a config dir that both cover ~/["opencode-harness"]/skills) must dedupe to one
+  // and a config dir that both cover ~/["pwncode"]/skills) must dedupe to one
   // entry, or the has()-guard misses and a lower-provenance file is claimed
   // under the wrong layer.
   const excludes = (opts.exclude ?? []).map((prefix) => {
@@ -292,16 +292,16 @@ const discoverSkills = Effect.fnUntraced(function* (
   }
 
   // Global skills home: always discoverable regardless of cwd. Engagements are
-  // global (~/["opencode-harness"]/engagements), so sessions run from arbitrary
+  // global (~/["pwncode"]/engagements), so sessions run from arbitrary
   // directories; skills placed here load everywhere. Physically separated into
   // provenance layers — see SkillLayer. Updates only ever rewrite the layer
   // they own, so user/ and packs/ survive a bundled refresh.
   //
   // MUST run before the config-dir scan below: config.directories() includes
-  // ${home}/["opencode-harness"] and scans it with `{skill,skills}/**`, which would
+  // ${home}/["pwncode"] and scans it with `{skill,skills}/**`, which would
   // otherwise match these same files first and mis-claim them as `project`.
   // First-claim-wins in scan(), so claiming the correct layer here comes first.
-  const globalSkills = path.join(global.home, ".opencode-harness", "skills")
+  const globalSkills = path.join(global.home, ".pwncode", "skills")
   if (yield* fsys.isDir(globalSkills)) {
     const bundled = path.join(globalSkills, "bundled")
     const packs = path.join(globalSkills, "packs")
@@ -322,10 +322,10 @@ const discoverSkills = Effect.fnUntraced(function* (
     })
   }
 
-  // Config directories (repo-local ["opencode-harness"] + global config) → project layer.
-  // config.directories() includes ${home}/["opencode-harness"], and OPENCODE_SKILL_PATTERN
+  // Config directories (repo-local ["pwncode"] + global config) → project layer.
+  // config.directories() includes ${home}/["pwncode"], and OPENCODE_SKILL_PATTERN
   // (`{skill,skills}/**`) would otherwise reach into the managed global skills
-  // home (${home}/["opencode-harness"]/skills/**), re-discovering bundled/pack/user and
+  // home (${home}/["pwncode"]/skills/**), re-discovering bundled/pack/user and
   // even disabled/ skills under the wrong (project) layer. That subtree is owned
   // by the global-home block above, so exclude it here.
   const configDirs = yield* config.directories()
@@ -343,7 +343,7 @@ const discoverSkills = Effect.fnUntraced(function* (
     // A relative skill path must not depend on the session cwd, which is
     // arbitrary for global engagements. Resolve it against the session
     // directory AND the project root of every discovered config dir (e.g. the
-    // parent of <root>/["opencode-harness"]), scanning whichever exist.
+    // parent of <root>/["pwncode"]), scanning whichever exist.
     const candidates = path.isAbsolute(expanded)
       ? [expanded]
       : [path.join(directory, expanded), ...configDirs.map((d) => path.join(path.dirname(d), expanded))]
@@ -427,7 +427,7 @@ const loadSkills = Effect.fnUntraced(function* (
   yield* Effect.logInfo("init", { count: Object.keys(state.skills).length })
 })
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Skill") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Skill") {}
 
 const layer = Layer.effect(
   Service,
@@ -438,7 +438,7 @@ const layer = Layer.effect(
     const fsys = yield* FSUtil.Service
     const global = yield* Global.Service
     const flags = yield* RuntimeFlags.Service
-    // Seed/refresh ~/["opencode-harness"]/skills/bundled from the binary-embedded set
+    // Seed/refresh ~/["pwncode"]/skills/bundled from the binary-embedded set
     // before any discovery runs. Best-effort and no-op in dev (not embedded).
     yield* BundledSkills.seed(fsys, global)
     // One-time migration of the pre-layered flat layout into user/ (runs after
@@ -466,11 +466,11 @@ const layer = Layer.effect(
         const s: State = { skills: {}, dirs: new Set() }
         // Register the built-in skill BEFORE disk discovery so a user-disk
         // skill with the same name can override it.
-        s.skills[CUSTOMIZE_OPENCODE_HARNESS_SKILL_NAME] = {
-          name: CUSTOMIZE_OPENCODE_HARNESS_SKILL_NAME,
-          description: CUSTOMIZE_OPENCODE_HARNESS_SKILL_DESCRIPTION,
+        s.skills[CUSTOMIZE_PWNCODE_SKILL_NAME] = {
+          name: CUSTOMIZE_PWNCODE_SKILL_NAME,
+          description: CUSTOMIZE_PWNCODE_SKILL_DESCRIPTION,
           location: "<built-in>",
-          content: CUSTOMIZE_OPENCODE_HARNESS_SKILL_BODY,
+          content: CUSTOMIZE_PWNCODE_SKILL_BODY,
           layer: "builtin",
           source: "built-in",
         }

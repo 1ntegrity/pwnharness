@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@opencode-harness/plugin",
+  "name": "@pwncode/plugin",
   "version": "0.1.0",
   "type": "module",
   "license": "MIT",
@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "@ai-sdk/provider": "3.0.8",
-    "@opencode-harness/sdk": "workspace:*",
+    "@pwncode/sdk": "workspace:*",
     "effect": "catalog:",
     "zod": "catalog:"
   },

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@opencode-harness/server",
+  "name": "@pwncode/server",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -12,8 +12,8 @@
     "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
-    "@opencode-harness/core": "workspace:*",
-    "@opencode-harness/protocol": "workspace:*",
+    "@pwncode/core": "workspace:*",
+    "@pwncode/protocol": "workspace:*",
     "drizzle-orm": "catalog:",
     "effect": "catalog:"
   },

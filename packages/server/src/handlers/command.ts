@@ -1,4 +1,4 @@
-import { CommandV2 } from "@opencode-harness/core/command"
+import { CommandV2 } from "@pwncode/core/command"
 import { HttpApiBuilder } from "effect/unstable/httpapi"
 import { Api } from "../api"
 import { response } from "../location"

@@ -1,5 +1,5 @@
-import { EventV2 } from "@opencode-harness/core/event"
-import { OpenCodeEvent } from "@opencode-harness/protocol/groups/event"
+import { EventV2 } from "@pwncode/core/event"
+import { OpenCodeEvent } from "@pwncode/protocol/groups/event"
 import { Effect, Schema, Stream } from "effect"
 import { HttpServerResponse } from "effect/unstable/http"
 import { HttpApiBuilder } from "effect/unstable/httpapi"

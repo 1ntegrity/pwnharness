@@ -1,4 +1,4 @@
-import { PermissionV1 } from "@opencode-harness/core/v1/permission"
+import { PermissionV1 } from "@pwncode/core/v1/permission"
 import { Permission } from "@/permission"
 import { Schema } from "effect"
 import { HttpApi, HttpApiEndpoint, HttpApiError, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
@@ -54,7 +54,7 @@ export const PermissionApi = HttpApi.make("permission")
   )
   .annotateMerge(
     OpenApi.annotations({
-      title: "opencode-harness experimental HttpApi",
+      title: "pwncode experimental HttpApi",
       version: "0.0.1",
       description: "Experimental HttpApi surface for selected instance routes.",
     }),

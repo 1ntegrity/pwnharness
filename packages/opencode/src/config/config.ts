@@ -1,31 +1,31 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
-import { httpClient } from "@opencode-harness/core/effect/app-node-platform"
-import { serviceUse } from "@opencode-harness/core/effect/service-use"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
+import { httpClient } from "@pwncode/core/effect/app-node-platform"
+import { serviceUse } from "@pwncode/core/effect/service-use"
 import path from "path"
 import { pathToFileURL } from "url"
 import os from "os"
 import { mergeDeep } from "remeda"
-import { Global } from "@opencode-harness/core/global"
+import { Global } from "@pwncode/core/global"
 import fsNode from "fs/promises"
-import { Flag } from "@opencode-harness/core/flag/flag"
+import { Flag } from "@pwncode/core/flag/flag"
 import { Auth } from "../auth"
 import { Env } from "../env"
 import { applyEdits, modify } from "jsonc-parser"
-import { InstallationLocal, InstallationVersion } from "@opencode-harness/core/installation/version"
+import { InstallationLocal, InstallationVersion } from "@pwncode/core/installation/version"
 import { existsSync } from "fs"
 import { Account } from "@/account/account"
 import { isRecord } from "@/util/record"
-import type { ConsoleState } from "@opencode-harness/core/v1/config/console-state"
-import { FSUtil } from "@opencode-harness/core/fs-util"
+import type { ConsoleState } from "@pwncode/core/v1/config/console-state"
+import { FSUtil } from "@pwncode/core/fs-util"
 import { InstanceState } from "@/effect/instance-state"
 import { Context, Duration, Effect, Exit, Fiber, Layer, Option, Schema } from "effect"
 import { FetchHttpClient, HttpClient, HttpClientRequest } from "effect/unstable/http"
-import { EffectFlock } from "@opencode-harness/core/util/effect-flock"
+import { EffectFlock } from "@pwncode/core/util/effect-flock"
 import { containsPath, type InstanceContext } from "../project/instance-context"
-import { ConfigV1 } from "@opencode-harness/core/v1/config/config"
-import { RemoteAuthError } from "@opencode-harness/core/v1/config/error"
-import { ConfigPermissionV1 } from "@opencode-harness/core/v1/config/permission"
-import { ConfigPluginV1 } from "@opencode-harness/core/v1/config/plugin"
+import { ConfigV1 } from "@pwncode/core/v1/config/config"
+import { RemoteAuthError } from "@pwncode/core/v1/config/error"
+import { ConfigPermissionV1 } from "@pwncode/core/v1/config/permission"
+import { ConfigPluginV1 } from "@pwncode/core/v1/config/plugin"
 import { ConfigAgent } from "./agent"
 import { ConfigCommand } from "./command"
 import { ConfigManaged } from "./managed"
@@ -33,7 +33,7 @@ import { ConfigParse } from "./parse"
 import { ConfigPaths } from "./paths"
 import { ConfigPlugin } from "./plugin"
 import { ConfigVariable } from "./variable"
-import { Npm } from "@opencode-harness/core/npm"
+import { Npm } from "@pwncode/core/npm"
 import { withTransientReadRetry } from "@/util/effect-http-client"
 
 // Custom merge function that concatenates array fields instead of replacing them
@@ -132,12 +132,12 @@ export interface Interface {
   readonly waitForDependencies: () => Effect.Effect<void>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Config") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Config") {}
 
 export const use = serviceUse(Service)
 
 function globalConfigFile() {
-  const candidates = ["opencode-harness.jsonc", "opencode-harness.json", "opencode.jsonc", "opencode.json", "config.json"].map((file) =>
+  const candidates = ["pwncode.jsonc", "pwncode.json", "opencode.jsonc", "opencode.json", "config.json"].map((file) =>
     path.join(Global.Path.config, file),
   )
   for (const file of candidates) {
@@ -258,8 +258,8 @@ const layer = Layer.effect(
       result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "config.json"), env))
       result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "opencode.json"), env))
       result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "opencode.jsonc"), env))
-      result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "opencode-harness.json"), env))
-      result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "opencode-harness.jsonc"), env))
+      result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "pwncode.json"), env))
+      result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "pwncode.jsonc"), env))
 
       const legacy = path.join(Global.Path.config, "config")
       if (existsSync(legacy)) {
@@ -359,7 +359,7 @@ const layer = Layer.effect(
           if (value.type === "wellknown") {
             const url = key.replace(/\/+$/, "")
             authEnv[value.key] = value.token
-            const wellknownURL = `${url}/.well-known/opencode-harness`
+            const wellknownURL = `${url}/.well-known/pwncode`
             yield* Effect.logDebug("fetching remote config", { url: wellknownURL })
             const wellknown = yield* fetchRemoteJson(wellknownURL, undefined, ConfigV1.WellKnown, url)
             const remote = yield* Effect.promise(() =>
@@ -406,7 +406,7 @@ const layer = Layer.effect(
         }
 
         if (!Flag.OPENCODE_DISABLE_PROJECT_CONFIG) {
-          for (const file of yield* ConfigPaths.files("opencode-harness", ctx.directory, ctx.worktree).pipe(Effect.orDie)) {
+          for (const file of yield* ConfigPaths.files("pwncode", ctx.directory, ctx.worktree).pipe(Effect.orDie)) {
             yield* merge(file, yield* loadFile(file, authEnv), "local")
           }
           for (const file of yield* ConfigPaths.files("opencode", ctx.directory, ctx.worktree).pipe(Effect.orDie)) {
@@ -427,8 +427,8 @@ const layer = Layer.effect(
         const deps: Fiber.Fiber<void>[] = []
 
         for (const dir of directories) {
-          if (dir.endsWith(".opencode-harness") || dir === Flag.OPENCODE_CONFIG_DIR) {
-            for (const file of ["opencode-harness.json", "opencode-harness.jsonc", "opencode.json", "opencode.jsonc"]) {
+          if (dir.endsWith(".pwncode") || dir === Flag.OPENCODE_CONFIG_DIR) {
+            for (const file of ["pwncode.json", "pwncode.jsonc", "opencode.json", "opencode.jsonc"]) {
               const source = path.join(dir, file)
               yield* Effect.logDebug(`loading config from ${source}`)
               yield* merge(source, yield* loadFile(source, authEnv))
@@ -444,7 +444,7 @@ const layer = Layer.effect(
             .install(dir, {
               add: [
                 {
-                  name: "@opencode-harness/plugin",
+                  name: "@pwncode/plugin",
                   version: InstallationLocal ? undefined : InstallationVersion,
                 },
               ],
@@ -464,7 +464,7 @@ const layer = Layer.effect(
           result.command = mergeDeep(result.command ?? {}, yield* Effect.promise(() => ConfigCommand.load(dir)))
           result.agent = mergeDeep(result.agent ?? {}, yield* Effect.promise(() => ConfigAgent.load(dir)))
           result.agent = mergeDeep(result.agent ?? {}, yield* Effect.promise(() => ConfigAgent.loadMode(dir)))
-          // Auto-discovered plugins under `.opencode-harness/plugin(s)` are already local files, so ConfigPlugin.load
+          // Auto-discovered plugins under `.pwncode/plugin(s)` are already local files, so ConfigPlugin.load
           // returns normalized Specs and we only need to attach origin metadata here.
           const list = yield* Effect.promise(() => ConfigPlugin.load(dir))
           yield* mergePluginOrigins(dir, list)
@@ -520,7 +520,7 @@ const layer = Layer.effect(
 
         const managedDir = ConfigManaged.managedConfigDir()
         if (existsSync(managedDir)) {
-          for (const file of ["opencode-harness.json", "opencode-harness.jsonc", "opencode.json", "opencode.jsonc"]) {
+          for (const file of ["pwncode.json", "pwncode.jsonc", "opencode.json", "opencode.jsonc"]) {
             const source = path.join(managedDir, file)
             yield* merge(source, yield* loadFile(source), "global")
           }

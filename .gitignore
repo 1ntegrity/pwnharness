@@ -28,7 +28,7 @@ target
 
 # Local dev files
 opencode-dev
-opencode-harness-dev
+pwncode-dev
 UPCOMING_CHANGELOG.md
 logs/
 *.bun-build

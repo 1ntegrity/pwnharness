@@ -1,6 +1,6 @@
-import { PermissionV1 } from "@opencode-harness/core/v1/permission"
+import { PermissionV1 } from "@pwncode/core/v1/permission"
 import type { Auth } from "@/auth"
-import { SessionV1 } from "@opencode-harness/core/v1/session"
+import { SessionV1 } from "@pwncode/core/v1/session"
 import type { RuntimeFlags } from "@/effect/runtime-flags"
 import { InstanceState } from "@/effect/instance-state"
 import { Permission } from "@/permission"
@@ -9,13 +9,13 @@ import type { MessageV2 } from "../message-v2"
 import type { Provider } from "@/provider/provider"
 import { ProviderTransform } from "@/provider/transform"
 import { SystemPrompt } from "../system"
-import { InstallationVersion } from "@opencode-harness/core/installation/version"
+import { InstallationVersion } from "@pwncode/core/installation/version"
 import { Effect, Record } from "effect"
 import { jsonSchema, tool as aiTool, type ModelMessage, type Tool } from "ai"
 import type { Plugin } from "@/plugin"
 import { mergeDeep } from "remeda"
 
-const USER_AGENT = `opencode-harness/${InstallationVersion}`
+const USER_AGENT = `pwncode/${InstallationVersion}`
 
 type PrepareInput = {
   readonly user: SessionV1.User

@@ -1,8 +1,8 @@
 /**
- * OpenCode Harness bridge for pi.
+ * PwnCode bridge for pi.
  *
- * Adds the `harness` tool: delegate work to a local opencode-harness server
- * (~/dev/pentestcode-harness, `opencode-harness serve --port 4097`). Each call
+ * Adds the `harness` tool: delegate work to a local pwncode server
+ * (~/dev/pentestcode-harness, `pwncode serve --port 4097`). Each call
  * creates (or continues) a harness session, waits for the agent turn to finish,
  * and returns the final assistant text. Harness sessions keep their own tools
  * (read/edit/shell/grep/...), agents, and skills — pi stays the front end.
@@ -140,11 +140,11 @@ function turnDone(messages: HarnessMessage[], sid: string, busy: Set<string>): b
 export default function harnessBridge(pi: RegisteredPi) {
     pi.registerTool({
         name: "harness",
-        label: "OpenCode Harness",
+        label: "PwnCode",
         description:
-            "Delegate a task to a local opencode-harness coding agent (own sessions, tools: read/edit/shell/grep/task, agents build/plan). " +
+            "Delegate a task to a local pwncode coding agent (own sessions, tools: read/edit/shell/grep/task, agents build/plan). " +
             "Returns the harness agent's final answer and the sessionID. Pass sessionID back to continue the same session with full context.",
-        promptSnippet: "delegate coding tasks to the local opencode-harness agent",
+        promptSnippet: "delegate coding tasks to the local pwncode agent",
         parameters: Type.Object({
             action: Type.Union([Type.Literal("run"), Type.Literal("list")], {
                 description: "run: create/continue a harness session with a prompt; list: list harness sessions",
@@ -233,7 +233,7 @@ export default function harnessBridge(pi: RegisteredPi) {
                     content: [
                         {
                             type: "text",
-                            text: `harness bridge error: ${e instanceof Error ? e.message : String(e)}\n(is the server running? opencode-harness serve --port 4097)`,
+                            text: `harness bridge error: ${e instanceof Error ? e.message : String(e)}\n(is the server running? pwncode serve --port 4097)`,
                         },
                     ],
                     details: {},

@@ -1,6 +1,6 @@
 // @ts-nocheck
 import * as mod from "./dock-prompt"
-import { create } from "@opencode-harness/ui/storybook/scaffold"
+import { create } from "@pwncode/ui/storybook/scaffold"
 
 const docs = `### Overview
 Docked prompt layout for questions and permission requests.

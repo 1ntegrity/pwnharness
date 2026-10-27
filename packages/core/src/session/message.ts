@@ -1,2 +1,2 @@
 export * as SessionMessage from "./message"
-export * from "@opencode-harness/schema/session-message"
+export * from "@pwncode/schema/session-message"

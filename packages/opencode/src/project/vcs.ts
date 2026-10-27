@@ -1,12 +1,12 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import { Effect, Layer, Context, Schema, Scope } from "effect"
 import { formatPatch, structuredPatch } from "diff"
 import { InstanceState } from "@/effect/instance-state"
-import { Watcher } from "@opencode-harness/core/filesystem/watcher"
+import { Watcher } from "@pwncode/core/filesystem/watcher"
 import { Git } from "@/git"
 import { EventV2Bridge } from "@/event-v2-bridge"
-import { EventV2 } from "@opencode-harness/core/event"
-import { VcsEvent } from "@opencode-harness/schema/vcs-event"
+import { EventV2 } from "@pwncode/core/event"
+import { VcsEvent } from "@pwncode/schema/vcs-event"
 
 const PATCH_CONTEXT_LINES = 2_147_483_647
 const MAX_PATCH_BYTES = 10_000_000
@@ -293,7 +293,7 @@ interface State {
   root: Git.Base | undefined
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Vcs") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Vcs") {}
 
 const layer: Layer.Layer<Service, never, Git.Service | EventV2Bridge.Service> = Layer.effect(
   Service,

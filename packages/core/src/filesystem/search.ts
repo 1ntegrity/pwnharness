@@ -5,7 +5,7 @@ import path from "path"
 import { Context, Effect, Layer, Scope } from "effect"
 import { Fff } from "#fff"
 import fuzzysort from "fuzzysort"
-import { Entry, FindInput, Match } from "@opencode-harness/schema/filesystem"
+import { Entry, FindInput, Match } from "@pwncode/schema/filesystem"
 import type { GlobInput, GrepInput } from "../filesystem"
 import { FSUtil } from "../fs-util"
 import { Location } from "../location"
@@ -19,7 +19,7 @@ export interface Interface {
   readonly grep: (input: GrepInput) => Effect.Effect<readonly Match[]>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/v2/FileSystem/Search") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/v2/FileSystem/Search") {}
 
 export const ripgrepLayer = Layer.effect(
   Service,

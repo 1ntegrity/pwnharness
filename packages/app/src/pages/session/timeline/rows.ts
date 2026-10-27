@@ -1,6 +1,6 @@
 import { parseCommentNote, readCommentMetadata } from "@/utils/comment-note"
-import { AssistantMessage, Part, SessionStatus, SnapshotFileDiff, UserMessage } from "@opencode-harness/sdk/v2"
-import { groupParts, renderable, type PartGroup } from "@opencode-harness/session-ui/message-part"
+import { AssistantMessage, Part, SessionStatus, SnapshotFileDiff, UserMessage } from "@pwncode/sdk/v2"
+import { groupParts, renderable, type PartGroup } from "@pwncode/session-ui/message-part"
 import { TimelineRow, type SummaryDiff } from "./timeline-row"
 
 export { TimelineRow, type SummaryDiff } from "./timeline-row"

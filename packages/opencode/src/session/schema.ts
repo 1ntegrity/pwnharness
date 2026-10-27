@@ -1,8 +1,8 @@
 import { Schema } from "effect"
 
 import { Identifier } from "@/id/id"
-import { SessionV2 } from "@opencode-harness/core/session"
-import { statics } from "@opencode-harness/core/schema"
+import { SessionV2 } from "@pwncode/core/session"
+import { statics } from "@pwncode/core/schema"
 
 export const SessionID = SessionV2.ID
 export type SessionID = Schema.Schema.Type<typeof SessionID>

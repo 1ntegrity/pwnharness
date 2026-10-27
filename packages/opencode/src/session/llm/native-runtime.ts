@@ -15,8 +15,8 @@ import {
   toDefinitions,
   type JsonSchema,
   type LLMEvent,
-} from "@opencode-harness/llm"
-import type { LLMClientShape } from "@opencode-harness/llm/route"
+} from "@pwncode/llm"
+import type { LLMClientShape } from "@pwncode/llm/route"
 import { LLMNative } from "./native-request"
 
 export type RuntimeStatus =
@@ -53,7 +53,7 @@ function statusWithFetch(
 ): RuntimeStatus {
   const providerID = input.model.providerID
   if (providerID !== "openai" && providerID !== "anthropic" && !providerID.startsWith("opencode"))
-    return { type: "unsupported", reason: "provider is not openai, opencode-harness, or anthropic" }
+    return { type: "unsupported", reason: "provider is not openai, pwncode, or anthropic" }
   const npm = input.model.api.npm
   if (npm !== "@ai-sdk/openai" && npm !== "@ai-sdk/openai-compatible" && npm !== "@ai-sdk/anthropic")
     return { type: "unsupported", reason: "provider package is not OpenAI, OpenAI-compatible, or Anthropic" }
@@ -76,7 +76,7 @@ export function stream(input: StreamInput): StreamResult {
   const current = statusWithFetch(input, fetch)
   if (current.type === "unsupported") return current
 
-  // Integration point with @opencode-harness/llm: native-request lowers session data
+  // Integration point with @pwncode/llm: native-request lowers session data
   // into an LLMRequest, then LLMClient handles route selection and transport.
   //
   // ProviderTransform.providerOptions builds AI-SDK-shaped options for the
@@ -170,8 +170,8 @@ export function nativeTools(tools: Record<string, Tool>, input: Pick<StreamInput
   return Object.fromEntries(
     Object.entries(tools).map(([name, item]) => [
       name,
-      // Tool execution remains opencode-harness-owned. The native runtime only adapts
-      // the @opencode-harness/llm tool call back into the AI SDK Tool.execute shape.
+      // Tool execution remains pwncode-owned. The native runtime only adapts
+      // the @pwncode/llm tool call back into the AI SDK Tool.execute shape.
       NativeTool.make({
         description: item.description ?? "",
         jsonSchema: nativeSchema(item.inputSchema),

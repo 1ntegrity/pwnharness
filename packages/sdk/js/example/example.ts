@@ -1,4 +1,4 @@
-import { createOpencodeClient, createOpencodeServer } from "@opencode-harness/sdk"
+import { createOpencodeClient, createOpencodeServer } from "@pwncode/sdk"
 import { pathToFileURL } from "bun"
 
 const server = await createOpencodeServer()

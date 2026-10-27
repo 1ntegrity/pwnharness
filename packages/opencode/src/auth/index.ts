@@ -1,11 +1,11 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import path from "path"
 import { Effect, Layer, Record, Result, Schema, Context } from "effect"
-import { NonNegativeInt } from "@opencode-harness/core/schema"
-import { Global } from "@opencode-harness/core/global"
-import { FSUtil } from "@opencode-harness/core/fs-util"
+import { NonNegativeInt } from "@pwncode/core/schema"
+import { Global } from "@pwncode/core/global"
+import { FSUtil } from "@pwncode/core/fs-util"
 
-export const OAUTH_DUMMY_KEY = "opencode-harness-oauth-dummy-key"
+export const OAUTH_DUMMY_KEY = "pwncode-oauth-dummy-key"
 
 const file = path.join(Global.Path.data, "auth.json")
 
@@ -47,7 +47,7 @@ export interface Interface {
   readonly remove: (key: string) => Effect.Effect<void, AuthError>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Auth") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Auth") {}
 
 const layer = Layer.effect(
   Service,

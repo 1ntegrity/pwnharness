@@ -1,4 +1,4 @@
-import type { Event } from "@opencode-harness/sdk/v2"
+import type { Event } from "@pwncode/sdk/v2"
 import { useSDK } from "./sdk"
 
 type EventMetadata = {

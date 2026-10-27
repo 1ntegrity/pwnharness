@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test } from "bun:test"
-import { EventV2 } from "@opencode-harness/core/event"
-import { Location } from "@opencode-harness/core/location"
+import { EventV2 } from "@pwncode/core/event"
+import { Location } from "@pwncode/core/location"
 import { Context, Schema } from "effect"
 import { HttpApiApp } from "../../src/server/routes/instance/httpapi/server"
 import { resetDatabase } from "../fixture/db"

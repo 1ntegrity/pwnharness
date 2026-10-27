@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { NamedError } from "@opencode-harness/core/util/error"
+import { NamedError } from "@pwncode/core/util/error"
 import { MessageError } from "../../src/session/message-error"
 
 describe("util.error", () => {

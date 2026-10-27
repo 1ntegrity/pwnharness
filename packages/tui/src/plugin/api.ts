@@ -1,4 +1,4 @@
-import type { TuiPluginApi, TuiRouteDefinition } from "@opencode-harness/plugin/tui"
+import type { TuiPluginApi, TuiRouteDefinition } from "@pwncode/plugin/tui"
 import { createSignal } from "solid-js"
 
 type RouteEntry = {

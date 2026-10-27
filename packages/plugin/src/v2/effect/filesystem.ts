@@ -1,4 +1,4 @@
-import type { FileSystemEntry } from "@opencode-harness/sdk/v2/types"
+import type { FileSystemEntry } from "@pwncode/sdk/v2/types"
 import type { Effect } from "effect"
 
 export interface FileSystem {

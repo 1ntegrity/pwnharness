@@ -1,12 +1,12 @@
-import { TextField } from "@opencode-harness/ui/text-field"
+import { TextField } from "@pwncode/ui/text-field"
 import * as Sentry from "@sentry/solid"
-import { Logo } from "@opencode-harness/ui/logo"
-import { Button } from "@opencode-harness/ui/button"
+import { Logo } from "@pwncode/ui/logo"
+import { Button } from "@pwncode/ui/button"
 import { Component, createSignal, onMount, Show } from "solid-js"
 import { createStore } from "solid-js/store"
 import { usePlatform } from "@/context/platform"
 import { useLanguage } from "@/context/language"
-import { Icon } from "@opencode-harness/ui/icon"
+import { Icon } from "@pwncode/ui/icon"
 import { errorDescriptionKey } from "./error-description"
 
 export type InitError = {

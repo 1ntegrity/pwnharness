@@ -1,9 +1,9 @@
 import { expect, mock, test } from "bun:test"
-import type { TuiPluginApi } from "@opencode-harness/plugin/tui"
+import type { TuiPluginApi } from "@pwncode/plugin/tui"
 import { createTestRenderer } from "@opentui/core/testing"
 import { Effect } from "effect"
-import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
-import { Global } from "@opencode-harness/core/global"
+import { AppNodeBuilder } from "@pwncode/core/effect/app-node-builder"
+import { Global } from "@pwncode/core/global"
 import { createTuiResolvedConfig } from "./fixture/tui-runtime"
 import { createEventSource, createFetch, directory, json } from "./fixture/tui-sdk"
 

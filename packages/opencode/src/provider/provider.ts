@@ -1,33 +1,33 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import os from "os"
-import { ConfigV1 } from "@opencode-harness/core/v1/config/config"
+import { ConfigV1 } from "@pwncode/core/v1/config/config"
 import fuzzysort from "fuzzysort"
 import { Config } from "@/config/config"
 import { mapValues, mergeDeep, omit, pickBy, sortBy } from "remeda"
 import { NoSuchModelError, type Provider as SDK } from "ai"
-import { Npm } from "@opencode-harness/core/npm"
-import { Hash } from "@opencode-harness/core/util/hash"
+import { Npm } from "@pwncode/core/npm"
+import { Hash } from "@pwncode/core/util/hash"
 import { Plugin } from "../plugin"
-import { serviceUse } from "@opencode-harness/core/effect/service-use"
+import { serviceUse } from "@pwncode/core/effect/service-use"
 import { type LanguageModelV3 } from "@ai-sdk/provider"
-import { ModelsDev } from "@opencode-harness/core/models-dev"
+import { ModelsDev } from "@pwncode/core/models-dev"
 import { Auth } from "../auth"
 import { Env } from "../env"
-import { InstallationVersion } from "@opencode-harness/core/installation/version"
+import { InstallationVersion } from "@pwncode/core/installation/version"
 import { iife } from "@/util/iife"
-import { Global } from "@opencode-harness/core/global"
+import { Global } from "@pwncode/core/global"
 import path from "path"
 import { pathToFileURL } from "url"
 import { Effect, Layer, Context, Schema, Types } from "effect"
 import { EffectBridge } from "@/effect/bridge"
 import { InstanceState } from "@/effect/instance-state"
 import { EffectPromise } from "@/effect/promise"
-import { FSUtil } from "@opencode-harness/core/fs-util"
+import { FSUtil } from "@pwncode/core/fs-util"
 import { isRecord } from "@/util/record"
-import { optional } from "@opencode-harness/core/schema"
+import { optional } from "@pwncode/core/schema"
 import { ProviderTransform } from "./transform"
-import { ProviderV2 } from "@opencode-harness/core/provider"
-import { ModelV2 } from "@opencode-harness/core/model"
+import { ProviderV2 } from "@pwncode/core/provider"
+import { ModelV2 } from "@pwncode/core/model"
 import { ModelStatus } from "./model-status"
 import { RuntimeFlags } from "@/effect/runtime-flags"
 import { ProviderError } from "./error"
@@ -364,7 +364,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
           }
 
           // Region resolution precedence (highest to lowest):
-          // 1. options.region from opencode-harness.json provider config
+          // 1. options.region from pwncode.json provider config
           // 2. defaultRegion from AWS_REGION environment variable
           // 3. Default "us-east-1" (baked into defaultRegion)
           const region = options?.region ?? defaultRegion
@@ -447,9 +447,9 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: false,
         options: {
           headers: {
-            "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-            "X-Title": "opencode-harness",
-            "X-Source": "opencode-harness",
+            "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+            "X-Title": "pwncode",
+            "X-Source": "pwncode",
           },
         },
       }),
@@ -458,8 +458,8 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: false,
         options: {
           headers: {
-            "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-            "X-Title": "opencode-harness",
+            "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+            "X-Title": "pwncode",
           },
         },
       }),
@@ -468,9 +468,9 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: provider.source === "config",
         options: {
           headers: {
-            "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-            "X-Title": "opencode-harness",
-            "X-BILLING-INVOKE-ORIGIN": "OpenCode Harness",
+            "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+            "X-Title": "pwncode",
+            "X-BILLING-INVOKE-ORIGIN": "PwnCode",
           },
         },
       }),
@@ -479,8 +479,8 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: false,
         options: {
           headers: {
-            "http-referer": "https://github.com/s0ld13rr/opencode-harness",
-            "x-title": "opencode-harness",
+            "http-referer": "https://github.com/s0ld13rr/pwncode",
+            "x-title": "pwncode",
           },
         },
       }),
@@ -585,8 +585,8 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: false,
         options: {
           headers: {
-            "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-            "X-Title": "opencode-harness",
+            "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+            "X-Title": "pwncode",
           },
         },
       }),
@@ -607,7 +607,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
       const directory = yield* InstanceState.directory
 
       const aiGatewayHeaders = {
-        "User-Agent": `opencode-harness/${InstallationVersion} gitlab-ai-provider/${GITLAB_PROVIDER_VERSION} (${os.platform()} ${os.release()}; ${os.arch()})`,
+        "User-Agent": `pwncode/${InstallationVersion} gitlab-ai-provider/${GITLAB_PROVIDER_VERSION} (${os.platform()} ${os.release()}; ${os.arch()})`,
         "anthropic-beta": "context-1m-2025-08-07",
         ...providerConfig?.options?.aiGatewayHeaders,
       }
@@ -740,7 +740,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         options: {
           apiKey,
           headers: {
-            "User-Agent": `opencode-harness/${InstallationVersion} cloudflare-workers-ai (${os.platform()} ${os.release()}; ${os.arch()})`,
+            "User-Agent": `pwncode/${InstallationVersion} cloudflare-workers-ai (${os.platform()} ${os.release()}; ${os.arch()})`,
           },
         },
         async getModel(sdk: any, modelID: string) {
@@ -785,7 +785,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
       if (!apiToken) {
         throw new Error(
           "CLOUDFLARE_API_TOKEN (or CF_AIG_TOKEN) is required for Cloudflare AI Gateway. " +
-            "Set it via environment variable or run `opencode-harness auth cloudflare-ai-gateway`.",
+            "Set it via environment variable or run `pwncode auth cloudflare-ai-gateway`.",
         )
       }
 
@@ -808,7 +808,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         skipCache: input.options?.skipCache,
         collectLog: input.options?.collectLog,
         headers: {
-          "User-Agent": `opencode-harness/${InstallationVersion} cloudflare-ai-gateway (${os.platform()} ${os.release()}; ${os.arch()})`,
+          "User-Agent": `pwncode/${InstallationVersion} cloudflare-ai-gateway (${os.platform()} ${os.release()}; ${os.arch()})`,
         },
       }
 
@@ -834,7 +834,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: false,
         options: {
           headers: {
-            "X-Cerebras-3rd-Party-Integration": "opencode-harness",
+            "X-Cerebras-3rd-Party-Integration": "pwncode",
           },
         },
       }),
@@ -843,8 +843,8 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         autoload: false,
         options: {
           headers: {
-            "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-            "X-Title": "opencode-harness",
+            "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+            "X-Title": "pwncode",
           },
         },
       }),
@@ -871,7 +871,7 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
           autoload: false,
           async getModel() {
             throw new Error(
-              `Snowflake Cortex: missing credentials (${missing}). Provide a bearer token (OAuth, JWT, or PAT) via env var, opencode-harness auth, or provider options.`,
+              `Snowflake Cortex: missing credentials (${missing}). Provide a bearer token (OAuth, JWT, or PAT) via env var, pwncode auth, or provider options.`,
             )
           },
         }
@@ -1150,7 +1150,7 @@ interface State {
   varsLoaders: Record<string, CustomVarsLoader>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Provider") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Provider") {}
 
 export const use = serviceUse(Service)
 

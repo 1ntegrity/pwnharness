@@ -9,8 +9,8 @@ import type {
   Message,
   Part,
   Config as SDKConfig,
-} from "@opencode-harness/sdk"
-import type { Provider as ProviderV2, Model as ModelV2, Auth } from "@opencode-harness/sdk/v2"
+} from "@pwncode/sdk"
+import type { Provider as ProviderV2, Model as ModelV2, Auth } from "@pwncode/sdk/v2"
 
 import type { BunShell } from "./shell.js"
 import { type ToolDefinition } from "./tool.js"

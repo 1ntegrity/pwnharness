@@ -1,15 +1,15 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import { Cause, Duration, Effect, Layer, Schedule, Schema, Semaphore, Context } from "effect"
 import { ChildProcess, ChildProcessSpawner } from "effect/unstable/process"
 import { formatPatch, structuredPatch } from "diff"
 import path from "path"
-import { AppProcess } from "@opencode-harness/core/process"
+import { AppProcess } from "@pwncode/core/process"
 import { InstanceState } from "@/effect/instance-state"
-import { FSUtil } from "@opencode-harness/core/fs-util"
-import { Hash } from "@opencode-harness/core/util/hash"
+import { FSUtil } from "@pwncode/core/fs-util"
+import { Hash } from "@pwncode/core/util/hash"
 import { Config } from "@/config/config"
-import { Global } from "@opencode-harness/core/global"
-import { Info } from "@opencode-harness/schema/file-diff"
+import { Global } from "@pwncode/core/global"
+import { Info } from "@pwncode/schema/file-diff"
 
 export const Patch = Schema.Struct({
   hash: Schema.String,
@@ -44,7 +44,7 @@ export interface Interface {
   readonly diffFull: (from: string, to: string) => Effect.Effect<FileDiff[]>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Snapshot") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Snapshot") {}
 
 const layer: Layer.Layer<Service, never, FSUtil.Service | AppProcess.Service | Config.Service> = Layer.effect(
   Service,

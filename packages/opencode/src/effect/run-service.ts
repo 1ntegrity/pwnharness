@@ -1,10 +1,10 @@
 import { Effect, Fiber, Layer, ManagedRuntime } from "effect"
 import * as Context from "effect/Context"
 import { InstanceRef, WorkspaceRef } from "./instance-ref"
-import * as Observability from "@opencode-harness/core/observability"
+import * as Observability from "@pwncode/core/observability"
 import { WorkspaceContext } from "@/control-plane/workspace-context"
 import type { InstanceContext } from "@/project/instance-context"
-import { memoMap } from "@opencode-harness/core/effect/memo-map"
+import { memoMap } from "@pwncode/core/effect/memo-map"
 
 type Refs = {
   instance?: InstanceContext

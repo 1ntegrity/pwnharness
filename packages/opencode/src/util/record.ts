@@ -1,1 +1,1 @@
-export * from "@opencode-harness/tui/util/record"
+export * from "@pwncode/tui/util/record"

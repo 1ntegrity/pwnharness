@@ -1,4 +1,4 @@
-import type { FilePart } from "@opencode-harness/sdk/v2"
+import type { FilePart } from "@pwncode/sdk/v2"
 
 export function attached(part: FilePart) {
   return part.url.startsWith("data:")

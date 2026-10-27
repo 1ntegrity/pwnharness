@@ -1,6 +1,6 @@
-import { FileIcon } from "@opencode-harness/ui/file-icon"
-import { useI18n } from "@opencode-harness/ui/context/i18n"
-import { ButtonV2 } from "@opencode-harness/ui/v2/button-v2"
+import { FileIcon } from "@pwncode/ui/file-icon"
+import { useI18n } from "@pwncode/ui/context/i18n"
+import { ButtonV2 } from "@pwncode/ui/v2/button-v2"
 import "./session-review-v2.css"
 
 export type SessionReviewEmptyNoGitV2Props = {

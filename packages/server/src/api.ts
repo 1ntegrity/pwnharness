@@ -1,4 +1,4 @@
-import { makeDefaultApi } from "@opencode-harness/protocol/api"
+import { makeDefaultApi } from "@pwncode/protocol/api"
 import { LocationMiddleware } from "./location"
 import { SessionLocationMiddleware } from "./middleware/session-location"
 

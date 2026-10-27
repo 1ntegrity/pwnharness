@@ -1,5 +1,5 @@
-import type { Event } from "@opencode-harness/sdk/v2/client"
-import { createSimpleContext } from "@opencode-harness/ui/context"
+import type { Event } from "@pwncode/sdk/v2/client"
+import { createSimpleContext } from "@pwncode/ui/context"
 import { createGlobalEmitter } from "@solid-primitives/event-bus"
 import { makeEventListener } from "@solid-primitives/event-listener"
 import { type Accessor, batch, createMemo, onCleanup, onMount } from "solid-js"

@@ -1,13 +1,13 @@
 import { Component, For, Show, createMemo, lazy, onCleanup, onMount } from "solid-js"
 import { createStore } from "solid-js/store"
 import { makeEventListener } from "@solid-primitives/event-listener"
-import { Button } from "@opencode-harness/ui/button"
-import { Icon } from "@opencode-harness/ui/icon"
-import { IconButton } from "@opencode-harness/ui/icon-button"
-import { TextField } from "@opencode-harness/ui/text-field"
-import { ButtonV2 } from "@opencode-harness/ui/v2/button-v2"
-import { IconButtonV2 } from "@opencode-harness/ui/v2/icon-button-v2"
-import { TextInputV2 } from "@opencode-harness/ui/v2/text-input-v2"
+import { Button } from "@pwncode/ui/button"
+import { Icon } from "@pwncode/ui/icon"
+import { IconButton } from "@pwncode/ui/icon-button"
+import { TextField } from "@pwncode/ui/text-field"
+import { ButtonV2 } from "@pwncode/ui/v2/button-v2"
+import { IconButtonV2 } from "@pwncode/ui/v2/icon-button-v2"
+import { TextInputV2 } from "@pwncode/ui/v2/text-input-v2"
 import { showToast } from "@/utils/toast"
 import fuzzysort from "fuzzysort"
 import { formatKeybind, parseKeybind, useCommand } from "@/context/command"
@@ -16,7 +16,7 @@ import { useSettings } from "@/context/settings"
 import { SettingsList } from "./settings-list"
 import { SettingsListV2 } from "./settings-v2/parts/list"
 
-const IconV2 = lazy(() => import("@opencode-harness/ui/v2/icon").then((module) => ({ default: module.Icon })))
+const IconV2 = lazy(() => import("@pwncode/ui/v2/icon").then((module) => ({ default: module.Icon })))
 
 const IS_MAC = typeof navigator === "object" && /(Mac|iPod|iPhone|iPad)/.test(navigator.platform)
 const PALETTE_ID = "command.palette"

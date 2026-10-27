@@ -1,8 +1,8 @@
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import { Effect, Layer, Context, Schema } from "effect"
-import { serviceUse } from "@opencode-harness/core/effect/service-use"
+import { serviceUse } from "@pwncode/core/effect/service-use"
 import { ChildProcess } from "effect/unstable/process"
-import { AppProcess } from "@opencode-harness/core/process"
+import { AppProcess } from "@pwncode/core/process"
 import { InstanceState } from "@/effect/instance-state"
 import path from "path"
 import { mergeDeep } from "remeda"
@@ -24,7 +24,7 @@ export interface Interface {
   readonly file: (filepath: string) => Effect.Effect<boolean>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/Format") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/Format") {}
 
 export const use = serviceUse(Service)
 

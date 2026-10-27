@@ -1,35 +1,35 @@
 import { expect, test } from "bun:test"
 import { Schema } from "effect"
-import { AgentV2 } from "@opencode-harness/core/agent"
-import { ModelV2 } from "@opencode-harness/core/model"
-import { SessionV2 } from "@opencode-harness/core/session"
-import { Agent } from "@opencode-harness/schema/agent"
-import { Location } from "@opencode-harness/schema/location"
-import { Model } from "@opencode-harness/schema/model"
-import { AgentAttachment, FileAttachment, Prompt, Source } from "@opencode-harness/schema/prompt"
-import { Provider } from "@opencode-harness/schema/provider"
-import { Project } from "@opencode-harness/schema/project"
-import { ProjectDirectories } from "@opencode-harness/schema/project-directories"
-import { PermissionV1 } from "@opencode-harness/schema/permission-v1"
-import { Session } from "@opencode-harness/schema/session"
-import { SessionInput } from "@opencode-harness/schema/session-input"
-import { SessionMessage } from "@opencode-harness/schema/session-message"
-import { Workspace } from "@opencode-harness/schema/workspace"
-import { Command } from "@opencode-harness/schema/command"
-import { Connection } from "@opencode-harness/schema/connection"
-import { Credential } from "@opencode-harness/schema/credential"
-import { FileSystem } from "@opencode-harness/schema/filesystem"
-import { Integration } from "@opencode-harness/schema/integration"
-import { LLM } from "@opencode-harness/schema/llm"
-import { Permission } from "@opencode-harness/schema/permission"
-import { Plugin } from "@opencode-harness/schema/plugin"
-import { Pty } from "@opencode-harness/schema/pty"
-import { Reference } from "@opencode-harness/schema/reference"
-import { SessionTodo } from "@opencode-harness/schema/session-todo"
-import { Skill } from "@opencode-harness/schema/skill"
-import { AbsolutePath, DateTimeUtcFromMillis, optional, statics } from "@opencode-harness/schema/schema"
-import { ProviderV2 } from "@opencode-harness/core/provider"
-import { PluginV2 } from "@opencode-harness/core/plugin"
+import { AgentV2 } from "@pwncode/core/agent"
+import { ModelV2 } from "@pwncode/core/model"
+import { SessionV2 } from "@pwncode/core/session"
+import { Agent } from "@pwncode/schema/agent"
+import { Location } from "@pwncode/schema/location"
+import { Model } from "@pwncode/schema/model"
+import { AgentAttachment, FileAttachment, Prompt, Source } from "@pwncode/schema/prompt"
+import { Provider } from "@pwncode/schema/provider"
+import { Project } from "@pwncode/schema/project"
+import { ProjectDirectories } from "@pwncode/schema/project-directories"
+import { PermissionV1 } from "@pwncode/schema/permission-v1"
+import { Session } from "@pwncode/schema/session"
+import { SessionInput } from "@pwncode/schema/session-input"
+import { SessionMessage } from "@pwncode/schema/session-message"
+import { Workspace } from "@pwncode/schema/workspace"
+import { Command } from "@pwncode/schema/command"
+import { Connection } from "@pwncode/schema/connection"
+import { Credential } from "@pwncode/schema/credential"
+import { FileSystem } from "@pwncode/schema/filesystem"
+import { Integration } from "@pwncode/schema/integration"
+import { LLM } from "@pwncode/schema/llm"
+import { Permission } from "@pwncode/schema/permission"
+import { Plugin } from "@pwncode/schema/plugin"
+import { Pty } from "@pwncode/schema/pty"
+import { Reference } from "@pwncode/schema/reference"
+import { SessionTodo } from "@pwncode/schema/session-todo"
+import { Skill } from "@pwncode/schema/skill"
+import { AbsolutePath, DateTimeUtcFromMillis, optional, statics } from "@pwncode/schema/schema"
+import { ProviderV2 } from "@pwncode/core/provider"
+import { PluginV2 } from "@pwncode/core/plugin"
 
 test("Core reuses the canonical shared schemas", async () => {
   const [
@@ -55,27 +55,27 @@ test("Core reuses the canonical shared schemas", async () => {
     coreSchema,
     coreWorkspace,
   ] = await Promise.all([
-    import("@opencode-harness/core/command"),
-    import("@opencode-harness/core/integration/connection"),
-    import("@opencode-harness/core/credential"),
-    import("@opencode-harness/core/filesystem"),
-    import("@opencode-harness/core/integration"),
-    import("@opencode-harness/core/location"),
-    import("@opencode-harness/llm"),
-    import("@opencode-harness/core/permission"),
-    import("@opencode-harness/core/v1/permission"),
-    import("@opencode-harness/core/project/copy"),
-    import("@opencode-harness/core/pty"),
-    import("@opencode-harness/core/project/schema"),
-    import("@opencode-harness/core/reference"),
-    import("@opencode-harness/core/session/input"),
-    import("@opencode-harness/core/session/message"),
-    import("@opencode-harness/core/session/todo"),
-    import("@opencode-harness/core/session/prompt"),
-    import("@opencode-harness/core/skill"),
-    import("@opencode-harness/core/v2-schema"),
-    import("@opencode-harness/core/schema"),
-    import("@opencode-harness/core/workspace"),
+    import("@pwncode/core/command"),
+    import("@pwncode/core/integration/connection"),
+    import("@pwncode/core/credential"),
+    import("@pwncode/core/filesystem"),
+    import("@pwncode/core/integration"),
+    import("@pwncode/core/location"),
+    import("@pwncode/llm"),
+    import("@pwncode/core/permission"),
+    import("@pwncode/core/v1/permission"),
+    import("@pwncode/core/project/copy"),
+    import("@pwncode/core/pty"),
+    import("@pwncode/core/project/schema"),
+    import("@pwncode/core/reference"),
+    import("@pwncode/core/session/input"),
+    import("@pwncode/core/session/message"),
+    import("@pwncode/core/session/todo"),
+    import("@pwncode/core/session/prompt"),
+    import("@pwncode/core/skill"),
+    import("@pwncode/core/v2-schema"),
+    import("@pwncode/core/schema"),
+    import("@pwncode/core/workspace"),
   ])
 
   const schemas = [

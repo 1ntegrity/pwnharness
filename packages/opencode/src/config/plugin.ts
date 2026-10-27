@@ -1,5 +1,5 @@
-import { Glob } from "@opencode-harness/core/util/glob"
-import { ConfigPluginV1 } from "@opencode-harness/core/v1/config/plugin"
+import { Glob } from "@pwncode/core/util/glob"
+import { ConfigPluginV1 } from "@pwncode/core/v1/config/plugin"
 import { pathToFileURL } from "url"
 import { isPathPluginSpec, parsePluginSpecifier, resolvePathPluginTarget } from "@/plugin/shared"
 import path from "path"

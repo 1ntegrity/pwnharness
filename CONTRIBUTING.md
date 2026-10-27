@@ -1,6 +1,6 @@
 # Contributing
 
-opencode-harness is a standalone extraction of the OpenCode engine (via the
+pwncode is a standalone extraction of the OpenCode engine (via the
 PentestCode fork). Development is plain bun + turbo:
 
 ```bash

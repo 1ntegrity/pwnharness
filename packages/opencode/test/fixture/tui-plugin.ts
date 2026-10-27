@@ -1,6 +1,6 @@
-import { createOpencodeClient } from "@opencode-harness/sdk/v2"
+import { createOpencodeClient } from "@pwncode/sdk/v2"
 import { RGBA, type CliRenderer } from "@opentui/core"
-import type { HostPluginApi } from "@opencode-harness/tui/plugin/slots"
+import type { HostPluginApi } from "@pwncode/tui/plugin/slots"
 import { createTuiResolvedConfig } from "./tui-runtime"
 
 type Count = {

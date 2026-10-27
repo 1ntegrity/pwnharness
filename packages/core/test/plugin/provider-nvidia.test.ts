@@ -1,11 +1,11 @@
 import { describe, expect } from "bun:test"
 import { Effect } from "effect"
-import { Catalog } from "@opencode-harness/core/catalog"
-import { PluginV2 } from "@opencode-harness/core/plugin"
-import { PluginHost } from "@opencode-harness/core/plugin/host"
-import { ProviderPlugins } from "@opencode-harness/core/plugin/provider"
-import { NvidiaPlugin } from "@opencode-harness/core/plugin/provider/nvidia"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { Catalog } from "@pwncode/core/catalog"
+import { PluginV2 } from "@pwncode/core/plugin"
+import { PluginHost } from "@pwncode/core/plugin/host"
+import { ProviderPlugins } from "@pwncode/core/plugin/provider"
+import { NvidiaPlugin } from "@pwncode/core/plugin/provider/nvidia"
+import { ProviderV2 } from "@pwncode/core/provider"
 import { testEffect } from "../lib/effect"
 import { PluginTestLayer } from "./fixture"
 
@@ -39,9 +39,9 @@ describe("NvidiaPlugin", () => {
       yield* addPlugin()
       expect((yield* catalog.provider.get(ProviderV2.ID.make("nvidia")))?.request.headers).toEqual({
         Existing: "value",
-        "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-        "X-Title": "opencode-harness",
-        "X-BILLING-INVOKE-ORIGIN": "OpenCode Harness",
+        "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+        "X-Title": "pwncode",
+        "X-BILLING-INVOKE-ORIGIN": "PwnCode",
       })
       expect((yield* catalog.provider.get(ProviderV2.ID.openrouter))?.request.headers).toEqual({})
     }),
@@ -62,9 +62,9 @@ describe("NvidiaPlugin", () => {
       yield* addPlugin()
 
       expect((yield* catalog.provider.get(ProviderV2.ID.make("nvidia")))?.request.headers).toEqual({
-        "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-        "X-Title": "opencode-harness",
-        "X-BILLING-INVOKE-ORIGIN": "OpenCode Harness",
+        "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+        "X-Title": "pwncode",
+        "X-BILLING-INVOKE-ORIGIN": "PwnCode",
       })
     }),
   )
@@ -88,8 +88,8 @@ describe("NvidiaPlugin", () => {
       yield* addPlugin()
 
       expect((yield* catalog.provider.get(ProviderV2.ID.make("nvidia")))?.request.headers).toEqual({
-        "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-        "X-Title": "opencode-harness",
+        "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+        "X-Title": "pwncode",
         "X-BILLING-INVOKE-ORIGIN": "CustomOrigin",
       })
     }),

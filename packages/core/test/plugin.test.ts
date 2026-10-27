@@ -1,8 +1,8 @@
 import { describe, expect } from "bun:test"
 import { Effect, Exit, Fiber } from "effect"
-import { define } from "@opencode-harness/plugin/v2/effect"
-import { AgentV2 } from "@opencode-harness/core/agent"
-import { PluginV2 } from "@opencode-harness/core/plugin"
+import { define } from "@pwncode/plugin/v2/effect"
+import { AgentV2 } from "@pwncode/core/agent"
+import { PluginV2 } from "@pwncode/core/plugin"
 import { testEffect } from "./lib/effect"
 import { PluginTestLayer } from "./plugin/fixture"
 

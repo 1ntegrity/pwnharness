@@ -1,9 +1,9 @@
-import type { Plugin } from "@opencode-harness/plugin"
+import type { Plugin } from "@pwncode/plugin"
 import { rename, writeFile } from "node:fs/promises"
 import { randomInt } from "node:crypto"
 import { setTimeout as sleep } from "node:timers/promises"
 
-const DEV_DATA_FILE = "/tmp/opencode-harness-workspace-dev-data.json"
+const DEV_DATA_FILE = "/tmp/pwncode-workspace-dev-data.json"
 const DEV_DATA_TEMP_FILE = `${DEV_DATA_FILE}.tmp`
 
 async function waitForHealth(port: number) {

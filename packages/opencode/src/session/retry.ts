@@ -1,5 +1,5 @@
-import type { NamedError } from "@opencode-harness/core/util/error"
-import { SessionV1 } from "@opencode-harness/core/v1/session"
+import type { NamedError } from "@pwncode/core/util/error"
+import { SessionV1 } from "@pwncode/core/v1/session"
 import { Cause, Clock, Duration, Effect, Schedule } from "effect"
 import { MessageV2 } from "./message-v2"
 import { iife } from "@/util/iife"
@@ -8,7 +8,7 @@ import { isRecord } from "@/util/record"
 export type Err = ReturnType<NamedError["toObject"]>
 
 export const GO_UPSELL_MESSAGE = "Rate limit reached. Check your provider's usage limits."
-export const GO_UPSELL_URL = "https://github.com/s0ld13rr/opencode-harness"
+export const GO_UPSELL_URL = "https://github.com/s0ld13rr/pwncode"
 export type RetryReason = "free_tier_limit" | "account_rate_limit" | (string & {})
 
 export type Retryable = {
@@ -118,7 +118,7 @@ export function retryable(error: Err, provider: string) {
 
       const message = `${limitName ? `${limitName} usage limit` : "Usage limit"} reached. It will reset in ${resetIn}. To continue using this model now, enable usage from your available balance`
 
-      const link = `https://github.com/s0ld13rr/opencode-harness`
+      const link = `https://github.com/s0ld13rr/pwncode`
       return {
         message: `${message} - ${link}`,
         action: {

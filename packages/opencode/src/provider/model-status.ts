@@ -1,6 +1,6 @@
 import { Schema } from "effect"
 
-export { CatalogModelStatus } from "@opencode-harness/core/models-dev"
+export { CatalogModelStatus } from "@pwncode/core/models-dev"
 
 export const ModelStatus = Schema.Literals(["alpha", "beta", "deprecated", "active"])
 export type ModelStatus = typeof ModelStatus.Type

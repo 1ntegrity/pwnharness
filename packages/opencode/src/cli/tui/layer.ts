@@ -1,6 +1,6 @@
-import { run as runTui, type TuiInput } from "@opencode-harness/tui"
-import { Global } from "@opencode-harness/core/global"
-import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
+import { run as runTui, type TuiInput } from "@pwncode/tui"
+import { Global } from "@pwncode/core/global"
+import { AppNodeBuilder } from "@pwncode/core/effect/app-node-builder"
 import { Effect } from "effect"
 
 export function run(input: TuiInput) {

@@ -1,6 +1,6 @@
-import { Flag } from "@opencode-harness/core/flag/flag"
-import { ConfigV1 } from "@opencode-harness/core/v1/config/config"
-import { SessionV1 } from "@opencode-harness/core/v1/session"
+import { Flag } from "@pwncode/core/flag/flag"
+import { ConfigV1 } from "@pwncode/core/v1/config/config"
+import { SessionV1 } from "@pwncode/core/v1/session"
 import { Cause, Duration, Effect, Layer, Scope } from "effect"
 import { TestLLMServer } from "../../lib/llm-server"
 import type { Config } from "../../../src/config/config"
@@ -11,8 +11,8 @@ import { call, callAuthProbe, disposeApps } from "./backend"
 import { original } from "./environment"
 import { runtime } from "./runtime"
 import type { ActiveScenario, Options, ProjectOptions, Result, Scenario, ScenarioContext, SeededContext } from "./types"
-import { ProviderV2 } from "@opencode-harness/core/provider"
-import { ModelV2 } from "@opencode-harness/core/model"
+import { ProviderV2 } from "@pwncode/core/provider"
+import { ModelV2 } from "@pwncode/core/model"
 
 export function runScenario(options: Options) {
   return (scenario: Scenario) => {

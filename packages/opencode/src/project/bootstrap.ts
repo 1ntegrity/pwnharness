@@ -1,4 +1,4 @@
-import { makeGlobalNode } from "@opencode-harness/core/effect/app-node"
+import { makeGlobalNode } from "@pwncode/core/effect/app-node"
 import { Plugin } from "../plugin"
 import { Format } from "../format"
 import { LSP } from "@/lsp/lsp"

@@ -1,10 +1,10 @@
 import path from "path"
 import { fileURLToPath } from "url"
 
-import { Flag } from "@opencode-harness/core/flag/flag"
-import { Global } from "@opencode-harness/core/global"
+import { Flag } from "@pwncode/core/flag/flag"
+import { Global } from "@pwncode/core/global"
 import { Filesystem } from "@/util/filesystem"
-import { Flock } from "@opencode-harness/core/util/flock"
+import { Flock } from "@pwncode/core/util/flock"
 
 import { parsePluginSpecifier, pluginSource } from "./shared"
 

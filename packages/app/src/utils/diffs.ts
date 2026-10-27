@@ -1,5 +1,5 @@
-import type { SnapshotFileDiff, VcsFileDiff } from "@opencode-harness/sdk/v2"
-import type { Message } from "@opencode-harness/sdk/v2/client"
+import type { SnapshotFileDiff, VcsFileDiff } from "@pwncode/sdk/v2"
+import type { Message } from "@pwncode/sdk/v2/client"
 
 type Diff = SnapshotFileDiff | VcsFileDiff
 

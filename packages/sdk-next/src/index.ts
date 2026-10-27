@@ -1,7 +1,7 @@
 export * as OpenCode from "./opencode"
 export * as Tool from "./tool"
 
-export { ClientError } from "@opencode-harness/client/effect"
+export { ClientError } from "@pwncode/client/effect"
 export {
   AbsolutePath,
   Agent,
@@ -13,5 +13,5 @@ export {
   Session,
   SessionInput,
   SessionMessage,
-} from "@opencode-harness/client/effect"
-export type { OpenCodeEvent } from "@opencode-harness/client/effect"
+} from "@pwncode/client/effect"
+export type { OpenCodeEvent } from "@pwncode/client/effect"

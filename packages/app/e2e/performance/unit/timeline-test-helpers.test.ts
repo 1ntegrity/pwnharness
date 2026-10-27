@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test"
-import { base64Encode } from "@opencode-harness/core/util/encode"
+import { base64Encode } from "@pwncode/core/util/encode"
 import { fixture } from "../timeline/session-timeline-stress.fixture"
 import { stressSessionHref } from "../timeline/timeline-test-helpers"
 

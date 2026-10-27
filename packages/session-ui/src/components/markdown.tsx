@@ -1,7 +1,7 @@
-import { useMarked } from "@opencode-harness/ui/context/marked"
-import { useI18n } from "@opencode-harness/ui/context/i18n"
+import { useMarked } from "@pwncode/ui/context/marked"
+import { useI18n } from "@pwncode/ui/context/i18n"
 import morphdom from "morphdom"
-import { checksum } from "@opencode-harness/core/util/encode"
+import { checksum } from "@pwncode/core/util/encode"
 import {
   type Accessor,
   type ComponentProps,
@@ -15,9 +15,9 @@ import {
   splitProps,
 } from "solid-js"
 import { isServer, render } from "solid-js/web"
-import { Icon as IconV2 } from "@opencode-harness/ui/v2/icon"
-import { IconButtonV2 } from "@opencode-harness/ui/v2/icon-button-v2"
-import { TooltipV2 } from "@opencode-harness/ui/v2/tooltip-v2"
+import { Icon as IconV2 } from "@pwncode/ui/v2/icon"
+import { IconButtonV2 } from "@pwncode/ui/v2/icon-button-v2"
+import { TooltipV2 } from "@pwncode/ui/v2/tooltip-v2"
 import { bundledLanguages } from "shiki"
 import { canReusePendingBlock, project, type Block, type Projection } from "./markdown-stream"
 import {

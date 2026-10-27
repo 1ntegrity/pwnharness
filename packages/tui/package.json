@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@opencode-harness/tui",
+  "name": "@pwncode/tui",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -48,10 +48,10 @@
     "./component/register-spinner": "./src/component/register-spinner.ts"
   },
   "dependencies": {
-    "@opencode-harness/core": "workspace:*",
-    "@opencode-harness/plugin": "workspace:*",
-    "@opencode-harness/sdk": "workspace:*",
-    "@opencode-harness/ui": "workspace:*",
+    "@pwncode/core": "workspace:*",
+    "@pwncode/plugin": "workspace:*",
+    "@pwncode/sdk": "workspace:*",
+    "@pwncode/ui": "workspace:*",
     "@opentui/core": "catalog:",
     "@opentui/keymap": "catalog:",
     "@opentui/solid": "catalog:",

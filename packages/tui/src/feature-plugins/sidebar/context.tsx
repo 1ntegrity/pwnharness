@@ -1,5 +1,5 @@
-import type { AssistantMessage } from "@opencode-harness/sdk/v2"
-import type { TuiPlugin, TuiPluginApi } from "@opencode-harness/plugin/tui"
+import type { AssistantMessage } from "@pwncode/sdk/v2"
+import type { TuiPlugin, TuiPluginApi } from "@pwncode/plugin/tui"
 import type { BuiltinTuiPlugin } from "../builtins"
 import { createMemo } from "solid-js"
 

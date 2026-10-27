@@ -1,12 +1,12 @@
 import { describe, expect } from "bun:test"
 import { Effect } from "effect"
-import { Catalog } from "@opencode-harness/core/catalog"
-import { Integration } from "@opencode-harness/core/integration"
-import { PluginV2 } from "@opencode-harness/core/plugin"
-import { PluginHost } from "@opencode-harness/core/plugin/host"
-import { ProviderPlugins } from "@opencode-harness/core/plugin/provider"
-import { LLMGatewayPlugin } from "@opencode-harness/core/plugin/provider/llmgateway"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { Catalog } from "@pwncode/core/catalog"
+import { Integration } from "@pwncode/core/integration"
+import { PluginV2 } from "@pwncode/core/plugin"
+import { PluginHost } from "@pwncode/core/plugin/host"
+import { ProviderPlugins } from "@pwncode/core/plugin/provider"
+import { LLMGatewayPlugin } from "@pwncode/core/plugin/provider/llmgateway"
+import { ProviderV2 } from "@pwncode/core/provider"
 import { testEffect } from "../lib/effect"
 import { PluginTestLayer } from "./fixture"
 
@@ -46,9 +46,9 @@ describe("LLMGatewayPlugin", () => {
       yield* addPlugin()
       expect((yield* catalog.provider.get(ProviderV2.ID.make("llmgateway")))?.request.headers).toEqual({
         Existing: "value",
-        "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-        "X-Title": "opencode-harness",
-        "X-Source": "opencode-harness",
+        "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+        "X-Title": "pwncode",
+        "X-Source": "pwncode",
       })
       expect((yield* catalog.provider.get(ProviderV2.ID.openrouter))?.request.headers).toEqual({})
     }),

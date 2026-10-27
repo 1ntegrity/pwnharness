@@ -1,11 +1,11 @@
 import { describe, expect } from "bun:test"
 import { Effect } from "effect"
-import { Catalog } from "@opencode-harness/core/catalog"
-import { PluginV2 } from "@opencode-harness/core/plugin"
-import { PluginHost } from "@opencode-harness/core/plugin/host"
-import { ProviderPlugins } from "@opencode-harness/core/plugin/provider"
-import { KiloPlugin } from "@opencode-harness/core/plugin/provider/kilo"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { Catalog } from "@pwncode/core/catalog"
+import { PluginV2 } from "@pwncode/core/plugin"
+import { PluginHost } from "@pwncode/core/plugin/host"
+import { ProviderPlugins } from "@pwncode/core/plugin/provider"
+import { KiloPlugin } from "@pwncode/core/plugin/provider/kilo"
+import { ProviderV2 } from "@pwncode/core/provider"
 import { testEffect } from "../lib/effect"
 import { PluginTestLayer } from "./fixture"
 
@@ -39,8 +39,8 @@ describe("KiloPlugin", () => {
       yield* addPlugin()
       expect((yield* catalog.provider.get(ProviderV2.ID.make("kilo")))?.request.headers).toEqual({
         Existing: "value",
-        "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-        "X-Title": "opencode-harness",
+        "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+        "X-Title": "pwncode",
       })
       expect((yield* catalog.provider.get(ProviderV2.ID.openrouter))?.request.headers).toEqual({})
     }),
@@ -61,8 +61,8 @@ describe("KiloPlugin", () => {
       yield* addPlugin()
 
       expect((yield* catalog.provider.get(ProviderV2.ID.make("kilo")))?.request.headers).toEqual({
-        "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-        "X-Title": "opencode-harness",
+        "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+        "X-Title": "pwncode",
       })
       expect((yield* catalog.provider.get(ProviderV2.ID.make("kilo")))?.request.headers).not.toHaveProperty(
         "http-referer",
@@ -90,8 +90,8 @@ describe("KiloPlugin", () => {
       yield* addPlugin()
 
       expect((yield* catalog.provider.get(ProviderV2.ID.make("kilo")))?.request.headers).toEqual({
-        "HTTP-Referer": "https://github.com/s0ld13rr/opencode-harness",
-        "X-Title": "opencode-harness",
+        "HTTP-Referer": "https://github.com/s0ld13rr/pwncode",
+        "X-Title": "pwncode",
       })
       expect((yield* catalog.provider.get(ProviderV2.ID.make("custom-kilo")))?.request.headers).toEqual({})
     }),

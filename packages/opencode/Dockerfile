@@ -7,12 +7,12 @@ ENV BUN_RUNTIME_TRANSPILER_CACHE_PATH=${BUN_RUNTIME_TRANSPILER_CACHE_PATH}
 RUN apk add libgcc libstdc++ ripgrep
 
 FROM base AS build-amd64
-COPY dist/opencode-harness-linux-x64-baseline-musl/bin/opencode-harness /usr/local/bin/opencode-harness
+COPY dist/pwncode-linux-x64-baseline-musl/bin/pwncode /usr/local/bin/pwncode
 
 FROM base AS build-arm64
-COPY dist/opencode-harness-linux-arm64-musl/bin/opencode-harness /usr/local/bin/opencode-harness
+COPY dist/pwncode-linux-arm64-musl/bin/pwncode /usr/local/bin/pwncode
 
 ARG TARGETARCH
 FROM build-${TARGETARCH}
-RUN opencode-harness --version
-ENTRYPOINT ["opencode-harness"]
+RUN pwncode --version
+ENTRYPOINT ["pwncode"]

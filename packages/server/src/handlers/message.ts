@@ -1,9 +1,9 @@
-import { SessionMessage } from "@opencode-harness/core/session/message"
-import { SessionV2 } from "@opencode-harness/core/session"
+import { SessionMessage } from "@pwncode/core/session/message"
+import { SessionV2 } from "@pwncode/core/session"
 import { Effect, Schema } from "effect"
 import { HttpApiBuilder } from "effect/unstable/httpapi"
 import { Api } from "../api"
-import { InvalidCursorError, SessionNotFoundError, UnknownError } from "@opencode-harness/protocol/errors"
+import { InvalidCursorError, SessionNotFoundError, UnknownError } from "@pwncode/protocol/errors"
 
 const DefaultMessagesLimit = 50
 

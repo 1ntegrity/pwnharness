@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 import { $ } from "bun"
 import pkg from "../package.json"
-import { Script } from "@opencode-harness/script"
+import { Script } from "@pwncode/script"
 import { fileURLToPath } from "url"
 
 const dir = fileURLToPath(new URL("..", import.meta.url))
@@ -78,7 +78,7 @@ const tasks = Object.entries(binaries).map(async ([name]) => {
 await Promise.all(tasks)
 await publish(`./dist/${pkg.name}`, `${pkg.name}-ai`, version)
 
-const image = "ghcr.io/s0ld13rr/opencode-harness"
+const image = "ghcr.io/s0ld13rr/pwncode"
 const platforms = "linux/amd64,linux/arm64"
 const tags = [`${image}:${version}`, `${image}:${Script.channel}`]
 const tagFlags = tags.flatMap((t) => ["-t", t])
@@ -87,10 +87,10 @@ const tagFlags = tags.flatMap((t) => ["-t", t])
 if (!Script.preview) {
   await $`docker buildx build --platform ${platforms} ${tagFlags} --push .`
   // Calculate SHA values
-  const arm64Sha = await $`sha256sum ./dist/opencode-harness-linux-arm64.tar.gz | cut -d' ' -f1`.text().then((x) => x.trim())
-  const x64Sha = await $`sha256sum ./dist/opencode-harness-linux-x64.tar.gz | cut -d' ' -f1`.text().then((x) => x.trim())
-  const macX64Sha = await $`sha256sum ./dist/opencode-harness-darwin-x64.zip | cut -d' ' -f1`.text().then((x) => x.trim())
-  const macArm64Sha = await $`sha256sum ./dist/opencode-harness-darwin-arm64.zip | cut -d' ' -f1`.text().then((x) => x.trim())
+  const arm64Sha = await $`sha256sum ./dist/pwncode-linux-arm64.tar.gz | cut -d' ' -f1`.text().then((x) => x.trim())
+  const x64Sha = await $`sha256sum ./dist/pwncode-linux-x64.tar.gz | cut -d' ' -f1`.text().then((x) => x.trim())
+  const macX64Sha = await $`sha256sum ./dist/pwncode-darwin-x64.zip | cut -d' ' -f1`.text().then((x) => x.trim())
+  const macArm64Sha = await $`sha256sum ./dist/pwncode-darwin-arm64.zip | cut -d' ' -f1`.text().then((x) => x.trim())
 
   const [pkgver, _subver = ""] = Script.version.split(/(-.*)/, 2)
 
@@ -98,32 +98,32 @@ if (!Script.preview) {
   const binaryPkgbuild = [
     "# Maintainer: s0ld13rr",
     "",
-    "pkgname='opencode-harness-bin'",
+    "pkgname='pwncode-bin'",
     `pkgver=${pkgver}`,
     `_subver=${_subver}`,
     "options=('!debug' '!strip')",
     "pkgrel=1",
     "pkgdesc='AI penetration testing agent for the terminal.'",
-    "url='https://github.com/s0ld13rr/opencode-harness'",
+    "url='https://github.com/s0ld13rr/pwncode'",
     "arch=('aarch64' 'x86_64')",
     "license=('MIT')",
-    "provides=('opencode-harness')",
-    "conflicts=('opencode-harness')",
+    "provides=('pwncode')",
+    "conflicts=('pwncode')",
     "depends=('ripgrep')",
     "",
-    `source_aarch64=("\${pkgname}_\${pkgver}_aarch64.tar.gz::https://github.com/s0ld13rr/opencode-harness/releases/download/v\${pkgver}\${_subver}/opencode-harness-linux-arm64.tar.gz")`,
+    `source_aarch64=("\${pkgname}_\${pkgver}_aarch64.tar.gz::https://github.com/s0ld13rr/pwncode/releases/download/v\${pkgver}\${_subver}/pwncode-linux-arm64.tar.gz")`,
     `sha256sums_aarch64=('${arm64Sha}')`,
 
-    `source_x86_64=("\${pkgname}_\${pkgver}_x86_64.tar.gz::https://github.com/s0ld13rr/opencode-harness/releases/download/v\${pkgver}\${_subver}/opencode-harness-linux-x64.tar.gz")`,
+    `source_x86_64=("\${pkgname}_\${pkgver}_x86_64.tar.gz::https://github.com/s0ld13rr/pwncode/releases/download/v\${pkgver}\${_subver}/pwncode-linux-x64.tar.gz")`,
     `sha256sums_x86_64=('${x64Sha}')`,
     "",
     "package() {",
-    '  install -Dm755 ./opencode-harness "${pkgdir}/usr/bin/opencode-harness"',
+    '  install -Dm755 ./pwncode "${pkgdir}/usr/bin/pwncode"',
     "}",
     "",
   ].join("\n")
 
-  for (const [pkg, pkgbuild] of [["opencode-harness-bin", binaryPkgbuild]]) {
+  for (const [pkg, pkgbuild] of [["pwncode-bin", binaryPkgbuild]]) {
     for (let i = 0; i < 30; i++) {
       try {
         await $`rm -rf ./dist/aur-${pkg}`
@@ -149,43 +149,43 @@ if (!Script.preview) {
     "",
     "class OpenCodeHarness < Formula",
     `  desc "AI penetration testing agent for the terminal."`,
-    `  homepage "https://github.com/s0ld13rr/opencode-harness"`,
+    `  homepage "https://github.com/s0ld13rr/pwncode"`,
     `  version "${Script.version.split("-")[0]}"`,
     "",
     `  depends_on "ripgrep"`,
     "",
     "  on_macos do",
     "    if Hardware::CPU.intel?",
-    `      url "https://github.com/s0ld13rr/opencode-harness/releases/download/v${Script.version}/opencode-harness-darwin-x64.zip"`,
+    `      url "https://github.com/s0ld13rr/pwncode/releases/download/v${Script.version}/pwncode-darwin-x64.zip"`,
     `      sha256 "${macX64Sha}"`,
     "",
     "      def install",
-    '        bin.install "opencode-harness"',
+    '        bin.install "pwncode"',
     "      end",
     "    end",
     "    if Hardware::CPU.arm?",
-    `      url "https://github.com/s0ld13rr/opencode-harness/releases/download/v${Script.version}/opencode-harness-darwin-arm64.zip"`,
+    `      url "https://github.com/s0ld13rr/pwncode/releases/download/v${Script.version}/pwncode-darwin-arm64.zip"`,
     `      sha256 "${macArm64Sha}"`,
     "",
     "      def install",
-    '        bin.install "opencode-harness"',
+    '        bin.install "pwncode"',
     "      end",
     "    end",
     "  end",
     "",
     "  on_linux do",
     "    if Hardware::CPU.intel? and Hardware::CPU.is_64_bit?",
-    `      url "https://github.com/s0ld13rr/opencode-harness/releases/download/v${Script.version}/opencode-harness-linux-x64.tar.gz"`,
+    `      url "https://github.com/s0ld13rr/pwncode/releases/download/v${Script.version}/pwncode-linux-x64.tar.gz"`,
     `      sha256 "${x64Sha}"`,
     "      def install",
-    '        bin.install "opencode-harness"',
+    '        bin.install "pwncode"',
     "      end",
     "    end",
     "    if Hardware::CPU.arm? and Hardware::CPU.is_64_bit?",
-    `      url "https://github.com/s0ld13rr/opencode-harness/releases/download/v${Script.version}/opencode-harness-linux-arm64.tar.gz"`,
+    `      url "https://github.com/s0ld13rr/pwncode/releases/download/v${Script.version}/pwncode-linux-arm64.tar.gz"`,
     `      sha256 "${arm64Sha}"`,
     "      def install",
-    '        bin.install "opencode-harness"',
+    '        bin.install "pwncode"',
     "      end",
     "    end",
     "  end",
@@ -202,8 +202,8 @@ if (!Script.preview) {
   const tap = `https://x-access-token:${token}@github.com/s0ld13rr/homebrew-tap.git`
   await $`rm -rf ./dist/homebrew-tap`
   await $`git clone ${tap} ./dist/homebrew-tap`
-  await Bun.file("./dist/homebrew-tap/opencode-harness.rb").write(homebrewFormula)
-  await $`cd ./dist/homebrew-tap && git add opencode-harness.rb`
+  await Bun.file("./dist/homebrew-tap/pwncode.rb").write(homebrewFormula)
+  await $`cd ./dist/homebrew-tap && git add pwncode.rb`
   if ((await $`cd ./dist/homebrew-tap && git diff --cached --quiet`.nothrow()).exitCode !== 0) {
     await $`cd ./dist/homebrew-tap && git commit -m "Update to v${Script.version}"`
     await $`cd ./dist/homebrew-tap && git push`

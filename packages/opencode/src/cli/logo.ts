@@ -1,1 +1,1 @@
-export * from "@opencode-harness/tui/logo"
+export * from "@pwncode/tui/logo"

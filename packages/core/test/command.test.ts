@@ -1,9 +1,9 @@
 import { describe, expect } from "bun:test"
 import { Effect } from "effect"
-import { CommandV2 } from "@opencode-harness/core/command"
-import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
-import { ModelV2 } from "@opencode-harness/core/model"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { CommandV2 } from "@pwncode/core/command"
+import { AppNodeBuilder } from "@pwncode/core/effect/app-node-builder"
+import { ModelV2 } from "@pwncode/core/model"
+import { ProviderV2 } from "@pwncode/core/provider"
 import { testEffect } from "./lib/effect"
 
 const it = testEffect(AppNodeBuilder.build(CommandV2.node))

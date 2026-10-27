@@ -1,8 +1,8 @@
 import { describe, expect } from "bun:test"
 import { Cause, Effect, Exit, Schema, Scope } from "effect"
-import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
-import { SystemContext } from "@opencode-harness/core/system-context"
-import { SystemContextRegistry } from "@opencode-harness/core/system-context/registry"
+import { AppNodeBuilder } from "@pwncode/core/effect/app-node-builder"
+import { SystemContext } from "@pwncode/core/system-context"
+import { SystemContextRegistry } from "@pwncode/core/system-context/registry"
 import { testEffect } from "../lib/effect"
 
 const entry = (key: string, text: string, sourceKey = key) => ({

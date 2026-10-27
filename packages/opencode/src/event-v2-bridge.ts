@@ -1,15 +1,15 @@
 // Opencode publish boundary for core events. Attach routed instance location
 // so direct EventV2 consumers can isolate directory/workspace streams.
-import { LayerNode } from "@opencode-harness/core/effect/layer-node"
+import { LayerNode } from "@pwncode/core/effect/layer-node"
 import { InstanceRef, WorkspaceRef } from "@/effect/instance-ref"
 import { GlobalBus } from "@/bus/global"
-import { EventV2 } from "@opencode-harness/core/event"
-import { Location } from "@opencode-harness/core/location"
-import { Project } from "@opencode-harness/core/project"
-import { AbsolutePath } from "@opencode-harness/core/schema"
+import { EventV2 } from "@pwncode/core/event"
+import { Location } from "@pwncode/core/location"
+import { Project } from "@pwncode/core/project"
+import { AbsolutePath } from "@pwncode/core/schema"
 import { Context, Effect, Layer } from "effect"
 
-export class Service extends Context.Service<Service, EventV2.Interface>()("@opencode-harness/EventV2Bridge") {}
+export class Service extends Context.Service<Service, EventV2.Interface>()("@pwncode/EventV2Bridge") {}
 
 const layer = Layer.effect(
   Service,

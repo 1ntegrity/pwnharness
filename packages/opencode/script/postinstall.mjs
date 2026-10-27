@@ -24,9 +24,9 @@ const archMap = {
 
 const platform = platformMap[os.platform()] ?? os.platform()
 const arch = archMap[os.arch()] ?? os.arch()
-const base = `opencode-harness-${platform}-${arch}`
-const sourceBinary = platform === "windows" ? "opencode-harness.exe" : "opencode-harness"
-const targetBinary = path.join(__dirname, "bin", "opencode-harness.exe")
+const base = `pwncode-${platform}-${arch}`
+const sourceBinary = platform === "windows" ? "pwncode.exe" : "pwncode"
+const targetBinary = path.join(__dirname, "bin", "pwncode.exe")
 
 function supportsAvx2() {
   if (arch !== "x64") return false
@@ -127,7 +127,7 @@ function installPackage(name) {
   const version = packageJson.optionalDependencies?.[name]
   if (!version) return
 
-  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "opencode-harness-install-"))
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), "pwncode-install-"))
   try {
     const result = childProcess.spawnSync(
       "npm",
@@ -175,7 +175,7 @@ function main() {
   }
 
   throw new Error(
-    `It seems your package manager failed to install the right opencode-harness CLI package. Try manually installing ${packageNames()
+    `It seems your package manager failed to install the right pwncode CLI package. Try manually installing ${packageNames()
       .map((name) => JSON.stringify(name))
       .join(" or ")}.`,
   )

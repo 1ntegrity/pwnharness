@@ -81,7 +81,7 @@ export interface Interface {
   readonly checkout: (snapshot: ID) => Effect.Effect<void, Error>
 }
 
-export class Service extends Context.Service<Service, Interface>()("@opencode-harness/v2/Snapshot") {}
+export class Service extends Context.Service<Service, Interface>()("@pwncode/v2/Snapshot") {}
 
 const layer = Layer.effect(
   Service,

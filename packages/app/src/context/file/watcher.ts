@@ -1,4 +1,4 @@
-import type { FileNode } from "@opencode-harness/sdk/v2"
+import type { FileNode } from "@pwncode/sdk/v2"
 
 type WatcherEvent = {
   type: string

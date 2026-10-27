@@ -1,14 +1,14 @@
 import { createMemo, createSignal, Show, type JSX } from "solid-js"
-import type { SnapshotFileDiff, VcsFileDiff } from "@opencode-harness/sdk/v2"
+import type { SnapshotFileDiff, VcsFileDiff } from "@pwncode/sdk/v2"
 import {
   SESSION_REVIEW_V2_SIDEBAR_WIDTH_MAX,
   SESSION_REVIEW_V2_SIDEBAR_WIDTH_MIN,
   SessionReviewV2,
   SessionReviewV2Sidebar,
   SessionReviewV2SidebarToggle,
-} from "@opencode-harness/session-ui/v2/session-review-v2"
-import { SessionReviewFilePreviewV2 } from "@opencode-harness/session-ui/v2/session-review-file-preview-v2"
-import { DiffChanges } from "@opencode-harness/ui/v2/diff-changes-v2"
+} from "@pwncode/session-ui/v2/session-review-v2"
+import { SessionReviewFilePreviewV2 } from "@pwncode/session-ui/v2/session-review-file-preview-v2"
+import { DiffChanges } from "@pwncode/ui/v2/diff-changes-v2"
 import type {
   SessionReviewComment,
   SessionReviewCommentActions,
@@ -17,7 +17,7 @@ import type {
   SessionReviewDiffStyle,
   SessionReviewFocus,
   SessionReviewLineComment,
-} from "@opencode-harness/session-ui/session-review"
+} from "@pwncode/session-ui/session-review"
 import FileTreeV2 from "@/components/file-tree-v2"
 import { useLanguage } from "@/context/language"
 import { useSDK } from "@/context/sdk"

@@ -1,6 +1,6 @@
-import { Location } from "@opencode-harness/core/location"
-import { Project } from "@opencode-harness/core/project"
-import { AbsolutePath } from "@opencode-harness/core/schema"
+import { Location } from "@pwncode/core/location"
+import { Project } from "@pwncode/core/project"
+import { AbsolutePath } from "@pwncode/core/schema"
 import { Effect, Layer } from "effect"
 import { tmpdir } from "./tmpdir"
 

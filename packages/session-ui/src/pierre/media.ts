@@ -1,4 +1,4 @@
-import type { FileContent } from "@opencode-harness/sdk/v2"
+import type { FileContent } from "@pwncode/sdk/v2"
 
 export type MediaKind = "image" | "audio" | "svg"
 

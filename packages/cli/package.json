@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@opencode-harness/cli",
+  "name": "@pwncode/cli",
   "version": "0.1.0",
   "type": "module",
   "license": "MIT",
@@ -17,10 +17,10 @@
   },
   "dependencies": {
     "@effect/platform-node": "catalog:",
-    "@opencode-harness/core": "workspace:*",
-    "@opencode-harness/sdk": "workspace:*",
-    "@opencode-harness/server": "workspace:*",
-    "@opencode-harness/tui": "workspace:*",
+    "@pwncode/core": "workspace:*",
+    "@pwncode/sdk": "workspace:*",
+    "@pwncode/server": "workspace:*",
+    "@pwncode/tui": "workspace:*",
     "@opentui/core": "catalog:",
     "@opentui/solid": "catalog:",
     "@parcel/watcher": "2.5.1",
@@ -28,7 +28,7 @@
     "solid-js": "catalog:"
   },
   "devDependencies": {
-    "@opencode-harness/script": "workspace:*",
+    "@pwncode/script": "workspace:*",
     "@tsconfig/bun": "catalog:",
     "@types/bun": "catalog:",
     "@typescript/native-preview": "catalog:"

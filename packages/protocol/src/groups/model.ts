@@ -1,5 +1,5 @@
-import { Model } from "@opencode-harness/schema/model"
-import { Location } from "@opencode-harness/schema/location"
+import { Model } from "@pwncode/schema/model"
+import { Location } from "@pwncode/schema/location"
 import { Schema } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, OpenApi } from "effect/unstable/httpapi"
 import { ServiceUnavailableError } from "../errors"

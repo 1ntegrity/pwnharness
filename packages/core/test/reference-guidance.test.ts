@@ -1,10 +1,10 @@
 import { describe, expect } from "bun:test"
 import { Effect, Layer } from "effect"
-import { AppNodeBuilder } from "@opencode-harness/core/effect/app-node-builder"
-import { AbsolutePath } from "@opencode-harness/core/schema"
-import { Reference } from "@opencode-harness/core/reference"
-import { ReferenceGuidance } from "@opencode-harness/core/reference/guidance"
-import { SystemContext } from "@opencode-harness/core/system-context/index"
+import { AppNodeBuilder } from "@pwncode/core/effect/app-node-builder"
+import { AbsolutePath } from "@pwncode/core/schema"
+import { Reference } from "@pwncode/core/reference"
+import { ReferenceGuidance } from "@pwncode/core/reference/guidance"
+import { SystemContext } from "@pwncode/core/system-context/index"
 import { it } from "./lib/effect"
 
 const guidanceLayer = (referenceLayer: Layer.Layer<Reference.Service>) =>

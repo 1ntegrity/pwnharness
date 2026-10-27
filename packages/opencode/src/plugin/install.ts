@@ -8,9 +8,9 @@ import {
 } from "jsonc-parser"
 
 import * as ConfigPaths from "@/config/paths"
-import { Global } from "@opencode-harness/core/global"
+import { Global } from "@pwncode/core/global"
 import { Filesystem } from "@/util/filesystem"
-import { Flock } from "@opencode-harness/core/util/flock"
+import { Flock } from "@pwncode/core/util/flock"
 import { isRecord } from "@/util/record"
 
 import { parsePluginSpecifier, readPackageThemes, readPluginPackage, resolvePluginTarget } from "./shared"
@@ -31,7 +31,7 @@ export type PatchDeps = {
   readText: (file: string) => Promise<string>
   write: (file: string, text: string) => Promise<void>
   exists: (file: string) => Promise<boolean>
-  files: (dir: string, name: "opencode-harness" | "tui") => string[]
+  files: (dir: string, name: "pwncode" | "tui") => string[]
 }
 
 export type PatchInput = {
@@ -334,11 +334,11 @@ function patchDir(input: PatchInput) {
   if (input.global) return input.config ?? Global.Path.config
   const git = input.vcs === "git" && input.worktree !== "/"
   const root = git ? input.worktree : input.directory
-  return path.join(root, ".opencode-harness")
+  return path.join(root, ".pwncode")
 }
 
-function patchName(kind: Kind): "opencode-harness" | "tui" {
-  if (kind === "server") return "opencode-harness"
+function patchName(kind: Kind): "pwncode" | "tui" {
+  if (kind === "server") return "pwncode"
   return "tui"
 }
 

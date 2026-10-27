@@ -1,5 +1,5 @@
 import { Schema } from "effect"
-import { ProviderMetadata } from "@opencode-harness/schema/llm"
+import { ProviderMetadata } from "@pwncode/schema/llm"
 
 export { ProviderMetadata }
 

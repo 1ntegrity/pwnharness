@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import type { SnapshotFileDiff } from "@opencode-harness/sdk/v2"
-import type { Message } from "@opencode-harness/sdk/v2/client"
+import type { SnapshotFileDiff } from "@pwncode/sdk/v2"
+import type { Message } from "@pwncode/sdk/v2/client"
 import { diffs, message } from "./diffs"
 
 const item = {

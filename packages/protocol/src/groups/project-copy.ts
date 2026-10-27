@@ -1,5 +1,5 @@
-import { ProjectCopy } from "@opencode-harness/schema/project-copy"
-import { Project } from "@opencode-harness/schema/project"
+import { ProjectCopy } from "@pwncode/schema/project-copy"
+import { Project } from "@pwncode/schema/project"
 import { Schema, Struct } from "effect"
 import { HttpApiEndpoint, HttpApiGroup, HttpApiSchema, OpenApi } from "effect/unstable/httpapi"
 import { LocationQuery, locationQueryOpenApi } from "./location"

@@ -1,8 +1,8 @@
 import { ServerAuth } from "../auth"
-import { UnauthorizedError } from "@opencode-harness/protocol/errors"
-import { Authorization } from "@opencode-harness/protocol/middleware/authorization"
-export { Authorization } from "@opencode-harness/protocol/middleware/authorization"
-import { hasPtyConnectTicketURL } from "@opencode-harness/protocol/groups/pty"
+import { UnauthorizedError } from "@pwncode/protocol/errors"
+import { Authorization } from "@pwncode/protocol/middleware/authorization"
+export { Authorization } from "@pwncode/protocol/middleware/authorization"
+import { hasPtyConnectTicketURL } from "@pwncode/protocol/groups/pty"
 import { Effect, Encoding, Layer, Redacted } from "effect"
 import { HttpEffect, HttpServerRequest, HttpServerResponse } from "effect/unstable/http"
 

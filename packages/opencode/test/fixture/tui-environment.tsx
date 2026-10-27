@@ -4,7 +4,7 @@ import {
   TuiStartupProvider,
   TuiTerminalEnvironmentProvider,
   type TuiPaths,
-} from "@opencode-harness/tui/context/runtime"
+} from "@pwncode/tui/context/runtime"
 import type { ParentProps } from "solid-js"
 
 export function TestTuiContexts(

@@ -7,7 +7,7 @@ import { Authorization } from "../middleware/authorization"
 import { InstanceContextMiddleware } from "../middleware/instance-context"
 import { WorkspaceRoutingMiddleware, WorkspaceRoutingQuery } from "../middleware/workspace-routing"
 import { described } from "./metadata"
-import { ProviderV2 } from "@opencode-harness/core/provider"
+import { ProviderV2 } from "@pwncode/core/provider"
 
 const root = "/provider"
 
@@ -94,7 +94,7 @@ export const ProviderApi = HttpApi.make("provider")
   )
   .annotateMerge(
     OpenApi.annotations({
-      title: "opencode-harness experimental HttpApi",
+      title: "pwncode experimental HttpApi",
       version: "0.0.1",
       description: "Experimental HttpApi surface for selected instance routes.",
     }),

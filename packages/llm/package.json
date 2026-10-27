@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "version": "0.1.0",
-  "name": "@opencode-harness/llm",
+  "name": "@pwncode/llm",
   "type": "module",
   "license": "MIT",
   "private": true,
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@clack/prompts": "1.0.0-alpha.1",
     "@effect/platform-node": "catalog:",
-    "@opencode-harness/http-recorder": "workspace:*",
+    "@pwncode/http-recorder": "workspace:*",
     "@tsconfig/bun": "catalog:",
     "@types/bun": "catalog:",
     "@typescript/native-preview": "catalog:"
@@ -45,7 +45,7 @@
   "dependencies": {
     "@smithy/eventstream-codec": "4.2.14",
     "@smithy/util-utf8": "4.2.2",
-    "@opencode-harness/schema": "workspace:*",
+    "@pwncode/schema": "workspace:*",
     "aws4fetch": "1.0.20",
     "effect": "catalog:"
   }
