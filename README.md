@@ -50,8 +50,7 @@ echo '{"my-provider": {"type": "api", "key": "sk-..."}}' > ~/.local/share/pwncod
 chmod 600 ~/.local/share/pwncode/auth.json
 ```
 
-Verify: `curl -X POST localhost:4097/session -d '{}' -H 'content-type: application/json'`
-then `POST /session/<id>/prompt_async` with `{"parts":[{"type":"text","text":"hi"}]}`.
+Verify your install: `./scripts/smoke.sh` — boots the server, runs one model turn, exits 0 on success (18s).
 API docs: `GET /doc`.
 
 Default agents: `build` (primary), `plan` (read-only planning), plus the internal
