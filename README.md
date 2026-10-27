@@ -61,6 +61,8 @@ ships zero skills; drop skill packs into `~/.opencode-harness/skills/` or wire
 
 ## Run
 
+Connect to [pi](integrations/pi/README.md) as a front-end: `pi install ./integrations/pi/harness-bridge.ts`.
+
 ```bash
 bun install
 bun run dev --help          # engine CLI (serve, run, skills, mcp, ...)
