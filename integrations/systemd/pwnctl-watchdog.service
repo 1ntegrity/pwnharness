@@ -1,0 +1,9 @@
+# Install under ~/.config/systemd/user/, then:
+# ExecStart assumes the repo launcher bin/pwnctl is symlinked to ~/.local/bin/pwnctl.
+#   systemctl --user daemon-reload && systemctl --user enable --now pwnctl-watchdog.timer
+[Unit]
+Description=pwnctl idle watchdog (stop abandoned engagements)
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/pwnctl watchdog --once

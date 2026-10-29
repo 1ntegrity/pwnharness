@@ -1,0 +1,10 @@
+# Install under ~/.config/systemd/user/ next to pwnctl-watchdog.service.
+[Unit]
+Description=Run the pwnctl idle watchdog periodically
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=10min
+
+[Install]
+WantedBy=timers.target
